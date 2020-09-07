@@ -1,0 +1,17 @@
+# Prototype
+gui-sketch.jpg contains two small sketcehs. These are referenced here.
+
+## Image 1
+A player (circle) with a small ring around. The ring indicates the state of one of the player's abilities.
+
+Three squares represent enemies opposing the players. Each enemy is shooting some kind of projectile. 
+
+The small dots represent simple bullets, while the arrows represent some kind of homing missiles.
+
+The rectangle represent a wall, an obstacle for both players and enemies.
+
+The spikes represent a dangerous element which can hurt both players and enemies.
+
+## Image 2
+This image represent when the player moves from one level to the next. When the player has completed their objective, a gate is opened at the center of the map. This gate can be used to enter the next level.
+
