@@ -17,7 +17,7 @@ Participants: everyone
 We have created a github repository, decided on project, and determined which GUI framework to use.
 
 Joachim has:
-    * setup github reposityro and invited everyone as collaborators.
+    * setup github repository and invited everyone as collaborators.
     * tried to get openjfx and maven to work, as a project basis.
 
 Anton, Mattias, Erik, Simon has:
