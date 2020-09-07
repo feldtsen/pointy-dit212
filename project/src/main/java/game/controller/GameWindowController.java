@@ -10,12 +10,12 @@ import javafx.scene.paint.Color;
 public class GameWindowController {
 
     @FXML
-    private Canvas board;
+    private Canvas canvas;
 
     @FXML
     private void switchToSecondary() throws IOException {
         //App.setRoot("secondary");
-        GraphicsContext gc = board.getGraphicsContext2D();
+        GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.BLUE);
         gc.fillRect(100, 100, 100, 100);
     }
