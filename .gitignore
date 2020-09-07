@@ -91,3 +91,6 @@ fabric.properties
 *.ear
 *.nar
 hs_err_pid*
+
+# attach pid
+.attach_pid*
