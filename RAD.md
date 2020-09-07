@@ -87,9 +87,11 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 ---
 ## 2.2. Definition of done
-In this section you list the acceptance criteria that are common for all user
-stories. For example, the code should reviewed and tests, it should be under
-version control, etc.
+For a user story to be considered to be done, the following criteria have to be fullfilled:
+
+- All acceptence crirteria of that user story are satisfied.
+
+- All tests have been passed.
 
 ## 2.3. User Interface
 
