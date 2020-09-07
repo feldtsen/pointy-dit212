@@ -86,6 +86,27 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
     - Is the enemy actions visible to the user?
 
 ---
+**Story Identifier:** STK004
+
+**Story Name:** Start menu
+
+**Description:** As a user, I want a start menu so I can decide when to start the game.
+
+**Confirmation**
+
+- **Functional:**
+    - Can I click a button to start the game?
+
+    - Can I click a button to quit the game?
+
+    - Is it possible to pause the game?
+
+-- **Non-functional**
+    - Is the menu always accessible when the game is started?
+
+    - Is the menu intuitive and easy to use?
+
+---
 ## 2.2. Definition of done
 For a user story to be considered to be done, the following criteria have to be fullfilled:
 
