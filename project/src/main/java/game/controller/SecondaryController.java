@@ -1,8 +1,8 @@
-package org.openjfx.controller;
+package game.controller;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
-import org.openjfx.App;
+import game.App;
 
 public class SecondaryController {
 
