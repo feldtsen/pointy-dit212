@@ -1,6 +1,6 @@
 # User story 
 
-Story Identifier: <id>
+Story Identifier: STK009
 Story Name: Shockwave
 
 

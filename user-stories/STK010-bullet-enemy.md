@@ -1,6 +1,6 @@
 # User story 
 
-Story Identifier: 
+Story Identifier: STK010
 Story Name: Bullet enemy
 
 

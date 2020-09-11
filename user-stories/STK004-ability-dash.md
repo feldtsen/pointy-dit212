@@ -1,10 +1,9 @@
 # User story 
 
-Story Identifier: <id>
+Story Identifier: STK004
 Story Name: Ability reflect
 
-## Description 
-
+## DescriptiSTK004
 As a player I want the ability to reflect projectiles, to protect myself and hurt hostile elements. If the ability has a cooldown, it would force me to use it strategically and introduce an interesting gameplay element. 
 
 ## Confirmation

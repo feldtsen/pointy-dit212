@@ -1,6 +1,6 @@
 # User story 
 
-Story Identifier: <id>
+Story Identifier: STK014
 Story Name: Scoring system
 
 

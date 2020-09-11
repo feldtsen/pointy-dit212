@@ -1,6 +1,6 @@
 # User story 
 
-Story Identifier: STK004
+Story Identifier: STK007
 Story Name: Start menu
 
 ## Description 

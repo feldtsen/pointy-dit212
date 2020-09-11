@@ -1,6 +1,6 @@
 # User story 
 
-Story Identifier: <id>
+Story Identifier: STK016
 Story Name: Sound effects
 
 

@@ -1,7 +1,7 @@
 # User story 
 
-Story Identifier: <id>
-Story Name: <short name>
+Story Identifier: STK015
+Story Name: Music
 
 
 ## Description 

@@ -1,6 +1,6 @@
 # User story 
 
-Story Identifier: <id>
+Story Identifier: STK005
 Story Name: Different levels
 
 
