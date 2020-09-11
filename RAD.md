@@ -117,7 +117,7 @@ For a user story to be considered to be done, the following criteria have to be 
 (Include sketches, drawings and explanations of the application’s user interface. Describe the navigation between the different views.)
 **GUI sketch**
 
-<img src=https://github.com/feldtsen/pointy-dit212/blob/master/gui-sketch.jpg height=600>
+<img src=https://github.com/feldtsen/pointy-dit212/blob/master/domain-model/gui-sketch.jpg height=600>
 
 # 3. Domain Model
 
