@@ -22,8 +22,6 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 ## 2.1. User Stories
 
-(in order of priority)
-
 
 **Story Identifier:** STK001
 
@@ -46,25 +44,6 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
     - Is there a visual indication of the players movement?
 
 ---
-**Story Identifier:** STK003
-
-**Story Name:** Basic map
-
-**Description:** As a user, I want a game to have a basic map in which I can navigate and explore.
-
-**Confirmation:**
-
-- **Functional:**
-
-    - There is a map with four walls at the edges, which cannot be crossed.
-
-- **Non-functional:**
-
-    - The walls of the map functions in a predictable way (cannot be crossed).
-
-    - The size and layout of the map is clearly visible to the user.
-
----
 **Story Identifier:** STK002
 
 **Story Name:** Basic enemy
@@ -84,6 +63,25 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
     - Does the enemies respond in a reasonable way?
 
     - Is the enemy actions visible to the user?
+
+---
+**Story Identifier:** STK003
+
+**Story Name:** Basic map
+
+**Description:** As a user, I want a game to have a basic map in which I can navigate and explore.
+
+**Confirmation:**
+
+- **Functional:**
+
+    - There is a map with four walls at the edges, which cannot be crossed.
+
+- **Non-functional:**
+
+    - The walls of the map functions in a predictable way (cannot be crossed).
+
+    - The size and layout of the map is clearly visible to the user.
 
 ---
 **Story Identifier:** STK004
@@ -117,10 +115,17 @@ For a user story to be considered to be done, the following criteria have to be 
 ## 2.3. User Interface
 
 (Include sketches, drawings and explanations of the application’s user interface. Describe the navigation between the different views.)
+**GUI sketch**
+
+<img src=https://github.com/feldtsen/pointy-dit212/blob/master/gui-sketch.jpg height=600>
 
 # 3. Domain Model
 
 (Give a high level view overview of the application using a UML diagram.)
+**UML of domain model**
+
+<img src=https://github.com/feldtsen/pointy-dit212/blob/master/domain-model/UML.png height=1000>
+
 
 ## 3.1. Class responsibilities
 
