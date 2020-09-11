@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import game.App;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 
 public class GameWindowController {
@@ -13,7 +14,7 @@ public class GameWindowController {
     private Canvas canvas;
 
     @FXML
-    private void switchToSecondary() throws IOException {
+    private void drawRectangle() throws IOException {
         //App.setRoot("secondary");
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.BLUE);
