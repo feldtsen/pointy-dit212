@@ -119,12 +119,29 @@ For a user story to be considered to be done, the following criteria have to be 
 
 <img src=https://github.com/feldtsen/pointy-dit212/blob/master/domain-model/gui-sketch.jpg height=600>
 
+### Image 1
+A player (circle) with a small ring around. The ring indicates the state of one of the player's abilities.
+
+Three squares represent enemies opposing the players. Each enemy is shooting some kind of projectile. 
+
+The small dots represent simple bullets, while the arrows represent some kind of homing missiles.
+
+The rectangle represent a wall, an obstacle for both players and enemies.
+
+The spikes represent a dangerous element which can hurt both players and enemies.
+
+### Image 2
+This image represent when the player moves from one level to the next. When the player has completed their objective, a gate is opened at the center of the map. This gate can be used to enter the next level.
+
+
+
 # 3. Domain Model
 
 (Give a high level view overview of the application using a UML diagram.)
+
 **UML of domain model**
 
-<img src=https://github.com/feldtsen/pointy-dit212/blob/master/domain-model/UML.png height=1000>
+<img src=https://github.com/feldtsen/pointy-dit212/blob/master/domain-model/domain-model-diagram.png width=100%>
 
 
 ## 3.1. Class responsibilities
