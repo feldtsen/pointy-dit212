@@ -108,13 +108,17 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 ## 2.2. Definition of done
 For a user story to be considered to be done, the following criteria have to be fullfilled:
 
-- All acceptence crirteria of that user story are satisfied.
+- All acceptence criteria of that user story are satisfied.
 
 - All tests have been passed.
+
+- All visual features of the user story have been added to the GUI. 
 
 ## 2.3. User Interface
 
 (Include sketches, drawings and explanations of the application’s user interface. Describe the navigation between the different views.)
+
+
 **GUI sketch**
 
 <img src=https://github.com/feldtsen/pointy-dit212/blob/master/domain-model/gui-sketch.jpg height=600>
@@ -132,7 +136,6 @@ The spikes represent a dangerous element which can hurt both players and enemies
 
 ### Image 2
 This image represent when the player moves from one level to the next. When the player has completed their objective, a gate is opened at the center of the map. This gate can be used to enter the next level.
-
 
 
 # 3. Domain Model
