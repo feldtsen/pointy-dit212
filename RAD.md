@@ -137,5 +137,8 @@ For a user story to be considered to be done, the following criteria have to be 
 
 - JavaFX - https://openjfx.io/
 - Maven - https://maven.apache.org/
+- Lucidchart - https://www.lucidchart.com/
+- JUnit - https://junit.org/
+- Git - https://git-scm.com/
 
 
