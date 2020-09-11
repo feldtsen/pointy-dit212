@@ -16,7 +16,7 @@ Participants: everyone
 - Seperate UML diagram into
     - proper domain model (simplify)
     - proper class diagram (add more to UML)
-- Add time estiamtes in user stories (ex days)
+- Add time estimates in user stories (ex days)
 - Start implementing, write initial tests
 
 ## Reports (15 min) from previous meeting
@@ -42,7 +42,7 @@ Simon has updated the RAD.
 5. Tasks and coding
 
 ## Outcomes and assignments (5 min)
-1. Joachim and Oom will work on the class diagram, add multiplicites, more functionality, more fields, generally more detail.
+1. Joachim and Mattias will work on the class diagram, add multiplicites, more functionality, more fields, generally more detail.
    Everyone will work on the domain model together!
 
 2. Anton and Simon will look through the UML diagram and create another set of user stories. We're aiming for around 12 user stories, before starting to code.
@@ -55,6 +55,8 @@ Simon has updated the RAD.
 
 5. Anton and Simon will start breaking down the user stories into tasks. 
    Once the tasks are done, we could start coding.
+   
+6. Erik, Anton and Simon will create a proper domain model with the right level of abstraction and prepare this to be presented at the seminar.   
 
 ## Wrap up
 Next meeting: 2020-09-14
