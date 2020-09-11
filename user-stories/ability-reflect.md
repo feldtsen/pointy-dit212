@@ -1,11 +1,11 @@
 # User story 
 
 Story Identifier: <id>
-Story Name: Dash
+Story Name: Ability reflect
 
 ## Description 
 
-As a player, I'd like an ability to dash, to avoid dangerous elements. If the ability has a cooldown, it would make the gameplay more interesting, and force me to be more strategic and conservative with the use of this ability.
+As a player I want the ability to reflect projectiles, to protect myself and hurt hostile elements. If the ability has a cooldown, it would force me to use it strategically and introduce an interesting gameplay element. 
 
 ## Confirmation
 
@@ -16,6 +16,7 @@ As a player, I'd like an ability to dash, to avoid dangerous elements. If the ab
 ### Non-functional
 Gameplay
 - Is there a clear benefit to using the ability?
+- Does the ability enable me to hurt hostile elements by reflecting their projectiles?
 
 Availability
 - Is there a clear indiciation to when the ability is available?
