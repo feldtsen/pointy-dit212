@@ -2,7 +2,7 @@
 
 Story Identifier: STK002
 Story Name: Basic enemy
-
+Time estimate: 2 days
 
 ## Description 
 

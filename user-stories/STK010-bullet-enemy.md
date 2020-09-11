@@ -2,7 +2,7 @@
 
 Story Identifier: STK010
 Story Name: Bullet enemy
-
+Time estimate: 5 days
 
 ## Description 
 

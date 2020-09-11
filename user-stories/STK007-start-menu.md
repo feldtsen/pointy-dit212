@@ -2,6 +2,7 @@
 
 Story Identifier: STK007
 Story Name: Start menu
+Time estiamte: 4 days
 
 ## Description 
 

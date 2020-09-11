@@ -2,7 +2,7 @@
 
 Story Identifier: STK003
 Story Name: Basic map
-
+Time estimate: 2 days
 
 ## Description 
 

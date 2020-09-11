@@ -2,6 +2,7 @@
 
 Story Identifier: STK011
 Story Name: Missile enemy
+Time estimate: 5 days
 
 ## Description 
 

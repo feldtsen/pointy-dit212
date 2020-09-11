@@ -2,7 +2,7 @@
 
 Story Identifier: STK005
 Story Name: Different levels
-
+Time estimates: 5 days
 
 ## Description 
 
@@ -10,8 +10,6 @@ As a user, I want a variety of levels, so that the gameplay doesn't become to si
 
 
 ## Confirmation
-
-List all acceptance criteria; you should be able to test/confirm these.
 
 ### Functional
 

@@ -2,6 +2,7 @@
 
 Story Identifier: STK001
 Story Name: Basic player
+Time estimate: 3 days
 
 ## Description 
 

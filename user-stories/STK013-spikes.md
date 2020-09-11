@@ -2,6 +2,7 @@
 
 Story Identifier: STK013
 Story Name: Spikes
+Time estimate: 2 days
 
 ## Description 
 

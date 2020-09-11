@@ -2,6 +2,7 @@
 
 Story Identifier: STK006
 Story Name: Level transition
+Time estimate: 4 days
 
 ## Description 
 

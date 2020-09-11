@@ -2,7 +2,7 @@
 
 Story Identifier: STK009
 Story Name: Shockwave
-
+Time estimate: 4 days
 
 ## Description 
 

@@ -2,6 +2,7 @@
 
 Story Identifier: STK016
 Story Name: Sound effects
+Time estiamte: 14 days
 
 
 ## Description 

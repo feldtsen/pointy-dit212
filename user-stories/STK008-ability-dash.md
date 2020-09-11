@@ -2,6 +2,7 @@
 
 Story Identifier: STK008
 Story Name: Dash
+Time estimate: 1 day
 
 ## Description 
 
