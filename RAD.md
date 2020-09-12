@@ -29,6 +29,8 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 **Description:** As a user, I want a basic player character which I can maneuver using WASD or the arrow keys.
 
+**Time estimate:** 3 days
+
 **Confirmation:** 
 
 - **Functional:**
@@ -49,6 +51,8 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 **Story Name:** Basic enemy
 
 **Description:** As a user, I want a enemy to compete against when playing a game, in order to have a fun gaming experience.
+
+**Time estimate:** 2 days
 
 **Confirmation:**
 
@@ -71,6 +75,8 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 **Description:** As a user, I want a game to have a basic map in which I can navigate and explore.
 
+**Time estimate:** 2 days
+
 **Confirmation:**
 
 - **Functional:**
@@ -90,6 +96,8 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 **Description:** As a user, I want a start menu so I can decide when to start the game.
 
+**Time estimate:** 4 days
+
 **Confirmation**
 
 - **Functional:**
@@ -99,9 +107,9 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
     - Is it possible to pause the game?
 
--- **Non-functional**
+- **Non-functional:**
     - Is the menu always accessible when the game is started?
-
+    
     - Is the menu intuitive and easy to use?
 
 ---
