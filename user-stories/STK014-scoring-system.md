@@ -12,10 +12,10 @@ As a user, I want a way to keep track of my score, so that I get motivated to im
 
 ### Functional
 
-- Can I get points generate points by performing certain actions throughout the game?
+- Can I get points by performing certain actions throughout the game?
 - Can I see my score while playing?
 - Can I keep track of how many points I've had in previous playthroughs?
 
 ### Non-functional
 
-- Does the difficulty of an action effect how many points that action is worth?
+- Does the difficulty of an action affect how many points that action is worth?
