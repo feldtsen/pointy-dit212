@@ -1,8 +1,8 @@
 # User story 
 
-Story Identifier: STK001
-Story Name: Basic player
-Time estimate: 3 days
+* Story Identifier: STK001
+* Story Name: Basic player
+* Time estimate: 3 days
 
 ## Description 
 

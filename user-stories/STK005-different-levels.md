@@ -1,8 +1,8 @@
 # User story 
 
-Story Identifier: STK005
-Story Name: Different levels
-Time estimates: 5 days
+* Story Identifier: STK005
+* Story Name: Different levels
+* Time estimates: 5 days
 
 ## Description 
 

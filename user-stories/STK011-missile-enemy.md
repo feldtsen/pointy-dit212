@@ -1,8 +1,8 @@
 # User story 
 
-Story Identifier: STK011
-Story Name: Missile enemy
-Time estimate: 5 days
+* Story Identifier: STK011
+* Story Name: Missile enemy
+* Time estimate: 5 days
 
 ## Description 
 
@@ -11,13 +11,13 @@ As a player, I want to fight against enemies which can shoot homing missiles whi
 ## Confirmation
 
 ### Functional
-Can the enemy shoot missiles targeted at me, the player?
 
-Is there a consequence to being hit by the missiles?
-
-Does the missiles follow me around?
+- Can the enemy shoot missiles targeted at me, the player?
+- Is there a consequence to being hit by the missiles?
+- Does the missiles follow me around?
 
 ### Non-functional
+
 Responsiveness
 - Does the enemies aim at me? 
 - Does the missiles react to my movements?

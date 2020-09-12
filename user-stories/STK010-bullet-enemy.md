@@ -1,8 +1,8 @@
 # User story 
 
-Story Identifier: STK010
-Story Name: Bullet enemy
-Time estimate: 5 days
+* Story Identifier: STK010
+* Story Name: Bullet enemy
+* Time estimate: 5 days
 
 ## Description 
 
@@ -11,11 +11,12 @@ As a player, I want to fight against enemies which can shoot bullets for me to a
 ## Confirmation
 
 ### Functional
-Can the enemy shoot bullets at me, the player?
 
-Is there a consequence to being hit by the bullets?
+- Can the enemy shoot bullets at me, the player?
+- Is there a consequence to being hit by the bullets?
 
 ### Non-functional
+
 Responsiveness
 - Does the enemies aim at me? 
 

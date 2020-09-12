@@ -1,8 +1,8 @@
 # User story 
 
-Story Identifier: STK009
-Story Name: Shockwave
-Time estimate: 4 days
+* Story Identifier: STK009
+* Story Name: Shockwave
+* Time estimate: 4 days
 
 ## Description 
 
@@ -12,10 +12,12 @@ As a player I need an ability to perform a shockwave so that I can push enemies 
 ## Confirmation
 
 ### Functional
+
 - Can I push a button and have the ability function reliably?
 - Are the enemies pushed away from me when I use the ability?
 
 ### Non-functional
+
 Availability
 - Can I see when my ability is available and when it's not?
 - Can I easily figure out how my to access my ability?

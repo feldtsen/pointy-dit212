@@ -1,8 +1,8 @@
 # User story 
 
-Story Identifier: STK013
-Story Name: Spikes
-Time estimate: 2 days
+* Story Identifier: STK013
+* Story Name: Spikes
+* Time estimate: 2 days
 
 ## Description 
 
@@ -11,10 +11,12 @@ As a player, I want there to exist "spikes", or dangerous, static game elements,
 ## Confirmation
 
 ### Functional
+
 - Can I, and enemies, collide with spikes?
 - Does the spikes hurt me, or the enemies, when hit?
 
 ### Non-functional
+
 Gameplay
 - Can I use the spikes to my advantage?
 

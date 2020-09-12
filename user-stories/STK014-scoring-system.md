@@ -1,8 +1,8 @@
 # User story 
 
-Story Identifier: STK014
-Story Name: Scoring system
-Time estimate: 6 days
+* Story Identifier: STK014
+* Story Name: Scoring system
+* Time estimate: 6 days
 
 ## Description 
 

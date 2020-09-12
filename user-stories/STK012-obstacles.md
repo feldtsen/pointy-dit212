@@ -1,8 +1,8 @@
 # User story 
 
-Story Identifier: STK012
-Story Name: Obstacles
-Time estiamte: 2 days
+* Story Identifier: STK012
+* Story Name: Obstacles
+* Time estiamte: 2 days
 
 ## Description 
 

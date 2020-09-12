@@ -1,9 +1,8 @@
 # User story 
 
-Story Identifier: STK015
-Story Name: Music
-Time estimate: 14 days
-
+* Story Identifier: STK015
+* Story Name: Music
+* Time estimate: 14 days
 
 ## Description 
 

@@ -1,8 +1,8 @@
 # User story 
 
-Story Identifier: STK008
-Story Name: Dash
-Time estimate: 1 day
+* Story Identifier: STK008
+* Story Name: Dash
+* Time estimate: 1 day
 
 ## Description 
 
@@ -11,10 +11,12 @@ As a player, I'd like an ability to dash, to avoid dangerous elements. If the ab
 ## Confirmation
 
 ### Functional
+
 - Can I click a key to activate this ability?
 - Is the ability unusable during the time of the cooldown?
 
 ### Non-functional
+
 Gameplay
 - Is there a clear benefit to using the ability?
 
