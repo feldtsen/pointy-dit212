@@ -1,4 +1,4 @@
-package game.model;
+package game.model.entity;
 
 public interface IPlayer {
     boolean activateAbility();

@@ -1,4 +1,9 @@
-package game.model;
+package game.model.entity;
+
+import game.model.ILiving;
+import game.model.IMovable;
+import game.model.ability.IAbilityBehaviour;
+import game.model.behavior.IMovementBehaviour;
 
 public interface IEnemy extends ILiving, IMovable {
     boolean attack();

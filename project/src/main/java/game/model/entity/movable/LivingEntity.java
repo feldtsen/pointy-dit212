@@ -1,4 +1,4 @@
-package game.model.entity;
+package game.model.entity.movable;
 
 
 import game.model.ILiving;

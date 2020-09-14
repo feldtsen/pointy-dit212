@@ -1,6 +1,7 @@
-package game.model.entity;
+package game.model.entity.movable;
 
 import game.model.IMovable;
+import game.model.entity.Entity;
 import javafx.geometry.Point2D;
 
 public abstract class MovableEntity extends Entity implements IMovable {
