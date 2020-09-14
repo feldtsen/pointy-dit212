@@ -18,6 +18,10 @@ public abstract class MovableEntity extends Entity implements IMovable {
 
     }
 
+    public void update(long delta) {
+
+    }
+
     public void move(Point2D offset) {
         position = position.add(offset);
     }
