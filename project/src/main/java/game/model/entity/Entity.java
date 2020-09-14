@@ -4,13 +4,13 @@ import game.model.IMovable;
 import game.model.IPositionable;
 import javafx.geometry.Point2D;
 
-public abstract class Entity implements IPositionable {
+public abstract class Entity implements IEntity {
     private Point2D position;
-    private double size;
+    private double radius;
 
-    public Entity(Point2D position, double size) {
+    public Entity(Point2D position, double radius) {
         this.position = position;
-        this.size = size;
+        this.radius = radius;
     }
 
     @Override
@@ -19,13 +19,18 @@ public abstract class Entity implements IPositionable {
     }
 
     @Override
-    public double getSize() {
-        return size;
+    public double getWidth() {
+        return radius;
+    }
+
+    @Override
+    public double getHeight() {
+        return radius;
     }
 
     public boolean checkCollision(Entity entity) {
         /* Minimum distance between entities before collision occurs */
-        double minDist = this.size + entity.getSize();
+        double minDist = this.radius + entity.radius;
 
         /* Difference in positions between entities. Used to calculate the square of the distance between the entities. */
         Point2D diff = this.position.subtract(entity.getPosition());
