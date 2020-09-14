@@ -426,8 +426,15 @@ The rectangle represent a wall, an obstacle for both players and enemies.
 
 The spikes represent a dangerous element which can hurt both players and enemies.
 
+
 ### Image 2
 This image represent when the player moves from one level to the next. When the player has completed their objective, a gate is opened at the center of the map. This gate can be used to enter the next level.
+
+### Start screen
+<img src=https://github.com/feldtsen/pointy-dit212/blob/master/domain-model/gamemenu.jpg height=600>
+
+Displayed when the game is launched. 
+
 
 
 # 3. Domain Model
