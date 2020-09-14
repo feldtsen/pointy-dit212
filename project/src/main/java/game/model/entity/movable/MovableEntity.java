@@ -82,6 +82,8 @@ public abstract class MovableEntity extends Entity implements IMovable {
     /* Helper methods */
     //TODO: move to util class?
     public static Point2D limit(Point2D vector, double maxMagnitude) { // Public only for testing purposes...
+        if(vector == null || maxMagnitude < 0) throw new IllegalArgumentException();
+
         /* Checks for the square of the magnitude instead of the magnitude itself, to avoid having to use
          * the sqrt operator.
          */
