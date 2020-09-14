@@ -72,7 +72,7 @@ public class MovableEntityTest {
     }
 
     @Test
-    public void testVelocityPositionUpdate() {
+    public void testVelocityUpdate() {
         Point2D velocity = new Point2D(1, 1);
         Point2D currentPosition = movableEntity.getPosition();
 
@@ -86,7 +86,7 @@ public class MovableEntityTest {
     }
 
     @Test
-    public void testOverMaxVelocityPositionUpdate() {
+    public void testOverMaxVelocityUpdate() {
         Point2D velocity = new Point2D(10, 10);
         Point2D currentPosition = movableEntity.getPosition();
 
@@ -96,5 +96,35 @@ public class MovableEntityTest {
         movableEntity.update(1);
 
         assertEquals(currentPosition.add(MovableEntity.limit(velocity, maxSpeed)), movableEntity.getPosition());
+    }
+
+    @Test
+    public void testAccelerationUpdate() {
+        Point2D force = new Point2D(2, 2);
+        Point2D currentPosition = movableEntity.getPosition();
+        Point2D currentVelocity = movableEntity.getVelocity();
+
+        movableEntity.addForce(force);
+
+        long second = 1000000000;
+        movableEntity.update(second);
+
+        assertEquals(currentVelocity.add(force), movableEntity.getVelocity());
+        assertEquals(currentPosition.add(currentVelocity.add(force)), movableEntity.getPosition());
+    }
+
+    @Test
+    public void testOverMaxAccelerationUpdate() {
+        Point2D force = new Point2D(10, 10);
+        Point2D currentPosition = movableEntity.getPosition();
+        Point2D currentVelocity = movableEntity.getVelocity();
+
+        movableEntity.addForce(force);
+
+        long second = 1000000000;
+        movableEntity.update(second);
+
+        assertEquals(currentVelocity.add(MovableEntity.limit(force, maxForce)), movableEntity.getVelocity());
+        assertEquals(currentPosition.add(currentVelocity.add(MovableEntity.limit(force, maxForce))), movableEntity.getPosition());
     }
 }
