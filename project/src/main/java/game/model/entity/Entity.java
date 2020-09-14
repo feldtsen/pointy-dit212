@@ -26,7 +26,8 @@ public abstract class Entity implements IEntity {
         return radius;
     }
 
-    public boolean checkCollision(Entity entity) {
+    @Override
+    public boolean checkCollision(IEntity entity) {
         /* Minimum distance between entities before collision occurs */
         double minDist = this.radius + entity.getWidth(); // getWidth() == getHeight() == radius
 
@@ -36,8 +37,9 @@ public abstract class Entity implements IEntity {
         /* Check collision with the square of the distance between the entities.
          * This avoids the use of the square root operator, which is an expensive operation.
          */
-        return diff.getX() * diff.getX() + diff.getY() * diff.getY() < minDist * minDist;
+        return diff.getX() * diff.getX() + diff.getY() * diff.getY() <= minDist * minDist;
     }
 
-    public abstract boolean handleCollision(Entity entity);
+    @Override
+    public abstract boolean handleCollision(IEntity entity);
 }
