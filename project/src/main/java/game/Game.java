@@ -83,6 +83,6 @@ public class Game implements IGame {
 
     @Override
     public int getCurrentFPS() {
-        return currentFPS
+        return currentFPS;
     }
 }
