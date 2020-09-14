@@ -37,7 +37,7 @@ public abstract class Entity implements IEntity {
         /* Check collision with the square of the distance between the entities.
          * This avoids the use of the square root operator, which is an expensive operation.
          */
-        return diff.getX() * diff.getX() + diff.getY() * diff.getY() < minDist * minDist;
+        return diff.getX() * diff.getX() + diff.getY() * diff.getY() <= minDist * minDist;
     }
 
     @Override
