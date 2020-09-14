@@ -5,16 +5,17 @@ Date:
 Chair: 
 Participants:
 
-## Objectives (5 min) 
-
-- Resolve any issues preventing the team to continue.
-- Short clear descriptions.
-
-
 ## Reports (15 min) from previous meeting
 
 - Each group member reports outcome of assigned issues, see also 'outcomes and
   assignments'.
+
+
+
+## Objectives (5 min) 
+
+- Resolve any issues preventing the team to continue.
+- Short clear descriptions.
 
 
 ## Discussion items (35 min)
