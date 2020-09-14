@@ -23,7 +23,22 @@ public class EntityTest {
     @Test
     public void testCheckCollisionNoCollision() {
         IEntity e1 = createEntity(new Point2D(0, 0), 10);
-        IEntity e2 = createEntity(new Point2D(20, 0), 10);
+        IEntity e2 = createEntity(new Point2D(30, 0), 10);
         assertFalse(e1.checkCollision(e2));
+    }
+
+    @Test
+    public void testCheckCollisionCollision() {
+        IEntity e1 = createEntity(new Point2D(0, 0), 10);
+        IEntity e2 = createEntity(new Point2D(5, 5), 10);
+        assertTrue(e1.checkCollision(e2));
+    }
+
+    /* If the entities are precisely beside each other, this is counted as a collision */
+    @Test
+    public void testCollisionBorderCollision() {
+        IEntity e1 = createEntity(new Point2D(5, 0), 5);
+        IEntity e2 = createEntity(new Point2D(15, 0), 5);
+        assertTrue(e1.checkCollision(e2));
     }
 }
