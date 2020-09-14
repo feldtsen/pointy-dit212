@@ -18,40 +18,43 @@ public abstract class MovableEntity extends Entity implements IMovable {
 
     }
 
+    @Override
     public void update(long delta) {
 
     }
 
+    @Override
     public void move(Point2D offset) {
         position = position.add(offset);
     }
 
+    @Override
     public void addForce(Point2D force) {
-
-        return;
+        acceleration = acceleration.add(force);
     }
 
+    @Override
     public Point2D getVelocity() {
-
-        return null;
+        return velocity;
     }
 
-    public Point2D getAcceleration() {
-
-        return null;
+    @Override
+    public Point2D setAcceleration() {
+        return acceleration;
     }
 
+    @Override
     public void setPosition(Point2D position) {
-
-        return;
+        this.position = position;
     }
 
+    @Override
     public void setVelocity(Point2D velocity) {
-
-        return;
+        this.velocity = velocity;
     }
 
-    public void getAcceleration(Point2D acceleration) {
+    @Override
+    public void setAcceleration(Point2D acceleration) {
 
         return;
     }
