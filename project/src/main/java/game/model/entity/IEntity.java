@@ -8,4 +8,6 @@ public interface IEntity extends IPositionable {
     double getHeight();
     boolean checkCollision(IEntity entity);
     boolean handleCollision(IEntity entity);
+
+    void update(long delta);
 }

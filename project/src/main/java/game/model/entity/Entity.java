@@ -3,7 +3,8 @@ package game.model.entity;
 import javafx.geometry.Point2D;
 
 public abstract class Entity implements IEntity {
-    private Point2D position;
+    //TODO: protected currently, is this a bad idea maybe hmmmm?
+    protected Point2D position;
     private double radius;
 
     public Entity(Point2D position, double radius) {
@@ -42,4 +43,7 @@ public abstract class Entity implements IEntity {
 
     @Override
     public abstract boolean handleCollision(IEntity entity);
+
+    @Override
+    public abstract void update(long delta);
 }

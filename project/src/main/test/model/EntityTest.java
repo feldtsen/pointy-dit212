@@ -17,6 +17,10 @@ public class EntityTest {
             public boolean handleCollision(IEntity entity) {
                 return false;
             }
+
+            @Override
+            public void update(long delta) {
+            }
         };
     }
 
