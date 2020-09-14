@@ -12,7 +12,7 @@ public class Game implements IGame {
     private boolean isRunning;          /* True if timer is running. */
 
     /* Fields for calculating FPS */
-    private long nanosSinceLastSecond;
+    private long lastSecond;
     private int framesThisSecond;
     private int currentFPS;
 
@@ -42,11 +42,11 @@ public class Game implements IGame {
                     framesThisSecond++;
                 }
 
-                nanosSinceLastSecond += elapsedNanos;
-                if(nanosSinceLastSecond >= SECOND) {
+                if(now - lastSecond >= SECOND) {
+                    lastSecond = now;
                     currentFPS = framesThisSecond;
                     framesThisSecond = 0;
-                    nanosSinceLastSecond -= SECOND;
+                    System.out.println(currentFPS);
                 }
             }
         };
