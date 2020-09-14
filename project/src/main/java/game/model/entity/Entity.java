@@ -12,11 +12,6 @@ public abstract class Entity implements IEntity {
     }
 
     @Override
-    public void setPosition(Point2D position) {
-        this.position = position;
-    }
-
-    @Override
     public Point2D getPosition() {
         return position;
     }
