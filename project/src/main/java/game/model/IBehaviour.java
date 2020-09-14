@@ -1,5 +1,7 @@
 package game.model;
 
+import game.model.entity.IEntity;
+
 public interface IBehaviour {
 
     /**
