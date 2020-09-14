@@ -1,7 +1,5 @@
 package game.model.entity;
 
-import game.model.IMovable;
-import game.model.IPositionable;
 import javafx.geometry.Point2D;
 
 public abstract class Entity implements IEntity {
@@ -30,7 +28,7 @@ public abstract class Entity implements IEntity {
 
     public boolean checkCollision(Entity entity) {
         /* Minimum distance between entities before collision occurs */
-        double minDist = this.radius + entity.radius;
+        double minDist = this.radius + entity.getWidth(); // getWidth() == getHeight() == radius
 
         /* Difference in positions between entities. Used to calculate the square of the distance between the entities. */
         Point2D diff = this.position.subtract(entity.getPosition());
