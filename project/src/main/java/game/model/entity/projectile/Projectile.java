@@ -1,6 +1,6 @@
 package game.model.entity.projectile;
 
-import game.model.entity.MovableEntity;
+import game.model.entity.movable.MovableEntity;
 import javafx.geometry.Point2D;
 import javafx.scene.effect.Light;
 
@@ -10,9 +10,8 @@ public abstract class Projectile extends MovableEntity implements IProjectile {
 
 
     public Projectile(Point2D position, double radius, double maxForce, double maxSpeed, int damage, Point2D velocity) {
-        super(position, radius, maxForce, maxSpeed);
+        super(position, velocity, radius, maxForce, maxSpeed);
         this.damage = damage;
         this.isDestroyed = false;
-        setVelocity(velocity);
     }
 }
