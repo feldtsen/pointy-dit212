@@ -80,4 +80,9 @@ public class Game implements IGame {
         isRunning = false;
         timer.stop();
     }
+
+    @Override
+    public int getCurrentFPS() {
+        return currentFPS
+    }
 }

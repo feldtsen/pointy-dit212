@@ -8,4 +8,6 @@ public interface IGame {
     boolean isRunning();
     void start();
     void stop();
+
+    int getCurrentFPS();
 }
