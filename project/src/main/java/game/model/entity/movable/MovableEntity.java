@@ -5,8 +5,8 @@ import game.model.entity.Entity;
 import javafx.geometry.Point2D;
 
 public abstract class MovableEntity extends Entity implements IMovable {
-    private double maxForce;
-    private double maxSpeed;
+    private final double maxForce;
+    private final double maxSpeed;
 
     private Point2D acceleration;
     private Point2D velocity;
@@ -27,13 +27,20 @@ public abstract class MovableEntity extends Entity implements IMovable {
 
     @Override
     public void update(long delta) {
-        //TODO: take delta into account!
-        setAcceleration(limit(acceleration, maxForce));
+        /* Calculate time increment in seconds */
+        double nano = 0.0000000001;
+        double deltaFactor = (double)delta * nano; //TODO: change delta to be time increment instead?
 
+        /* Limit the acceleration to maxForce, and multiply with the delta time value */
+        setAcceleration(limit(acceleration, maxForce).multiply(deltaFactor));
+
+        /* Add acceleration to velocity, and limit the velocity to max speed */
         setVelocity(limit(velocity.add(acceleration), maxSpeed));
 
+        /* Add velocity to position */
         setPosition(position.add(velocity));
 
+        /* Reset acceleration */
         setAcceleration(new Point2D(0, 0));
     }
 
@@ -73,11 +80,12 @@ public abstract class MovableEntity extends Entity implements IMovable {
     }
 
     /* Helper methods */
+    //TODO: move to util class?
     public static Point2D limit(Point2D vector, double maxMagnitude) { // Public only for testing purposes...
         /* Checks for the square of the magnitude instead of the magnitude itself, to avoid having to use
          * the sqrt operator.
          */
-        if(Math.pow(vector.getX(), 2) + Math.pow(vector.getY(), 2) < maxMagnitude * maxMagnitude) {
+        if(Math.pow(vector.getX(), 2) + Math.pow(vector.getY(), 2) > maxMagnitude * maxMagnitude) {
             double magnitude = vector.magnitude();
             double factor = maxMagnitude / magnitude;
             return vector.multiply(factor);
