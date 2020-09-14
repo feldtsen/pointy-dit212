@@ -1,6 +1,6 @@
 package game.model.entity;
 
-import game.model.IMovable;
+
 import game.model.ILiving;
 import javafx.geometry.Point2D;
 
@@ -17,7 +17,11 @@ public abstract class LivingEntity extends MovableEntity implements ILiving {
         return this.hitPoints;
     }
 
-    public void setHitpoints(int hitPoints) {
+    public void setHitPoints(int hitPoints) {
         this.hitPoints = hitPoints;
+    }
+
+    public boolean isAlive() {
+        return this.hitPoints > 0;
     }
 }
