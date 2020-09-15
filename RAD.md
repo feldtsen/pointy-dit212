@@ -443,7 +443,7 @@ Displayed when the game is launched.
 
 **UML of domain model**
 
-<img src=https://github.com/feldtsen/pointy-dit212/blob/master/domain-model/domain-model-diagram.png width=100%>
+<img src=https://github.com/feldtsen/pointy-dit212/blob/master/domain-model/domain-model.png width=100%>
 
 
 ## 3.1. Class responsibilities
