@@ -9,5 +9,5 @@ public interface IEntity extends IPositionable {
     boolean checkCollision(IEntity entity);
     boolean handleCollision(IEntity entity);
 
-    void update(long delta);
+    void update(double delta);
 }

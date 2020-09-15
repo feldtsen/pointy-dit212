@@ -27,13 +27,9 @@ public abstract class MovableEntity extends Entity implements IMovable {
 
     /* Takes change in time in nanoseconds since last update */
     @Override
-    public void update(long delta) {
-        /* Calculate time increment in seconds */
-        double nano = 0.000000001;
-        double deltaFactor = (double)delta * nano; //TODO: change delta to be time increment instead?
-
+    public void update(double delta) {
         /* Limit the acceleration to maxForce, and multiply with the delta time value */
-        setAcceleration(limit(acceleration, maxForce).multiply(deltaFactor));
+        setAcceleration(limit(acceleration, maxForce).multiply(delta));
 
         /* Add acceleration to velocity, and limit the velocity to max speed */
         setVelocity(limit(velocity.add(acceleration), maxSpeed));

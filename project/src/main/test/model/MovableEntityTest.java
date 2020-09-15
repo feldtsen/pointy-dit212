@@ -105,9 +105,7 @@ public class MovableEntityTest {
         Point2D currentVelocity = movableEntity.getVelocity();
 
         movableEntity.addForce(force);
-
-        long second = 1000000000;
-        movableEntity.update(second);
+        movableEntity.update(1.0); //delta 1.0 ==> 1 second has passed since last update
 
         assertEquals(currentVelocity.add(force), movableEntity.getVelocity());
         assertEquals(currentPosition.add(currentVelocity.add(force)), movableEntity.getPosition());
@@ -120,9 +118,7 @@ public class MovableEntityTest {
         Point2D currentVelocity = movableEntity.getVelocity();
 
         movableEntity.addForce(force);
-
-        long second = 1000000000;
-        movableEntity.update(second);
+        movableEntity.update(1.0);
 
         assertEquals(currentVelocity.add(MovableEntity.limit(force, maxForce)), movableEntity.getVelocity());
         assertEquals(currentPosition.add(currentVelocity.add(MovableEntity.limit(force, maxForce))), movableEntity.getPosition());

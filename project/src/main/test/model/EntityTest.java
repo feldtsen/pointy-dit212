@@ -19,7 +19,7 @@ public class EntityTest {
             }
 
             @Override
-            public void update(long delta) {
+            public void update(double delta) {
             }
         };
     }
