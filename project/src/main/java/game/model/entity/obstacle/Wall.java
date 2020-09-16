@@ -9,7 +9,7 @@ public class Wall extends Entity implements IObstacle {
     private double height;
 
     public Wall(Point2D position, double width, double height) {
-        super(position, width); //TODO: Constructor of Entity takes radius as second arg. Radius of wall?
+        super(position, width); //TODO: Second arg of constructor is radius. Width for now.
         this.height = height;
         this.width = width;
     }
@@ -44,7 +44,7 @@ public class Wall extends Entity implements IObstacle {
 
     @Override
     public boolean handleCollision(IEntity entity) {
-        return false;
+        return false; //TODO
     }
 
     @Override
