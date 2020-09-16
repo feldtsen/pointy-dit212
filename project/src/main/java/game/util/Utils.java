@@ -7,6 +7,13 @@ public class Utils {
     private Utils() {
     }
 
+    /* Sets magnitude of vector to magnitude */
+    public static Point2D setMagnitude(Point2D vector, double magnitude) {
+        if(vector == null) throw new IllegalArgumentException();
+        return vector.normalize().multiply(magnitude);
+    }
+
+    /* Sets the magnitude of vector to maxMagnitude if vector.magnitude() exceeds maxMagnitude */
     public static Point2D limit(Point2D vector, double maxMagnitude) {
         if(vector == null || maxMagnitude < 0) throw new IllegalArgumentException();
 
@@ -14,9 +21,7 @@ public class Utils {
          * the sqrt operator.
          */
         if(Math.pow(vector.getX(), 2) + Math.pow(vector.getY(), 2) > maxMagnitude * maxMagnitude) {
-            double magnitude = vector.magnitude();
-            double factor = maxMagnitude / magnitude;
-            return vector.multiply(factor);
+            return setMagnitude(vector, maxMagnitude);
         } else {
             return vector;
         }
