@@ -9,6 +9,7 @@ public class Bullet extends Projectile{
         super(position, radius, maxForce, maxSpeed, damage, velocity);
     }
 
+    //Todo: Remove, collision should be handle by higher level
     @Override
     public boolean handleCollision(IEntity entity) {
         return false;
