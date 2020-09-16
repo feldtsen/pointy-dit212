@@ -63,6 +63,16 @@ public abstract class MovableEntity extends Entity implements IMovable {
     }
 
     @Override
+    public double getMaxForce() {
+        return maxForce;
+    }
+
+    @Override
+    public double getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    @Override
     public void setPosition(Point2D position) {
         this.position = position;
     }

@@ -8,6 +8,8 @@ public interface IMovable extends IPositionable {
 
     Point2D getVelocity();
     Point2D getAcceleration();
+    double getMaxSpeed();
+    double getMaxForce();
 
     void setPosition(Point2D position);
     void setVelocity(Point2D velocity);

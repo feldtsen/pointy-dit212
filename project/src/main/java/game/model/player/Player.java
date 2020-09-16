@@ -2,7 +2,6 @@ package game.model.player;
 
 import game.model.entity.IEntity;
 import game.model.entity.movable.LivingEntity;
-import game.model.entity.movable.MovableEntity;
 import javafx.geometry.Point2D;
 
 public class Player extends LivingEntity implements IPlayer {
@@ -10,11 +9,9 @@ public class Player extends LivingEntity implements IPlayer {
     private final static Point2D RIGHT = new Point2D(1, 0);
     private final static Point2D UP    = new Point2D(0, -1);
     private final static Point2D DOWN  = new Point2D(0, 1);
-    private double acceleration;
 
-    public Player(Point2D position, double radius, double maxForce, double maxSpeed, double acceleration) {
-        super(position, radius, maxForce, maxSpeed, 1);
-        this.acceleration = acceleration;
+    public Player(Point2D position, double radius, double responsiveness, double maxSpeed) {
+        super(position, radius, responsiveness, maxSpeed, 1);
     }
 
     @Override
@@ -24,27 +21,30 @@ public class Player extends LivingEntity implements IPlayer {
 
     @Override
     public void moveUp() {
-        Point2D force = UP.multiply(acceleration);
-        addForce(force);
+        moveDirection(UP);
     }
 
     @Override
     public void moveLeft() {
-
+        moveDirection(LEFT);
     }
 
     @Override
     public void moveDown() {
-
+        moveDirection(DOWN);
     }
 
     @Override
     public void moveRight() {
-
+        moveDirection(RIGHT);
     }
 
     @Override
     public boolean handleCollision(IEntity entity) {
         return false;
+    }
+
+    private void moveDirection(Point2D direction) {
+       addForce(direction.multiply(getMaxForce()));
     }
 }

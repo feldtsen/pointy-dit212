@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import game.model.entity.IEntity;
 import game.model.entity.movable.MovableEntity;
+import game.model.player.Player;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -110,7 +111,7 @@ public class GameWindowController {
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        DummyPlayer player = new DummyPlayer();
+        Player player = new Player(new Point2D(100, 100), 55, 50, 10);
 
         CurrentDirection currentDirection = new CurrentDirection();
 
@@ -141,6 +142,8 @@ public class GameWindowController {
                 if(currentDirection.getCurrentDirections().get(3)) {
                     player.moveRight();
                 }
+
+                player.update(1.0 / 60);
 
             }
         }.start();
