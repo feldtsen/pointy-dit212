@@ -36,7 +36,7 @@ public abstract class MovableEntity extends Entity implements IMovable {
         setVelocity(Utils.limit(velocity.add(acceleration), maxSpeed));
 
         /* Add velocity to position */
-        setPosition(position.add(velocity));
+        setPosition(position.add(velocity.multiply(delta)));
 
         /* Reset acceleration */
         setAcceleration(new Point2D(0, 0));

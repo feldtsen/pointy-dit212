@@ -116,7 +116,7 @@ public class GameWindowController {
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        Player player = new Player(new Point2D(100, 100), 55, 50, 10);
+        Player player = new Player(new Point2D(100, 100), 55, 2500, 1000);
 
         CurrentDirection currentDirection = new CurrentDirection();
 
@@ -124,7 +124,7 @@ public class GameWindowController {
         gamePane.setOnKeyReleased(currentDirection::unregister);
 
         //new AnimationTimer()
-        new GameLoop(100000)
+        new GameLoop(1000)
         {
             public void update(double delta)
             {
@@ -148,8 +148,7 @@ public class GameWindowController {
                     player.moveRight();
                 }
 
-                player.setVelocity(player.getVelocity().multiply(0.95));
-
+                player.setVelocity(player.getVelocity().multiply(0.98));
                 player.update(delta );
             }
         }.start();
