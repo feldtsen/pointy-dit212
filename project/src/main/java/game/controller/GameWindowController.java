@@ -9,6 +9,7 @@ import game.model.entity.IEntity;
 import game.model.entity.movable.MovableEntity;
 import game.model.player.Player;
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import game.App;
@@ -23,30 +24,6 @@ import javafx.scene.paint.Color;
 import javax.crypto.Cipher;
 
 public class GameWindowController {
-
-    private class DummyPlayer extends MovableEntity {
-        public DummyPlayer(){
-            super(new Point2D(10, 10), 50, 5, 5);
-        }
-
-        public void moveRight (){
-            this.position = new Point2D(this.position.getX() + 5, this.position.getY());
-        }
-        public void moveLeft (){
-            this.position = new Point2D(this.position.getX() - 5, this.position.getY());
-        }
-        public void moveDown (){
-            this.position = new Point2D(this.position.getX(), this.position.getY() + 5);
-        }
-        public void moveUp (){
-            this.position = new Point2D(this.position.getX(), this.position.getY() - 5);
-        }
-
-        @Override
-        public boolean handleCollision(IEntity entity) {
-            return false;
-        }
-    }
 
     @FXML
     private Canvas canvas;
@@ -112,18 +89,17 @@ public class GameWindowController {
 
     @FXML
     private void startGame() throws IOException {
-        final long startNanoTime = System.nanoTime();
-
         GraphicsContext gc = canvas.getGraphicsContext2D();
-
-        Player player = new Player(new Point2D(100, 100), 55, 2500, 1000);
-
+        Player player = new Player(new Point2D(575, 375), 50, 2500, 1000);
         CurrentDirection currentDirection = new CurrentDirection();
 
         gamePane.setOnKeyPressed(currentDirection::register);
         gamePane.setOnKeyReleased(currentDirection::unregister);
 
-        //new AnimationTimer()
+        Button start = (Button) gamePane.lookup("#startGameButton");
+        start.setText("Wow");
+        start.toBack();
+
         new GameLoop(1000)
         {
             public void update(double delta)
