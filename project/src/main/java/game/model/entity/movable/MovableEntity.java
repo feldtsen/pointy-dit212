@@ -2,6 +2,7 @@ package game.model.entity.movable;
 
 import game.model.IMovable;
 import game.model.entity.Entity;
+import game.util.Utils;
 import javafx.geometry.Point2D;
 
 public abstract class MovableEntity extends Entity implements IMovable {
@@ -29,10 +30,10 @@ public abstract class MovableEntity extends Entity implements IMovable {
     @Override
     public void update(double delta) {
         /* Limit the acceleration to maxForce, and multiply with the delta time value */
-        setAcceleration(limit(acceleration, maxForce).multiply(delta));
+        setAcceleration(Utils.limit(acceleration, maxForce).multiply(delta));
 
         /* Add acceleration to velocity, and limit the velocity to max speed */
-        setVelocity(limit(velocity.add(acceleration), maxSpeed));
+        setVelocity(Utils.limit(velocity.add(acceleration), maxSpeed));
 
         /* Add velocity to position */
         setPosition(position.add(velocity));
@@ -76,20 +77,4 @@ public abstract class MovableEntity extends Entity implements IMovable {
         this.acceleration = acceleration;
     }
 
-    /* Helper methods */
-    //TODO: move to util class?
-    public static Point2D limit(Point2D vector, double maxMagnitude) { // Public only for testing purposes...
-        if(vector == null || maxMagnitude < 0) throw new IllegalArgumentException();
-
-        /* Checks for the square of the magnitude instead of the magnitude itself, to avoid having to use
-         * the sqrt operator.
-         */
-        if(Math.pow(vector.getX(), 2) + Math.pow(vector.getY(), 2) > maxMagnitude * maxMagnitude) {
-            double magnitude = vector.magnitude();
-            double factor = maxMagnitude / magnitude;
-            return vector.multiply(factor);
-        } else {
-            return vector;
-        }
-    }
 }

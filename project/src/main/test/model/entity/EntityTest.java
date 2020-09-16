@@ -1,4 +1,4 @@
-package model;
+package model.entity;
 
 import game.model.entity.Entity;
 import game.model.entity.IEntity;

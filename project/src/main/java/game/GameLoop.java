@@ -2,26 +2,26 @@ package game;
 
 import javafx.animation.AnimationTimer;
 
-public class Game implements IGame {
+public abstract class GameLoop implements IGameLoop {
     private final static long SECOND = 1_000_000_000;
 
     /* Fields used for managing the game loop. */
     private final long nanosPerFrame;   /* The number of nano seconds per frame at desired FPS */
     private long lastNanoTime;          /* Last sampled nano time. Used to calculate delta. */
-    private final AnimationTimer timer; /* Timer used for handling game loop. */
     private boolean isRunning;          /* True if timer is running. */
+    private final AnimationTimer timer; /* Timer used for handling game loop. */
 
     /* Fields for calculating FPS */
     private long lastSecond;
     private int framesThisSecond;
     private int currentFPS;
 
-    /* Player/level specific fields. */
-    private final int score;            /* Player score. */
+    public GameLoop() {
+        /* Improbably high FPS, ensures animation timer can set FPS itself */
+        this(1000);
+    }
 
-    public Game(int desiredFPS) {
-        this.score = 0;
-
+    public GameLoop(int desiredFPS) {
         /* The number of nano seconds which will elapse each frame at desired FPS. */
         this.nanosPerFrame = SECOND / desiredFPS;
 
@@ -53,16 +53,7 @@ public class Game implements IGame {
     }
 
     /* Delta signifies the change in time since last update. */
-    private void update(double delta) {
-        /* TODO: Game code goes here... */
-
-
-    }
-
-    @Override
-    public int getScore() {
-        return score;
-    }
+    public abstract void update(double delta);
 
     @Override
     public boolean isRunning() {
