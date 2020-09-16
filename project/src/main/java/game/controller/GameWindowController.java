@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import game.GameLoop;
 import game.model.entity.IEntity;
 import game.model.entity.movable.MovableEntity;
+import game.model.player.Player;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -94,6 +96,10 @@ public class GameWindowController {
                     break;
             }
 
+
+        }
+        public boolean keyPressed(){
+            return directions.get(0) || directions.get(1) || directions.get(2) || directions.get(3);
         }
 
         public ArrayList<Boolean> getCurrentDirections(){
@@ -110,18 +116,18 @@ public class GameWindowController {
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        DummyPlayer player = new DummyPlayer();
+        Player player = new Player(new Point2D(100, 100), 55, 50, 10);
 
         CurrentDirection currentDirection = new CurrentDirection();
 
         gamePane.setOnKeyPressed(currentDirection::register);
         gamePane.setOnKeyReleased(currentDirection::unregister);
 
-        new AnimationTimer()
+        //new AnimationTimer()
+        new GameLoop(100000)
         {
-            public void handle(long currentNanoTime)
+            public void update(double delta)
             {
-                double t = (currentNanoTime - startNanoTime) / 1000000000.0;
                 gc.clearRect(0, 0, 1200, 800);
                 gc.setFill(Color.rgb(50, 50, 50));
                 gc.fillRect(0, 0, 1200, 800);
@@ -142,6 +148,9 @@ public class GameWindowController {
                     player.moveRight();
                 }
 
+                player.setVelocity(player.getVelocity().multiply(0.95));
+
+                player.update(delta );
             }
         }.start();
     }
