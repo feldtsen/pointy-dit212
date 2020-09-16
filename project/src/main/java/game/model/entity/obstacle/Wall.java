@@ -15,6 +15,7 @@ public class Wall extends Entity implements IObstacle {
     }
 
     @Override
+    /* Checks if an Entity has collided with the wall. */
     public boolean checkCollision(IEntity entity) {
         /* Size and coordinates of the entity to check for collision. */
         double entityWidth = entity.getWidth();

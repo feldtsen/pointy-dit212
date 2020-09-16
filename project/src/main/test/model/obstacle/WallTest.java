@@ -5,6 +5,7 @@ import game.model.entity.IEntity;
 import game.model.entity.obstacle.Wall;
 import javafx.geometry.Point2D;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class WallTest {
@@ -27,13 +28,24 @@ public class WallTest {
 
     @Test
     public void testCheckCollisionNoCollision() {
-        IEntity entity = createEntity(new Point2D(100, 100),10);
-        assertFalse(wall.checkCollision(entity));
+        IEntity entity0 = createEntity(new Point2D(100, 100),10);  /* Bottom right of wall. */
+        IEntity entity1 = createEntity(new Point2D(40, 40), 10);  /* Top left of wall. */
+        IEntity entity2 = createEntity(new Point2D(100, 40), 10); /* Top right of wall. */
+        IEntity entity3 = createEntity(new Point2D(40, 100), 10); /* Bottom left of wall */
+
+
+        assertFalse(wall.checkCollision(entity0) || wall.checkCollision(entity1) ||
+                              wall.checkCollision(entity2) || wall.checkCollision(entity3));
     }
 
     @Test
     public void testCheckCollisionCollision() {
-        IEntity entity = createEntity(new Point2D(99, 99), 10);
-        assertTrue(wall.checkCollision(entity));
+        IEntity entity0 = createEntity(new Point2D(99, 99), 10); /* Bottom right of wall */
+        IEntity entity1 = createEntity(new Point2D(41, 41), 10); /* Top left of wall */
+        IEntity entity2 = createEntity(new Point2D(99, 41), 10); /* Bottom left of wall */
+        IEntity entity3 = createEntity(new Point2D(99, 99), 10); /* Bottom right of wall */
+
+        assertTrue(wall.checkCollision(entity0) && wall.checkCollision(entity1) &&
+                             wall.checkCollision(entity2) && wall.checkCollision(entity3));
     }
 }
