@@ -27,7 +27,7 @@ public abstract class Projectile extends MovableEntity implements IProjectile {
 
     @Override
     public void setDestroyed() {
-        isDestroyed = false;
+        isDestroyed = true;
     }
 
 }
