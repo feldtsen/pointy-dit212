@@ -26,6 +26,7 @@ public class Rectangle implements IShape2D, IRectangle{
         return rotation;
     }
 
+    @Override
     public void setRotation(double rotation)  {
         this.rotation = rotation;
     }

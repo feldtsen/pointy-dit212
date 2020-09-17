@@ -4,4 +4,5 @@ public interface IRectangle {
     double getWidth();
     double getHeight();
     double getRotation();
+    void setRotation(double rotation);
 }
