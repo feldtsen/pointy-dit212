@@ -11,6 +11,8 @@ import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
 import game.model.entity.movable.MovableEntity;
 import game.model.player.Player;
+import game.model.shape2d.ICircle;
+import game.model.shape2d.Shapes;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -148,9 +150,10 @@ public class GameWindowController {
                 gc.clearRect(0, 0, 1200, 800);
                 gc.setFill(Color.rgb(30, 30, 30));
                 gc.fillRect(0, 0, 1200, 800);
+                boolean collision = Shapes.testCollision((ICircle) player.getShape(), player.getPosition(), (ICircle) enemy.getShape(), enemy.getPosition());
                 gc.setFill(Color.WHITE);
-                gc.fillOval(player.getPosition().getX(), player.getPosition().getY(), player.getWidth(), player.getHeight());
-                gc.fillOval(enemy.getPosition().getX(), enemy.getPosition().getY(), enemy.getWidth(), enemy.getHeight());
+                gc.fillOval(player.getPosition().getX(), player.getPosition().getY(), 50, 50);
+                gc.fillOval(enemy.getPosition().getX(), enemy.getPosition().getY(), 50, 50);
 
                 if(currentDirection.getCurrentDirections().get(0)) {
                     player.moveUp();
