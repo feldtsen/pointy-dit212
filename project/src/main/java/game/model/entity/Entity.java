@@ -42,8 +42,5 @@ public abstract class Entity implements IEntity {
     }
 
     @Override
-    public abstract boolean handleCollision(IEntity entity);
-
-    @Override
     public abstract void update(double delta);
 }

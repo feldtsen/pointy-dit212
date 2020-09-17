@@ -43,10 +43,6 @@ public class Wall extends Entity implements IObstacle {
         return xOverlap && yOverlap;
     }
 
-    @Override
-    public boolean handleCollision(IEntity entity) {
-        return false; //TODO
-    }
 
     @Override
     public void update(double delta) {
