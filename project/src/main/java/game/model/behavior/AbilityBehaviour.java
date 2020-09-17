@@ -1,4 +1,7 @@
-package game.model.ability;
+package game.model.behavior;
+
+import game.model.ability.IAbility;
+import game.model.behavior.IAbilityBehaviour;
 
 import java.util.List;
 

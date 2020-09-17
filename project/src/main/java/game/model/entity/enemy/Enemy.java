@@ -1,8 +1,7 @@
 package game.model.entity.enemy;
 
-import game.model.ability.IAbilityBehaviour;
-import game.model.behavior.IMovementBehaviour;
-import game.model.entity.IEntity;
+import game.model.behavior.IAbilityBehaviour;
+import game.model.behavior.movement.IMovementBehaviour;
 import game.model.entity.movable.LivingEntity;
 import javafx.geometry.Point2D;
 
@@ -20,11 +19,11 @@ public class Enemy extends LivingEntity implements IEnemy {
 
     @Override
     public void setMovementBehaviour(IMovementBehaviour movementBehaviour) {
-
+        this.movementBehaviour = movementBehaviour;
     }
 
     @Override
     public void setAbilityBehaviour(IAbilityBehaviour abilityBehaviour) {
-
+        this.abilityBehaviour = abilityBehaviour;
     }
 }
