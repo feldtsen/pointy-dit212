@@ -22,7 +22,7 @@ public class Level implements ILevel {
 
     @Override
     public List<IEntity> getEnemies() {
-        return  this.enemies;
+        return this.enemies;
     }
 
     @Override
