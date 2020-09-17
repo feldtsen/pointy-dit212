@@ -5,10 +5,10 @@ import java.util.List;
 
 public class LevelLoader {
 
-    private final String level;
+    private final String path;
 
     public LevelLoader(String level) {
-        this.level = level;
+        this.path = "..." + level + ".csv";
     }
 
 
@@ -31,6 +31,7 @@ public class LevelLoader {
         //TODO
         return 0;
     }
+
     public double loadHeight() {
         //TODO
         return 0;
