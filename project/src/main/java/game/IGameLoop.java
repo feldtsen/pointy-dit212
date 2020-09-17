@@ -5,5 +5,6 @@ public interface IGameLoop {
     void start();
     void stop();
     int getCurrentFPS();
+    void setPaused(boolean paused);
     void update(double delta);
 }
