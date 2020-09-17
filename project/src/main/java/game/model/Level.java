@@ -1,6 +1,7 @@
 package game.model;
 
 import game.model.entity.IEntity;
+
 import java.util.List;
 
 public class Level implements ILevel {
