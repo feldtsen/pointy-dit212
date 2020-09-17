@@ -136,7 +136,7 @@ public class GameWindowController implements Initializable {
 
     private void startGame() throws IOException {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        Player player = new Player(new Point2D(575, 375), 50, 2500, 1000);
+        Player player = new Player(new Point2D(575, 375), 30, 2500, 1000);
         Enemy enemy = new Enemy(new Point2D(100,100), 50, 1000, 1000, 1,null, new SeekingBehaviour(), player);
         CurrentDirection currentDirection = new CurrentDirection();
 
@@ -150,14 +150,20 @@ public class GameWindowController implements Initializable {
                 gc.clearRect(0, 0, 1200, 800);
                 gc.setFill(Color.rgb(30, 30, 30));
                 gc.fillRect(0, 0, 1200, 800);
-                boolean collision = Shapes.testCollision((ICircle) player.getShape(), player.getPosition(), (ICircle) enemy.getShape(), enemy.getPosition());
+                boolean collision = Shapes.testCollision(player.getShape(), player.getPosition(), enemy.getShape(), enemy.getPosition());
                 if(collision) {
                     gc.setFill(Color.RED);
                 } else {
                     gc.setFill(Color.WHITE);
                 }
-                gc.fillOval(player.getPosition().getX(), player.getPosition().getY(), 2*50, 2*50);
-                gc.fillOval(enemy.getPosition().getX(), enemy.getPosition().getY(), 2*50, 2*50);
+                gc.fillOval(player.getPosition().getX() - player.getShape().getRadius(),
+                        player.getPosition().getY() - player.getShape().getRadius(),
+                        2*player.getShape().getRadius(),
+                        2*player.getShape().getRadius());
+                gc.fillOval(enemy.getPosition().getX() - enemy.getShape().getRadius(),
+                        enemy.getPosition().getY() - enemy.getShape().getRadius(),
+                        2*enemy.getShape().getRadius(),
+                        2*enemy.getShape().getRadius());
 
                 if(currentDirection.getCurrentDirections().get(0)) {
                     player.moveUp();
@@ -175,8 +181,8 @@ public class GameWindowController implements Initializable {
 
                 player.setVelocity(player.getVelocity().multiply(0.98));
                 player.update(delta);
-                enemy.setVelocity(enemy.getVelocity().multiply(0.98));
-                enemy.update(delta);
+                //enemy.setVelocity(enemy.getVelocity().multiply(0.98));
+                //enemy.update(delta);
 
             }
         };
