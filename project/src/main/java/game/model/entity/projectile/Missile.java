@@ -1,6 +1,7 @@
 package game.model.entity.projectile;
 
 import game.model.entity.IEntity;
+import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;
 
 public class Missile extends Projectile{
@@ -22,6 +23,7 @@ public class Missile extends Projectile{
     public IEntity getTarget(){
         return target;
     }
+
 
     //TODO: Use this to implement missile homing
     @Override
