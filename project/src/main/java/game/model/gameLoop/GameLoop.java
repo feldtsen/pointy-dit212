@@ -47,7 +47,7 @@ public abstract class GameLoop implements IGameLoop {
                     lastSecond = now;
                     currentFPS = framesThisSecond;
                     framesThisSecond = 0;
-                    System.out.println(currentFPS);
+                    //System.out.println(currentFPS);
                 }
             }
         };
