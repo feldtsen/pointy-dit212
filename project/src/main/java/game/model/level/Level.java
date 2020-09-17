@@ -17,8 +17,8 @@ public class Level implements ILevel {
 
 
 
-    public Level(String level) {
-        LevelLoader ll = new LevelLoader(level);
+    public Level(String levelID) {
+        ILevelLoader ll = new LevelLoader(levelID);
         this.enemies = ll.loadEnemies();
         this.projectiles = new ArrayList<>();
         this.obstacles = ll.loadObstacles();
