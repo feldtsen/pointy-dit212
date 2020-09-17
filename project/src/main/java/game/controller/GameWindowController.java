@@ -5,7 +5,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import game.GameLoop;
+import game.model.behavior.movement.SeekingBehaviour;
 import game.model.entity.IEntity;
+import game.model.entity.enemy.Enemy;
 import game.model.entity.movable.MovableEntity;
 import game.model.player.Player;
 import javafx.animation.AnimationTimer;
@@ -133,6 +135,7 @@ public class GameWindowController {
     private void startGame() throws IOException {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         Player player = new Player(new Point2D(575, 375), 50, 2500, 1000);
+        Enemy enemy = new Enemy(new Point2D(100,100), 50, 1000, 1000, 1,null, new SeekingBehaviour(), player);
         CurrentDirection currentDirection = new CurrentDirection();
 
         gamePane.setOnKeyPressed(currentDirection::register);
@@ -147,6 +150,7 @@ public class GameWindowController {
                 gc.fillRect(0, 0, 1200, 800);
                 gc.setFill(Color.WHITE);
                 gc.fillOval(player.getPosition().getX(), player.getPosition().getY(), player.getWidth(), player.getHeight());
+                gc.fillOval(enemy.getPosition().getX(), enemy.getPosition().getY(), enemy.getWidth(), enemy.getHeight());
 
                 if(currentDirection.getCurrentDirections().get(0)) {
                     player.moveUp();
@@ -163,7 +167,9 @@ public class GameWindowController {
                 }
 
                 player.setVelocity(player.getVelocity().multiply(0.98));
-                player.update(delta );
+                player.update(delta);
+                enemy.setVelocity(enemy.getVelocity().multiply(0.98));
+                enemy.update(delta);
             }
         }.start();
     }
