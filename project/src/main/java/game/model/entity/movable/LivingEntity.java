@@ -13,14 +13,17 @@ public abstract class LivingEntity extends MovableEntity implements ILiving {
         this.hitPoints = hitPoints;
     }
 
+    @Override
     public int getHitPoints() {
         return this.hitPoints;
     }
 
+    @Override
     public void setHitPoints(int hitPoints) {
         this.hitPoints = hitPoints;
     }
 
+    @Override
     public boolean isAlive() {
         return this.hitPoints > 0;
     }
