@@ -1,4 +1,4 @@
-package game;
+package game.model.gameLoop;
 
 public interface IGameLoop {
     boolean isRunning();
