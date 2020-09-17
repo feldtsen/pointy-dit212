@@ -18,6 +18,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
@@ -28,8 +29,8 @@ public class GameWindowController {
     @FXML
     private Canvas canvas;
 
-    private class CurrentDirection {
-        private ArrayList<Boolean> directions = new ArrayList<>();
+    private static class CurrentDirection {
+        private final ArrayList<Boolean> directions = new ArrayList<>();
 
         public CurrentDirection() {
             directions.add(false);
@@ -75,9 +76,6 @@ public class GameWindowController {
 
 
         }
-        public boolean keyPressed(){
-            return directions.get(0) || directions.get(1) || directions.get(2) || directions.get(3);
-        }
 
         public ArrayList<Boolean> getCurrentDirections(){
             return directions;
@@ -88,6 +86,29 @@ public class GameWindowController {
     Pane gamePane;
 
     @FXML
+    private void handleMenuLevelButton () {
+        System.out.println("Level button clicked");
+    }
+
+    @FXML
+    private void handleMenuScoreButton() {
+        System.out.println("Score button clicked ");
+    }
+
+    @FXML
+    private void handleMenuStartButton(ActionEvent e) throws IOException {
+        Button menuStartButton = (Button) e.getSource();
+        HBox menuContainer = (HBox) menuStartButton.getParent();
+        menuContainer.toBack();
+        startGame();
+    }
+
+
+    @FXML
+    private void handleReturnToMenuButton() {
+
+    }
+
     private void startGame() throws IOException {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         Player player = new Player(new Point2D(575, 375), 50, 2500, 1000);
@@ -96,16 +117,12 @@ public class GameWindowController {
         gamePane.setOnKeyPressed(currentDirection::register);
         gamePane.setOnKeyReleased(currentDirection::unregister);
 
-        Button start = (Button) gamePane.lookup("#startGameButton");
-        start.setText("Wow");
-        start.toBack();
-
         new GameLoop(1000)
         {
             public void update(double delta)
             {
                 gc.clearRect(0, 0, 1200, 800);
-                gc.setFill(Color.rgb(50, 50, 50));
+                gc.setFill(Color.rgb(30, 30, 30));
                 gc.fillRect(0, 0, 1200, 800);
                 gc.setFill(Color.WHITE);
                 gc.fillOval(player.getPosition().getX(), player.getPosition().getY(), player.getWidth(), player.getHeight());
