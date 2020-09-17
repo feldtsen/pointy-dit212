@@ -2,6 +2,7 @@ package game.model.entity.obstacle;
 
 import game.model.entity.Entity;
 import game.model.entity.IEntity;
+import game.model.shape2d.Rectangle;
 import javafx.geometry.Point2D;
 
 public class Wall extends Entity implements IObstacle {
@@ -9,7 +10,7 @@ public class Wall extends Entity implements IObstacle {
     private double height;
 
     public Wall(Point2D position, double width, double height) {
-        super(position, width); //TODO: Second arg of constructor is radius. Width for now.
+        super(position, new Rectangle(width, height,0)); //TODO: Second arg of constructor is radius. Width for now.
         this.height = height;
         this.width = width;
     }
@@ -18,8 +19,8 @@ public class Wall extends Entity implements IObstacle {
     /* Checks if an Entity has collided with the wall. */
     public boolean checkCollision(IEntity entity) {
         /* Size and coordinates of the entity to check for collision. */
-        double entityWidth = entity.getWidth();
-        double entityHeight = entity.getHeight();
+        //double entityWidth = entity.getWidth();
+        //double entityHeight = entity.getHeight();
         double entityX = entity.getPosition().getX();
         double entityY = entity.getPosition().getY();
 
@@ -31,16 +32,17 @@ public class Wall extends Entity implements IObstacle {
         boolean xOverlap = false;
         boolean yOverlap = false;
 
-        if (entityX < wallX + width && entityX + entityWidth > wallX) {
-            xOverlap = true;
-        }
+        //if (entityX < wallX + width && entityX + entityWidth > wallX) {
+        //    xOverlap = true;
+        //}
 
-        if (entityY < wallY + height && entityY + entityHeight > wallY) {
-            yOverlap = true;
-        }
+        //if (entityY < wallY + height && entityY + entityHeight > wallY) {
+        //    yOverlap = true;
+        //}
 
         /* True if there is an overlap both in x- and y-axis. */
-        return xOverlap && yOverlap;
+        //return xOverlap && yOverlap;
+        return false;
     }
 
     @Override

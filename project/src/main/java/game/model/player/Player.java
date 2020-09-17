@@ -2,6 +2,7 @@ package game.model.player;
 
 import game.model.entity.IEntity;
 import game.model.entity.movable.LivingEntity;
+import game.model.shape2d.Circle;
 import javafx.geometry.Point2D;
 
 public class Player extends LivingEntity implements IPlayer {
@@ -11,7 +12,7 @@ public class Player extends LivingEntity implements IPlayer {
     private final static Point2D DOWN  = new Point2D(0, 1);
 
     public Player(Point2D position, double radius, double responsiveness, double maxSpeed) {
-        super(position, radius, responsiveness, maxSpeed, 1);
+        super(position, responsiveness, maxSpeed, 1, new Circle(radius));
     }
 
     @Override

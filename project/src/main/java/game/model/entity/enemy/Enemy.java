@@ -4,6 +4,7 @@ import game.model.behavior.IAbilityBehaviour;
 import game.model.behavior.movement.IMovementBehaviour;
 import game.model.entity.IEntity;
 import game.model.entity.movable.LivingEntity;
+import game.model.shape2d.Circle;
 import javafx.geometry.Point2D;
 
 public class Enemy extends LivingEntity implements IEnemy {
@@ -14,7 +15,7 @@ public class Enemy extends LivingEntity implements IEnemy {
 
 
     public Enemy(Point2D position, double radius, double maxForce, double maxSpeed, int hitPoints, IAbilityBehaviour abilityBehaviour, IMovementBehaviour movementBehaviour, IEntity target) {
-        super(position, radius, maxForce, maxSpeed, hitPoints);
+        super(position, maxForce, maxSpeed, hitPoints, new Circle(radius));
         this.abilityBehaviour = abilityBehaviour;
         this.movementBehaviour = movementBehaviour;
         this.target = target;

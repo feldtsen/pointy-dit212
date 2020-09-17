@@ -2,6 +2,7 @@ package game.model.entity.movable;
 
 import game.model.IMovable;
 import game.model.entity.Entity;
+import game.model.shape2d.IShape2D;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 
@@ -12,12 +13,12 @@ public abstract class MovableEntity extends Entity implements IMovable {
     private Point2D acceleration;
     private Point2D velocity;
 
-    public MovableEntity(Point2D position, double radius, double maxForce, double maxSpeed) {
-        this(position, new Point2D(0, 0), radius, maxForce, maxSpeed);
+    public MovableEntity(Point2D position, double maxForce, double maxSpeed, IShape2D shape) {
+        this(position, new Point2D(0, 0), maxForce, maxSpeed, shape);
     }
 
-    public MovableEntity(Point2D position, Point2D velocity, double radius, double maxForce, double maxSpeed) {
-        super(position, radius);
+    public MovableEntity(Point2D position, Point2D velocity, double maxForce, double maxSpeed, IShape2D shape) {
+        super(position, shape);
 
         this.velocity = velocity;
         this.acceleration = new Point2D(0, 0);
