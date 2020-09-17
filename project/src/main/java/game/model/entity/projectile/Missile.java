@@ -5,6 +5,7 @@ import javafx.geometry.Point2D;
 
 public class Missile extends Projectile{
 
+    private double steering; //How fast a missile turns towards the player
     private IEntity target;
 
     public Missile(Point2D position, double radius, double maxForce, double maxSpeed, int damage, Point2D velocity, IEntity target) {

@@ -12,6 +12,7 @@ public class EntityTest {
     /* Helper method required for initializing an anonymous instance of the abstract class */
     public IEntity createEntity(Point2D position, double radius) {
         return new Entity(position, radius) {
+
             @Override
             public void update(double delta) {
             }

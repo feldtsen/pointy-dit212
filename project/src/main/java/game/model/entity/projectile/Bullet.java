@@ -8,5 +8,5 @@ public class Bullet extends Projectile {
     public Bullet(Point2D position, double radius, double maxForce, double maxSpeed, int damage, Point2D velocity) {
         super(position, radius, maxForce, maxSpeed, damage, velocity);
     }
-
 }
+

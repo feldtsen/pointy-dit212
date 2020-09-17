@@ -17,6 +17,7 @@ public class MovableEntityTest {
     public void before() {
         maxForce = 3;
         maxSpeed = 3;
+
         movableEntity = new MovableEntity(new Point2D(0, 0), 1, maxForce, maxSpeed) {};
     }
 
@@ -29,17 +30,26 @@ public class MovableEntityTest {
     }
 
     @Test
-    public void testVelocityUpdate() {
+    public void testVelocityUpdateDeltaOne() {
         Point2D velocity = new Point2D(1, 1);
         Point2D currentPosition = movableEntity.getPosition();
 
         movableEntity.setVelocity(velocity);
-
-        /* Delta should not matter for velocity */
-        //TODO: is this good!?!?!?
         movableEntity.update(1);
 
         assertEquals(currentPosition.add(velocity), movableEntity.getPosition());
+    }
+
+    @Test
+    public void testVelocityUpdateDeltaNonOne() {
+        double delta = 1.0 / 60.0; /* Simulating actual delta: One 60th of a second */
+        Point2D velocity = new Point2D(1, 1);
+        Point2D currentPosition = movableEntity.getPosition();
+
+        movableEntity.setVelocity(velocity);
+        movableEntity.update(delta);
+
+        assertEquals(currentPosition.add(velocity.multiply(delta)), movableEntity.getPosition());
     }
 
     @Test
@@ -48,8 +58,6 @@ public class MovableEntityTest {
         Point2D currentPosition = movableEntity.getPosition();
 
         movableEntity.setVelocity(velocity);
-
-        /* Delta should not matter for velocity */
         movableEntity.update(1);
 
         assertEquals(currentPosition.add(Utils.limit(velocity, maxSpeed)), movableEntity.getPosition());

@@ -12,7 +12,6 @@ import static org.junit.Assert.*;
 public class WallTest {
     private Entity wall  = new Wall(new Point2D(50, 50), 50, 50);
 
-
     @Test
     public void testCheckCollisionNoCollision() {
         IEntity entity0 = new MovableEntity(new Point2D(100, 100), 10, 3, 3) {};  /* Bottom right of wall. */

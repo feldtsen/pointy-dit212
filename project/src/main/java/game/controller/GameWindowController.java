@@ -9,6 +9,7 @@ import game.model.entity.IEntity;
 import game.model.entity.movable.MovableEntity;
 import game.model.player.Player;
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import game.App;
@@ -108,18 +109,17 @@ public class GameWindowController {
 
     @FXML
     private void startGame() throws IOException {
-        final long startNanoTime = System.nanoTime();
-
         GraphicsContext gc = canvas.getGraphicsContext2D();
-
-        Player player = new Player(new Point2D(100, 100), 55, 2500, 1000);
-
+        Player player = new Player(new Point2D(575, 375), 50, 2500, 1000);
         CurrentDirection currentDirection = new CurrentDirection();
 
         gamePane.setOnKeyPressed(currentDirection::register);
         gamePane.setOnKeyReleased(currentDirection::unregister);
 
-        //new AnimationTimer()
+        Button start = (Button) gamePane.lookup("#startGameButton");
+        start.setText("Wow");
+        start.toBack();
+
         new GameLoop(1000)
         {
             public void update(double delta)
