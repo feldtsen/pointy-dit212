@@ -39,11 +39,6 @@ public class Player extends LivingEntity implements IPlayer {
         moveDirection(RIGHT);
     }
 
-    @Override
-    public boolean handleCollision(IEntity entity) {
-        return false;
-    }
-
     private void moveDirection(Point2D direction) {
        addForce(direction.multiply(getMaxForce()));
     }

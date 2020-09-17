@@ -42,10 +42,6 @@ public class GameWindowController {
             this.position = new Point2D(this.position.getX(), this.position.getY() - 5);
         }
 
-        @Override
-        public boolean handleCollision(IEntity entity) {
-            return false;
-        }
     }
 
     @FXML

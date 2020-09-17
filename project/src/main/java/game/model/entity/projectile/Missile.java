@@ -22,12 +22,6 @@ public class Missile extends Projectile{
         return target;
     }
 
-    //Todo: Remove, collision should be handle by higher level
-    @Override
-    public boolean handleCollision(IEntity entity) {
-        return false;
-    }
-
     //TODO: Use this to implement missile homing
     @Override
     public void update(double delta) {

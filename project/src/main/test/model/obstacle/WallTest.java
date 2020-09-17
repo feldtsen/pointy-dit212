@@ -14,12 +14,6 @@ public class WallTest {
     /* Helper method required for initializing an anonymous instance of the abstract class */
     public IEntity createEntity(Point2D position, double radius) {
         return new Entity(position, radius) {
-            /* Dummy method, will be tested in implementation of abstract class entity */
-            @Override
-            public boolean handleCollision(IEntity entity) {
-                return false;
-            }
-
             @Override
             public void update(double delta) {
             }

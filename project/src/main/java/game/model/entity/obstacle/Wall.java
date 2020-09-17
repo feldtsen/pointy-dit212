@@ -44,11 +44,6 @@ public class Wall extends Entity implements IObstacle {
     }
 
     @Override
-    public boolean handleCollision(IEntity entity) {
-        return false; //TODO
-    }
-
-    @Override
     public void update(double delta) {
         //TODO: How should a wall update?
     }

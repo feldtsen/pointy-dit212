@@ -17,12 +17,7 @@ public class MovableEntityTest {
     public void before() {
         maxForce = 3;
         maxSpeed = 3;
-        movableEntity = new MovableEntity(new Point2D(0, 0), 1, maxForce, maxSpeed) {
-            @Override
-            public boolean handleCollision(IEntity entity) {
-                return false;
-            }
-        };
+        movableEntity = new MovableEntity(new Point2D(0, 0), 1, maxForce, maxSpeed) {};
     }
 
     @Test
