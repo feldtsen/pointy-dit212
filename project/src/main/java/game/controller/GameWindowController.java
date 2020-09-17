@@ -29,26 +29,6 @@ import javax.crypto.Cipher;
 
 public class GameWindowController {
 
-    private class DummyPlayer extends MovableEntity {
-        public DummyPlayer(){
-            super(new Point2D(10, 10), 50, 5, 5);
-        }
-
-        public void moveRight (){
-            this.position = new Point2D(this.position.getX() + 5, this.position.getY());
-        }
-        public void moveLeft (){
-            this.position = new Point2D(this.position.getX() - 5, this.position.getY());
-        }
-        public void moveDown (){
-            this.position = new Point2D(this.position.getX(), this.position.getY() + 5);
-        }
-        public void moveUp (){
-            this.position = new Point2D(this.position.getX(), this.position.getY() - 5);
-        }
-
-    }
-
     @FXML
     private Canvas canvas;
 
