@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Level implements ILevel {
 
-    private List<IEntity> enemies;
-    private List<IEntity> projectiles;
-    private IEntity player;
-    private int width;
-    private int height;
+    private final List<IEntity<?>> enemies;
+    private final List<IEntity<?>> projectiles;
+    private final IEntity<?> player;
+    private final double width;
+    private final double height;
 
 
-    public Level(List<IEntity> enemies,List<IEntity> projectiles, IEntity player, int width, int height) {
+    public Level(List<IEntity<?>> enemies,List<IEntity<?>> projectiles, IEntity<?> player, int width, int height) {
         this.enemies = enemies;
         this.projectiles = projectiles;
         this.player = player;
@@ -21,27 +21,27 @@ public class Level implements ILevel {
     }
 
     @Override
-    public List<IEntity> getEnemies() {
+    public List<IEntity<?>> getEnemies() {
         return this.enemies;
     }
 
     @Override
-    public List<IEntity> getProjectiles() {
+    public List<IEntity<?>> getProjectiles() {
         return this.projectiles;
     }
 
     @Override
-    public IEntity getPlayer() {
+    public IEntity<?> getPlayer() {
         return this.player;
     };
 
     @Override
-    public int getWidth(){
+    public double getWidth(){
         return this.width;
     }
 
     @Override
-    public int getHeight(){
+    public double getHeight(){
         return this.height;
     }
 

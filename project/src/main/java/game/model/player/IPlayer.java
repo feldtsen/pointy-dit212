@@ -1,6 +1,8 @@
 package game.model.player;
 
-public interface IPlayer {
+import game.model.shape2d.IShape2D;
+
+public interface IPlayer<T extends IShape2D> {
     boolean activateAbility();
     void moveUp();
     void moveLeft();
