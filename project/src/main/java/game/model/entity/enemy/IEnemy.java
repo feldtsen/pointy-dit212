@@ -1,4 +1,4 @@
-package game.model.entity;
+package game.model.entity.enemy;
 
 import game.model.ILiving;
 import game.model.IMovable;
