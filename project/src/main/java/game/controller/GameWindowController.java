@@ -38,7 +38,7 @@ public class GameWindowController {
     @FXML
     private Canvas canvas;
 
-    IGameLoop gameLoop;
+    private IGameLoop gameLoop;
 
     private static class CurrentDirection {
         private final ArrayList<Boolean> directions = new ArrayList<>();
@@ -100,22 +100,27 @@ public class GameWindowController {
     }
 
     @FXML
-    private void handleMenuScoreButton() {
+    private void handleMenuScoreButton() throws IOException {
         System.out.println("Score button clicked ");
     }
 
 
+    private boolean isRunning = false;
     @FXML
     private void handleMenuStartButton(ActionEvent e) throws IOException {
         Button menuStartButton = (Button) e.getSource();
         HBox menuContainer = (HBox) menuStartButton.getParent();
         menuContainer.toBack();
 
-        Button menuButton = FXMLLoader.load(App.class.getResource("menuButton.fxml"));
+        menuContainer.getScene().lookup("#menuPauseButton").toFront();
 
-        gamePane.getChildren().add(menuButton);
 
-        startGame();
+        if(!isRunning) {
+            startGame();
+            isRunning = true;
+        }
+        gameLoop.setPaused(false);
+
     }
 
 
@@ -123,7 +128,8 @@ public class GameWindowController {
     private void handleReturnToMenuButton(ActionEvent e) {
         Button returnToMenuButton = (Button) e.getSource();
         returnToMenuButton.toBack();
-        returnToMenuButton.getParent().lookup("#menuContainer").toFront();
+        returnToMenuButton.getScene().lookup("#menuContainer").toFront();
+        gameLoop.setPaused(true);
     }
 
     private void startGame() throws IOException {
@@ -136,11 +142,9 @@ public class GameWindowController {
         gamePane.setOnKeyReleased(currentDirection::unregister);
 
 
-
-        new GameLoop(1000)
-        {
-            public void update(double delta)
-            {
+        gameLoop = new GameLoop(1000) {
+            @Override
+            public void update(double delta) {
                 gc.clearRect(0, 0, 1200, 800);
                 gc.setFill(Color.rgb(30, 30, 30));
                 gc.fillRect(0, 0, 1200, 800);
@@ -166,7 +170,9 @@ public class GameWindowController {
                 player.update(delta);
                 enemy.setVelocity(enemy.getVelocity().multiply(0.98));
                 enemy.update(delta);
+
             }
-        }.start();
+        };
+        gameLoop.start();
     }
 }

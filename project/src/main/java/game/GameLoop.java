@@ -10,6 +10,7 @@ public abstract class GameLoop implements IGameLoop {
     private long lastNanoTime;          /* Last sampled nano time. Used to calculate delta. */
     private boolean isRunning;          /* True if timer is running. */
     private final AnimationTimer timer; /* Timer used for handling game loop. */
+    private boolean paused = true;
 
     /* Fields for calculating FPS */
     private long lastSecond;
@@ -36,7 +37,7 @@ public abstract class GameLoop implements IGameLoop {
                     /* Calculate delta: change in nanoseconds divided by 10^9 (1 second in nanosecond) */
                     double delta = (double)elapsedNanos / SECOND;
 
-                    update(delta);
+                    if (!paused) update(delta);
 
                     lastNanoTime = now;
                     framesThisSecond++;
@@ -58,6 +59,11 @@ public abstract class GameLoop implements IGameLoop {
     @Override
     public boolean isRunning() {
         return isRunning;
+    }
+
+    @Override
+    public void setPaused(boolean paused) {
+       this.paused = paused;
     }
 
     @Override
