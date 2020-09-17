@@ -1,13 +1,12 @@
 package game.model.entity;
 
 import game.model.IPositionable;
-import javafx.geometry.Point2D;
-import javafx.scene.shape.Shape;
+import game.model.shape2d.IShape2D;
 
 public interface IEntity extends IPositionable {
     double getWidth();
     double getHeight();
-    Shape getShape();
+    IShape2D getShape();
     boolean checkCollision(IEntity entity);
 
     void update(double delta);
