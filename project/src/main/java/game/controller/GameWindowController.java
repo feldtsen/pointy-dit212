@@ -181,9 +181,8 @@ public class GameWindowController implements Initializable {
 
                 player.setVelocity(player.getVelocity().multiply(0.98));
                 player.update(delta);
-                //enemy.setVelocity(enemy.getVelocity().multiply(0.98));
-                //enemy.update(delta);
-
+                enemy.setVelocity(enemy.getVelocity().multiply(0.98));
+                enemy.update(delta);
             }
         };
         gameLoop.start();
