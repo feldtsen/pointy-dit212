@@ -1,38 +1,30 @@
 package game.controller;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-import game.GameLoop;
-import game.IGameLoop;
+import game.model.gameLoop.GameLoop;
+import game.model.gameLoop.IGameLoop;
 import game.model.behavior.movement.SeekingBehaviour;
-import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
-import game.model.entity.movable.MovableEntity;
 import game.model.player.Player;
 import game.model.shape2d.ICircle;
 import game.model.shape2d.Shapes;
-import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import game.App;
-import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-import javax.crypto.Cipher;
-
-public class GameWindowController {
+public class GameWindowController implements Initializable {
 
     @FXML
     private StackPane gamePane;
@@ -41,6 +33,20 @@ public class GameWindowController {
     private Canvas canvas;
 
     private IGameLoop gameLoop;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setFill(Color.rgb(30, 30, 30));
+        gc.fillRect(0, 0, 1200, 800);
+        try {
+            startGame();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        gameLoop.start();
+
+    }
 
     private static class CurrentDirection {
         private final ArrayList<Boolean> directions = new ArrayList<>();
@@ -102,25 +108,19 @@ public class GameWindowController {
     }
 
     @FXML
-    private void handleMenuScoreButton() throws IOException {
+    private void handleMenuScoreButton() {
         System.out.println("Score button clicked ");
     }
 
 
-    private boolean isRunning = false;
     @FXML
-    private void handleMenuStartButton(ActionEvent e) throws IOException {
+    private void handleMenuStartButton(ActionEvent e) {
         Button menuStartButton = (Button) e.getSource();
         HBox menuContainer = (HBox) menuStartButton.getParent();
         menuContainer.toBack();
 
         menuContainer.getScene().lookup("#menuPauseButton").toFront();
 
-
-        if(!isRunning) {
-            startGame();
-            isRunning = true;
-        }
         gameLoop.setPaused(false);
 
     }
