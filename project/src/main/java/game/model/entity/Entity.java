@@ -1,5 +1,6 @@
 package game.model.entity;
 
+import game.model.shape2d.IShaped2D;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Shape;
 
@@ -7,7 +8,7 @@ public abstract class Entity implements IEntity {
     //TODO: protected currently, is this a bad idea maybe hmmmm?
     protected Point2D position;
     private double radius;
-    private Shape shape;
+    private IShaped2D shape;
 
     public Entity(Point2D position, double radius) {
         this.position = position;
