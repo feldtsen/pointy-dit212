@@ -151,9 +151,13 @@ public class GameWindowController {
                 gc.setFill(Color.rgb(30, 30, 30));
                 gc.fillRect(0, 0, 1200, 800);
                 boolean collision = Shapes.testCollision((ICircle) player.getShape(), player.getPosition(), (ICircle) enemy.getShape(), enemy.getPosition());
-                gc.setFill(Color.WHITE);
-                gc.fillOval(player.getPosition().getX(), player.getPosition().getY(), 50, 50);
-                gc.fillOval(enemy.getPosition().getX(), enemy.getPosition().getY(), 50, 50);
+                if(collision) {
+                    gc.setFill(Color.RED);
+                } else {
+                    gc.setFill(Color.WHITE);
+                }
+                gc.fillOval(player.getPosition().getX(), player.getPosition().getY(), 2*50, 2*50);
+                gc.fillOval(enemy.getPosition().getX(), enemy.getPosition().getY(), 2*50, 2*50);
 
                 if(currentDirection.getCurrentDirections().get(0)) {
                     player.moveUp();
