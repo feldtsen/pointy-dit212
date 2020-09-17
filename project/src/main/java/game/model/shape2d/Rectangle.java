@@ -8,7 +8,7 @@ public class Rectangle implements IShape2D, IRectangle{
     public Rectangle(double width, double height, double rotation) {
         this.height = height;
         this.width = width;
-        this.rotation = 0;
+        this.rotation = rotation;
     }
 
     @Override
