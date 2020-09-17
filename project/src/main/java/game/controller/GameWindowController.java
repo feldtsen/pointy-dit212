@@ -5,6 +5,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import game.GameLoop;
+import game.IGameLoop;
 import game.model.behavior.movement.SeekingBehaviour;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
@@ -23,6 +24,8 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import javax.crypto.Cipher;
@@ -30,7 +33,12 @@ import javax.crypto.Cipher;
 public class GameWindowController {
 
     @FXML
+    private StackPane gamePane;
+
+    @FXML
     private Canvas canvas;
+
+    IGameLoop gameLoop;
 
     private static class CurrentDirection {
         private final ArrayList<Boolean> directions = new ArrayList<>();
@@ -85,8 +93,6 @@ public class GameWindowController {
         }
 
     }
-    @FXML
-    Pane gamePane;
 
     @FXML
     private void handleMenuLevelButton () {
@@ -98,18 +104,26 @@ public class GameWindowController {
         System.out.println("Score button clicked ");
     }
 
+
     @FXML
     private void handleMenuStartButton(ActionEvent e) throws IOException {
         Button menuStartButton = (Button) e.getSource();
         HBox menuContainer = (HBox) menuStartButton.getParent();
         menuContainer.toBack();
+
+        Button menuButton = FXMLLoader.load(App.class.getResource("menuButton.fxml"));
+
+        gamePane.getChildren().add(menuButton);
+
         startGame();
     }
 
 
     @FXML
-    private void handleReturnToMenuButton() {
-
+    private void handleReturnToMenuButton(ActionEvent e) {
+        Button returnToMenuButton = (Button) e.getSource();
+        returnToMenuButton.toBack();
+        returnToMenuButton.getParent().lookup("#menuContainer").toFront();
     }
 
     private void startGame() throws IOException {
@@ -120,6 +134,8 @@ public class GameWindowController {
 
         gamePane.setOnKeyPressed(currentDirection::register);
         gamePane.setOnKeyReleased(currentDirection::unregister);
+
+
 
         new GameLoop(1000)
         {

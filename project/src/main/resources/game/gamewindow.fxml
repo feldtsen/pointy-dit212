@@ -7,13 +7,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="gamePane" style="-fx-background-color: rgb(30,30,30);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.controller.GameWindowController">
+<StackPane fx:id="gamePane" alignment="TOP_LEFT" style="-fx-background-color: rgb(30,30,30);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.controller.GameWindowController">
    <children>
-      <Button fx:id="returnToMenuButton" mnemonicParsing="false" onAction="#handleReturnToMenuButton" prefHeight="100.0" prefWidth="142.0" stylesheets="@../styles/button.css" text="Menu" textFill="WHITE" StackPane.alignment="TOP_LEFT">
-         <font>
-            <Font name="DejaVu Sans Bold" size="23.0" />
-         </font>
-      </Button>
       <Canvas fx:id="canvas" height="800.0" width="1200.0" />
       <HBox fx:id="menuContainer" alignment="BOTTOM_CENTER">
          <children>
