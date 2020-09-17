@@ -13,7 +13,7 @@ import static org.junit.Assert.assertFalse;
 public class LivingEntityTest {
     /* Helper method required for initializing an anonymous instance of the abstract class */
     public ILiving createLivingEntity(Point2D position, double maxForce, double maxSpeed, int hitPoints, IShape2D shape) {
-        return new LivingEntity(position, maxForce, maxSpeed, hitPoints, shape) {
+        return new LivingEntity<>(position, maxForce, maxSpeed, hitPoints, shape) {
 
             @Override
             public void update(double delta) {

@@ -6,18 +6,18 @@ import game.model.shape2d.IShape2D;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 
-public abstract class MovableEntity extends Entity implements IMovable {
+public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> implements IMovable {
     private final double maxForce;
     private final double maxSpeed;
 
     private Point2D acceleration;
     private Point2D velocity;
 
-    public MovableEntity(Point2D position, double maxForce, double maxSpeed, IShape2D shape) {
+    public MovableEntity(Point2D position, double maxForce, double maxSpeed, T shape) {
         this(position, new Point2D(0, 0), maxForce, maxSpeed, shape);
     }
 
-    public MovableEntity(Point2D position, Point2D velocity, double maxForce, double maxSpeed, IShape2D shape) {
+    public MovableEntity(Point2D position, Point2D velocity, double maxForce, double maxSpeed, T shape) {
         super(position, shape);
 
         this.velocity = velocity;

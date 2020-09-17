@@ -5,11 +5,11 @@ import game.model.ILiving;
 import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;
 
-public abstract class LivingEntity extends MovableEntity implements ILiving {
+public abstract class LivingEntity<T extends IShape2D> extends MovableEntity<T> implements ILiving {
 
     private int hitPoints;
 
-    public LivingEntity(Point2D position, double maxForce, double maxSpeed, int hitPoints, IShape2D shape) {
+    public LivingEntity(Point2D position, double maxForce, double maxSpeed, int hitPoints, T shape) {
         super(position, maxForce, maxSpeed, shape);
         this.hitPoints = hitPoints;
     }

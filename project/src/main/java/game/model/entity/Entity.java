@@ -3,12 +3,12 @@ package game.model.entity;
 import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;
 
-public abstract class Entity implements IEntity {
+public abstract class Entity<T extends IShape2D> implements IEntity<T> {
     //TODO: protected currently, is this a bad idea maybe hmmmm?
     protected Point2D position;
-    private IShape2D shape;
+    private T shape;
 
-    public Entity(Point2D position, IShape2D shape) {
+    public Entity(Point2D position, T shape) {
         this.position = position;
         this.shape = shape;
     }
@@ -19,12 +19,12 @@ public abstract class Entity implements IEntity {
     }
 
     @Override
-    public IShape2D getShape(){
+    public T getShape(){
         return shape;
     }
 
     @Override
-    public boolean checkCollision(IEntity entity) {
+    public boolean checkCollision(IEntity<?> entity) {
         return false;
     }
 

@@ -5,19 +5,15 @@ import game.model.entity.IEntity;
 import game.model.shape2d.Rectangle;
 import javafx.geometry.Point2D;
 
-public class Wall extends Entity implements IObstacle {
-    private double width;
-    private double height;
+public class Wall extends Entity<Rectangle> implements IObstacle<Rectangle> {
 
     public Wall(Point2D position, double width, double height) {
-        super(position, new Rectangle(width, height,0)); //TODO: Second arg of constructor is radius. Width for now.
-        this.height = height;
-        this.width = width;
+        super(position, new Rectangle(width, height,0));
     }
 
     @Override
     /* Checks if an Entity has collided with the wall. */
-    public boolean checkCollision(IEntity entity) {
+    public boolean checkCollision(IEntity<?> entity) {
         /* Size and coordinates of the entity to check for collision. */
         //double entityWidth = entity.getWidth();
         //double entityHeight = entity.getHeight();
