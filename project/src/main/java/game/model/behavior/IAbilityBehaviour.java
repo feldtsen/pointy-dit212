@@ -1,4 +1,4 @@
-package game.model.ability;
+package game.model.behavior;
 
 import game.model.behavior.IBehaviour;
 
