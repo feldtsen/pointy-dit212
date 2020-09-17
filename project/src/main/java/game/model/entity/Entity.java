@@ -30,6 +30,11 @@ public abstract class Entity implements IEntity {
     }
 
     @Override
+    public Shape getShape() {
+        return shape;
+    }
+
+    @Override
     public boolean checkCollision(IEntity entity) {
         /* Minimum distance between entities before collision occurs */
         double minDist = this.radius + entity.getWidth(); // getWidth() == getHeight() == radius
