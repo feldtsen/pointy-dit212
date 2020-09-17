@@ -7,5 +7,6 @@ public interface IEntity extends IPositionable {
     double getWidth();
     double getHeight();
     boolean checkCollision(IEntity entity);
+
     void update(double delta);
 }

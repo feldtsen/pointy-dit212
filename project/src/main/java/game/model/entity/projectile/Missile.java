@@ -23,7 +23,6 @@ public class Missile extends Projectile{
         return target;
     }
 
-
     //TODO: Use this to implement missile homing
     @Override
     public void update(double delta) {

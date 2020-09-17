@@ -43,7 +43,6 @@ public class Wall extends Entity implements IObstacle {
         return xOverlap && yOverlap;
     }
 
-
     @Override
     public void update(double delta) {
         //TODO: How should a wall update?
