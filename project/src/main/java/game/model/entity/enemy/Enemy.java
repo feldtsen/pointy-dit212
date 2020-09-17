@@ -2,19 +2,22 @@ package game.model.entity.enemy;
 
 import game.model.behavior.IAbilityBehaviour;
 import game.model.behavior.movement.IMovementBehaviour;
+import game.model.entity.IEntity;
 import game.model.entity.movable.LivingEntity;
 import javafx.geometry.Point2D;
 
 public class Enemy extends LivingEntity implements IEnemy {
 
+    private IEntity target;
     private IMovementBehaviour movementBehaviour;
     private IAbilityBehaviour abilityBehaviour;
 
 
-    public Enemy(Point2D position, double radius, double maxForce, double maxSpeed, int hitPoints, IAbilityBehaviour abilityBehaviour, IMovementBehaviour movementBehaviour) {
+    public Enemy(Point2D position, double radius, double maxForce, double maxSpeed, int hitPoints, IAbilityBehaviour abilityBehaviour, IMovementBehaviour movementBehaviour, IEntity target) {
         super(position, radius, maxForce, maxSpeed, hitPoints);
         this.abilityBehaviour = abilityBehaviour;
         this.movementBehaviour = movementBehaviour;
+        this.target = target;
     }
 
     @Override
@@ -25,5 +28,11 @@ public class Enemy extends LivingEntity implements IEnemy {
     @Override
     public void setAbilityBehaviour(IAbilityBehaviour abilityBehaviour) {
         this.abilityBehaviour = abilityBehaviour;
+    }
+
+    @Override
+    public void update(double delta) {
+        super.update(delta);
+        movementBehaviour.apply(this, target);
     }
 }
