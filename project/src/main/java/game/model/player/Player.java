@@ -3,9 +3,10 @@ package game.model.player;
 import game.model.entity.IEntity;
 import game.model.entity.movable.LivingEntity;
 import game.model.shape2d.Circle;
+import game.model.shape2d.ICircle;
 import javafx.geometry.Point2D;
 
-public class Player extends LivingEntity implements IPlayer {
+public class Player extends LivingEntity<ICircle> implements IPlayer<ICircle> {
     private final static Point2D LEFT  = new Point2D(-1, 0);
     private final static Point2D RIGHT = new Point2D(1, 0);
     private final static Point2D UP    = new Point2D(0, -1);
