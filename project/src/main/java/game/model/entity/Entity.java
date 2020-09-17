@@ -1,11 +1,13 @@
 package game.model.entity;
 
 import javafx.geometry.Point2D;
+import javafx.scene.shape.Shape;
 
 public abstract class Entity implements IEntity {
     //TODO: protected currently, is this a bad idea maybe hmmmm?
     protected Point2D position;
     private double radius;
+    private Shape shape;
 
     public Entity(Point2D position, double radius) {
         this.position = position;
