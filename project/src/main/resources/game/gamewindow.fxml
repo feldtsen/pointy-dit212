@@ -1,12 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<Pane fx:id="gamePane" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: rgb(50,50,50);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.controller.GameWindowController">
+<StackPane fx:id="gamePane" style="-fx-background-color: rgb(30,30,30);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.controller.GameWindowController">
    <children>
+      <Button fx:id="returnToMenuButton" mnemonicParsing="false" onAction="#handleReturnToMenuButton" prefHeight="100.0" prefWidth="142.0" stylesheets="@../styles/button.css" text="Menu" textFill="WHITE" StackPane.alignment="TOP_LEFT">
+         <font>
+            <Font name="DejaVu Sans Bold" size="23.0" />
+         </font>
+      </Button>
       <Canvas fx:id="canvas" height="800.0" width="1200.0" />
-      <Button fx:id="startGameButton" layoutX="266.0" layoutY="366.0" onAction="#startGame" prefHeight="69.0" prefWidth="669.0" stylesheets="@../styles/button.css" text="Start Game" textFill="#b2b2b2" />
+      <HBox fx:id="menuContainer" alignment="BOTTOM_CENTER">
+         <children>
+            <Button fx:id="menuStartButton" mnemonicParsing="false" onAction="#handleMenuStartButton" prefHeight="100.0" prefWidth="400.0" stylesheets="@../styles/button.css" text="START" textFill="WHITE" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font name="DejaVu Sans Bold" size="23.0" />
+               </font>
+            </Button>
+            <Button fx:id="menuLevelButton" mnemonicParsing="false" onAction="#handleMenuLevelButton" prefHeight="100.0" prefWidth="400.0" stylesheets="@../styles/button.css" text="LEVEL" textFill="WHITE" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font name="DejaVu Sans Bold" size="23.0" />
+               </font>
+            </Button>
+            <Button fx:id="menuScoreButton" mnemonicParsing="false" onAction="#handleMenuScoreButton" prefHeight="100.0" prefWidth="400.0" stylesheets="@../styles/button.css" text="SCORE" textFill="WHITE" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font name="DejaVu Sans Bold" size="23.0" />
+               </font>
+            </Button>
+         </children>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </HBox>
    </children>
-</Pane>
+</StackPane>
