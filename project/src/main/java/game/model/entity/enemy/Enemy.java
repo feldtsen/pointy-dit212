@@ -19,16 +19,6 @@ public class Enemy extends LivingEntity implements IEnemy {
     }
 
     @Override
-    public boolean handleCollision(IEntity entity) {
-        return false;
-    }
-
-    @Override
-    public boolean attack() {
-        return false;
-    }
-
-    @Override
     public void setMovementBehaviour(IMovementBehaviour movementBehaviour) {
 
     }
