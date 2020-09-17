@@ -1,32 +1,37 @@
 package game.model.level;
 
 import game.model.entity.IEntity;
-
 import java.util.List;
 
 public class LevelLoader {
 
+    private final String level;
 
-    public static List<IEntity> loadEnemies(String level) {
+    public LevelLoader(String level) {
+        this.level = level;
+    }
+
+
+    public List<IEntity<?>> loadEnemies() {
         //TODO;
         return null;
     }
 
-    public static List<IEntity> loadObstacles(String level) {
+    public List<IEntity<?>> loadObstacles() {
         //TODO
         return null;
     }
 
-    public static IEntity loadPlayer(String level) {
+    public IEntity<?> loadPlayer() {
         //TODO
         return null;
     }
 
-    public static int loadWidth(String level) {
+    public double loadWidth() {
         //TODO
         return 0;
     }
-    public static int loadHeight(String level) {
+    public double loadHeight() {
         //TODO
         return 0;
     }
