@@ -1,7 +1,9 @@
 package game.model.shape2d;
 
 import javafx.geometry.Point2D;
+import javafx.scene.transform.Rotate;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
 
 public class Shapes {
@@ -18,6 +20,13 @@ public class Shapes {
         Point2D[] r1Corners = getCornerCoordinates(r1, r1Position); // Corners of first rectangle
         Point2D[] r2Corners = getCornerCoordinates(r2, r2Position); // Corners of second rectangle
 
+        Point2D[] r1Axes = getRectangleAxes(r1Corners);
+        Point2D[] r2Axes = getRectangleAxes(r2Corners);
+
+        // Concatenate r1Axes and r2Axes into axes.
+        Point2D[] axes = new Point2D[r1Axes.length + r2Axes.length];
+        System.arraycopy(r1Axes, 0, axes, 0, r1Axes.length);
+        System.arraycopy(r2Axes, 0, axes, r1Axes.length, r2Axes.length);
 
 
 
@@ -36,6 +45,20 @@ public class Shapes {
         return corners;
     }
 
+    // Takes an array of Point2D and rotates every point according to the given pivot point and angle in radians.
+    // Modifies the given array.
+    private static void rotatePoints(Point2D[] points, Point2D pivot, double rad) {
+        // Create Rotate object to rotate points.
+        Rotate rotate = new Rotate();
+        rotate.setPivotX(pivot.getX());
+        rotate.setPivotY(pivot.getY());
+        rotate.setAngle(Math.toDegrees(rad));
+
+        for (int i = 0; i < points.length; i++) {
+            points[i] = rotate.transform(points[i]);
+        }
+    }
+
     // Takes an array of a rectangles corners and returns an array of axes parallel to the edges of the rectangle.
     private static Point2D[] getRectangleAxes(Point2D[] corners) {
         Point2D[] axes = new Point2D[corners.length];
@@ -50,5 +73,4 @@ public class Shapes {
 
         return axes;
     }
-
 }
