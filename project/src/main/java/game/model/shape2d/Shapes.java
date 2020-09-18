@@ -86,6 +86,9 @@ public class Shapes {
         }
     }
 
+    //TODO: getRectangleAxes doesn't need to return 4 axes since every axis there will be another parallel axis.
+    //      2 will be enough
+
     // Takes an array of a rectangles corners and returns an array of axes parallel to the edges of the rectangle.
     private static Point2D[] getRectangleAxes(Point2D[] corners) {
         Point2D[] axes = new Point2D[corners.length];
