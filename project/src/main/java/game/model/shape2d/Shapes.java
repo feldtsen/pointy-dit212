@@ -29,7 +29,32 @@ public class Shapes {
         System.arraycopy(r1Axes, 0, axes, 0, r1Axes.length);
         System.arraycopy(r2Axes, 0, axes, r1Axes.length, r2Axes.length);
 
-        return false;
+        // For every axis, check if there is a gap between the rectangle. If there is, return false since there can
+        // be no collision.
+        for (Point2D axis : axes) {
+            double[] r1Projection = projection(r1Corners, axis);
+            double[] r2Projection = projection(r2Corners, axis);
+
+            if (!overlap(r1Projection, r2Projection)) {
+                return false;
+            }
+        }
+
+        // If there is gap found for any axis, then a collision has occurred.
+        return true;
+    }
+
+    // Takes two double[] where each array holds the min and max magnitude of a rectangles projected points on
+    // a line. Element 0 is the min value. Element 1 is the max value.
+    private static boolean overlap(double[] r1Projection, double[] r2Projection) {
+        if (r1Projection.length != 2 || r2Projection.length != 2) {
+            throw new IllegalArgumentException();
+        }
+
+        // Check if max projection magnitude of rectangle 1 is smaller than min projection value of rectangle 2,
+        // and vice versa. I.e. if there is a gap between the rectangles. Returns true if there is an overlap,
+        // else false.
+        return (!(r2Projection[1] < r1Projection[0] || r1Projection[1] < r2Projection[0]));
     }
 
     // Returns the coordinates of the corners of the given rectangle.
@@ -94,5 +119,5 @@ public class Shapes {
         double[] result = new double[]{min, max};
         return result;
     }
-    
+
 }
