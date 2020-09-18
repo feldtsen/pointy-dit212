@@ -50,14 +50,12 @@ public class Shapes {
         return true;
     }
 
-    // Returns true if there has been a collisions between the given circle and the given rectangle.
+    // Detects collisions between a rectangle and a circle using separating axis theorem.
     public static boolean testCollision(IRectangle rectangle, Point2D rPosition, ICircle circle, Point2D cPosition) {
         Point2D[] rectCorners = getCornerCoordinates(rectangle, rPosition);
 
-        // If the distance from the center of the rectangle to one of its corners plus the radius of the circle is
-        // greater than the distance from the center of the circle to the center of the rectangle, then there cannot be
-        // a collision.
-        if (rPosition.distance(rectCorners[0]) + circle.getRadius() > rPosition.distance(cPosition)) {
+        // Checks if the distance between the shapes is too large for there to have been a collision.
+        if (rPosition.distance(rectCorners[0]) + circle.getRadius() < rPosition.distance(cPosition)) {
             return false;
         }
 
@@ -69,8 +67,7 @@ public class Shapes {
             }
         }
 
-        // If the distance from the closest rectangle corner to the center of the circle is lesser than or equal to the
-        // radius of the circle, then the corner has collided with the circle.
+        // Checks if the nearest corner is inside the circle.
         if (closestCorner.distance(cPosition) <= circle.getRadius()) {
             return true;
         }
