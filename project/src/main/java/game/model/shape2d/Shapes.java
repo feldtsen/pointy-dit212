@@ -44,21 +44,8 @@ public class Shapes {
         return true;
     }
 
-    // Takes two double[] where each array holds the min and max magnitude of a rectangles projected points on
-    // a line. Element 0 is the min value. Element 1 is the max value.
-    private static boolean overlap(double[] r1Projection, double[] r2Projection) {
-        if (r1Projection.length != 2 || r2Projection.length != 2) {
-            throw new IllegalArgumentException();
-        }
-
-        // Check if max projection magnitude of rectangle 1 is smaller than min projection value of rectangle 2,
-        // and vice versa. I.e. if there is a gap between the rectangles. Returns true if there is an overlap,
-        // else false.
-        return (!(r2Projection[1] < r1Projection[0] || r1Projection[1] < r2Projection[0]));
-    }
-
     // Returns the coordinates of the corners of the given rectangle.
-    private static Point2D[] getCornerCoordinates(IRectangle rectangle, Point2D position) {
+    public static Point2D[] getCornerCoordinates(IRectangle rectangle, Point2D position) {
         Point2D[] corners = new Point2D[4];
 
         corners[0] = position.add(new Point2D(-rectangle.getWidth()/2, -rectangle.getHeight()/2)); //Top left
@@ -74,7 +61,7 @@ public class Shapes {
 
     // Takes an array of Point2D and rotates every point according to the given pivot point and angle in radians.
     // Modifies the given array.
-    private static void rotatePoints(Point2D[] points, Point2D pivot, double rad) {
+    public static void rotatePoints(Point2D[] points, Point2D pivot, double rad) {
         // Create Rotate object to rotate points.
         Rotate rotate = new Rotate(); //TODO: Rotate is a part of javaFX. Is this allowed in model?
         rotate.setPivotX(pivot.getX());
@@ -84,6 +71,19 @@ public class Shapes {
         for (int i = 0; i < points.length; i++) {
             points[i] = rotate.transform(points[i]);
         }
+    }
+
+    // Takes two double[] where each array holds the min and max magnitude of a rectangles projected points on
+    // a line. Element 0 is the min value. Element 1 is the max value.
+    private static boolean overlap(double[] r1Projection, double[] r2Projection) {
+        if (r1Projection.length != 2 || r2Projection.length != 2) {
+            throw new IllegalArgumentException();
+        }
+
+        // Check if max projection magnitude of rectangle 1 is smaller than min projection value of rectangle 2,
+        // and vice versa. I.e. if there is a gap between the rectangles. Returns true if there is an overlap,
+        // else false.
+        return (!(r2Projection[1] < r1Projection[0] || r1Projection[1] < r2Projection[0]));
     }
 
     //TODO: getRectangleAxes doesn't need to return 4 axes since every axis there will be another parallel axis.
