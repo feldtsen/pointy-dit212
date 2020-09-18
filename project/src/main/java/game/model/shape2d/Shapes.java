@@ -16,6 +16,7 @@ public class Shapes {
         return Math.pow(vector.getX(), 2) + Math.pow(vector.getY(), 2) <= Math.pow(radiusSum, 2);
     }
 
+    // Detects collisions between rectangles using the separating axis theorem.
     public static boolean testCollision(IRectangle r1, Point2D r1Position, IRectangle r2 , Point2D r2Position) {
         Point2D[] r1Corners = getCornerCoordinates(r1, r1Position); // Corners of first rectangle
         Point2D[] r2Corners = getCornerCoordinates(r2, r2Position); // Corners of second rectangle
@@ -27,8 +28,6 @@ public class Shapes {
         Point2D[] axes = new Point2D[r1Axes.length + r2Axes.length];
         System.arraycopy(r1Axes, 0, axes, 0, r1Axes.length);
         System.arraycopy(r2Axes, 0, axes, r1Axes.length, r2Axes.length);
-
-
 
         return false;
     }
@@ -42,6 +41,9 @@ public class Shapes {
         corners[2] = position.add(new Point2D(rectangle.getWidth()/2, rectangle.getHeight()/2)); //Top right
         corners[3] = position.add(new Point2D(rectangle.getWidth()/2, -rectangle.getHeight()/2)); //Bottom right
 
+        // Rotate points according to the rotation of the rectangle.
+        rotatePoints(corners, position, rectangle.getRotation());
+
         return corners;
     }
 
@@ -49,7 +51,7 @@ public class Shapes {
     // Modifies the given array.
     private static void rotatePoints(Point2D[] points, Point2D pivot, double rad) {
         // Create Rotate object to rotate points.
-        Rotate rotate = new Rotate();
+        Rotate rotate = new Rotate(); //TODO: Rotate is a part of javaFX. Is this allowed in model?
         rotate.setPivotX(pivot.getX());
         rotate.setPivotY(pivot.getY());
         rotate.setAngle(Math.toDegrees(rad));
@@ -73,4 +75,24 @@ public class Shapes {
 
         return axes;
     }
+
+    // Returns the the largest and smallest projection magnitudes of the rectangle corners projected on the given axis.
+    // Element 0 of the returned double[] is the min value. Element 1 is the max value.
+    private static double[] projection(Point2D[] rectangleCorners, Point2D axis) {
+        double min = axis.dotProduct(rectangleCorners[0]);
+        double max = min;
+
+        for (int i = 1; i < rectangleCorners.length; i++) {
+            double projectionMagnitude = axis.dotProduct(rectangleCorners[i]);
+            if (projectionMagnitude < min) {
+                min = projectionMagnitude;
+            }
+            else if (projectionMagnitude > max) {
+                max = projectionMagnitude;
+            }
+        }
+        double[] result = new double[]{min, max};
+        return result;
+    }
+    
 }
