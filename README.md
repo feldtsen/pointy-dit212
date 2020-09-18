@@ -8,7 +8,7 @@ The map contains different neutral elements, such as walls, spikes and traps, wh
 The goal of the player is to defeat all the elements, reach the map exit, or perform a specific task. 
 
 ## LINKS
-Trello (SCRUM BOARD):
+Trello (SCRUM board):
 * https://trello.com/invite/b/DJp7eGR9/bf5deeea868862ddfec292dd16bb8952/pointy-board
 
 Slack (internal communication):
