@@ -46,7 +46,60 @@ public class Shapes {
             }
         }
 
-        // If there is gap found for any axis, then a collision has occurred.
+        // If there is no gap found for any axis, then a collision has occurred.
+        return true;
+    }
+
+    // Returns true if there has been a collisions between the given circle and the given rectangle.
+    public static boolean testCollision(IRectangle rectangle, Point2D rPosition, ICircle circle, Point2D cPosition) {
+        Point2D[] rectCorners = getCornerCoordinates(rectangle, rPosition);
+
+        // If the distance from the center of the rectangle to one of its corners plus the radius of the circle is
+        // greater than the distance from the center of the circle to the center of the rectangle, then there cannot be
+        // a collision.
+        if (rPosition.distance(rectCorners[0]) + circle.getRadius() > rPosition.distance(cPosition)) {
+            return false;
+        }
+
+        // Find the rectangle corner that is closest to the center of the circle.
+        Point2D closestCorner = rectCorners[0];
+        for (int i = 0; i < rectCorners.length; i++) {
+            if (rectCorners[i].distance(cPosition) < closestCorner.distance(cPosition)) {
+                closestCorner = rectCorners[i];
+            }
+        }
+
+        // If the distance from the closest rectangle corner to the center of the circle is lesser than or equal to the
+        // radius of the circle, then the corner has collided with the circle.
+        if (closestCorner.distance(cPosition) <= circle.getRadius()) {
+            return true;
+        }
+
+        Point2D[] axes = new Point2D[rectCorners.length + 1];
+
+        // Add axes from rectangle to array.
+        System.arraycopy(getRectangleAxes(rectCorners), 0, axes, 0, rectCorners.length);
+
+        // Get an axis from circle by drawing a vector from the closest corner to the midpoint of the circle.
+        Point2D circleAxis = closestCorner.subtract(cPosition).normalize();
+        axes[axes.length - 1] = circleAxis;
+
+        // Loop through axes and see if there is overlap in the projections of the circle and the rectangle.
+        for (Point2D axis : axes) {
+            double[] rectangleProjections = projection(rectCorners, axis);
+
+            // Find the min/max projections of the circle by finding the projection of the midpoint and
+            // subtracting/adding the radius.
+            double circleProjection = axis.dotProduct(cPosition);
+            double[] circleProjections = new double[]{circleProjection - circle.getRadius(),
+                    circleProjection + circle.getRadius()};
+
+            // If for some axis there is no overlap, return false since there cannot be a collision.
+            if (!(overlap(rectangleProjections, circleProjections))) {
+                return false;
+            }
+        }
+        // True if there is overlap for every axis.
         return true;
     }
 
