@@ -7,4 +7,13 @@ The map contains different neutral elements, such as walls, spikes and traps, wh
 
 The goal of the player is to defeat all the elements, reach the map exit, or perform a specific task. 
 
+## LINKS
+Trello (SCRUM BOARD):
+* https://trello.com/invite/b/DJp7eGR9/bf5deeea868862ddfec292dd16bb8952/pointy-board
+
+Slack (internal communication):
+* https://join.slack.com/t/pointy-dit212/shared_invite/zt-h621a081-F2Fco67GP6jt~zsK6zGgew
+
+Design model (live document, continuously updated):
+* https://app.lucidchart.com/invitations/accept/0c94ac1f-1795-4dc9-a109-1a3705caffd1
 
