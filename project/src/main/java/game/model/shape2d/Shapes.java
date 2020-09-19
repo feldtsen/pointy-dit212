@@ -23,7 +23,7 @@ public class Shapes {
 
         // If the sum of the distances from the centers to a corner in the rectangle, is greater than the distance
         // between the centers of the rectangles, then a collision is impossible and there is no need to check
-        if (r1Position.distance(r1Corners[0]) + r2Position.distance(r2Corners[0]) > r1Position.distance(r2Position)) {
+        if (r1Position.distance(r1Corners[0]) + r2Position.distance(r2Corners[0]) < r1Position.distance(r2Position)) {
             return false;
         }
 
