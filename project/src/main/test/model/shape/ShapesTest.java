@@ -74,8 +74,10 @@ public class ShapesTest {
         Rectangle r5 = new Rectangle(1, 1, 0);
         Point2D p5 = new Point2D(0, -1);
 
-        assertTrue(Shapes.testCollision(r1, p1, r2, p2) && Shapes.testCollision(r1, p1, r2, p2) &&
-                Shapes.testCollision(r1, p1, r3, p3) && Shapes.testCollision(r1, p1, r4, p4) &&
+        assertTrue(Shapes.testCollision(r1, p1, r2, p2) &&
+                Shapes.testCollision(r1, p1, r2, p2) &&
+                Shapes.testCollision(r1, p1, r3, p3) &&
+                Shapes.testCollision(r1, p1, r4, p4) &&
                 Shapes.testCollision(r1, p1, r5, p5));
     }
 
@@ -96,8 +98,67 @@ public class ShapesTest {
         Rectangle r5 = new Rectangle(1, 1, 0);
         Point2D p5 = new Point2D(0, -1.01);
 
-        assertFalse(Shapes.testCollision(r1, p1, r2, p2) || Shapes.testCollision(r1, p1, r3, p3) ||
-                Shapes.testCollision(r1, p1, r4, p4) || Shapes.testCollision(r1, p1, r5, p5));
+        assertFalse(Shapes.testCollision(r1, p1, r2, p2) ||
+                Shapes.testCollision(r1, p1, r3, p3) ||
+                Shapes.testCollision(r1, p1, r4, p4) ||
+                Shapes.testCollision(r1, p1, r5, p5));
+    }
+
+    @Test
+    public void testRectangleCircleCollision() {
+        Circle circle = new Circle(1);
+        Point2D pc = new Point2D(0, 0);
+
+        Rectangle rect1 = new Rectangle(1, 1, 0);
+        Point2D pr1 = new Point2D(0, 0);
+
+        Point2D pr2 = new Point2D(1, 1);
+
+        Point2D pr3 = new Point2D(-1.5, 0);
+
+        assertTrue(Shapes.testCollision(rect1, pr1, circle, pc) &&
+                Shapes.testCollision(rect1, pr2, circle, pc) &&
+                Shapes.testCollision(rect1, pr3, circle, pc));
+    }
+
+    @Test
+    public void testRectangleCircleNoCollision() {
+        Circle circle = new Circle(1);
+        Point2D pc = new Point2D(0, 0);
+
+        Rectangle rect1 = new Rectangle(1, 1, Math.PI/4);
+        Point2D pr1 = new Point2D(1.1, 1.1);
+
+        Rectangle rect2 = new Rectangle(1, 1, 0);
+        Point2D pr2 = new Point2D(0, 1.51);
+
+        Point2D pr3 = new Point2D(-1.1, -1.1);
+
+        Point2D pr4 = new Point2D(0, -1.51);
+
+        assertFalse(Shapes.testCollision(rect1, pr1, circle, pc) ||
+                Shapes.testCollision(rect2, pr2, circle, pc) ||
+                Shapes.testCollision(rect1, pr3, circle, pc) ||
+                Shapes.testCollision(rect2, pr4, circle, pc));
+    }
+
+    @Test
+    public void testRectangleCircleEdgeCollision() {
+        Circle circle = new Circle(1);
+        Point2D pc = new Point2D(0, 0);
+
+        Rectangle rectangle = new Rectangle(1, 1, 0);
+
+        Point2D pr1 = new Point2D(1.5, 0);
+        Point2D pr2 = new Point2D(0, 1.5);
+        Point2D pr3 = new Point2D(-1.5, 0);
+        Point2D pr4 = new Point2D(0, -1.5);
+
+        assertTrue(Shapes.testCollision(rectangle, pr1, circle, pc) &&
+                Shapes.testCollision(rectangle, pr2, circle, pc) &&
+                Shapes. testCollision(rectangle, pr3, circle, pc) &&
+                Shapes.testCollision(rectangle, pr4, circle, pc));
+
     }
 
 }
