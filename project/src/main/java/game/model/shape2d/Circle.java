@@ -39,7 +39,14 @@ public class Circle implements ICircle{
 
     @Override
     public double[] project(Point2D axis, Point2D position) {
-        return new double[0];
+        // Get magnitude of the projection of the center point onto the axis.
+        double centerProjection = axis.dotProduct(position);
+
+        // Get the min and max projection magnitudes.
+        double min = centerProjection - radius;
+        double max = centerProjection + radius;
+
+        return new double[]{min, max};
     }
 
     @Override

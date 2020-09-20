@@ -51,7 +51,21 @@ public class Rectangle implements IRectangle{
 
     @Override
     public double[] project(Point2D axis, Point2D position) {
-        return new double[0];
+        List<Point2D> cornerPoints = getPoints(position);
+        Shapes.rotatePoints(cornerPoints, position, rotation);
+
+        double min = axis.dotProduct(cornerPoints.get(0));
+        double max = min;
+        for (int i = 1; i < cornerPoints.size(); i++) {
+            double projection = axis.dotProduct(cornerPoints.get(i));
+            if (projection < min) {
+                min = projection;
+            }
+            else if (projection >  max) {
+                max = projection;
+            }
+        }
+        return new double[]{min, max};
     }
 
     @Override
