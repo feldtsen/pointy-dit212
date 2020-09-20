@@ -37,6 +37,7 @@ public class Rectangle implements IRectangle{
     }
 
     @Override
+    // Returns a list of normalized vectors parallel to the edges of the rectangle.
     public List<Point2D> getAxes(Point2D position1, IShape2D shape2, Point2D position2) {
         List<Point2D> points = getPoints(position1);
 
@@ -45,11 +46,12 @@ public class Rectangle implements IRectangle{
         axes.add(points.get(0).subtract(points.get(1)).normalize());
         axes.add(points.get(1).subtract(points.get(2)).normalize());
 
-
         return axes;
     }
 
     @Override
+    // Takes the position of the rectangle and a vector, and returns an array containing the minimum and maximum
+    // projection of the rectangles corners onto the given vector.
     public double[] projection(Point2D axis, Point2D position) {
         List<Point2D> cornerPoints = getPoints(position);
 
@@ -69,6 +71,7 @@ public class Rectangle implements IRectangle{
     }
 
     @Override
+    // Takes the position of the rectangle and returns a list of the corner points.
     public List<Point2D> getPoints(Point2D position) {
         List<Point2D> cornerPoints = new ArrayList<>();
 
@@ -78,7 +81,6 @@ public class Rectangle implements IRectangle{
         cornerPoints.add(new Point2D(x - width/2, y - height/2));
         cornerPoints.add(new Point2D(x + width/2, y - height/2));
         cornerPoints.add(new Point2D(x + width/2, y + height/2));
-
 
         Shapes.rotatePoints(cornerPoints, position, rotation);
         return cornerPoints;

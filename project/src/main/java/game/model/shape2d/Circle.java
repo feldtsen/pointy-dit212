@@ -20,6 +20,8 @@ public class Circle implements ICircle{
     }
 
     @Override
+    // Returns a list containing one normalized vector parallel to the line from the center of the circle to the
+    // closest point of the other shape.
     public List<Point2D> getAxes(Point2D position1, IShape2D shape2, Point2D position2) {
         List<Point2D> shape2Points = shape2.getPoints(position2);
 
@@ -38,6 +40,8 @@ public class Circle implements ICircle{
     }
 
     @Override
+    // Takes a vector and the position of the circle. Returns an array of double containing the minimum and maximum
+    // value of the circle's projections onto the vector.
     public double[] projection(Point2D axis, Point2D position) {
         // Get magnitude of the projection of the center point onto the axis.
         double centerProjection = axis.dotProduct(position);
@@ -50,7 +54,7 @@ public class Circle implements ICircle{
     }
 
     @Override
-    // Returns a List containing the center of the circle.
+    // Returns a List containing only the center of the circle.
     public List<Point2D> getPoints(Point2D position) {
         List<Point2D> points = new ArrayList<>();
         points.add(position);
