@@ -5,6 +5,7 @@ import javafx.scene.transform.Rotate;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.List;
 
 public class Shapes {
 
@@ -47,6 +48,31 @@ public class Shapes {
         }
 
         // If there is no gap found for any axis, then a collision has occurred.
+        return true;
+    }
+
+    public static boolean testCollision(IShape2D shape1, Point2D position1, IShape2D shape2, Point2D position2) {
+        // Get axes from both shapes - getAxes in IShape2D
+        // loop through axes
+            // project both shapes on axis and check for overlap
+            // return false if overlap
+        // Return true
+
+        // Find axes to project shapes onto.
+        List<Point2D> axes = shape1.getAxes(position1, shape2, position2);
+        axes.addAll(shape2.getAxes(position2, shape1, position1));
+
+        // Loop through axes and look for overlap.
+        for (Point2D axis : axes) {
+            double[] projection1 = shape1.project(axis);
+            double[] projection2 = shape2.project(axis);
+
+            // If, for some axis, the shapes do not overlap, return false since there cannot be a collision.
+            if (!overlap(projection1, projection2)) {
+                return false;
+            }
+        }
+        // If overlap is found for every axis, a collision has occurred.
         return true;
     }
 
@@ -126,6 +152,17 @@ public class Shapes {
 
         for (int i = 0; i < points.length; i++) {
             points[i] = rotate.transform(points[i]);
+        }
+    }
+
+    public static void rotatePoints(List<Point2D> points, Point2D pivot, double rad) {
+        Rotate rotate = new Rotate(); //TODO: Rotate is a part of javaFX. Is this allowed in model?
+        rotate.setPivotX(pivot.getX());
+        rotate.setPivotY(pivot.getY());
+        rotate.setAngle(Math.toDegrees(rad));
+
+        for (int i = 0; i < points.size(); i++) {
+            points.set(i, rotate.transform(points.get(i)));
         }
     }
 
