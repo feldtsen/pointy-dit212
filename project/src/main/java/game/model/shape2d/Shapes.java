@@ -64,8 +64,8 @@ public class Shapes {
 
         // Loop through axes and look for overlap.
         for (Point2D axis : axes) {
-            double[] projection1 = shape1.project(axis, position1);
-            double[] projection2 = shape2.project(axis, position2);
+            double[] projection1 = shape1.projection(axis, position1);
+            double[] projection2 = shape2.projection(axis, position2);
 
             // If, for some axis, the shapes do not overlap, return false since there cannot be a collision.
             if (!overlap(projection1, projection2)) {

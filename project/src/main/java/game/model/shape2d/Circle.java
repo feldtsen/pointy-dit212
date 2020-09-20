@@ -38,7 +38,7 @@ public class Circle implements ICircle{
     }
 
     @Override
-    public double[] project(Point2D axis, Point2D position) {
+    public double[] projection(Point2D axis, Point2D position) {
         // Get magnitude of the projection of the center point onto the axis.
         double centerProjection = axis.dotProduct(position);
 
@@ -50,7 +50,10 @@ public class Circle implements ICircle{
     }
 
     @Override
+    // Returns a List containing the center of the circle.
     public List<Point2D> getPoints(Point2D position) {
-        return null;
+        List<Point2D> points = new ArrayList<>();
+        points.add(position);
+        return points;
     }
 }

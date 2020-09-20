@@ -20,7 +20,7 @@ public interface IShape2D {
        axis - The normalized vector to project the shape onto.
        position - The position of the shape.
      */
-    double[] project(Point2D axis, Point2D position);
+    double[] projection(Point2D axis, Point2D position);
 
     List<Point2D> getPoints(Point2D position);
 }

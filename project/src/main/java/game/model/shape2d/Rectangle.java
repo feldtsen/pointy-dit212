@@ -39,7 +39,6 @@ public class Rectangle implements IRectangle{
     @Override
     public List<Point2D> getAxes(Point2D position1, IShape2D shape2, Point2D position2) {
         List<Point2D> points = getPoints(position1);
-        Shapes.rotatePoints(points, position1, rotation);
 
         // Get vectors from first to second corner and second to third corner, and normalize.
         List<Point2D> axes = new ArrayList<>();
@@ -50,12 +49,12 @@ public class Rectangle implements IRectangle{
     }
 
     @Override
-    public double[] project(Point2D axis, Point2D position) {
+    public double[] projection(Point2D axis, Point2D position) {
         List<Point2D> cornerPoints = getPoints(position);
-        Shapes.rotatePoints(cornerPoints, position, rotation);
 
         double min = axis.dotProduct(cornerPoints.get(0));
         double max = min;
+
         for (int i = 1; i < cornerPoints.size(); i++) {
             double projection = axis.dotProduct(cornerPoints.get(i));
             if (projection < min) {
@@ -70,6 +69,16 @@ public class Rectangle implements IRectangle{
 
     @Override
     public List<Point2D> getPoints(Point2D position) {
-        return null;
+        List<Point2D> cornerPoints = new ArrayList<>();
+
+        double x = position.getX();
+        double y = position.getY();
+        cornerPoints.add(new Point2D(x - width/2, y + height/2));
+        cornerPoints.add(new Point2D(x - width/2, y - height/2));
+        cornerPoints.add(new Point2D(x + width/2, y + height/2));
+        cornerPoints.add(new Point2D(x + width/2, y - height/2));
+
+        Shapes.rotatePoints(cornerPoints, position, rotation);
+        return cornerPoints;
     }
 }
