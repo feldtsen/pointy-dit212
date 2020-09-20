@@ -13,11 +13,6 @@ public class Shapes {
 
     // Detects collisions between shapes using the separating axis theorem.
     public static boolean testCollision(IShape2D shape1, Point2D position1, IShape2D shape2, Point2D position2) {
-        // Get axes from both shapes
-        // loop through axes
-            // project both shapes on axis and check for overlap
-            // return false if overlap
-        // Return true
 
         // Find axes to project shapes onto.
         List<Point2D> axes = shape1.getAxes(position1, shape2, position2);
