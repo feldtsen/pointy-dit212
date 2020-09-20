@@ -32,6 +32,7 @@ public class Shapes {
         return true;
     }
 
+    // Rotates every point in the given list of points around the pivot by the specified amount in radians.
     public static void rotatePoints(List<Point2D> points, Point2D pivot, double rad) {
         Rotate rotate = new Rotate(); //TODO: Rotate is a part of javaFX. Is this allowed in model?
         rotate.setPivotX(pivot.getX());
@@ -43,8 +44,8 @@ public class Shapes {
         }
     }
 
-    // Takes two double[] where each array holds the min and max magnitude of a rectangles projected points on
-    // a line. Element 0 is the min value. Element 1 is the max value.
+    // Takes two double[] where each array holds the min and max magnitude of a shapes projected points on
+    // a line. Element 0 is the min value. Element 1 is the max value. Returns true if the projections overlap.
     private static boolean overlap(double[] r1Projection, double[] r2Projection) {
         if (r1Projection.length != 2 || r2Projection.length != 2) {
             throw new IllegalArgumentException();
