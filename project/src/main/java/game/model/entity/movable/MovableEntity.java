@@ -33,8 +33,11 @@ public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> imple
         /* Limit the acceleration to maxForce, and multiply with the delta time value */
         setAcceleration(Utils.limit(acceleration, maxForce).multiply(delta));
 
-        /* Add acceleration to velocity, and limit the velocity to max speed */
-        setVelocity(Utils.limit(velocity.add(acceleration), maxSpeed));
+        /* Add acceleration to velocity */
+        setVelocity(velocity.add(acceleration));
+
+        /* Add friction to velocity, and limit the velocity to max speed */
+        setVelocity(Utils.limit(velocity.add(velocity.multiply(-3 * delta)), maxSpeed));
 
         /* Add velocity to position */
         setPosition(position.add(velocity.multiply(delta)));
