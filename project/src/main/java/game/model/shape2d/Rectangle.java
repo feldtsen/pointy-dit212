@@ -42,8 +42,9 @@ public class Rectangle implements IRectangle{
 
         // Get vectors from first to second corner and second to third corner, and normalize.
         List<Point2D> axes = new ArrayList<>();
-        axes.add(points.get(0).subtract(points.get(1).normalize()));
+        axes.add(points.get(0).subtract(points.get(1)).normalize());
         axes.add(points.get(1).subtract(points.get(2)).normalize());
+
 
         return axes;
     }
@@ -75,8 +76,9 @@ public class Rectangle implements IRectangle{
         double y = position.getY();
         cornerPoints.add(new Point2D(x - width/2, y + height/2));
         cornerPoints.add(new Point2D(x - width/2, y - height/2));
-        cornerPoints.add(new Point2D(x + width/2, y + height/2));
         cornerPoints.add(new Point2D(x + width/2, y - height/2));
+        cornerPoints.add(new Point2D(x + width/2, y + height/2));
+
 
         Shapes.rotatePoints(cornerPoints, position, rotation);
         return cornerPoints;
