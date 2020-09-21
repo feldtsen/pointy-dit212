@@ -137,7 +137,9 @@ public class GameWindowController implements Initializable {
     private void startGame() throws IOException {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         Player player = new Player(new Point2D(575, 375), 30, 2500, 1000);
+        player.setFriction(3);
         Enemy enemy = new Enemy(new Point2D(100,100), 50, 1000, 1000, 1,null, new SeekingBehaviour(), player);
+        enemy.setFriction(3);
         CurrentDirection currentDirection = new CurrentDirection();
 
         gamePane.setOnKeyPressed(currentDirection::register);

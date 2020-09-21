@@ -2,6 +2,7 @@ package model.entity;
 
 import game.model.entity.Entity;
 import game.model.entity.IEntity;
+import game.model.shape2d.Circle;
 import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;
 import org.junit.Before;
@@ -12,7 +13,7 @@ import static org.junit.Assert.*;
 public class EntityTest {
     /* Helper method required for initializing an anonymous instance of the abstract class */
     public IEntity<?> createEntity(Point2D position, double radius) {
-        return new Entity<>(position, null) {
+        return new Entity<>(position, new Circle(radius)) {
 
             @Override
             public void update(double delta) {
