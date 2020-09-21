@@ -16,7 +16,7 @@ public class Level implements ILevel {
 
 
 
-    public Level(List<IEntity<?>> enemies,List<IEntity<?>> projectiles,List<IEntity<?>> obstacles,IEntity<?> player,double width,double height) {
+    public Level(List<IEntity<?>> enemies, List<IEntity<?>> projectiles, List<IEntity<?>> obstacles, IEntity<?> player, double width, double height) {
         this.enemies = enemies;
         this.projectiles = projectiles;
         this.obstacles = obstacles;
