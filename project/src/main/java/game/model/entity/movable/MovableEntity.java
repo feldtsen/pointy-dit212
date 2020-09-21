@@ -37,6 +37,7 @@ public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> imple
         setVelocity(velocity.add(acceleration));
 
         /* Add friction to velocity, and limit the velocity to max speed */
+        //TODO: allow for setting friction value using setter! (magic numbers no good)
         setVelocity(Utils.limit(velocity.add(velocity.multiply(-3 * delta)), maxSpeed));
 
         /* Add velocity to position */
