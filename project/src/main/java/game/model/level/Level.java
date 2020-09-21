@@ -1,7 +1,6 @@
 package game.model.level;
 
 import game.model.entity.IEntity;
-import game.model.level.ILevel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +16,13 @@ public class Level implements ILevel {
 
 
 
-    public Level(String levelID) {
-        ILevelLoader ll = new LevelLoader(levelID);
-        this.enemies = ll.loadEnemies();
-        this.projectiles = new ArrayList<>();
-        this.obstacles = ll.loadObstacles();
-        this.player = ll.loadPlayer();
-        this.width = ll.loadWidth();
-        this.height = ll.loadHeight();
+    public Level(List<IEntity<?>> enemies,List<IEntity<?>> projectiles,List<IEntity<?>> obstacles,IEntity<?> player,double width,double height) {
+        this.enemies = enemies;
+        this.projectiles = projectiles;
+        this.obstacles = obstacles;
+        this.player = player;
+        this.width = width;
+        this.height = height;
     }
 
     @Override
