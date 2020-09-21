@@ -6,7 +6,7 @@ import game.model.behavior.IAbilityBehaviour;
 import java.util.List;
 
 public abstract class AbilityBehaviour implements IAbilityBehaviour {
-    private List<IAbility> abilities;
+    private final List<IAbility> abilities;
 
     public AbilityBehaviour(List<IAbility> abilities) {
         this.abilities = abilities;
