@@ -1,12 +1,8 @@
 package model.entity;
 
 import game.model.entity.Entity;
-import game.model.entity.IEntity;
-import game.model.entity.movable.MovableEntity;
 import game.model.shape2d.*;
 import javafx.geometry.Point2D;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
