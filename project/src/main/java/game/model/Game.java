@@ -12,10 +12,10 @@ import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game {
+public class Game implements IGame {
 
-    private List<ILevel> levels;
-    private ILevel currentLevel;
+    public List<ILevel> levels;
+    public ILevel currentLevel;
 
     public Game() {
         this.levels = dummyLevels();
