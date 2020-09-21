@@ -13,6 +13,8 @@ public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> imple
     private Point2D acceleration;
     private Point2D velocity;
 
+    private double friction;
+
     public MovableEntity(Point2D position, double maxForce, double maxSpeed, T shape) {
         this(position, new Point2D(0, 0), maxForce, maxSpeed, shape);
     }
@@ -25,6 +27,8 @@ public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> imple
 
         this.maxForce = maxForce;
         this.maxSpeed = maxSpeed;
+
+        this.friction = 0.0;
     }
 
     /* Takes change in time in nanoseconds since last update */
@@ -37,8 +41,8 @@ public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> imple
         setVelocity(velocity.add(acceleration));
 
         /* Add friction to velocity, and limit the velocity to max speed */
-        //TODO: allow for setting friction value using setter! (magic numbers no good)
-        setVelocity(Utils.limit(velocity.add(velocity.multiply(-3 * delta)), maxSpeed));
+        //TODO: possible to simplify friction calculation?
+        setVelocity(Utils.limit(velocity.add(velocity.multiply(-friction * delta)), maxSpeed));
 
         /* Add velocity to position */
         setPosition(position.add(velocity.multiply(delta)));
@@ -92,4 +96,8 @@ public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> imple
         this.acceleration = acceleration;
     }
 
+    @Override
+    public void setFriction(double friction) {
+        this.friction = friction;
+    }
 }
