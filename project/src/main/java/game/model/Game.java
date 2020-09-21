@@ -24,9 +24,9 @@ public class Game {
 
     public static List<ILevel> dummyLevels() {
 
-        Player player = EntityFactory.basicPlayer();
+        Player player = EntityFactory.basicPlayer(375, 200);
         List<IEntity<?>> enemies = new ArrayList<IEntity<?>>();
-        IEntity<ICircle> e1 = EntityFactory.basicEnemy(player);
+        IEntity<ICircle> e1 = EntityFactory.basicEnemy(500, 650, player);
         enemies.add(e1);
 
         ILevel level = new Level(enemies, new ArrayList<IEntity<?>>(), new ArrayList<IEntity<?>>(), player, 1200, 800);
