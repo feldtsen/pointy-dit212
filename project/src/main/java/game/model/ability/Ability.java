@@ -23,6 +23,7 @@ public abstract class Ability implements IAbility{
     }
 
     public abstract void activate();
+
 }
 
 
