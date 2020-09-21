@@ -9,10 +9,10 @@ import javafx.geometry.Point2D;
 
 public class EntityFactory {
 
-    public static Player basicPlayer() {
-        return new Player(new Point2D(575, 375), 30, 2500, 1000);
+    public static Player basicPlayer(double x, double y) {
+        return new Player(new Point2D(x, y), 30, 2500, 1000);
     }
-    public static IEntity<ICircle> basicEnemy(Player player) {
-        return new Enemy(new Point2D(100,100), 50, 1000, 1000, 1,null, new SeekingBehaviour(), player);
+    public static IEntity<ICircle> basicEnemy(double x, double y, IEntity target) {
+        return new Enemy(new Point2D(x,y), 50, 1000, 1000, 1,null, new SeekingBehaviour(), target);
     }
 }
