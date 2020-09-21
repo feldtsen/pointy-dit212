@@ -1,10 +1,10 @@
-package game;
+package game.model;
 
 import game.model.entity.IEntity;
 import game.model.entity.movable.MovableEntity;
 import game.model.level.ILevel;
 import game.model.level.Level;
-import game.model.player.Player;
+import game.model.entity.player.Player;
 import game.model.shape2d.ICircle;
 import game.services.EntityFactory;
 import javafx.geometry.Point2D;

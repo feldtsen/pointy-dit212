@@ -1,4 +1,4 @@
-package game.model.player;
+package game.model.entity.player;
 
 import game.model.shape2d.IShape2D;
 

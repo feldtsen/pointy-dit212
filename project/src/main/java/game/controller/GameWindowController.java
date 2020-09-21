@@ -5,13 +5,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import game.Game;
+import game.model.Game;
 import game.model.gameLoop.GameLoop;
 import game.model.gameLoop.IGameLoop;
 import game.model.behavior.movement.SeekingBehaviour;
 import game.model.entity.enemy.Enemy;
-import game.model.player.Player;
-import game.model.shape2d.ICircle;
+import game.model.entity.player.Player;
 import game.model.shape2d.Shapes;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

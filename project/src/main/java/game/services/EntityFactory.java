@@ -3,8 +3,7 @@ package game.services;
 import game.model.behavior.movement.SeekingBehaviour;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
-import game.model.player.IPlayer;
-import game.model.player.Player;
+import game.model.entity.player.Player;
 import game.model.shape2d.ICircle;
 import javafx.geometry.Point2D;
 

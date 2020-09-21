@@ -2,8 +2,7 @@ package model.entity;
 
 import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
-import game.model.entity.enemy.IEnemy;
-import game.model.player.Player;
+import game.model.entity.player.Player;
 import javafx.geometry.Point2D;
 import org.junit.Before;
 import org.junit.Test;
