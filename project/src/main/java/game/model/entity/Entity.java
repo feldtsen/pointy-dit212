@@ -24,7 +24,7 @@ public abstract class Entity<T extends IShape2D> implements IEntity<T> {
     }
 
     @Override
-    public boolean checkCollision(IEntity<?> entity) {
+    public <V extends IShape2D> boolean checkCollision(IEntity<V> entity) {
         return false;
     }
 

@@ -2,6 +2,7 @@ package game.model.entity.obstacle;
 
 import game.model.entity.Entity;
 import game.model.entity.IEntity;
+import game.model.shape2d.IShape2D;
 import game.model.shape2d.Rectangle;
 import javafx.geometry.Point2D;
 
@@ -13,7 +14,7 @@ public class Wall extends Entity<Rectangle> implements IObstacle<Rectangle> {
 
     @Override
     /* Checks if an Entity has collided with the wall. */
-    public boolean checkCollision(IEntity<?> entity) {
+    public <V extends IShape2D> boolean checkCollision(IEntity<V> entity) {
         /* Size and coordinates of the entity to check for collision. */
         //double entityWidth = entity.getWidth();
         //double entityHeight = entity.getHeight();
