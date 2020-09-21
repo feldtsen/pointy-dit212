@@ -17,12 +17,13 @@ public abstract class Ability implements IAbility{
         long currentTime = System.nanoTime();
         if (currentTime - lastUsed >= cooldown){
             lastUsed = currentTime;
+            activate();
             return true;
         }
         return false;
     }
 
-    public abstract void activate();
+    protected abstract void activate();
 
 }
 
