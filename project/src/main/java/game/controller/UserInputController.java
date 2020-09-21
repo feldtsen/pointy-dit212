@@ -4,12 +4,12 @@ import game.model.player.Player;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 
-public  class PlayerInputController {
+public  class UserInputController {
     private final boolean[] directions = new boolean[]{false, false, false, false};
     private final Player player;
     StackPane gamePane;
 
-    public PlayerInputController(StackPane gamePane, Player player) {
+    public UserInputController(StackPane gamePane, Player player) {
         this.gamePane = gamePane;
         this.player = player;
         gamePane.setOnKeyPressed(this::register);

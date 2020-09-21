@@ -83,7 +83,7 @@ public class GameWindowController implements Initializable {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         Player player = new Player(new Point2D(575, 375), 30, 2500, 1000);
         Enemy enemy = new Enemy(new Point2D(100,100), 50, 1000, 1000, 1,null, new SeekingBehaviour(), player);
-        PlayerInputController playerInputController = new PlayerInputController(gamePane, player);
+        UserInputController userInputController = new UserInputController(gamePane, player);
 
 
 
@@ -108,7 +108,7 @@ public class GameWindowController implements Initializable {
                         2*enemy.getShape().getRadius(),
                         2*enemy.getShape().getRadius());
 
-                playerInputController.movePlayer();
+                userInputController.movePlayer();
                 player.update(delta);
                 enemy.update(delta);
             }
