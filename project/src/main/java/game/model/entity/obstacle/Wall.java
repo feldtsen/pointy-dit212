@@ -14,6 +14,6 @@ public class Wall extends Entity<Rectangle> implements IObstacle<Rectangle> {
 
     @Override
     public void update(double delta) {
-        //TODO: How should a wall update?
+
     }
 }
