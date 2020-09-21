@@ -9,10 +9,10 @@ import java.util.List;
 
 public class Level implements ILevel {
 
-    private final List<IEnemy<?>> enemies;
-    private final List<IProjectile<?>> projectiles;
-    private final List<IObstacle<?>> obstacles;
-    private final IPlayer player;
+    private List<IEnemy<?>> enemies;
+    private List<IProjectile<?>> projectiles;
+    private List<IObstacle<?>> obstacles;
+    private IPlayer player;
     private final double width;
     private final double height;
 
