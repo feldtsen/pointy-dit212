@@ -1,7 +1,9 @@
 package game.model;
 
 import game.model.entity.IEntity;
+import game.model.entity.enemy.IEnemy;
 import game.model.entity.movable.MovableEntity;
+import game.model.entity.player.IPlayer;
 import game.model.level.ILevel;
 import game.model.level.Level;
 import game.model.entity.player.Player;
@@ -29,7 +31,7 @@ public class Game implements IGame {
         IEntity<ICircle> e1 = EntityFactory.basicEnemy(500, 650, player);
         enemies.add(e1);
 
-        ILevel level = new Level(enemies, new ArrayList<IEntity<?>>(), new ArrayList<IEntity<?>>(), player, 1200, 800);
+        ILevel level = new Level(enemies, null, null, player, 1200, 800);
         List<ILevel> levels = new ArrayList<ILevel>();
         levels.add(level);
         return levels;

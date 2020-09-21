@@ -9,10 +9,10 @@ import game.model.entity.projectile.IProjectile;
 import java.util.List;
 
 public interface ILevel {
-    List<IEnemy<?>> getEnemies();
-    List<IProjectile<?>> getProjectiles();
-    List<IObstacle<?>> getObstacles();
-    IPlayer getPlayer();
+    List<IEntity<?>> getEnemies();
+    List<IEntity<?>> getProjectiles();
+    List<IEntity<?>> getObstacles();
+    IEntity<?> getPlayer();
     double getWidth();
     double getHeight();
 

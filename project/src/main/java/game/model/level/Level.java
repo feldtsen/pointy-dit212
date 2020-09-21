@@ -1,5 +1,6 @@
 package game.model.level;
 
+import game.model.entity.IEntity;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.obstacle.IObstacle;
 import game.model.entity.player.IPlayer;
@@ -9,16 +10,16 @@ import java.util.List;
 
 public class Level implements ILevel {
 
-    private List<IEnemy<?>> enemies;
-    private List<IProjectile<?>> projectiles;
-    private List<IObstacle<?>> obstacles;
-    private IPlayer player;
+    private List<IEntity<?>> enemies;
+    private List<IEntity<?>> projectiles;
+    private List<IEntity<?>> obstacles;
+    private IEntity<?> player;
     private final double width;
     private final double height;
 
 
 
-    public Level(List<IEnemy<?>> enemies, List<IProjectile<?>> projectiles, List<IObstacle<?>> obstacles, IPlayer player, double width, double height) {
+    public Level(List<IEntity<?>> enemies, List<IEntity<?>> projectiles, List<IEntity<?>> obstacles, IEntity<?> player, double width, double height) {
         this.enemies = enemies;
         this.projectiles = projectiles;
         this.obstacles = obstacles;
@@ -28,22 +29,22 @@ public class Level implements ILevel {
     }
 
     @Override
-    public List<IEnemy<?>> getEnemies() {
+    public List<IEntity<?>> getEnemies() {
         return this.enemies;
     }
 
     @Override
-    public List<IProjectile<?>> getProjectiles() {
+    public List<IEntity<?>> getProjectiles() {
         return this.projectiles;
     }
 
     @Override
-    public List<IObstacle<?>> getObstacles() {
+    public List<IEntity<?>> getObstacles() {
         return this.obstacles;
     }
 
     @Override
-    public IPlayer getPlayer() {
+    public IEntity<?> getPlayer() {
         return this.player;
     };
 
