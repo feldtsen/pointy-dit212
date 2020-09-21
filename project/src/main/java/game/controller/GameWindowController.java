@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import game.Game;
 import game.model.gameLoop.GameLoop;
 import game.model.gameLoop.IGameLoop;
 import game.model.behavior.movement.SeekingBehaviour;
@@ -183,6 +184,8 @@ public class GameWindowController implements Initializable {
 
                 player.update(delta);
                 enemy.update(delta);
+                Game.containToBounds(player);
+                Game.containToBounds(enemy);
             }
         };
         gameLoop.start();

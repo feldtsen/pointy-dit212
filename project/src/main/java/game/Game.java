@@ -1,6 +1,7 @@
 package game;
 
 import game.model.entity.IEntity;
+import game.model.entity.movable.MovableEntity;
 import game.model.level.ILevel;
 import game.model.level.Level;
 import game.model.player.Player;
@@ -17,11 +18,11 @@ public class Game {
     private ILevel currentLevel;
 
     public Game() {
-        this.levels = dummyLevel();
-
+        this.levels = dummyLevels();
+        this.currentLevel = levels.get(0);
     }
 
-    public static List<ILevel> dummyLevel() {
+    public static List<ILevel> dummyLevels() {
 
         Player player = EntityFactory.basicPlayer();
         List<IEntity<?>> enemies = new ArrayList<IEntity<?>>();
@@ -33,4 +34,42 @@ public class Game {
         levels.add(level);
         return levels;
     }
+
+    public static void containToBounds(MovableEntity<ICircle> entity) {
+        //TODO: dummy level, use currentLevel
+        ILevel level = new Level(null, null, null, null, 1200, 800);
+
+        double width = level.getWidth();
+        double height = level.getHeight();
+
+        Point2D v = entity.getVelocity();
+        Point2D p = entity.getPosition();
+        double r = entity.getShape().getRadius(); //TODO: hard coded for circles right now
+
+        if(p.getX() - r < 0) {
+            p = new Point2D(r, p.getY());
+            v = new Point2D(0, v.getY());
+        }
+        else if(p.getX() + r >= width) {
+            p = new Point2D(width - r, p.getY());
+            v = new Point2D(0, v.getY());
+        }
+
+        if(p.getY() - r < 0) {
+            p = new Point2D(p.getX(), r);
+            v = new Point2D(v.getX(), 0);
+        }
+        else if(p.getY() + r >= height) {
+            p = new Point2D(p.getX(), height - r);
+            v = new Point2D(v.getX(), 0);
+        }
+
+        entity.setPosition(p);
+        entity.setVelocity(v);
+    }
+
+
 }
+
+
+
