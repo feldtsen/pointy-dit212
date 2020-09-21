@@ -2,7 +2,7 @@ package game.model.behavior;
 
 import game.model.entity.IEntity;
 
-public interface IBehaviour<T extends IEntity, V extends IEntity> {
+public interface IBehaviour<T extends IEntity<?>, V extends IEntity<?>> {
 
     /**
     * Applies the behaviour of one entity to another entity.
