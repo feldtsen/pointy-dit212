@@ -101,7 +101,8 @@ public class ShapesTest {
         assertFalse(Shapes.testCollision(r1, p1, r2, p2) ||
                 Shapes.testCollision(r1, p1, r3, p3) ||
                 Shapes.testCollision(r1, p1, r4, p4) ||
-                Shapes.testCollision(r1, p1, r5, p5));
+                Shapes.testCollision(r1, p1, r5, p5)
+        );
     }
 
     @Test
