@@ -34,6 +34,15 @@ public class Enemy extends LivingEntity<ICircle> implements IEnemy<ICircle> {
     }
 
     @Override
+    public boolean setTarget(IEntity<?> target) {
+        if(target == this) {
+            return false;
+        }
+        this.target = target;
+        return true;
+    }
+
+    @Override
     public void update(double delta) {
         super.update(delta);
         movementBehaviour.apply(this, target);
