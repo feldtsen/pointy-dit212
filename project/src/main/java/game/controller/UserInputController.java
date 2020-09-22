@@ -5,6 +5,22 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 
 public  class UserInputController {
+    //TODO: user inputs can be singleton!
+
+    //TODO: does not need to be instantiated, gamePane can register event listening once on game startup!
+
+    //TODO: more generic solution: register "actions" for each keypress. Call update every frame, on each update,
+    //TODO: look through list of currently held keys (hashset?), see if action is registered for that keypress, activate aciton!
+    //TODO: something like https://gamedevelopment.tutsplus.com/tutorials/introduction-to-javafx-for-game-development--cms-23835
+    //TODO: (but with better data structure)
+
+    //TODO: alternative: each action associated with key, each frame check if associated key is pressed! if pressed, activate action!
+
+    //TODO: game handles actions, ex UserInputController has method called "setOnHeld(KeyCode code, Lambda...)"
+    //TODO: example call: UserInputController.setOnHeld("W", () -> player.moveUp())
+
+    //TODO: UserInputController has update method, calls every lambda expression each frame if corresponding key is pressed
+
     private final boolean[] directions = new boolean[]{false, false, false, false};
     private final Player player;
     StackPane gamePane;
