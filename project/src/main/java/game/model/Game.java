@@ -37,12 +37,12 @@ public class Game implements IGame {
         return levels;
     }
 
-    public static void containToBounds(MovableEntity<ICircle> entity) {
+    public void containToBounds(MovableEntity<ICircle> entity) {
         //TODO: dummy level, use currentLevel
-        ILevel level = new Level(null, null, null, null, 1200, 800);
+        //ILevel level = new Level(null, null, null, null, 1200, 800);
 
-        double width = level.getWidth();
-        double height = level.getHeight();
+        double width = currentLevel.getWidth();
+        double height = currentLevel.getHeight();
 
         Point2D v = entity.getVelocity();
         Point2D p = entity.getPosition();
