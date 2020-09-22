@@ -1,6 +1,5 @@
 package game.controller;
 
-import game.model.entity.player.Player;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;

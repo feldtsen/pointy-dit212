@@ -79,6 +79,11 @@ public abstract class GameLoop implements IGameLoop {
     }
 
     @Override
+    public boolean isPaused() {
+        return paused;
+    }
+
+    @Override
     public int getCurrentFPS() {
         return currentFPS;
     }
