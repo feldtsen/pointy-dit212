@@ -2,7 +2,7 @@ package game.model.entity.enemy;
 
 import game.model.ILiving;
 import game.model.IMovable;
-import game.model.behavior.IAbilityBehaviour;
+import game.model.behavior.ability.IAbilityBehaviour;
 import game.model.behavior.movement.IMovementBehaviour;
 import game.model.entity.IEntity;
 import game.model.shape2d.IShape2D;
