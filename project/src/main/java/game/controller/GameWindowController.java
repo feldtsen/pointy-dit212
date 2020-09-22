@@ -83,6 +83,8 @@ public class GameWindowController implements Initializable {
     }
 
     private void startGame() throws IOException {
+        Game game = new Game();
+
         GraphicsContext gc = canvas.getGraphicsContext2D();
         Player player = new Player(new Point2D(575, 375), 30, 2500, 1000);
         player.setFriction(3);
@@ -119,8 +121,8 @@ public class GameWindowController implements Initializable {
                 UserInputController.update();
                 player.update(delta);
                 enemy.update(delta);
-                Game.containToBounds(player);
-                Game.containToBounds(enemy);
+                game.containToBounds(player);
+                game.containToBounds(enemy);
             }
         };
         gameLoop.start();
