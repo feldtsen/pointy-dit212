@@ -1,8 +1,6 @@
 package game.controller;
 
-import java.io.IOException;
 import java.net.URL;
-import java.net.UnknownServiceException;
 import java.util.ResourceBundle;
 
 import game.model.Game;
@@ -12,7 +10,6 @@ import game.model.behavior.movement.SeekingBehaviour;
 import game.model.entity.enemy.Enemy;
 import game.model.entity.player.Player;
 import game.model.shape2d.Shapes;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
@@ -20,7 +17,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
@@ -39,16 +35,10 @@ public class GameWindowController implements Initializable {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.rgb(30, 30, 30));
         gc.fillRect(0, 0, 1200, 800);
-        try {
-            startGame();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        startGame();
         gameLoop.start();
 
     }
-
-
 
     @FXML
     private void handleMenuLevelButton () {
@@ -60,29 +50,21 @@ public class GameWindowController implements Initializable {
         System.out.println("Score button clicked ");
     }
 
-
     @FXML
-    private void handleMenuStartButton(ActionEvent e) {
-        Button menuStartButton = (Button) e.getSource();
-        HBox menuContainer = (HBox) menuStartButton.getParent();
-        menuContainer.toBack();
-
-        menuContainer.getScene().lookup("#menuPauseButton").toFront();
-
+    private void handleMenuStartButton() {
+        System.out.println("start");
         gameLoop.setPaused(false);
-
+        gamePane.lookup("#menuContainer").toBack();
+        ((Button) gamePane.lookup("#menuStartButton")).setText("RETURN");
     }
-
 
     @FXML
-    private void handleReturnToMenuButton(ActionEvent e) {
-        Button returnToMenuButton = (Button) e.getSource();
-        returnToMenuButton.toBack();
-        returnToMenuButton.getScene().lookup("#menuContainer").toFront();
+    private void pauseGame() {
         gameLoop.setPaused(true);
+        gamePane.lookup("#menuContainer").toFront();
     }
 
-    private void startGame() throws IOException {
+    private void startGame() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         Player player = new Player(new Point2D(575, 375), 30, 2500, 1000);
         player.setFriction(3);
@@ -94,6 +76,7 @@ public class GameWindowController implements Initializable {
         UserInputController.registerAction(KeyCode.A, player::moveLeft);
         UserInputController.registerAction(KeyCode.S, player::moveDown);
         UserInputController.registerAction(KeyCode.D, player::moveRight);
+        UserInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
 
         gameLoop = new GameLoop(1000) {
             @Override
