@@ -1,69 +1,60 @@
 package game.controller;
 
 import game.model.entity.player.Player;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 
+import java.util.*;
+import java.util.concurrent.ConcurrentSkipListSet;
+
 public  class UserInputController {
-    //TODO: user inputs can be singleton!
+    private static UserInputController INSTANCE = null;
 
-    //TODO: does not need to be instantiated, gamePane can register event listening once on game startup!
+    public interface Action {
+        void apply();
+    }
 
-    //TODO: more generic solution: register "actions" for each keypress. Call update every frame, on each update,
-    //TODO: look through list of currently held keys (hashset?), see if action is registered for that keypress, activate aciton!
-    //TODO: something like https://gamedevelopment.tutsplus.com/tutorials/introduction-to-javafx-for-game-development--cms-23835
-    //TODO: (but with better data structure)
+    private final Set<KeyCode> pressedKeys;
+    private final Map<KeyCode, List<Action>> actions;
 
-    //TODO: alternative: each action associated with key, each frame check if associated key is pressed! if pressed, activate action!
+    public static void init(StackPane gamePane) {
+        INSTANCE = new UserInputController(gamePane);
+    }
 
-    //TODO: game handles actions, ex UserInputController has method called "setOnHeld(KeyCode code, Lambda...)"
-    //TODO: example call: UserInputController.setOnHeld("W", () -> player.moveUp())
-
-    //TODO: UserInputController has update method, calls every lambda expression each frame if corresponding key is pressed
-
-    private final boolean[] directions = new boolean[]{false, false, false, false};
-    private final Player player;
-    StackPane gamePane;
-
-    public UserInputController(StackPane gamePane, Player player) {
-        this.gamePane = gamePane;
-        this.player = player;
+    private UserInputController(StackPane gamePane) {
+        pressedKeys = new ConcurrentSkipListSet<>();
+        actions = new HashMap<>();
         gamePane.setOnKeyPressed(this::register);
         gamePane.setOnKeyReleased(this::unregister);
     }
 
-    private void setDirections (KeyEvent e, boolean isPressed) {
-        switch (e.getCode()) {
-            case W:
-                directions[0] = isPressed;
-                break;
-            case A:
-                directions[1] = isPressed;
-                break;
-            case S:
-                directions[2] = isPressed;
-                break;
-            case D:
-                directions[3] = isPressed;
-                break;
-
-        }
-
-    }
-
     private void register(KeyEvent e) {
-        setDirections(e, true);
+        pressedKeys.add(e.getCode());
     }
 
     private void unregister(KeyEvent e){
-        setDirections(e, false);
+        pressedKeys.remove(e.getCode());
     }
 
-    public void movePlayer() {
-        if(directions[0]) player.moveUp();
-        if(directions[1]) player.moveLeft();
-        if(directions[2]) player.moveDown();
-        if(directions[3]) player.moveRight();
+    public static void registerAction(KeyCode code, Action action) {
+        List<Action> list;
+        if(!INSTANCE.actions.containsKey(code)) {
+            list = new ArrayList<>();
+            INSTANCE.actions.put(code, list);
+        } else {
+            list = INSTANCE.actions.get(code);
+        }
+        list.add(action);
     }
 
+    public static void update() {
+        for(KeyCode c : INSTANCE.pressedKeys) {
+            List<Action> l = INSTANCE.actions.get(c);
+            if(l == null) continue;
+            for(Action a : l) {
+                a.apply();
+            }
+        }
+    }
 }

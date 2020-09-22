@@ -2,6 +2,7 @@ package game.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.net.UnknownServiceException;
 import java.util.ResourceBundle;
 
 import game.model.Game;
@@ -18,6 +19,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -86,9 +88,12 @@ public class GameWindowController implements Initializable {
         player.setFriction(3);
         Enemy enemy = new Enemy(new Point2D(100,100), 50, 1000, 1000, 1,null, new SeekingBehaviour(), player);
         enemy.setFriction(3);
-        UserInputController userInputController = new UserInputController(gamePane, player);
 
-
+        UserInputController.init(gamePane);
+        UserInputController.registerAction(KeyCode.W, player::moveUp);
+        UserInputController.registerAction(KeyCode.A, player::moveLeft);
+        UserInputController.registerAction(KeyCode.S, player::moveDown);
+        UserInputController.registerAction(KeyCode.D, player::moveRight);
 
         gameLoop = new GameLoop(1000) {
             @Override
@@ -111,7 +116,7 @@ public class GameWindowController implements Initializable {
                         2*enemy.getShape().getRadius(),
                         2*enemy.getShape().getRadius());
 
-                userInputController.movePlayer();
+                UserInputController.update();
                 player.update(delta);
                 enemy.update(delta);
                 Game.containToBounds(player);
