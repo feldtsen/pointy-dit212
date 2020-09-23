@@ -2,7 +2,7 @@ package game.model;
 
 import javafx.geometry.Point2D;
 
-public interface IMovable extends IPositionable {
+public interface IMovable extends IPositionable, IUpdatable {
     void move(Point2D offset);
     void addForce(Point2D force);
 

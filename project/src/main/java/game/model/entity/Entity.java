@@ -29,6 +29,4 @@ public abstract class Entity<T extends IShape2D> implements IEntity<T> {
         return Shapes.testCollision(shape, position, entity.getShape(), entity.getPosition());
     }
 
-    @Override
-    public abstract void update(double delta);
 }
