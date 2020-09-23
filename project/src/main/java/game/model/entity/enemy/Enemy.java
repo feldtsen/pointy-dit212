@@ -45,8 +45,8 @@ public class Enemy extends LivingEntity<ICircle> implements IEnemy<ICircle> {
     }
 
     @Override
-    public void update(double delta) {
-        super.update(delta);
+    public void update(double delta, double timestep) {
+        super.update(delta, timestep);
         movementBehaviour.apply(this, target);
     }
 }

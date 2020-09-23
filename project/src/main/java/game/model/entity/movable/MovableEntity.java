@@ -33,7 +33,7 @@ public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> imple
 
     /* Takes change in time in nanoseconds since last update */
     @Override
-    public void update(double delta) {
+    public void update(double delta, double timestep) {
         /* Limit the acceleration to maxForce, and multiply with the delta time value */
         setAcceleration(Utils.limit(acceleration, maxForce).multiply(delta));
 

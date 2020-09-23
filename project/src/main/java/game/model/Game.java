@@ -48,8 +48,8 @@ public class Game implements IGame {
         Player player = currentLevel.getPlayer();
         Enemy enemy = currentLevel.getEnemies().get(0);
 
-        player.update(delta);
-        enemy.update(delta);
+        player.update(delta, timestep);
+        enemy.update(delta, timestep);
 
         containToBounds(player);
         containToBounds(enemy);

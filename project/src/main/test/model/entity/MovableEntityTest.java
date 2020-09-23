@@ -35,7 +35,7 @@ public class MovableEntityTest {
         Point2D currentPosition = movableEntity.getPosition();
 
         movableEntity.setVelocity(velocity);
-        movableEntity.update(1);
+        movableEntity.update(1, 1);
 
         assertEquals(currentPosition.add(velocity), movableEntity.getPosition());
     }
@@ -47,7 +47,7 @@ public class MovableEntityTest {
         Point2D currentPosition = movableEntity.getPosition();
 
         movableEntity.setVelocity(velocity);
-        movableEntity.update(delta);
+        movableEntity.update(delta, 1);
 
         assertEquals(currentPosition.add(velocity.multiply(delta)), movableEntity.getPosition());
     }
@@ -58,7 +58,7 @@ public class MovableEntityTest {
         Point2D currentPosition = movableEntity.getPosition();
 
         movableEntity.setVelocity(velocity);
-        movableEntity.update(1);
+        movableEntity.update(1, 1);
 
         assertEquals(currentPosition.add(Utils.limit(velocity, maxSpeed)), movableEntity.getPosition());
     }
@@ -70,7 +70,7 @@ public class MovableEntityTest {
         Point2D currentVelocity = movableEntity.getVelocity();
 
         movableEntity.addForce(force);
-        movableEntity.update(1.0); //delta 1.0 ==> 1 second has passed since last update
+        movableEntity.update(1.0, 1); //delta 1.0 ==> 1 second has passed since last update
 
         assertEquals(currentVelocity.add(force), movableEntity.getVelocity());
         assertEquals(currentPosition.add(currentVelocity.add(force)), movableEntity.getPosition());
@@ -83,7 +83,7 @@ public class MovableEntityTest {
         Point2D currentVelocity = movableEntity.getVelocity();
 
         movableEntity.addForce(force);
-        movableEntity.update(1.0);
+        movableEntity.update(1.0, 1);
 
         assertEquals(currentVelocity.add(Utils.limit(force, maxForce)), movableEntity.getVelocity());
         assertEquals(currentPosition.add(currentVelocity.add(Utils.limit(force, maxForce))), movableEntity.getPosition());

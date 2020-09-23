@@ -13,7 +13,7 @@ public class Wall extends Entity<Rectangle> implements IObstacle<Rectangle> {
     }
 
     @Override
-    public void update(double delta) {
+    public void update(double delta, double timestep) {
 
     }
 }

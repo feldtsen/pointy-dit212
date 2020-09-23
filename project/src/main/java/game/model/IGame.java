@@ -4,8 +4,7 @@ import game.model.level.ILevel;
 
 import java.util.List;
 
-public interface IGame {
-    void update(double delta, double timestep);
+public interface IGame extends IUpdatable {
 
     ILevel getCurrentLevel();
     List<ILevel> getLevels();
