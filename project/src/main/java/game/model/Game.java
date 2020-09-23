@@ -46,13 +46,31 @@ public class Game implements IGame {
     @Override
     public void update(double delta, double timestep) {
         Player player = currentLevel.getPlayer();
-        Enemy enemy = currentLevel.getEnemies().get(0);
-
         player.update(delta, timestep);
-        enemy.update(delta, timestep);
-
         containToBounds(player);
-        containToBounds(enemy);
+
+        for (Enemy enemy : currentLevel.getEnemies()) {
+            enemy = currentLevel.getEnemies().get(0);
+            enemy.update(delta, timestep);
+            containToBounds(enemy);
+        }
+        for (int i = 0; i < currentLevel.getEnemies().size(); i++) {
+            Enemy e1 = currentLevel.getEnemies().get(i);
+            for (int j = i+1; j < currentLevel.getEnemies().size(); j++ ){
+                Enemy e2 = currentLevel.getEnemies().get(j);
+                if (e1.checkCollision(e2)) {
+                    //TODO invent the wheel
+                    handleCollision(e1,e2);
+                }
+            }
+
+            if (player.checkCollision(e1)){
+                if (player.getStrength() < e1.getStrength()){
+                    player.setHitPoints(0);
+                }
+            }
+        }
+
     }
 
     public void containToBounds(MovableEntity<ICircle> entity) {
@@ -105,6 +123,12 @@ public class Game implements IGame {
     @Override
     public int getScore() {
         return score;
+    }
+
+    private void handleCollision(IEntity<?> e1, IEntity<?> e2){
+        //TODO inventing the wheel
+
+
     }
 }
 
