@@ -10,26 +10,19 @@ import javafx.geometry.Point2D;
 
 public class Enemy extends LivingEntity<ICircle> implements IEnemy<ICircle> {
 
-
-    private final int strength;
     private IEntity<?> target;
     private IMovementBehaviour movementBehaviour;
     private IAbilityBehaviour abilityBehaviour;
 
     public Enemy(Point2D position, double radius, double maxForce, double maxSpeed, int hitPoints, IAbilityBehaviour abilityBehaviour, IMovementBehaviour movementBehaviour, IEntity<?> target){
-        super(position, maxForce, maxSpeed, hitPoints, new Circle(radius));
-        this.abilityBehaviour = abilityBehaviour;
-        this.movementBehaviour = movementBehaviour;
-        this.target = target;
-        this.strength = 1;
+        this(position, radius, maxForce, maxSpeed, hitPoints, abilityBehaviour, movementBehaviour, target,0);
     }
 
     public Enemy(Point2D position, double radius, double maxForce, double maxSpeed, int hitPoints, IAbilityBehaviour abilityBehaviour, IMovementBehaviour movementBehaviour, IEntity<?> target, int strength) {
-        super(position, maxForce, maxSpeed, hitPoints, new Circle(radius));
+        super(position, maxForce, maxSpeed, hitPoints, new Circle(radius),strength);
         this.abilityBehaviour = abilityBehaviour;
         this.movementBehaviour = movementBehaviour;
         this.target = target;
-        this.strength = strength;
     }
 
     @Override
