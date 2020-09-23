@@ -43,6 +43,18 @@ public class Game implements IGame {
         return levels;
     }
 
+    @Override
+    public void update(double delta, double timestep) {
+        Player player = currentLevel.getPlayer();
+        Enemy enemy = currentLevel.getEnemies().get(0);
+
+        player.update(delta);
+        enemy.update(delta);
+
+        containToBounds(player);
+        containToBounds(enemy);
+    }
+
     public void containToBounds(MovableEntity<ICircle> entity) {
         double width = currentLevel.getWidth();
         double height = currentLevel.getHeight();

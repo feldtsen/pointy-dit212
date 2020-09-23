@@ -107,10 +107,7 @@ public class GameWindowController implements Initializable {
                         2*enemy.getShape().getRadius());
 
                 UserInputController.update();
-                player.update(delta);
-                enemy.update(delta);
-                game.containToBounds(player);
-                game.containToBounds(enemy);
+                game.update(delta, 1);
             }
         };
         gameLoop.start();
