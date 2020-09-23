@@ -35,17 +35,17 @@ public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> imple
     @Override
     public void update(double delta, double timestep) {
         /* Limit the acceleration to maxForce, and multiply with the delta time value */
-        setAcceleration(Utils.limit(acceleration, maxForce).multiply(delta));
+        setAcceleration(Utils.limit(acceleration, maxForce).multiply(delta * timestep));
 
         /* Add acceleration to velocity */
         setVelocity(velocity.add(acceleration));
 
         /* Add friction to velocity, and limit the velocity to max speed */
         //TODO: possible to simplify friction calculation?
-        setVelocity(Utils.limit(velocity.add(velocity.multiply(-friction * delta)), maxSpeed));
+        setVelocity(Utils.limit(velocity.add(velocity.multiply(-friction * delta * timestep)), maxSpeed));
 
         /* Add velocity to position */
-        setPosition(position.add(velocity.multiply(delta)));
+        setPosition(position.add(velocity.multiply(delta * timestep)));
 
         /* Reset acceleration */
         setAcceleration(new Point2D(0, 0));
