@@ -21,8 +21,9 @@ public class MovingWall extends MovableEntity<Rectangle> implements IObstacle<Re
 
     @Override
     public void update(double delta, double timestep) {
-        //TODO
-        //Implement proper movement function for moving obstacles
+        //TODO: Implement proper movement function for moving obstacles
+
+
         super.update(delta, timestep);
     }
 }

@@ -45,7 +45,7 @@ public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> imple
         setVelocity(Utils.limit(velocity.add(velocity.multiply(-friction * delta * timestep)), maxSpeed));
 
         /* Add velocity to position */
-        setPosition(position.add(velocity.multiply(delta * timestep)));
+        move(velocity.multiply(delta * timestep));
 
         /* Reset acceleration */
         setAcceleration(new Point2D(0, 0));
