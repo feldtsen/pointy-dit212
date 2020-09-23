@@ -4,4 +4,5 @@ public interface ILiving {
     int getHitPoints();
     void setHitPoints(int hitPoints);
     boolean isAlive();
+    int getStrength();
 }
