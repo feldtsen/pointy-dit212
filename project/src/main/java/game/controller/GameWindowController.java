@@ -10,6 +10,7 @@ import game.model.gameLoop.GameLoop;
 import game.model.gameLoop.IGameLoop;
 import game.model.entity.enemy.Enemy;
 import game.model.entity.player.Player;
+import game.view.Renderer;
 import game.view.RendererUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -71,7 +72,7 @@ public class GameWindowController implements Initializable {
         Game game = new Game();
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
-        RendererUtils rendererUtils = new RendererUtils(graphicsContext);
+        Renderer renderer = new Renderer(graphicsContext);
 
         UserInputController.init(gamePane);
         UserInputController.registerAction(KeyCode.W, game.getCurrentLevel().getPlayer()::moveUp);
@@ -80,23 +81,10 @@ public class GameWindowController implements Initializable {
         UserInputController.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
         UserInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
 
-        HashMap<Class<?>, Color> colorMatcher = new HashMap<>();
-        colorMatcher.put(Player.class, Color.rgb(200, 200, 200));
-        colorMatcher.put(Enemy.class, Color.rgb(100, 200, 150));
-
         gameLoop = new GameLoop(1000) {
             @Override
             public void update(double delta) {
-                Player player = game.getCurrentLevel().getPlayer();
-                Enemy enemy = game.getCurrentLevel().getEnemies().get(0);
-                rendererUtils.clear();
-                rendererUtils.setBackgroundColor(Color.rgb(30, 30, 30));
-
-                graphicsContext.setFill(colorMatcher.get(player.getClass()));
-                rendererUtils.drawEntity(player.getShape(), player.getPosition());
-
-                graphicsContext.setFill(colorMatcher.get(enemy.getClass()));
-                rendererUtils.drawEntity(enemy.getShape(), enemy.getPosition());
+                renderer.draw(game.getCurrentLevel());
 
                 UserInputController.update();
                 game.update(delta, 1);

@@ -3,37 +3,29 @@ package game.view;
 import game.model.shape2d.ICircle;
 import game.model.shape2d.IRectangle;
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class RendererUtils {
-    private final GraphicsContext graphicsContext;
-    private final double WIDTH;
-    private final double HEIGHT;
-
-    public RendererUtils(GraphicsContext graphicsContext) {
-       this.graphicsContext = graphicsContext;
-       WIDTH = graphicsContext.getCanvas().getWidth();
-       HEIGHT = graphicsContext.getCanvas().getHeight();
-    }
-
-    public void clear() {
+    public static void clear(GraphicsContext graphicsContext) {
         graphicsContext.clearRect(0, 0, 1200, 800);
     }
 
-    public void setBackgroundColor(Color color) {
+    public static void setBackgroundColor(GraphicsContext graphicsContext, Color color) {
+        Canvas canvas = graphicsContext.getCanvas();
         graphicsContext.setFill(color);
-        graphicsContext.fillRect(0, 0, WIDTH, HEIGHT);
+        graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getWidth());
     }
 
-    public void drawEntity(ICircle circle, Point2D position) {
+    public static void drawEntity(GraphicsContext graphicsContext, ICircle circle, Point2D position) {
         graphicsContext.fillOval(position.getX() - circle.getRadius(),
                 position.getY() - circle.getRadius(),
                 2*circle.getRadius(),
                 2*circle.getRadius());
     }
 
-    public void drawEntity(IRectangle shape, Point2D position) {
+    public static void drawEntity(GraphicsContext graphicsContext, IRectangle shape, Point2D position) {
 
     }
 
