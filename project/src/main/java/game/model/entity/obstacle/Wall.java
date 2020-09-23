@@ -9,6 +9,7 @@ public class Wall extends Entity<Rectangle> implements IObstacle<Rectangle>{
         super(position, new Rectangle(width, height,0));
     }
 
+
     @Override
     public void update(double delta, double timestep) {
 

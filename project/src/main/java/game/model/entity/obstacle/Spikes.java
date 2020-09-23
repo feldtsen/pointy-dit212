@@ -13,6 +13,10 @@ public class Spikes extends Entity<Rectangle> implements IObstacle<Rectangle> {
         this.damage = damage;
     }
 
+    public double getDamage() {
+        return damage;
+    }
+
     @Override
     public void update(double delta, double timestep) {
 
