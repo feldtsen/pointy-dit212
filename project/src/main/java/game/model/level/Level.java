@@ -14,14 +14,14 @@ public class Level implements ILevel {
 
     private List<Enemy> enemies;
     private List<IProjectile<?>> projectiles;
-    private List<IObstacle<?>> obstacles;
+    private List<IObstacle> obstacles;
     private Player player;
     private final double width;
     private final double height;
 
 
 
-    public Level(List<Enemy> enemies, List<IProjectile<?>> projectiles, List<IObstacle<?>> obstacles, Player player, double width, double height) {
+    public Level(List<Enemy> enemies, List<IProjectile<?>> projectiles, List<IObstacle> obstacles, Player player, double width, double height) {
         this.enemies = enemies;
         this.projectiles = projectiles;
         this.obstacles = obstacles;
@@ -41,7 +41,7 @@ public class Level implements ILevel {
     }
 
     @Override
-    public List<IObstacle<?>> getObstacles() {
+    public List<IObstacle> getObstacles() {
         return this.obstacles;
     }
 

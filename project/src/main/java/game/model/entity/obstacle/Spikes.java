@@ -4,7 +4,7 @@ import game.model.entity.Entity;
 import game.model.shape2d.Rectangle;
 import javafx.geometry.Point2D;
 
-public class Spikes extends Entity<Rectangle> implements IObstacle<Rectangle> {
+public class Spikes extends Entity<Rectangle> implements IObstacle {
 
     private final double damage;
 
