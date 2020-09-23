@@ -91,9 +91,7 @@ public class GameWindowController implements Initializable {
                 renderer.clear();
                 renderer.setBackgroundColor(Color.rgb(30, 30, 30));
 
-                boolean collision = Shapes.testCollision(player.getShape(), player.getPosition(), enemy.getShape(), enemy.getPosition());
-
-                if(collision) {
+                if(player.checkCollision(enemy)) {
                     graphicsContext.setFill(Color.RED);
                 } else {
                     graphicsContext.setFill(Color.WHITE);
