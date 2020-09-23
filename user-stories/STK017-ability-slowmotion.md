@@ -1,20 +1,24 @@
 # User story 
 
-* Story Identifier: STK009
-* Story Name: Shockwave
+Story Identifier: STK017
+Story Name: Slowmotion
 * Time estimate: 4 days
+
 
 ## Description 
 
-As a player I need an ability to perform a shockwave so that I can push enemies away from me.
+As a player, I need an ability that lets me slow the environment around me so that I can escape dangers more easily.
+
 
 
 ## Confirmation
 
+List all acceptance criteria; you should be able to test/confirm these.
+
 ### Functional
 
 - Can I push a button and have the ability function reliably?
-- Are the enemies pushed away from me when I use the ability?
+- Is everything around me slowed down when using the ability?
 
 ### Non-functional
 
@@ -28,6 +32,3 @@ Availability
 Usability
 - Is my ability easily accessible?
 - Can I easily figure out how my ability works?
-- Can I easily understand the range and limits of my ability?
-
-
