@@ -25,6 +25,9 @@ public abstract class LivingEntity<T extends IShape2D> extends MovableEntity<T> 
     }
 
     @Override
+    public int getStrength() { return strength; }
+
+    @Override
     public void setHitPoints(int hitPoints) {
         this.hitPoints = hitPoints;
     }
