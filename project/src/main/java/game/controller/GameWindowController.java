@@ -69,18 +69,15 @@ public class GameWindowController implements Initializable {
     }
 
     private void startGame() throws IOException {
-        Game game = new Game();
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        Player player = new Player(new Point2D(575, 375), 30, 2500, 1000);
-        player.setFriction(3);
-        Enemy enemy = new Enemy(new Point2D(100,100), 50, 1000, 1000, 1,null, new SeekingBehaviour(), player);
-        enemy.setFriction(3);
+
+        Game game = new Game();
 
         UserInputController.init(gamePane);
-        UserInputController.registerAction(KeyCode.W, player::moveUp);
-        UserInputController.registerAction(KeyCode.A, player::moveLeft);
-        UserInputController.registerAction(KeyCode.S, player::moveDown);
-        UserInputController.registerAction(KeyCode.D, player::moveRight);
+        UserInputController.registerAction(KeyCode.W, game.getCurrentLevel().getPlayer()::moveUp);
+        UserInputController.registerAction(KeyCode.A, game.getCurrentLevel().getPlayer()::moveLeft);
+        UserInputController.registerAction(KeyCode.S, game.getCurrentLevel().getPlayer()::moveDown);
+        UserInputController.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
         UserInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
 
         gameLoop = new GameLoop(1000) {
@@ -89,6 +86,10 @@ public class GameWindowController implements Initializable {
                 gc.clearRect(0, 0, 1200, 800);
                 gc.setFill(Color.rgb(30, 30, 30));
                 gc.fillRect(0, 0, 1200, 800);
+
+                Player player = game.getCurrentLevel().getPlayer();
+                Enemy enemy = game.getCurrentLevel().getEnemies().get(0);
+
                 boolean collision = Shapes.testCollision(player.getShape(), player.getPosition(), enemy.getShape(), enemy.getPosition());
                 if(collision) {
                     gc.setFill(Color.RED);

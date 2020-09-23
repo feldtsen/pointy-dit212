@@ -1,6 +1,7 @@
 package game.model;
 
 import game.model.entity.IEntity;
+import game.model.entity.enemy.Enemy;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.movable.MovableEntity;
 import game.model.entity.player.IPlayer;
@@ -16,19 +17,24 @@ import java.util.List;
 
 public class Game implements IGame {
 
-    public List<ILevel> levels;
+    public final List<ILevel> levels;
     public ILevel currentLevel;
+    public int score;
 
     public Game() {
         this.levels = dummyLevels();
         this.currentLevel = levels.get(0);
+        this.score = 0;
     }
 
     public static List<ILevel> dummyLevels() {
 
         Player player = EntityFactory.basicPlayer(375, 200);
-        List<IEntity<?>> enemies = new ArrayList<IEntity<?>>();
-        IEntity<ICircle> e1 = EntityFactory.basicEnemy(500, 650, player);
+        player.setFriction(3);
+
+        List<Enemy> enemies = new ArrayList<>();
+        Enemy e1 = EntityFactory.basicEnemy(500, 650, player);
+        e1.setFriction(3);
         enemies.add(e1);
 
         ILevel level = new Level(enemies, null, null, player, 1200, 800);
@@ -38,9 +44,6 @@ public class Game implements IGame {
     }
 
     public void containToBounds(MovableEntity<ICircle> entity) {
-        //TODO: dummy level, use currentLevel
-        //ILevel level = new Level(null, null, null, null, 1200, 800);
-
         double width = currentLevel.getWidth();
         double height = currentLevel.getHeight();
 
@@ -70,7 +73,27 @@ public class Game implements IGame {
         entity.setVelocity(v);
     }
 
+    @Override
+    public boolean setLevel(ILevel level) {
+        if(!levels.contains(level)) return false;
+        this.currentLevel = level;
+        return true;
+    }
 
+    @Override
+    public ILevel getCurrentLevel() {
+        return currentLevel;
+    }
+
+    @Override
+    public List<ILevel> getLevels() {
+        return levels;
+    }
+
+    @Override
+    public int getScore() {
+        return score;
+    }
 }
 
 
