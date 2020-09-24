@@ -1,10 +1,7 @@
 package game.model.ability;
 
-import game.model.ILiving;
-import game.model.IMovable;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.Entity;
-import game.model.entity.IEntity;
 import game.model.entity.movable.LivingEntity;
 import game.model.entity.projectile.Bullet;
 import game.model.entity.projectile.IProjectile;
