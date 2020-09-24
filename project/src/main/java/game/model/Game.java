@@ -1,5 +1,6 @@
 package game.model;
 
+import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
 import game.model.entity.enemy.IEnemy;
@@ -19,6 +20,10 @@ public class Game implements IGame {
 
     private final List<ILevel> levels;
     private ILevel currentLevel;
+
+    private final List<IAbilityAction> activeAbilityActions;
+    private final List<Double> activationTimes;
+
     private int score;
 
 
@@ -26,12 +31,13 @@ public class Game implements IGame {
         this.levels = levels;
         this.currentLevel = levels.get(0);
         this.score = 0;
+
+        this.activeAbilityActions = new ArrayList<>();
+        this.activationTimes = new ArrayList<>();
     }
 
     public Game() {
-        this.levels = dummyLevels();
-        this.currentLevel = levels.get(0);
-        this.score = 0;
+        this(dummyLevels());
     }
 
     public static List<ILevel> dummyLevels() {
@@ -125,6 +131,11 @@ public class Game implements IGame {
     @Override
     public List<ILevel> getLevels() {
         return levels;
+    }
+
+    @Override
+    public List<IAbilityAction> activeAbilityActions() {
+        return activeAbilityActions;
     }
 
     @Override

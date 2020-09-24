@@ -6,10 +6,8 @@ import game.util.Utils;
 import javafx.geometry.Point2D;
 
 public class SeekingBehaviour implements IMovementBehaviour {
-
-
     @Override
-    public boolean apply(MovableEntity subject, IEntity object) {
+    public boolean apply(MovableEntity<?> subject, IEntity<?> object) {
         Point2D direction = object.getPosition().subtract(subject.getPosition());
         Point2D force = Utils.setMagnitude(direction, subject.getMaxForce());
         subject.addForce(force);
