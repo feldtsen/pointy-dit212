@@ -1,11 +1,10 @@
 package game.view;
 
-import game.model.shape2d.ICircle;
-import game.model.shape2d.IRectangle;
-import game.model.shape2d.Rectangle;
+import game.model.shape2d.*;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Rotate;
 
 public class RendererUtils {
     public static void clear(GraphicsContext graphicsContext) {
@@ -48,6 +47,21 @@ public class RendererUtils {
                 rectangle.getWidth(),
                 rectangle.getHeight()
         );
+    }
+
+    // TODO: refactor this into rectangle
+    public static void translate(GraphicsContext graphicsContext, IRectangle rectangle) {
+        double rotationCenterX = (rectangle.getWidth()) / 2;
+        double rotationCenterY = (rectangle.getHeight()) / 2;
+
+        graphicsContext.save();
+        graphicsContext.translate(rotationCenterX + 400, rotationCenterY + 400);
+        graphicsContext.rotate(rectangle.getRotation());
+        graphicsContext.translate(-rotationCenterX - 400, -rotationCenterY - 400);
+
+        graphicsContext.fillRect(400, 400, rectangle.getWidth(), rectangle.getHeight());
+        graphicsContext.restore();
+
     }
 
 }

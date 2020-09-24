@@ -14,7 +14,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 
 public class GameWindowController implements Initializable {
 
@@ -29,9 +28,6 @@ public class GameWindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.setFill(Color.rgb(30, 30, 30));
-        gc.fillRect(0, 0, 1200, 800);
         startGame();
         gameLoop.start();
     }
