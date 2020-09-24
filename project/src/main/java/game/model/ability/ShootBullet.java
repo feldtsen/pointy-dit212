@@ -28,11 +28,16 @@ public class ShootBullet extends Ability {
             @Override
             // Adds a bullet with the given radius, maxForce, maxSpeed, damage to the given ILevels list of
             // projectiles. The bullet is fired from the position of the user and fired towards the position of the
-            // user.
+            // target.
             public void apply(ILevel level, double timePassed) {
-                Point2D bulletVelocity = user.getPosition().subtract(target.getPosition());
+                // Gets velocity by subtracting targets position from user and limiting to maxSpeed.
+                Point2D bulletVelocity = target.getPosition().subtract(user.getPosition());
                 bulletVelocity = Utils.limit(bulletVelocity, maxSpeed);
+
+                // Create new bullet
                 Projectile bullet = new Bullet(user.getPosition(), bulletRadius, maxForce, maxSpeed, damage, bulletVelocity);
+
+                // Get list of projectiles and add new bullet.
                 List<IProjectile<?>> projectiles = level.getProjectiles();
                 projectiles.add(bullet);
             }
