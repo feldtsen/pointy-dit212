@@ -17,9 +17,16 @@ import java.util.List;
 
 public class Game implements IGame {
 
-    public final List<ILevel> levels;
-    public ILevel currentLevel;
-    public int score;
+    private final List<ILevel> levels;
+    private ILevel currentLevel;
+    private int score;
+
+
+    public Game(List<ILevel> levels) {
+        this.levels = levels;
+        this.currentLevel = levels.get(0);
+        this.score = 0;
+    }
 
     public Game() {
         this.levels = dummyLevels();
@@ -33,7 +40,7 @@ public class Game implements IGame {
         player.setFriction(3);
 
         List<Enemy> enemies = new ArrayList<>();
-        Enemy e1 = EntityFactory.basicEnemy(500, 650, player);
+        Enemy e1 = EntityFactory.basicEnemy(500, 650, player, 0);
         e1.setFriction(3);
         enemies.add(e1);
 

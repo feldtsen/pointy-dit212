@@ -7,8 +7,8 @@ import javafx.scene.layout.StackPane;
 import java.util.*;
 import java.util.concurrent.ConcurrentSkipListSet;
 
-public  class UserInputController {
-    private static UserInputController INSTANCE = null;
+public  class KeyboardInputHandler {
+    private static KeyboardInputHandler INSTANCE = null;
 
     public interface Action {
         void apply();
@@ -18,10 +18,10 @@ public  class UserInputController {
     private final Map<KeyCode, List<Action>> actions;
 
     public static void init(StackPane gamePane) {
-        INSTANCE = new UserInputController(gamePane);
+        INSTANCE = new KeyboardInputHandler(gamePane);
     }
 
-    private UserInputController(StackPane gamePane) {
+    private KeyboardInputHandler(StackPane gamePane) {
         pressedKeys = new ConcurrentSkipListSet<>();
         actions = new HashMap<>();
         gamePane.setOnKeyPressed(this::register);
@@ -47,7 +47,7 @@ public  class UserInputController {
         list.add(action);
     }
 
-    public static void update() {
+    public static void applyRegisteredActions() {
         for(KeyCode c : INSTANCE.pressedKeys) {
             List<Action> l = INSTANCE.actions.get(c);
             if(l == null) continue;
