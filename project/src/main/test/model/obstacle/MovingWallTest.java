@@ -5,7 +5,8 @@ import game.model.entity.obstacle.MovingWall;
 import javafx.geometry.Point2D;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertFalse;
+
+import static org.junit.Assert.*;
 
 
 public class MovingWallTest {
@@ -18,17 +19,19 @@ public class MovingWallTest {
     public void setup() {
         wallX =  new MovingWall(new Point2D(200,500), new Point2D(800,500), 2,2, 50, 20);
         wallY =  new MovingWall(new Point2D(500,200), new Point2D(500,800), 2,2, 20, 50);
-
     }
 
     @Test
-    public void testMovement() {
+    public void testMovementX() {
 
         boolean b = false;
-        //Test x
+
         double xStart = wallX.getPosition().getX();
+        double yStart = wallX.getPosition().getY();
+
         wallX.update(1,1);
-        assertFalse(xStart == wallX.getPosition().getX());
+        assertNotEquals(xStart, wallX.getPosition().getX(), 0.0);
+        assert(yStart == wallX.getPosition().getY());
 
         while(true) {
             wallX.update(1,1);
@@ -38,6 +41,7 @@ public class MovingWallTest {
             }
         }
         assert(b);
+        assert(yStart == wallX.getPosition().getY());
 
         b = false;
         while(true) {
@@ -48,11 +52,23 @@ public class MovingWallTest {
             }
         }
         assert(b);
+        assert(yStart == wallX.getPosition().getY());
 
-        //Test y
-        double yStart = wallX.getPosition().getX();
+
+
+    }
+    @Test
+    public void testMovementY() {
+
+        boolean b = false;
+
+        double xStart = wallY.getPosition().getX();
+        double yStart = wallY.getPosition().getY();
+
         wallY.update(1,1);
-        assertFalse(yStart == wallY.getPosition().getY());
+        assertNotEquals(yStart, wallY.getPosition().getY(), 0.0);
+        assert(xStart == wallY.getPosition().getX());
+
 
         b = false;
         while(true) {
@@ -63,6 +79,7 @@ public class MovingWallTest {
             }
         }
         assert(b);
+        assert(xStart == wallY.getPosition().getX());
 
         b = false;
         while(true) {
@@ -73,6 +90,6 @@ public class MovingWallTest {
             }
         }
         assert(b);
-
+        assert(xStart == wallY.getPosition().getX());
     }
 }

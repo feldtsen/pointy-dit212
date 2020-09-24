@@ -1,8 +1,6 @@
 package game.view;
 
-import game.model.shape2d.ICircle;
-import game.model.shape2d.IRectangle;
-import game.model.shape2d.Rectangle;
+import game.model.shape2d.*;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -40,14 +38,23 @@ public class RendererUtils {
         );
     }
 
-    public static void drawShape(GraphicsContext graphicsContext, Color color, IRectangle rectangle, Point2D position) {
+    public static void drawShape(GraphicsContext graphicsContext, Color color, IRotatableShape shape, Point2D position) {
+        double rotationCenterX = (shape.getWidth()) / 2;
+        double rotationCenterY = (shape.getHeight()) / 2;
+
         graphicsContext.setFill(color);
-        graphicsContext.fillRect(
-                position.getX(),
-                position.getY(),
-                rectangle.getWidth(),
-                rectangle.getHeight()
-        );
+
+        graphicsContext.save();
+        graphicsContext.translate(rotationCenterX + position.getX(), rotationCenterY + position.getY());
+        graphicsContext.rotate(shape.getRotation());
+        graphicsContext.translate(-rotationCenterX - position.getX(), -rotationCenterY - position.getY());
+
+        graphicsContext.fillRect(position.getX(), position.getY(), shape.getWidth(), shape.getHeight());
+        graphicsContext.restore();
+
+
+        shape.setRotation(shape.getRotation()+1);
+
     }
 
 }
