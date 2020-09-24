@@ -8,7 +8,7 @@ import game.model.shape2d.Circle;
 import game.model.shape2d.ICircle;
 import javafx.geometry.Point2D;
 
-public class Enemy extends LivingEntity<ICircle> implements IEnemy<ICircle> {
+public class Enemy extends LivingEntity<ICircle> implements IEnemy {
 
     private IEntity<?> target;
     private IMovementBehaviour movementBehaviour;

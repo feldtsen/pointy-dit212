@@ -1,8 +1,9 @@
 package game.model.ability;
 
 
-public interface IAbility {
+import game.model.ability.action.IAbilityAction;
 
-    boolean use();
+public interface IAbility {
+    IAbilityAction use();
     long getCooldown();
 }
