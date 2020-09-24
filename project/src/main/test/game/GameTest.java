@@ -1,12 +1,21 @@
 package game;
 
 import game.model.Game;
+import game.model.entity.enemy.Enemy;
 import game.model.entity.movable.MovableEntity;
+import game.model.entity.player.Player;
+import game.model.level.ILevel;
+import game.model.level.Level;
 import game.model.shape2d.Circle;
 import game.model.shape2d.ICircle;
+import game.services.EntityFactory;
 import javafx.geometry.Point2D;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class GameTest {
@@ -41,12 +50,70 @@ public class GameTest {
 
     @Test
     public void limitToBoundsLimitBottomCorner() {
-        MovableEntity<ICircle> entity = makeEntity(new Point2D(game.currentLevel.getWidth(), game.currentLevel.getHeight()), 10);
+        MovableEntity<ICircle> entity = makeEntity(new Point2D(game.getCurrentLevel().getWidth(), game.getCurrentLevel().getHeight()), 10);
         game.containToBounds(entity);
 
-        Point2D expected = new Point2D(game.currentLevel.getWidth() - 10, game.currentLevel.getHeight() - 10);
+        Point2D expected = new Point2D(game.getCurrentLevel().getWidth() - 10, game.getCurrentLevel().getHeight() - 10);
         assertEquals(expected, entity.getPosition());
     }
 
+    @Test
+    public void testUpdatePlayerLessStrength(){
+        Player player = EntityFactory.basicPlayer(500, 500);
+
+        List<Enemy> enemies= new ArrayList<>();
+        Enemy e1 = EntityFactory.basicEnemy(500,500, player,5);
+        enemies.add(e1);
+
+        ILevel level = new Level(enemies, null, null, player, 1200, 800);
+        List<ILevel> levels = new ArrayList<>();
+        levels.add(level);
+
+        Game game = new Game(levels);
+
+        game.update(1/60, 1);
+
+        assertEquals(0, player.getHitPoints() );
+
+    }
+    @Test
+    public void testUpdatePlayerSameStrength(){
+        Player player = EntityFactory.basicPlayer(500, 500);
+
+        List<Enemy> enemies= new ArrayList<>();
+        Enemy e1 = EntityFactory.basicEnemy(500,500, player,0);
+        enemies.add(e1);
+
+        ILevel level = new Level(enemies, null, null, player, 1200, 800);
+        List<ILevel> levels = new ArrayList<>();
+        levels.add(level);
+
+        Game game = new Game(levels);
+
+        game.update(1/60, 1);
+
+        assertEquals(1, player.getHitPoints() );
+
+    }
+
+    @Test
+    public void testUpdatePlayerMoreStrength(){
+        Player player = EntityFactory.basicPlayer(500, 500);
+
+        List<Enemy> enemies= new ArrayList<>();
+        Enemy e1 = EntityFactory.basicEnemy(500,500, player,-2);
+        enemies.add(e1);
+
+        ILevel level = new Level(enemies, null, null, player, 1200, 800);
+        List<ILevel> levels = new ArrayList<>();
+        levels.add(level);
+
+        Game game = new Game(levels);
+
+        game.update(1/60, 1);
+
+        assertEquals(1, player.getHitPoints() );
+
+    }
 
 }
