@@ -3,7 +3,7 @@ package game.model.gameLoop;
 import javafx.animation.AnimationTimer;
 
 public abstract class GameLoop implements IGameLoop {
-    private final static long SECOND = 1_000_000_000;
+    public final static long SECOND = 1_000_000_000;
 
     /* Fields used for managing the game loop. */
     private final long nanosPerFrame;   /* The number of nano seconds per frame at desired FPS */
