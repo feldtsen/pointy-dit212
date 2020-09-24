@@ -53,6 +53,10 @@ public class Game implements IGame {
         e1.setFriction(3);
         enemies.add(e1);
 
+        Enemy e2 = EntityFactory.basicEnemy(900, 850, player, 5);
+        e2.setFriction(3);
+        enemies.add(e2);
+
         List<IProjectile<?>> projectiles = new ArrayList<>();
 
         List<IObstacle> obstacles = new ArrayList<>();
@@ -96,7 +100,6 @@ public class Game implements IGame {
 
         // Update all enemies
         for (Enemy enemy : currentLevel.getEnemies()) {
-            enemy = currentLevel.getEnemies().get(0);
             enemy.update(delta, timeStep);
             containToBounds(enemy);
 
