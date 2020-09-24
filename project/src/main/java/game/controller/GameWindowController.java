@@ -1,17 +1,12 @@
 package game.controller;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import game.model.Game;
 import game.model.gameLoop.GameLoop;
 import game.model.gameLoop.IGameLoop;
-import game.model.entity.enemy.Enemy;
-import game.model.entity.player.Player;
 import game.view.Renderer;
-import game.view.RendererUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -23,26 +18,22 @@ import javafx.scene.paint.Color;
 
 public class GameWindowController implements Initializable {
 
+    private IGameLoop gameLoop;
+
     @FXML
     private StackPane gamePane;
 
     @FXML
     private Canvas canvas;
 
-    private IGameLoop gameLoop;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.rgb(30, 30, 30));
         gc.fillRect(0, 0, 1200, 800);
-        try {
-            startGame();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        startGame();
         gameLoop.start();
-
     }
 
     @FXML
@@ -68,28 +59,29 @@ public class GameWindowController implements Initializable {
         gamePane.lookup("#menuContainer").toFront();
     }
 
-    private void startGame() throws IOException {
+    private void startGame() {
         Game game = new Game();
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
-
         Renderer renderer = new Renderer(graphicsContext);
 
-        UserInputController.init(gamePane);
-        UserInputController.registerAction(KeyCode.W, game.getCurrentLevel().getPlayer()::moveUp);
-        UserInputController.registerAction(KeyCode.A, game.getCurrentLevel().getPlayer()::moveLeft);
-        UserInputController.registerAction(KeyCode.S, game.getCurrentLevel().getPlayer()::moveDown);
-        UserInputController.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
-        UserInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
+        // Give key codes registered by the game pane a given action
+        KeyboardInputHandler.init(gamePane);
+        KeyboardInputHandler.registerAction(KeyCode.W, game.getCurrentLevel().getPlayer()::moveUp);
+        KeyboardInputHandler.registerAction(KeyCode.A, game.getCurrentLevel().getPlayer()::moveLeft);
+        KeyboardInputHandler.registerAction(KeyCode.S, game.getCurrentLevel().getPlayer()::moveDown);
+        KeyboardInputHandler.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
+        KeyboardInputHandler.registerAction(KeyCode.ESCAPE, this::pauseGame);
 
+        // Gets called every frame
         gameLoop = new GameLoop(1000) {
             @Override
             public void update(double delta) {
                 renderer.draw(game.getCurrentLevel());
 
-                UserInputController.update();
+                KeyboardInputHandler.applyRegisteredActions();
+
                 game.update(delta, 1);
             }
         };
-        gameLoop.start();
     }
 }
