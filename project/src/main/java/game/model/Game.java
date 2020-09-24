@@ -45,7 +45,7 @@ public class Game implements IGame {
 
     public static List<ILevel> dummyLevels() {
 
-        Player player = EntityFactory.basicPlayer(375, 200);
+        Player player = EntityFactory.strongPlayer(375, 200);
         player.setFriction(3);
 
         List<Enemy> enemies = new ArrayList<>();
@@ -131,6 +131,10 @@ public class Game implements IGame {
                 // If enemy is stronger than player, player dies :(
                 if (player.getStrength() < e1.getStrength()){
                     player.setHitPoints(0);
+                }
+                else {
+                    e1.setHitPoints(0);
+                    currentLevel.removeEnemy(e1);
                 }
             }
         }
