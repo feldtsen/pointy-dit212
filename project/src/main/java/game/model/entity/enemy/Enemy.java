@@ -49,8 +49,9 @@ public class Enemy extends LivingEntity<ICircle> implements IEnemy {
     }
 
     @Override
-    public IAbilityAction applyAbility(ILevel level, double time) {
-        return abilityBehaviour.apply(level, time);
+    public IAbilityAction applyAbility(ILevel level) {
+        if(abilityBehaviour == null) return null;
+        return abilityBehaviour.apply(level);
     }
 
     @Override

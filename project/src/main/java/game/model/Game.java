@@ -6,6 +6,7 @@ import game.model.entity.enemy.Enemy;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.movable.MovableEntity;
 import game.model.entity.player.IPlayer;
+import game.model.gameLoop.GameLoop;
 import game.model.level.ILevel;
 import game.model.level.Level;
 import game.model.entity.player.Player;
@@ -69,15 +70,46 @@ public class Game implements IGame {
 
     @Override
     public void update(double delta, double timestep) {
+        // Nanos passed since last update
+        long now = System.nanoTime();
+
+        // Remove finished ability actions
+        // Iterate backwards to avoid problems with removing entries from list
+        for(int i = activeAbilityActions.size() - 1;  i >= 0; i--) {
+            IAbilityAction abilityAction = activeAbilityActions.get(i);
+            long activationTime = activationTimes.get(i);
+            if(now - activationTime > abilityAction.getDuration() * GameLoop.SECOND) {
+                deactivateAbility(i);
+            }
+        }
+
+        // Update player
         Player player = currentLevel.getPlayer();
         player.update(delta, timestep);
         containToBounds(player);
 
+        // Update all enemies
         for (Enemy enemy : currentLevel.getEnemies()) {
             enemy = currentLevel.getEnemies().get(0);
             enemy.update(delta, timestep);
             containToBounds(enemy);
+
+            // Activate enemy abilities
+            IAbilityAction abilityAction = enemy.applyAbility(currentLevel);
+            if(abilityAction != null) {
+                activeAbilityActions.add(abilityAction);
+                activationTimes.add(now);
+            }
         }
+
+        // Apply active abilities
+        for(int i = 0; i < activeAbilityActions.size(); i++) {
+            IAbilityAction abilityAction = activeAbilityActions.get(i);
+            long activationTime = activationTimes.get(i);
+            abilityAction.apply(currentLevel, (double)(now - activationTime) / GameLoop.SECOND);
+        }
+
+        // Check collision between players and enemies, and enemies and other enemies
         for (int i = 0; i < currentLevel.getEnemies().size(); i++) {
             Enemy e1 = currentLevel.getEnemies().get(i);
             for (int j = i+1; j < currentLevel.getEnemies().size(); j++ ){
@@ -88,22 +120,26 @@ public class Game implements IGame {
                 }
             }
 
+            // Check player-enemy collision
             if (player.checkCollision(e1)){
+                // If enemy is stronger than player, player dies :(
                 if (player.getStrength() < e1.getStrength()){
                     player.setHitPoints(0);
                 }
             }
         }
 
+
     }
 
+    // Makes sure an entity does not leave the map bounds
     public void containToBounds(MovableEntity<ICircle> entity) {
         double width = currentLevel.getWidth();
         double height = currentLevel.getHeight();
 
         Point2D v = entity.getVelocity();
         Point2D p = entity.getPosition();
-        double r = entity.getShape().getRadius(); //TODO: hard coded for circles right now
+        double r = entity.getShape().getRadius();
 
         if(p.getX() - r < 0) {
             p = new Point2D(r, p.getY());
