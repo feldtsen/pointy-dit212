@@ -35,7 +35,7 @@ public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> imple
     @Override
     public void update(double delta, double timestep) {
         /* Limit the acceleration to maxForce, and multiply with the delta time value */
-        setAcceleration(Utils.limit(acceleration, maxForce).multiply(delta * timestep));
+        setAcceleration(acceleration.multiply(delta * timestep));
 
         /* Add acceleration to velocity */
         setVelocity(velocity.add(acceleration));
@@ -45,7 +45,7 @@ public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> imple
         setVelocity(Utils.limit(velocity.add(velocity.multiply(-friction * delta * timestep)), maxSpeed));
 
         /* Add velocity to position */
-        setPosition(position.add(velocity.multiply(delta * timestep)));
+        move(velocity.multiply(delta * timestep));
 
         /* Reset acceleration */
         setAcceleration(new Point2D(0, 0));
@@ -58,7 +58,7 @@ public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> imple
 
     @Override
     public void addForce(Point2D force) {
-        acceleration = acceleration.add(force);
+        acceleration = acceleration.add(Utils.limit(force, maxForce));
     }
 
     @Override

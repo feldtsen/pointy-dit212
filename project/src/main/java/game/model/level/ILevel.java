@@ -14,7 +14,7 @@ import java.util.List;
 public interface ILevel {
     List<Enemy> getEnemies();
     List<IProjectile<?>> getProjectiles();
-    List<IObstacle<?>> getObstacles();
+    List<IObstacle> getObstacles();
     Player getPlayer();
     double getWidth();
     double getHeight();
