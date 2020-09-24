@@ -1,11 +1,14 @@
 package game.model.ability;
 
-public abstract class Ability implements IAbility{
+import game.model.ability.action.IAbilityAction;
 
-    private long cooldown;
+public abstract class Ability implements IAbility{
+    private final IAbilityAction action;
+    private final long cooldown;
     private long lastUsed;
 
-    public Ability(long cooldown) {
+    public Ability(long cooldown, IAbilityAction action) {
+        this.action = action;
         this.cooldown = cooldown;
         this.lastUsed = 0;
     }
@@ -13,18 +16,14 @@ public abstract class Ability implements IAbility{
     @Override
     public long getCooldown(){return cooldown;}
 
-    public boolean use(){
+    public IAbilityAction use(){
         long currentTime = System.nanoTime();
         if (currentTime - lastUsed >= cooldown){
             lastUsed = currentTime;
-            activate();
-            return true;
+            return action;
         }
-        return false;
+        return null;
     }
-
-    protected abstract void activate();
-
 }
 
 
