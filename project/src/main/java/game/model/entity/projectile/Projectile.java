@@ -7,19 +7,19 @@ import javafx.geometry.Point2D;
 import javafx.scene.effect.Light;
 
 public abstract class Projectile<T extends IShape2D> extends MovableEntity<T> implements IProjectile<T> {
-    private final int damage;
+    private final double strength;
     private boolean isDestroyed;
 
 
-    public Projectile(Point2D position, double maxForce, double maxSpeed, int damage, Point2D velocity, T shape) {
+    public Projectile(Point2D position, double maxForce, double maxSpeed, double strength, Point2D velocity, T shape) {
         super(position, velocity, maxForce, maxSpeed, shape);
-        this.damage = damage;
+        this.strength = strength;
         this.isDestroyed = false;
     }
 
     @Override
-    public int getDamage() {
-        return damage;
+    public double getStrength() {
+        return strength;
     }
 
     @Override
