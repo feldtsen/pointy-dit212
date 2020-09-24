@@ -22,7 +22,7 @@ public class Game implements IGame {
     private ILevel currentLevel;
 
     private final List<IAbilityAction> activeAbilityActions;
-    private final List<Double> activationTimes;
+    private final List<Long> activationTimes;
 
     private int score;
 
@@ -54,6 +54,17 @@ public class Game implements IGame {
         List<ILevel> levels = new ArrayList<ILevel>();
         levels.add(level);
         return levels;
+    }
+
+    private void activateAbility(IAbilityAction action) {
+        Long now = System.nanoTime();
+        activeAbilityActions.add(action);
+        activationTimes.add(now);
+    }
+
+    private void deactivateAbility(int index) {
+        activeAbilityActions.remove(index);
+        activationTimes.remove(index);
     }
 
     @Override
