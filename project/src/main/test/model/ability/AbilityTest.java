@@ -11,11 +11,6 @@ public class AbilityTest {
     private IAbilityAction getAction() {
         return new IAbilityAction() {
             @Override
-            public double getRadius() {
-                return 0;
-            }
-
-            @Override
             public double getDuration() {
                 return 0;
             }
