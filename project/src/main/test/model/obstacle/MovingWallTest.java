@@ -5,6 +5,8 @@ import game.model.entity.obstacle.MovingWall;
 import javafx.geometry.Point2D;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertFalse;
+
 
 public class MovingWallTest {
 
@@ -25,6 +27,8 @@ public class MovingWallTest {
         boolean b = false;
         //Test x
         double xStart = wallX.getPosition().getX();
+        wallX.update(1,1);
+        assertFalse(xStart == wallX.getPosition().getX());
 
         while(true) {
             wallX.update(1,1);
@@ -47,6 +51,8 @@ public class MovingWallTest {
 
         //Test y
         double yStart = wallX.getPosition().getX();
+        wallY.update(1,1);
+        assertFalse(yStart == wallY.getPosition().getY());
 
         b = false;
         while(true) {

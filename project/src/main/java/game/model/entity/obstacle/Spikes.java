@@ -1,20 +1,22 @@
 package game.model.entity.obstacle;
 
 import game.model.entity.Entity;
+import game.model.entity.IKillOnTouch;
 import game.model.shape2d.Rectangle;
 import javafx.geometry.Point2D;
 
-public class Spikes extends Entity<Rectangle> implements IObstacle {
+public class Spikes extends Entity<Rectangle> implements IObstacle, IKillOnTouch {
 
-    private final double damage;
+    private final double strength;
 
-    public Spikes(Point2D position, double width, double height, double damage) {
+    public Spikes(Point2D position, double width, double height, double strength) {
         super(position, new Rectangle(width, height,0));
-        this.damage = damage;
+        this.strength = strength;
     }
 
-    public double getDamage() {
-        return damage;
+    @Override
+    public double getStrength() {
+        return strength;
     }
 
     @Override

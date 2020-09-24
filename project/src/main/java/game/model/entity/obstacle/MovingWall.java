@@ -16,7 +16,6 @@ public class MovingWall extends MovableEntity<Rectangle> implements IObstacle {
         this.startPosition = startPosition;
         this.endPosition = endPosition;
 
-
     }
 
     @Override
