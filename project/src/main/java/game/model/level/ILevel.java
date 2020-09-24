@@ -19,4 +19,8 @@ public interface ILevel {
     double getWidth();
     double getHeight();
 
+    void removeEnemy(Enemy e);
+    void removeObstacle(IObstacle o);
+    void removeProjectile(IProjectile<?> p);
+
 }

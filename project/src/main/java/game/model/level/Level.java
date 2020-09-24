@@ -60,5 +60,22 @@ public class Level implements ILevel {
         return this.height;
     }
 
+    @Override
+    public void removeEnemy(Enemy e) {
+        enemies.remove(e);
+    }
+
+    @Override
+    public void removeObstacle(IObstacle o) {
+        obstacles.remove(o);
+
+    }
+
+    @Override
+    public void removeProjectile(IProjectile<?> p) {
+        projectiles.remove(p);
+
+    }
+
 
 }
