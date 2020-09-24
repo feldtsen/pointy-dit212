@@ -3,6 +3,7 @@ package game.model.entity.enemy;
 import game.model.behavior.ability.IAbilityBehaviour;
 import game.model.behavior.movement.IMovementBehaviour;
 import game.model.entity.IEntity;
+import game.model.entity.IStrength;
 import game.model.entity.movable.LivingEntity;
 import game.model.shape2d.Circle;
 import game.model.shape2d.ICircle;
@@ -14,8 +15,9 @@ public class Enemy extends LivingEntity<ICircle> implements IEnemy {
     private IMovementBehaviour movementBehaviour;
     private IAbilityBehaviour abilityBehaviour;
 
-    public Enemy(Point2D position, double radius, double maxForce, double maxSpeed, int hitPoints, IAbilityBehaviour abilityBehaviour, IMovementBehaviour movementBehaviour, IEntity<?> target){
+    public Enemy(Point2D position, double radius, double maxForce, double maxSpeed, int hitPoints, double strength, IAbilityBehaviour abilityBehaviour, IMovementBehaviour movementBehaviour, IEntity<?> target){
         this(position, radius, maxForce, maxSpeed, hitPoints, abilityBehaviour, movementBehaviour, target,0);
+
     }
 
     public Enemy(Point2D position, double radius, double maxForce, double maxSpeed, int hitPoints, IAbilityBehaviour abilityBehaviour, IMovementBehaviour movementBehaviour, IEntity<?> target, int strength) {
@@ -49,4 +51,5 @@ public class Enemy extends LivingEntity<ICircle> implements IEnemy {
         super.update(delta, timestep);
         movementBehaviour.apply(this, target);
     }
+
 }
