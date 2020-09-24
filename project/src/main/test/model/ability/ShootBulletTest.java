@@ -30,6 +30,7 @@ public class ShootBulletTest {
     Enemy user;
     Enemy target;
     ILevel level;
+    double bulletSpeed = 5;
     IAbilityBehaviour abilityBehaviour;
 
     //Create AbilityBehaviour with dummy apply method
@@ -53,7 +54,7 @@ public class ShootBulletTest {
         user = new Enemy(new Point2D(0, 0), 1, 3, 3, 3,3,  abilityBehaviour, null, target);
 
         List<IAbility> abilities = new ArrayList<>();
-        abilities.add(0, new ShootBullet(user, target, 3, 0.1, 5, 5, 1));
+        abilities.add(0, new ShootBullet(user, target, 3, 0.1, 5, bulletSpeed, 1));
         abilityBehaviour.setAbilities(abilities);
 
         // Create new level with list for projectiles
@@ -69,16 +70,14 @@ public class ShootBulletTest {
         assertTrue(level.getProjectiles().size() == 1);
     }
 
-    /*
     @Test
     public void testBulletVelocity() {
         init();
         shoot();
-        <?> bullet = level.getProjectiles().get(0).;
-        assertTrue(bullet.getVelocity());
+        IProjectile<?> bullet = level.getProjectiles().get(0);
+        System.out.println(bullet.getVelocity().magnitude());
+        assertTrue(bullet.getVelocity().magnitude() == bulletSpeed);
     }
-    
-     */
 
     private void shoot() {
         IAbilityAction abilityAction = abilityBehaviour.apply(level);
