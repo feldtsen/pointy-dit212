@@ -40,7 +40,7 @@ public class Game implements IGame {
         player.setFriction(3);
 
         List<Enemy> enemies = new ArrayList<>();
-        Enemy e1 = EntityFactory.basicEnemy(500, 650, player, 0);
+        Enemy e1 = EntityFactory.basicEnemy(500, 650, player, 5);
         e1.setFriction(3);
         enemies.add(e1);
 
