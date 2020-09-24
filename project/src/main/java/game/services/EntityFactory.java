@@ -15,7 +15,7 @@ public class EntityFactory {
         return new Player(new Point2D(x, y), 30, 2500, 1000);
     }
 
-    public static Enemy basicEnemy(double x, double y, IEntity target) {
-        return new Enemy(new Point2D(x,y), 50, 1000, 1000, 1,null, new SeekingBehaviour(), target);
+    public static Enemy basicEnemy(double x, double y, IEntity target, int strength) {
+        return new Enemy(new Point2D(x,y), 50, 1000, 1000, 1,null, new SeekingBehaviour(), target, strength);
     }
 }
