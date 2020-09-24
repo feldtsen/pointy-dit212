@@ -1,10 +1,10 @@
 package game.model.entity;
 
-public interface IKillOnTouch {
+public interface IStrength {
 
     double getStrength();
 
-    default boolean isStrongerThan(IKillOnTouch other) {
+    default boolean isStrongerThan(IStrength other) {
         return this.getStrength() > other.getStrength();
     }
 

@@ -1,8 +1,9 @@
 package game.model;
 
-public interface ILiving {
+import game.model.entity.IStrength;
+
+public interface ILiving extends IStrength {
     int getHitPoints();
     void setHitPoints(int hitPoints);
     boolean isAlive();
-    int getStrength();
 }
