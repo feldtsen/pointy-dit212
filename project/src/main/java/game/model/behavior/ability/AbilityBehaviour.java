@@ -5,9 +5,15 @@ import game.model.ability.IAbility;
 import java.util.List;
 
 public abstract class AbilityBehaviour implements IAbilityBehaviour {
-    private final List<IAbility> abilities;
+    private List<IAbility> abilities;
 
     public AbilityBehaviour(List<IAbility> abilities) {
+        this.abilities = abilities;
+    }
+
+    public AbilityBehaviour() {}
+
+    public void setAbilities(List<IAbility> abilities) {
         this.abilities = abilities;
     }
 
