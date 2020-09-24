@@ -15,5 +15,5 @@ public interface IEnemy extends IEntity<ICircle>, ILiving, IMovable {
     void setAbilityBehaviour(IAbilityBehaviour abilityBehaviour);
     boolean setTarget(IEntity<?> target);
 
-    IAbilityAction applyAbility(ILevel level, double time);
+    IAbilityAction applyAbility(ILevel level);
 }

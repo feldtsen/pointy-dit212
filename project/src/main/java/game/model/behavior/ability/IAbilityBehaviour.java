@@ -7,5 +7,5 @@ import game.model.entity.movable.MovableEntity;
 import game.model.level.ILevel;
 
 public interface IAbilityBehaviour extends IBehaviour {
-    IAbilityAction apply(ILevel level, double time);
+    IAbilityAction apply(ILevel level);
 }

@@ -71,7 +71,17 @@ public class Game implements IGame {
     @Override
     public void update(double delta, double timestep) {
         // Nanos passed since last update
-        long nanos = (long) (delta * GameLoop.SECOND);
+        long now = System.nanoTime();
+
+        // Remove finished ability actions
+        // Iterate backwards to avoid problems with removing entries from list
+        for(int i = activeAbilityActions.size() - 1;  i >= 0; i--) {
+            IAbilityAction abilityAction = activeAbilityActions.get(i);
+            long activationTime = activationTimes.get(i);
+            if(now - activationTime > abilityAction.getDuration() * GameLoop.SECOND) {
+                deactivateAbility(i);
+            }
+        }
 
         // Update player
         Player player = currentLevel.getPlayer();
@@ -83,6 +93,20 @@ public class Game implements IGame {
             enemy = currentLevel.getEnemies().get(0);
             enemy.update(delta, timestep);
             containToBounds(enemy);
+
+            // Activate enemy abilities
+            IAbilityAction abilityAction = enemy.applyAbility(currentLevel);
+            if(abilityAction != null) {
+                activeAbilityActions.add(abilityAction);
+                activationTimes.add(now);
+            }
+        }
+
+        // Apply active abilities
+        for(int i = 0; i < activeAbilityActions.size(); i++) {
+            IAbilityAction abilityAction = activeAbilityActions.get(i);
+            long activationTime = activationTimes.get(i);
+            abilityAction.apply(currentLevel, (double)(now - activationTime) / GameLoop.SECOND);
         }
 
         // Check collision between players and enemies, and enemies and other enemies
@@ -104,6 +128,7 @@ public class Game implements IGame {
                 }
             }
         }
+
 
     }
 
