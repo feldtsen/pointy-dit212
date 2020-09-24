@@ -18,11 +18,6 @@ public class ShootBullet extends Ability {
     public ShootBullet(Entity<Circle> user, LivingEntity<Circle> target, long cooldown, double bulletRadius, double maxForce, double maxSpeed, int damage) {
         super(cooldown, new IAbilityAction() {
             @Override
-            public double getRadius() {
-                return bulletRadius;
-            }
-
-            @Override
             public double getDuration() {
                 return -1; // No duration
             }
