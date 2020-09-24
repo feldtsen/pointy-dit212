@@ -1,5 +1,5 @@
 package game.model;
 
 public interface IUpdatable {
-    void update(double delta, double timestep);
+    void update(double delta, double timeStep);
 }

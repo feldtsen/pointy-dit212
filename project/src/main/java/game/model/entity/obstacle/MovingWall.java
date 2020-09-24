@@ -19,7 +19,7 @@ public class MovingWall extends MovableEntity<Rectangle> implements IObstacle {
     }
 
     @Override
-    public void update(double delta, double timestep) {
+    public void update(double delta, double timeStep) {
         //TODO: Fix so that obstacle can start at either extreme position without changing direction of velocity
         if (startPosition.subtract(getPosition()).getX() >= 0 || endPosition.subtract(getPosition()).getX() <= 0) {
             setVelocity(new Point2D(getVelocity().getX() * -1, getVelocity().getY()));
@@ -27,6 +27,6 @@ public class MovingWall extends MovableEntity<Rectangle> implements IObstacle {
         if (startPosition.subtract(getPosition()).getY() >= 0 || endPosition.subtract(getPosition()).getY() <= 0) {
             setVelocity(new Point2D(getVelocity().getX(), getVelocity().getY() * -1));
         }
-        super.update(delta, timestep);
+        super.update(delta, timeStep);
     }
 }

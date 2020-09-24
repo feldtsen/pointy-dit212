@@ -20,7 +20,7 @@ public class Spikes extends Entity<Rectangle> implements IObstacle, IStrength {
     }
 
     @Override
-    public void update(double delta, double timestep) {
+    public void update(double delta, double timeStep) {
 
     }
 }

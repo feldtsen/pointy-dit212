@@ -29,7 +29,7 @@ public class Missile extends Projectile<ICircle> {
 
     //TODO: Use this to implement missile homing
     @Override
-    public void update(double delta, double timestep) {
-        super.update(delta, timestep);
+    public void update(double delta, double timeStep) {
+        super.update(delta, timeStep);
     }
 }

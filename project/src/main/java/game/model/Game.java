@@ -5,7 +5,9 @@ import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.movable.MovableEntity;
+import game.model.entity.obstacle.IObstacle;
 import game.model.entity.player.IPlayer;
+import game.model.entity.projectile.IProjectile;
 import game.model.gameLoop.GameLoop;
 import game.model.level.ILevel;
 import game.model.level.Level;
@@ -51,8 +53,12 @@ public class Game implements IGame {
         e1.setFriction(3);
         enemies.add(e1);
 
-        ILevel level = new Level(enemies, null, null, player, 1200, 800);
-        List<ILevel> levels = new ArrayList<ILevel>();
+        List<IProjectile<?>> projectiles = new ArrayList<>();
+
+        List<IObstacle> obstacles = new ArrayList<>();
+
+        ILevel level = new Level(enemies, projectiles, obstacles, player, 1200, 800);
+        List<ILevel> levels = new ArrayList<>();
         levels.add(level);
         return levels;
     }
@@ -69,7 +75,7 @@ public class Game implements IGame {
     }
 
     @Override
-    public void update(double delta, double timestep) {
+    public void update(double delta, double timeStep) {
         // Nanos passed since last update
         long now = System.nanoTime();
 
@@ -85,13 +91,13 @@ public class Game implements IGame {
 
         // Update player
         Player player = currentLevel.getPlayer();
-        player.update(delta, timestep);
+        player.update(delta, timeStep);
         containToBounds(player);
 
         // Update all enemies
         for (Enemy enemy : currentLevel.getEnemies()) {
             enemy = currentLevel.getEnemies().get(0);
-            enemy.update(delta, timestep);
+            enemy.update(delta, timeStep);
             containToBounds(enemy);
 
             // Activate enemy abilities

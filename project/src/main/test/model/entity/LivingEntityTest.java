@@ -16,7 +16,7 @@ public class LivingEntityTest {
         return new LivingEntity<>(position, maxForce, maxSpeed, hitPoints, shape) {
 
             @Override
-            public void update(double delta, double timestep) {
+            public void update(double delta, double timeStep) {
             }
         };
     }
