@@ -12,7 +12,9 @@ import game.model.gameLoop.GameLoop;
 import game.model.level.ILevel;
 import game.model.level.Level;
 import game.model.entity.player.Player;
+import game.model.shape2d.Circle;
 import game.model.shape2d.ICircle;
+import game.model.shape2d.IShape2D;
 import game.services.EntityFactory;
 import javafx.geometry.Point2D;
 
@@ -97,6 +99,13 @@ public class Game implements IGame {
         Player player = currentLevel.getPlayer();
         player.update(delta, timeStep);
         containToBounds(player);
+
+        // Check for collisions between player and projectiles
+        for (IProjectile<?> projectile : currentLevel.getProjectiles()) {
+            if (player.checkCollision(projectile)) {
+                //TODO: handleCollision
+            }
+        }
 
         // Update all enemies
         for (Enemy enemy : currentLevel.getEnemies()) {
