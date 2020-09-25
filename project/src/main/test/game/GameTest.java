@@ -65,7 +65,7 @@ public class GameTest {
         Enemy e1 = EntityFactory.basicEnemy(500,500, player,5);
         enemies.add(e1);
 
-        ILevel level = new Level(enemies, null, null, player, 1200, 800);
+        ILevel level = new Level(enemies, new ArrayList<>(), new ArrayList<>(), player, 1200, 800);
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
 
@@ -84,7 +84,7 @@ public class GameTest {
         Enemy e1 = EntityFactory.basicEnemy(500,500, player,0);
         enemies.add(e1);
 
-        ILevel level = new Level(enemies, null, null, player, 1200, 800);
+        ILevel level = new Level(enemies, new ArrayList<>(), new ArrayList<>(), player, 1200, 800);
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
 
@@ -104,7 +104,7 @@ public class GameTest {
         Enemy e1 = EntityFactory.basicEnemy(500,500, player,-2);
         enemies.add(e1);
 
-        ILevel level = new Level(enemies, null, null, player, 1200, 800);
+        ILevel level = new Level(enemies, new ArrayList<>(), new ArrayList<>(), player, 1200, 800);
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
 
