@@ -14,7 +14,7 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
     public Player(Point2D position, double radius, double responsiveness, double maxSpeed) {
         super(position, responsiveness, maxSpeed, 1, new Circle(radius));
     }
-    public Player(Point2D position, double radius, double responsiveness, double maxSpeed, double strength) {
+    public Player(Point2D position, double radius, double responsiveness, double maxSpeed, int strength) {
         super(position, responsiveness, maxSpeed, 1, new Circle(radius), strength);
     }
 

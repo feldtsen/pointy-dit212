@@ -7,15 +7,15 @@ import javafx.geometry.Point2D;
 
 public class Spikes extends Entity<Rectangle> implements IObstacle, IStrength {
 
-    private final double strength;
+    private final int strength;
 
-    public Spikes(Point2D position, double width, double height, double strength) {
+    public Spikes(Point2D position, double width, double height, int strength) {
         super(position, new Rectangle(width, height,0));
         this.strength = strength;
     }
 
     @Override
-    public double getStrength() {
+    public int getStrength() {
         return strength;
     }
 

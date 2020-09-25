@@ -98,10 +98,14 @@ public class Game implements IGame {
         player.update(delta, timeStep);
         containToBounds(player);
 
-        // Check for collisions between player and projectiles
+        // Check for collisions between player and projectiles. Adjust players hit points if collision occurs.
         for (IProjectile<?> projectile : currentLevel.getProjectiles()) {
             if (player.checkCollision(projectile)) {
-                //TODO: handleCollision
+                int previousHitPoints = player.getHitPoints();
+                int damage = projectile.getStrength();
+                int newHitPoints = previousHitPoints - damage;
+
+                player.setHitPoints(newHitPoints);
             }
         }
 
