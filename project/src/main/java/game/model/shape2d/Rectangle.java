@@ -85,4 +85,16 @@ public class Rectangle implements IRectangle{
         Shapes.rotatePoints(cornerPoints, position, rotation);
         return cornerPoints;
     }
+
+    @Override
+    // Returns the distance from the center point to one of the corners.
+    public double largestInnerDistance() {
+        double halfHeight = height/2;
+        double halfWidth = width/2;
+
+        // Get distance to corner by using Pythagoras theorem.
+        double distance = Math.sqrt(Math.pow(halfHeight, 2) + Math.pow(halfWidth, 2));
+
+        return distance;
+    }
 }

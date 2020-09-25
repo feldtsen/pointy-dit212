@@ -60,4 +60,10 @@ public class Circle implements ICircle{
         points.add(position);
         return points;
     }
+
+    @Override
+    // Returns the radius
+    public double largestInnerDistance() {
+        return radius;
+    }
 }

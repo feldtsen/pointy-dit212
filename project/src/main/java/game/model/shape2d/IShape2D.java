@@ -23,4 +23,7 @@ public interface IShape2D {
     // Returns a list of points that the shape consists of. For polygons, this will be a list of the corner points.
     // For circles a list consisting of only the center point will be returned.
     List<Point2D> getPoints(Point2D position);
+
+    // Returns the largest internal distance from the center point of the shape.
+    double largestInnerDistance();
 }
