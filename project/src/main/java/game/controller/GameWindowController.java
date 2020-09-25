@@ -4,8 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import game.model.Game;
-import game.model.gameLoop.GameLoop;
-import game.model.gameLoop.IGameLoop;
+import game.controller.gameLoop.GameLoop;
+import game.controller.gameLoop.IGameLoop;
 import game.view.Renderer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

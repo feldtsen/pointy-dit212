@@ -1,4 +1,4 @@
-package game.model.gameLoop;
+package game.controller.gameLoop;
 
 import javafx.animation.AnimationTimer;
 

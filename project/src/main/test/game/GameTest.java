@@ -71,7 +71,7 @@ public class GameTest {
 
         Game game = new Game(levels);
 
-        game.update(1/60, 1);
+        game.update(1.0/60, 1);
 
         assertEquals(0, player.getHitPoints() );
 
@@ -90,7 +90,7 @@ public class GameTest {
 
         Game game = new Game(levels);
 
-        game.update(1/60, 1);
+        game.update(1.0/60, 1);
 
         assertEquals(1, player.getHitPoints() );
 
@@ -110,7 +110,7 @@ public class GameTest {
 
         Game game = new Game(levels);
 
-        game.update(1/60, 1);
+        game.update(1.0/60, 1);
 
         assertEquals(1, player.getHitPoints() );
 
