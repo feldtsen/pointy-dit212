@@ -17,12 +17,12 @@ public class Enemy extends LivingEntity<ICircle> implements IEnemy {
     private IMovementBehaviour movementBehaviour;
     private IAbilityBehaviour abilityBehaviour;
 
-    public Enemy(Point2D position, double radius, double maxForce, double maxSpeed, int hitPoints, double strength, IAbilityBehaviour abilityBehaviour, IMovementBehaviour movementBehaviour, IEntity<?> target){
+    public Enemy(Point2D position, double radius, double maxForce, double maxSpeed, int hitPoints, int strength, IAbilityBehaviour abilityBehaviour, IMovementBehaviour movementBehaviour, IEntity<?> target){
         this(position, radius, maxForce, maxSpeed, hitPoints, abilityBehaviour, movementBehaviour, target, strength);
 
     }
 
-    public Enemy(Point2D position, double radius, double maxForce, double maxSpeed, int hitPoints, IAbilityBehaviour abilityBehaviour, IMovementBehaviour movementBehaviour, IEntity<?> target, double strength) {
+    public Enemy(Point2D position, double radius, double maxForce, double maxSpeed, int hitPoints, IAbilityBehaviour abilityBehaviour, IMovementBehaviour movementBehaviour, IEntity<?> target, int strength) {
         super(position, maxForce, maxSpeed, hitPoints, new Circle(radius),strength);
         this.abilityBehaviour = abilityBehaviour;
         this.movementBehaviour = movementBehaviour;

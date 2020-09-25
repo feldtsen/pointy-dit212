@@ -11,7 +11,7 @@ public class Missile extends Projectile<ICircle> {
     private double steering; //How fast a missile turns towards the player
     private IEntity<?> target;
 
-    public Missile(Point2D position, double radius, double maxForce, double maxSpeed, double strength, Point2D velocity, IEntity<?> target) {
+    public Missile(Point2D position, double radius, double maxForce, double maxSpeed, int strength, Point2D velocity, IEntity<?> target) {
         super(position, maxForce, maxSpeed, strength, velocity, new Circle(radius));
         this.target = target;
     }

@@ -102,8 +102,8 @@ public class Game implements IGame {
         for (IProjectile<?> projectile : currentLevel.getProjectiles()) {
             if (player.checkCollision(projectile)) {
                 int previousHitPoints = player.getHitPoints();
-                double damage = projectile.getStrength(); //TODO: Should strength also be int?
-                int newHitPoints = previousHitPoints - (int) damage;
+                int damage = projectile.getStrength();
+                int newHitPoints = previousHitPoints - damage;
 
                 player.setHitPoints(newHitPoints);
             }

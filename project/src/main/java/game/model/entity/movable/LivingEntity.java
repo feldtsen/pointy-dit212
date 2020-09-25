@@ -9,12 +9,12 @@ import javafx.geometry.Point2D;
 public abstract class LivingEntity<T extends IShape2D> extends MovableEntity<T> implements ILiving {
 
     private int hitPoints;
-    private final double strength;
+    private final int strength;
 
     public LivingEntity(Point2D position, double maxForce, double maxSpeed, int hitPoints, T shape) {
         this(position, maxForce, maxSpeed, hitPoints, shape, 0);
     }
-    public LivingEntity(Point2D position, double maxForce, double maxSpeed, int hitPoints, T shape, double strength) {
+    public LivingEntity(Point2D position, double maxForce, double maxSpeed, int hitPoints, T shape, int strength) {
         super(position, maxForce, maxSpeed, shape);
         this.hitPoints = hitPoints;
         this.strength = strength;
@@ -26,7 +26,7 @@ public abstract class LivingEntity<T extends IShape2D> extends MovableEntity<T> 
     }
 
     @Override
-    public double getStrength() { return strength; }
+    public int getStrength() { return strength; }
 
     @Override
     public void setHitPoints(int hitPoints) {

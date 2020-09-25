@@ -8,7 +8,7 @@ import javafx.geometry.Point2D;
 
 public class Bullet extends Projectile<ICircle> {
 
-    public Bullet(Point2D position, double radius, double maxForce, double maxSpeed, double strength, Point2D velocity) {
+    public Bullet(Point2D position, double radius, double maxForce, double maxSpeed, int strength, Point2D velocity) {
         super(position, maxForce, maxSpeed, strength, velocity, new Circle(radius));
     }
 
