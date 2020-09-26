@@ -60,7 +60,7 @@ public class AbilityTest {
 
     @Test
     public void testUseOnCooldown(){
-        long cooldown = 5550;
+        long cooldown = 10000000;
 
         IAbility a1 = getAbility(cooldown);
         a1.use(dummy1, dummy2);
