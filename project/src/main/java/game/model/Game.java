@@ -10,9 +10,7 @@ import game.controller.gameLoop.GameLoop;
 import game.model.level.ILevel;
 import game.model.level.Level;
 import game.model.entity.player.Player;
-import game.model.shape2d.Circle;
 import game.model.shape2d.ICircle;
-import game.model.shape2d.IShape2D;
 import game.services.EntityFactory;
 import javafx.geometry.Point2D;
 
@@ -20,16 +18,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game implements IGame {
+    private int score;
 
     private final List<ILevel> levels;
     private ILevel currentLevel;
 
+    // This list is continuously updated with the active ability actions.
+    // An action is removed when it's duration has run out.
     private final List<IAbilityAction> activeAbilityActions;
+    // This is a helper list containing the nano time of the activation of a certain ability.
+    // Index n in this list corresponds to index n in activeAbilityActions.
     private final List<Long> activationTimes;
 
-    private int score;
-
-
+    // TODO: take level loader instead!
     public Game(List<ILevel> levels) {
         this.levels = levels;
         this.currentLevel = levels.get(0);
@@ -67,8 +68,8 @@ public class Game implements IGame {
         return levels;
     }
 
-    private void activateAbility(IAbilityAction action) {
-        Long now = System.nanoTime();
+    //
+    private void activateAbility(IAbilityAction action, long now) {
         activeAbilityActions.add(action);
         activationTimes.add(now);
     }
@@ -88,7 +89,9 @@ public class Game implements IGame {
         for(int i = activeAbilityActions.size() - 1;  i >= 0; i--) {
             IAbilityAction abilityAction = activeAbilityActions.get(i);
             long activationTime = activationTimes.get(i);
+            // Check if the time since activation time exceeds the duration of the abilityAction.
             if(now - activationTime > abilityAction.getDuration() * GameLoop.SECOND) {
+                // If true, deactivate ability.
                 deactivateAbility(i);
             }
         }
@@ -101,11 +104,7 @@ public class Game implements IGame {
         // Check for collisions between player and projectiles. Adjust players hit points if collision occurs.
         for (IProjectile<?> projectile : currentLevel.getProjectiles()) {
             if (player.checkCollision(projectile)) {
-                int previousHitPoints = player.getHitPoints();
-                int damage = projectile.getStrength();
-                int newHitPoints = previousHitPoints - damage;
-
-                player.setHitPoints(newHitPoints);
+                player.setHitPoints(player.getHitPoints() - projectile.getStrength());
             }
         }
 
@@ -117,8 +116,7 @@ public class Game implements IGame {
             // Activate enemy abilities
             IAbilityAction abilityAction = enemy.applyAbility(currentLevel);
             if(abilityAction != null) {
-                activeAbilityActions.add(abilityAction);
-                activationTimes.add(now);
+                activateAbility(abilityAction, now);
             }
         }
 
@@ -126,13 +124,16 @@ public class Game implements IGame {
         for(int i = 0; i < activeAbilityActions.size(); i++) {
             IAbilityAction abilityAction = activeAbilityActions.get(i);
             long activationTime = activationTimes.get(i);
+            // Feed the ability the time since activation (in seconds). Some ability will depend on this value.
             abilityAction.apply(currentLevel, (double)(now - activationTime) / GameLoop.SECOND);
         }
 
         // Check collision between players and enemies, and enemies and other enemies
         for (int i = 0; i < currentLevel.getEnemies().size(); i++) {
             Enemy e1 = currentLevel.getEnemies().get(i);
-            for (int j = i+1; j < currentLevel.getEnemies().size(); j++ ){
+            // Loop from i + 1 to ensure collision is not checked twice for each entity pair, and to avoid checking
+            // self collision checking.
+            for (int j = i + 1; j < currentLevel.getEnemies().size(); j++ ){
                 Enemy e2 = currentLevel.getEnemies().get(j);
                 if (e1.checkCollision(e2)) {
                     //TODO invent the wheel
@@ -145,8 +146,7 @@ public class Game implements IGame {
                 // If enemy is stronger than player, player dies :(
                 if (player.getStrength() < e1.getStrength()){
                     player.setHitPoints(0);
-                }
-                else {
+                } else {
                     e1.setHitPoints(0);
                     currentLevel.removeEnemy(e1);
                 }
@@ -161,24 +161,27 @@ public class Game implements IGame {
         double width = currentLevel.getWidth();
         double height = currentLevel.getHeight();
 
+        // Velocity is later set to 0 in the direction of collision.
         Point2D v = entity.getVelocity();
+
         Point2D p = entity.getPosition();
         double r = entity.getShape().getRadius();
 
+        // Collision with left wall
         if(p.getX() - r < 0) {
             p = new Point2D(r, p.getY());
             v = new Point2D(0, v.getY());
-        }
-        else if(p.getX() + r >= width) {
+        // Collision with right wall
+        } else if(p.getX() + r >= width) {
             p = new Point2D(width - r, p.getY());
             v = new Point2D(0, v.getY());
         }
-
+        // Collision with top wall
         if(p.getY() - r < 0) {
             p = new Point2D(p.getX(), r);
             v = new Point2D(v.getX(), 0);
-        }
-        else if(p.getY() + r >= height) {
+        // Collision with bottom wall
+        } else if(p.getY() + r >= height) {
             p = new Point2D(p.getX(), height - r);
             v = new Point2D(v.getX(), 0);
         }

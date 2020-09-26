@@ -5,12 +5,16 @@ import game.model.level.ILevel;
 
 import java.util.List;
 
+// Interface for class running the game itself.
+// Does not include the gameLoop, which should be handled by a controller.
 public interface IGame extends IUpdatable {
-    ILevel getCurrentLevel();
-    List<ILevel> getLevels();
+
+    // This method returns the abilities (in the form of ability actions) which is currently active.
     List<IAbilityAction> activeAbilityActions();
 
-    int getScore();
-
     boolean setLevel(ILevel level);
+
+    int getScore();
+    ILevel getCurrentLevel();
+    List<ILevel> getLevels();
 }
