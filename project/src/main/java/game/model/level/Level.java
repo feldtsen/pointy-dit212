@@ -12,14 +12,12 @@ import java.util.List;
 
 public class Level implements ILevel {
 
-    private List<Enemy> enemies;
-    private List<IProjectile<?>> projectiles;
-    private List<IObstacle> obstacles;
-    private Player player;
+    private final List<Enemy> enemies;
+    private final List<IProjectile<?>> projectiles;
+    private final List<IObstacle> obstacles;
+    private final Player player;
     private final double width;
     private final double height;
-
-
 
     public Level(List<Enemy> enemies, List<IProjectile<?>> projectiles, List<IObstacle> obstacles, Player player, double width, double height) {
         this.enemies = enemies;
@@ -68,14 +66,10 @@ public class Level implements ILevel {
     @Override
     public void removeObstacle(IObstacle o) {
         obstacles.remove(o);
-
     }
 
     @Override
     public void removeProjectile(IProjectile<?> p) {
         projectiles.remove(p);
-
     }
-
-
 }

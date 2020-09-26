@@ -4,10 +4,11 @@ import game.model.shape2d.IShape2D;
 import game.model.shape2d.Shapes;
 import javafx.geometry.Point2D;
 
+
 public abstract class Entity<T extends IShape2D> implements IEntity<T> {
-    //TODO: protected currently, is this a bad idea maybe hmmmm?
+    //TODO: avoid protected variable possibly?
     protected Point2D position;
-    private T shape;
+    private final T shape;
 
     public Entity(Point2D position, T shape) {
         this.position = position;

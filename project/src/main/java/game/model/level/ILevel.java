@@ -11,6 +11,7 @@ import game.model.shape2d.ICircle;
 
 import java.util.List;
 
+// This interface represents a single level of the game, and manages all entities.
 public interface ILevel {
     List<Enemy> getEnemies();
     List<IProjectile<?>> getProjectiles();
