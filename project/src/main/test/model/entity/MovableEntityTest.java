@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class MovableEntityTest {
-    public MovableEntity movableEntity;
+    public MovableEntity<?> movableEntity;
     private double maxForce;
     private double maxSpeed;
 
@@ -18,7 +18,7 @@ public class MovableEntityTest {
         maxForce = 3;
         maxSpeed = 3;
 
-        movableEntity = new MovableEntity(new Point2D(0, 0), maxForce, maxSpeed, null) {};
+        movableEntity = new MovableEntity<>(new Point2D(0, 0), maxForce, maxSpeed, null) {};
     }
 
     @Test
@@ -50,6 +50,17 @@ public class MovableEntityTest {
         movableEntity.update(delta, 1);
 
         assertEquals(currentPosition.add(velocity.multiply(delta)), movableEntity.getPosition());
+    }
+
+    @Test
+    public void testVelocityUpdateTimeStepNonOne() {
+        Point2D velocity = new Point2D(1, 1);
+        Point2D currentPosition = movableEntity.getPosition();
+
+        movableEntity.setVelocity(velocity);
+        movableEntity.update(1, 0.5);
+
+        assertEquals(currentPosition.add(velocity.multiply(0.5)), movableEntity.getPosition());
     }
 
     @Test
