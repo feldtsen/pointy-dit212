@@ -1,7 +1,9 @@
 package game.model.ability;
 
+import game.model.ability.action.AbilityAction;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.Entity;
+import game.model.entity.IEntity;
 import game.model.entity.movable.LivingEntity;
 import game.model.entity.projectile.Bullet;
 import game.model.entity.projectile.IProjectile;
@@ -14,35 +16,40 @@ import javafx.geometry.Point2D;
 import java.util.List;
 
 public class ShootBullet extends Ability {
-    private Entity<?> user;
-    private Entity<?> target;
+    private double bulletRadius;
+    private double maxForce;
+    private double maxSpeed;
+    private int strength;
 
-    public ShootBullet(Entity<?> user, LivingEntity<?> target, long cooldown, double bulletRadius, double maxForce, double maxSpeed, int damage) {
-        super(cooldown, new IAbilityAction() {
-            @Override
-            public double getDuration() {
-                return -1; // No duration
-            }
+    public ShootBullet(long cooldown, double bulletRadius, double maxForce, double maxSpeed, int strength) {
+        super(cooldown);
+        this.bulletRadius = bulletRadius;
+        this.strength = strength;
+        this.maxForce = maxForce;
+        this.maxSpeed = maxSpeed;
+    }
+
+    @Override
+    // The returned AbilityAction creates and adds a bullet to the levels list of projectiles.
+    public IAbilityAction createAction(IEntity<?> user, IEntity<?> target) {
+        IAbilityAction abilityAction = new AbilityAction(user, target, 0) {
 
             @Override
-            // Adds a bullet with the given radius, maxForce, maxSpeed, damage to the given levels list of
-            // projectiles. The bullet is fired from the position of the user and fired towards the position of the
-            // target.
             public void apply(ILevel level, double timePassed) {
-                // Only add a new projectile if the target is alive and not null.
-                if (target == null || !target.isAlive()) return;
 
-                // Gets velocity by subtracting targets position from user and setting speed to maxSpeed.
+                // Gets velocity by subtracting the users position from the targets position and setting speed to max.
                 Point2D bulletVelocity = target.getPosition().subtract(user.getPosition());
                 bulletVelocity = Utils.setMagnitude(bulletVelocity, maxSpeed);
 
-                // Create new bullet
-                Projectile bullet = new Bullet(user.getPosition(), bulletRadius, maxForce, maxSpeed, damage, bulletVelocity);
+                // Create new bullet.
+                Projectile bullet = new Bullet(user.getPosition(), bulletRadius, maxForce, maxSpeed, strength, bulletVelocity);
 
-                // Get list of projectiles and add new bullet.
+                // Get levels list of projectiles and add bullet.
                 List<IProjectile<?>> projectiles = level.getProjectiles();
                 projectiles.add(bullet);
             }
-        });
+        };
+
+        return abilityAction;
     }
 }
