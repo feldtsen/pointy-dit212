@@ -208,7 +208,7 @@ public class Game implements IGame {
     }
 
     @Override
-    public List<IAbilityAction> activeAbilityActions() {
+    public List<IAbilityAction> getActiveAbilityActions() {
         return activeAbilityActions;
     }
 

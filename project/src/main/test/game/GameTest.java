@@ -1,6 +1,11 @@
 package game;
 
+import game.controller.gameLoop.GameLoop;
 import game.model.Game;
+import game.model.ability.Ability;
+import game.model.ability.IAbility;
+import game.model.ability.action.IAbilityAction;
+import game.model.behavior.ability.AbilityBehaviour;
 import game.model.entity.enemy.Enemy;
 import game.model.entity.movable.MovableEntity;
 import game.model.entity.player.Player;
@@ -114,6 +119,92 @@ public class GameTest {
 
         assertEquals(1, player.getHitPoints() );
 
+    }
+
+    @Test
+    public void testAbilityAddedToAbilityActionList() {
+        Player player = EntityFactory.basicPlayer(500, 500);
+
+        List<Enemy> enemies= new ArrayList<>();
+        Enemy e1 = EntityFactory.basicEnemy(500,500, player,-2);
+
+        List<IAbility> abilities = new ArrayList<>();
+        abilities.add(new Ability(1, new IAbilityAction() {
+            @Override
+            public double getDuration() {
+                return 0;
+            }
+
+            @Override
+            public void apply(ILevel level, double timePassed) {
+            }
+        }) {
+        });
+
+        e1.setAbilityBehaviour(new AbilityBehaviour(abilities) {
+            @Override
+            public IAbilityAction apply(ILevel level) {
+                return abilities.get(0).use();
+            }
+        });
+        enemies.add(e1);
+
+        ILevel level = new Level(enemies, new ArrayList<>(), new ArrayList<>(), player, 1200, 800);
+        List<ILevel> levels = new ArrayList<>();
+        levels.add(level);
+
+        Game game = new Game(levels);
+        game.update(1, 1);
+
+        assertEquals(1, game.getActiveAbilityActions().size());
+    }
+
+    @Test
+    public void testAbilityRemovedFromAbilityActionList() {
+        Player player = EntityFactory.basicPlayer(500, 500);
+
+        List<Enemy> enemies= new ArrayList<>();
+        Enemy e1 = EntityFactory.basicEnemy(500,500, player,-2);
+        double duration = 0.5;
+
+        List<IAbility> abilities = new ArrayList<>();
+        abilities.add(new Ability(1, new IAbilityAction() {
+            @Override
+            public double getDuration() {
+                return duration;
+            }
+
+            @Override
+            public void apply(ILevel level, double timePassed) {
+            }
+        }) {
+        });
+
+        e1.setAbilityBehaviour(new AbilityBehaviour(abilities) {
+            @Override
+            public IAbilityAction apply(ILevel level) {
+                return abilities.get(0).use();
+            }
+        });
+        enemies.add(e1);
+
+        ILevel level = new Level(enemies, new ArrayList<>(), new ArrayList<>(), player, 1200, 800);
+        List<ILevel> levels = new ArrayList<>();
+        levels.add(level);
+
+        Game game = new Game(levels);
+        game.update(1.0/60, 1);
+
+        assertEquals(1, game.getActiveAbilityActions().size());
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            fail();
+        }
+        game.update(1.0, 1);
+
+        assertEquals(0, game.getActiveAbilityActions().size());
     }
 
 }

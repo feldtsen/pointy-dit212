@@ -10,7 +10,7 @@ import java.util.List;
 public interface IGame extends IUpdatable {
 
     // This method returns the abilities (in the form of ability actions) which is currently active.
-    List<IAbilityAction> activeAbilityActions();
+    List<IAbilityAction> getActiveAbilityActions();
 
     boolean setLevel(ILevel level);
 
