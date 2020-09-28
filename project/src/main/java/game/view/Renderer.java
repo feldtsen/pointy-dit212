@@ -34,15 +34,16 @@ public class Renderer implements IRenderer{
 
         RendererUtils.drawShape(graphicsContext, colors.get(level.getPlayer().getClass()) ,level.getPlayer().getShape(), level.getPlayer().getPosition());
 
+        for(IProjectile<?> projectile : level.getProjectiles()) {
+            //TODO: ICircle cast is temporary solution...
+            RendererUtils.drawShape(graphicsContext, colors.get(projectile.getClass()), (ICircle)projectile.getShape(), projectile.getPosition());
+        }
+
         for (Enemy enemy : level.getEnemies()) {
             RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), enemy.getShape(), enemy.getPosition());
             RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), testRect, enemy.getPosition());
         }
 
-        for(IProjectile<?> projectile : level.getProjectiles()) {
-            //TODO: ICircle cast is temporary solution...
-            RendererUtils.drawShape(graphicsContext, colors.get(projectile.getClass()), (ICircle)projectile.getShape(), projectile.getPosition());
-        }
 
 
         //TODO: remove this (used for testing)
