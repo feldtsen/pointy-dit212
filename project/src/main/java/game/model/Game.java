@@ -114,7 +114,7 @@ public class Game implements IGame {
             containToBounds(enemy);
 
             // Activate enemy abilities
-            IAbilityAction abilityAction = enemy.applyAbility(currentLevel);
+            IAbilityAction abilityAction = enemy.applyAbility();
             if(abilityAction != null) {
                 activateAbility(abilityAction, now);
             }
