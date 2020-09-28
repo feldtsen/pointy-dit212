@@ -7,7 +7,9 @@ import game.model.ability.action.IAbilityAction;
 import game.model.behavior.ability.AbilityBehaviour;
 import game.model.behavior.ability.IAbilityBehaviour;
 import game.model.entity.Entity;
+import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
+import game.model.entity.enemy.IEnemy;
 import game.model.entity.movable.LivingEntity;
 import game.model.entity.movable.MovableEntity;
 import game.model.entity.obstacle.IObstacle;
@@ -20,6 +22,7 @@ import game.model.shape2d.Circle;
 import javafx.geometry.Point2D;
 import org.junit.Before;
 import org.junit.Test;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,38 +30,39 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class ShootBulletTest {
-    Enemy user;
-    Enemy target;
+    IEnemy user;
+    IEntity<?> target;
     ILevel level;
-    double bulletSpeed = 5;
     IAbilityBehaviour abilityBehaviour;
 
     //Create AbilityBehaviour with dummy apply method
-    //Create enemy, add abilityBehaviour
-    //Create ShootBullet and add to abilityBehaviour
+    //Create enemy, add abilityBehaviour with ShootBullet
     public void init() {
-        // Creates abilityBehaviour without adding any abilities
-        abilityBehaviour = new AbilityBehaviour() {
+
+        // Create ability ShootBullet
+        IAbility ability = new ShootBullet(0, 0.1, 3, 5, 1);
+
+        // Create list of abilities for AbilityBehaviour
+        List<IAbility> abilities = new ArrayList<>();
+        abilities.add(ability);
+
+        // Creates abilityBehaviour and adds list containing ShootBullet.
+        abilityBehaviour = new AbilityBehaviour(abilities) {
             @Override
-            // Dummy method. If there is an ability in list, use first one.
-            public IAbilityAction apply(ILevel level) {
-                List<IAbility> abilities = getAbilities();
-                if (abilities == null) return null; // If apply is called before abilities are added.
+            // Dummy method. Use first ability in list.
+            public IAbilityAction apply(IEntity<?> user, IEntity<?> target) {
 
                 // Return abilityAction from ability
-                return abilities.get(0).use();
+                return abilities.get(0).use(user, target);
             }
         };
 
-        target = new Enemy(new Point2D(1, 0), 1, 3, 3, 3, 4, null, null, null);
+        // Initialize user and target to two Enemies.
+        target = new Player(new Point2D(1, 0), 1, 1, 3);
         user = new Enemy(new Point2D(0, 0), 1, 3, 3, 3,3,  abilityBehaviour, null, target);
 
-        List<IAbility> abilities = new ArrayList<>();
-        abilities.add(0, new ShootBullet(user, target, 3, 0.1, 5, bulletSpeed, 1));
-        abilityBehaviour.setAbilities(abilities);
-
-        // Create new level with list for projectiles
-        level = new Level(null, new ArrayList<>(), null, null, 100, 100);
+        // Create new level with list for projectiles.
+        level = new Level(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), null, 100, 100);
     }
 
     @Test
@@ -75,12 +79,11 @@ public class ShootBulletTest {
         init();
         shoot();
         IProjectile<?> bullet = level.getProjectiles().get(0);
-        System.out.println(bullet.getVelocity().magnitude());
-        assertTrue(bullet.getVelocity().magnitude() == bulletSpeed);
+        assertTrue(bullet.getVelocity().magnitude() == 5);
     }
 
     private void shoot() {
-        IAbilityAction abilityAction = abilityBehaviour.apply(level);
+        IAbilityAction abilityAction = user.applyAbility();
         abilityAction.apply(level, 0);
     }
 }

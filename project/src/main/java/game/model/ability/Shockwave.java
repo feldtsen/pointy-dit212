@@ -2,6 +2,7 @@ package game.model.ability;
 
 import game.model.ILiving;
 import game.model.ability.action.IAbilityAction;
+import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.movable.LivingEntity;
@@ -13,14 +14,17 @@ import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Shockwave extends Ability{
-
+    private double radius;
+    private double force;
 
     public Shockwave(long cooldown, double radius, double force, LivingEntity<?> user) {
-        super(cooldown, createAction(radius,force, user));
+        super(cooldown);
+        this.radius = radius;
+        this.force = force;
     }
-    private static IAbilityAction createAction(double radius, double force, LivingEntity<?> user){
+
+    public IAbilityAction createAction(IEntity<?> user, IEntity<?> target){
         return new IAbilityAction() {
             @Override
             public double getDuration() {

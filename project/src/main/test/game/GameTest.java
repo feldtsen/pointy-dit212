@@ -120,7 +120,7 @@ public class GameTest {
         assertEquals(1, player.getHitPoints() );
 
     }
-
+    /*
     @Test
     public void testAbilityAddedToAbilityActionList() {
         Player player = EntityFactory.basicPlayer(500, 500);
@@ -206,5 +206,5 @@ public class GameTest {
 
         assertEquals(0, game.getActiveAbilityActions().size());
     }
-
+*/
 }
