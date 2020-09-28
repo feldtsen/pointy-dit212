@@ -10,16 +10,17 @@ import game.model.entity.projectile.IProjectile;
 import game.model.entity.projectile.Projectile;
 import game.model.level.ILevel;
 import game.model.shape2d.Circle;
+import game.model.shape2d.ICircle;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 
 import java.util.List;
 
 public class ShootBullet extends Ability {
-    private double bulletRadius;
-    private double maxForce;
-    private double maxSpeed;
-    private int strength;
+    private final double bulletRadius;
+    private final double maxForce;
+    private final double maxSpeed;
+    private final int strength;
 
     public ShootBullet(long cooldown, double bulletRadius, double maxForce, double maxSpeed, int strength) {
         super(cooldown);
@@ -32,7 +33,7 @@ public class ShootBullet extends Ability {
     @Override
     // The returned AbilityAction creates and adds a bullet to the levels list of projectiles.
     public IAbilityAction createAction(IEntity<?> user, IEntity<?> target) {
-        IAbilityAction abilityAction = new AbilityAction(user, target, 0) {
+        return new AbilityAction(user, target, 0) {
 
             @Override
             public void apply(ILevel level, double timePassed) {
@@ -42,14 +43,12 @@ public class ShootBullet extends Ability {
                 bulletVelocity = Utils.setMagnitude(bulletVelocity, maxSpeed);
 
                 // Create new bullet.
-                Projectile bullet = new Bullet(user.getPosition(), bulletRadius, maxForce, maxSpeed, strength, bulletVelocity);
+                Projectile<ICircle> bullet = new Bullet(user.getPosition(), bulletRadius, maxForce, maxSpeed, strength, bulletVelocity);
 
                 // Get levels list of projectiles and add bullet.
                 List<IProjectile<?>> projectiles = level.getProjectiles();
                 projectiles.add(bullet);
             }
         };
-
-        return abilityAction;
     }
 }

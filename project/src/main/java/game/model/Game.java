@@ -54,7 +54,8 @@ public class Game implements IGame {
         e1.setFriction(3);
         enemies.add(e1);
 
-        Enemy e2 = EntityFactory.basicEnemy(900, 850, player, 5);
+        //Enemy e2 = EntityFactory.basicEnemy(900, 850, player, 5);
+        Enemy e2 = EntityFactory.bulletEnemy(900, 850, player, 5, GameLoop.SECOND / 10, 10, 1000, 1);
         e2.setFriction(3);
         enemies.add(e2);
 
@@ -102,7 +103,15 @@ public class Game implements IGame {
         containToBounds(player);
 
         // Check for collisions between player and projectiles. Adjust players hit points if collision occurs.
-        for (IProjectile<?> projectile : currentLevel.getProjectiles()) {
+        for (int i = currentLevel.getProjectiles().size() - 1; i >= 0; i--) {
+            IProjectile<?> projectile = currentLevel.getProjectiles().get(i);
+            projectile.update(delta, timeStep);
+
+            if(isOutOfBounds(projectile)) {
+                currentLevel.getProjectiles().remove(i);
+                continue;
+            }
+
             if (player.checkCollision(projectile)) {
                 player.setHitPoints(player.getHitPoints() - projectile.getStrength());
             }
@@ -154,6 +163,11 @@ public class Game implements IGame {
         }
 
 
+    }
+
+    public boolean isOutOfBounds(IEntity<?> entity) {
+        return entity.getPosition().getX() < 0 || entity.getPosition().getX() >= currentLevel.getWidth() ||
+               entity.getPosition().getY() < 0 || entity.getPosition().getY() >= currentLevel.getHeight();
     }
 
     // Makes sure an entity does not leave the map bounds
