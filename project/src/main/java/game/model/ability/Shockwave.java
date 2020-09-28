@@ -1,10 +1,8 @@
 package game.model.ability;
 
-import game.model.ILiving;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
-import game.model.entity.enemy.IEnemy;
 import game.model.entity.movable.LivingEntity;
 import game.model.entity.player.Player;
 import game.model.level.ILevel;
@@ -15,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shockwave extends Ability{
-    private double radius;
-    private double force;
+    private final double radius;
+    private final double force;
 
-    public Shockwave(long cooldown, double radius, double force, LivingEntity<?> user) {
+    public Shockwave(long cooldown, double radius, double force) {
         super(cooldown);
         this.radius = radius;
         this.force = force;
