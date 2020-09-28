@@ -15,6 +15,8 @@ public interface IGame extends IUpdatable {
     boolean setLevel(ILevel level);
 
     int getScore();
+    boolean isGameOver();
+
     ILevel getCurrentLevel();
     List<ILevel> getLevels();
 }

@@ -19,8 +19,9 @@ import java.util.List;
 
 public class Game implements IGame {
     private int score;
+    private boolean gameOver;
 
-    private final List<ILevel> levels;
+    private List<ILevel> levels;
     private ILevel currentLevel;
 
     // This list is continuously updated with the active ability actions.
@@ -35,6 +36,7 @@ public class Game implements IGame {
         this.levels = levels;
         this.currentLevel = levels.get(0);
         this.score = 0;
+        this.gameOver = false;
 
         this.activeAbilityActions = new ArrayList<>();
         this.activationTimes = new ArrayList<>();
@@ -46,7 +48,7 @@ public class Game implements IGame {
 
     public static List<ILevel> dummyLevels() {
 
-        Player player = EntityFactory.strongPlayer(375, 200);
+        Player player = EntityFactory.basicPlayer(375, 200);
         player.setFriction(3);
 
         List<Enemy> enemies = new ArrayList<>();
@@ -84,6 +86,11 @@ public class Game implements IGame {
     public void update(double delta, double timeStep) {
         // Nanos passed since last update
         long now = System.nanoTime();
+
+        // Check for player death
+        if(!currentLevel.getPlayer().isAlive()) {
+            gameOver();
+        }
 
         // Remove finished ability actions
         // Iterate backwards to avoid problems with removing entries from list
@@ -165,6 +172,11 @@ public class Game implements IGame {
 
     }
 
+    private void gameOver() {
+        // TODO: handle player death
+        this.gameOver = true;
+    }
+
     public boolean isOutOfBounds(IEntity<?> entity) {
         return entity.getPosition().getX() < 0 || entity.getPosition().getX() >= currentLevel.getWidth() ||
                entity.getPosition().getY() < 0 || entity.getPosition().getY() >= currentLevel.getHeight();
@@ -229,6 +241,11 @@ public class Game implements IGame {
     @Override
     public int getScore() {
         return score;
+    }
+
+    @Override
+    public boolean isGameOver() {
+        return gameOver;
     }
 
     private void handleCollision(IEntity<?> e1, IEntity<?> e2){
