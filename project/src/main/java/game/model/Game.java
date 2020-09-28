@@ -102,7 +102,15 @@ public class Game implements IGame {
         containToBounds(player);
 
         // Check for collisions between player and projectiles. Adjust players hit points if collision occurs.
-        for (IProjectile<?> projectile : currentLevel.getProjectiles()) {
+        for (int i = currentLevel.getProjectiles().size(); i >= 0; i--) {
+            IProjectile<?> projectile = currentLevel.getProjectiles().get(i);
+            projectile.update(delta, timeStep);
+
+            if(isOutOfBounds(projectile)) {
+                currentLevel.getProjectiles().remove(i);
+                continue;
+            }
+
             if (player.checkCollision(projectile)) {
                 player.setHitPoints(player.getHitPoints() - projectile.getStrength());
             }
@@ -154,6 +162,11 @@ public class Game implements IGame {
         }
 
 
+    }
+
+    public boolean isOutOfBounds(IEntity<?> entity) {
+        return entity.getPosition().getX() < 0 || entity.getPosition().getX() >= currentLevel.getWidth() ||
+               entity.getPosition().getY() < 0 || entity.getPosition().getY() >= currentLevel.getHeight();
     }
 
     // Makes sure an entity does not leave the map bounds
