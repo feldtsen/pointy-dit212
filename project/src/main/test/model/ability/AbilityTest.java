@@ -15,8 +15,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AbilityTest {
-    private IEntity<?> dummy1 = new Player(new Point2D(0, 0), 1, 1, 1);
-    private IEntity<?> dummy2 = new Player(new Point2D(0, 0), 1, 1, 1);
+    private IEntity<?> dummy1 = new Player(new Point2D(0, 0), 1, 1, 1,0);
+    private IEntity<?> dummy2 = new Player(new Point2D(0, 0), 1, 1, 1,0);
 
     private IAbilityAction getAction() {
         return new IAbilityAction() {

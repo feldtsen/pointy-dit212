@@ -15,7 +15,7 @@ public class EnemyTest {
     @Before
     public void setup() {
         enemy = new Enemy(new Point2D(0,0), 10, 2, 2, 1, null, null, null, 0);
-        target = new Player(new Point2D(0,0), 10, 2, 2);
+        target = new Player(new Point2D(0,0), 10, 2, 2,0);
     }
 
     @Test

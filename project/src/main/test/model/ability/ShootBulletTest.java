@@ -58,7 +58,7 @@ public class ShootBulletTest {
         };
 
         // Initialize user and target to two Enemies.
-        target = new Player(new Point2D(1, 0), 1, 1, 3);
+        target = new Player(new Point2D(1, 0), 1, 1, 3,0);
         user = new Enemy(new Point2D(0, 0), 1, 3, 3, 3,3,  abilityBehaviour, null, target);
 
         // Create new level with list for projectiles.

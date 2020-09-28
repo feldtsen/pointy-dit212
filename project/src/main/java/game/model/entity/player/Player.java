@@ -16,11 +16,6 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
 
     private final ArrayList<IAbility> abilities;
 
-    public Player(Point2D position, double radius, double responsiveness, double maxSpeed) {
-        super(position, responsiveness, maxSpeed, 1, new Circle(radius));
-        //TODO: remove one of the constructors
-        this.abilities = new ArrayList<>();
-    }
     public Player(Point2D position, double radius, double responsiveness, double maxSpeed, int strength) {
         super(position, responsiveness, maxSpeed, 1, new Circle(radius), strength);
         this.abilities = new ArrayList<>();
