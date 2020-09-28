@@ -31,7 +31,7 @@ public class Renderer implements IRenderer{
         RendererUtils.drawShape(graphicsContext, shapeColors.get(level.getPlayer().getClass()) ,level.getPlayer().getShape(), level.getPlayer().getPosition());
 
         for (Enemy enemy : level.getEnemies()) {
-            RendererUtils.drawShape(graphicsContext, shapeColors.get(enemy.getClass()), enemy.getShape(), enemy.getPosition());
+            //RendererUtils.drawShape(graphicsContext, shapeColors.get(enemy.getClass()), enemy.getShape(), enemy.getPosition());
             RendererUtils.drawShape(graphicsContext, shapeColors.get(enemy.getClass()), testRect, enemy.getPosition());
 
         }

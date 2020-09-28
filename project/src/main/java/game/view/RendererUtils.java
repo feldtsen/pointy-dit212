@@ -39,15 +39,15 @@ public class RendererUtils {
     }
 
     public static void drawShape(GraphicsContext graphicsContext, Color color, IRotatableShape shape, Point2D position) {
-        double rotationCenterX = (shape.getWidth()) / 2;
-        double rotationCenterY = (shape.getHeight()) / 2;
+        double rotationCenterX = shape.getWidth() / 2;
+        double rotationCenterY = shape.getHeight() / 2;
 
         graphicsContext.setFill(color);
 
         graphicsContext.save();
-        graphicsContext.translate(rotationCenterX + position.getX(), rotationCenterY + position.getY());
+        graphicsContext.translate(position.getX(), position.getY());
         graphicsContext.rotate(shape.getRotation());
-        graphicsContext.translate(-rotationCenterX - position.getX(), -rotationCenterY - position.getY());
+        graphicsContext.translate(-position.getX(), -position.getY());
 
         graphicsContext.fillRect(position.getX(), position.getY(), shape.getWidth(), shape.getHeight());
         graphicsContext.restore();
