@@ -2,7 +2,6 @@ package game.model.entity.movable;
 
 
 import game.model.ILiving;
-import game.model.entity.IStrength;
 import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;
 
