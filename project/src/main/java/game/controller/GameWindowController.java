@@ -7,6 +7,7 @@ import game.model.Game;
 import game.controller.gameLoop.GameLoop;
 import game.controller.gameLoop.IGameLoop;
 import game.model.IGame;
+import game.model.ability.action.IAbilityAction;
 import game.view.Renderer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -82,6 +83,11 @@ public class GameWindowController implements Initializable {
         KeyboardInputHandler.registerAction(KeyCode.A, game.getCurrentLevel().getPlayer()::moveLeft);
         KeyboardInputHandler.registerAction(KeyCode.S, game.getCurrentLevel().getPlayer()::moveDown);
         KeyboardInputHandler.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
+        KeyboardInputHandler.registerAction(KeyCode.E, () -> {
+                //TODO: very ugly and temporary player ability activation code
+                IAbilityAction action = game.getCurrentLevel().getPlayer().activateAbility(0);
+                ((Game) game).activateAbility(action, System.nanoTime());
+        });
         KeyboardInputHandler.registerAction(KeyCode.ESCAPE, this::pauseGame);
     }
 }

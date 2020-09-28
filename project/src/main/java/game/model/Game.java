@@ -1,5 +1,6 @@
 package game.model;
 
+import game.model.ability.Shockwave;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
@@ -50,6 +51,7 @@ public class Game implements IGame {
 
         Player player = EntityFactory.basicPlayer(375, 200);
         player.setFriction(3);
+        player.addAbility(new Shockwave(1, 300, 5000, 0.1));
 
         List<Enemy> enemies = new ArrayList<>();
         Enemy e1 = EntityFactory.basicEnemy(500, 650, player, 5);
@@ -57,7 +59,7 @@ public class Game implements IGame {
         enemies.add(e1);
 
         //Enemy e2 = EntityFactory.basicEnemy(900, 850, player, 5);
-        Enemy e2 = EntityFactory.bulletEnemy(900, 850, player, 5, GameLoop.SECOND / 10, 10, 1000, 1);
+        Enemy e2 = EntityFactory.bulletEnemy(900, 850, player, 5, GameLoop.SECOND / 2, 10, 800, 1);
         e2.setFriction(3);
         enemies.add(e2);
 
@@ -71,8 +73,9 @@ public class Game implements IGame {
         return levels;
     }
 
-    //
-    private void activateAbility(IAbilityAction action, long now) {
+    //TODO: should probably not be public, for testing purposes only
+    public void activateAbility(IAbilityAction action, long now) {
+        if(action == null) return;
         activeAbilityActions.add(action);
         activationTimes.add(now);
     }
@@ -90,18 +93,6 @@ public class Game implements IGame {
         // Check for player death
         if(!currentLevel.getPlayer().isAlive()) {
             gameOver();
-        }
-
-        // Remove finished ability actions
-        // Iterate backwards to avoid problems with removing entries from list
-        for(int i = activeAbilityActions.size() - 1;  i >= 0; i--) {
-            IAbilityAction abilityAction = activeAbilityActions.get(i);
-            long activationTime = activationTimes.get(i);
-            // Check if the time since activation time exceeds the duration of the abilityAction.
-            if(now - activationTime > abilityAction.getDuration() * GameLoop.SECOND) {
-                // If true, deactivate ability.
-                deactivateAbility(i);
-            }
         }
 
         // Update player
@@ -169,7 +160,17 @@ public class Game implements IGame {
             }
         }
 
-
+        // Remove finished ability actions
+        // Iterate backwards to avoid problems with removing entries from list
+        for(int i = activeAbilityActions.size() - 1;  i >= 0; i--) {
+            IAbilityAction abilityAction = activeAbilityActions.get(i);
+            long activationTime = activationTimes.get(i);
+            // Check if the time since activation time exceeds the duration of the abilityAction.
+            if(now - activationTime > abilityAction.getDuration() * GameLoop.SECOND) {
+                // If true, deactivate ability.
+                deactivateAbility(i);
+            }
+        }
     }
 
     private void gameOver() {

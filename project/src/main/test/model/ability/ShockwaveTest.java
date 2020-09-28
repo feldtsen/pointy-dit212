@@ -18,7 +18,7 @@ import java.util.List;
 public class ShockwaveTest {
 
     Player player = EntityFactory.basicPlayer(500, 700);
-    IAbility shockwave = new Shockwave(10, 100, 1500);
+    IAbility shockwave = new Shockwave(10, 100, 1500, 0.1);
 
     Enemy enemy1 = EntityFactory.basicEnemy(500,650, player, 10);
     Enemy enemy2 = EntityFactory.basicEnemy(500, 750, player, 10);
@@ -34,6 +34,6 @@ public class ShockwaveTest {
 
     @Test
     public void EnemyPushed (){
-        player.activateAbility();
+        player.activateAbility(0);
     }
 }

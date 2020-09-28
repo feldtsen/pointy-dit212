@@ -1,6 +1,7 @@
 package game.model.entity.player;
 
 import game.model.ability.IAbility;
+import game.model.ability.action.IAbilityAction;
 import game.model.entity.movable.LivingEntity;
 import game.model.shape2d.Circle;
 import game.model.shape2d.ICircle;
@@ -22,8 +23,8 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
     }
 
     @Override
-    public boolean activateAbility() {
-        return false;
+    public IAbilityAction activateAbility(int index) {
+        return abilities.get(index).use(this, null);
     }
 
     @Override

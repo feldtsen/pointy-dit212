@@ -15,18 +15,20 @@ import java.util.List;
 public class Shockwave extends Ability{
     private final double radius;
     private final double force;
+    private final double duration;
 
-    public Shockwave(long cooldown, double radius, double force) {
+    public Shockwave(long cooldown, double radius, double force, double duration) {
         super(cooldown);
         this.radius = radius;
         this.force = force;
+        this.duration = duration;
     }
 
     public IAbilityAction createAction(IEntity<?> user, IEntity<?> target){
         return new IAbilityAction() {
             @Override
             public double getDuration() {
-                return 0;
+                return duration;
             }
 
             @Override
