@@ -6,6 +6,7 @@ import game.model.ability.Ability;
 import game.model.ability.IAbility;
 import game.model.ability.action.IAbilityAction;
 import game.model.behavior.ability.AbilityBehaviour;
+import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
 import game.model.entity.movable.MovableEntity;
 import game.model.entity.player.Player;
@@ -120,7 +121,8 @@ public class GameTest {
         assertEquals(1, player.getHitPoints() );
 
     }
-    /*
+
+
     @Test
     public void testAbilityAddedToAbilityActionList() {
         Player player = EntityFactory.basicPlayer(500, 500);
@@ -129,7 +131,7 @@ public class GameTest {
         Enemy e1 = EntityFactory.basicEnemy(500,500, player,-2);
 
         List<IAbility> abilities = new ArrayList<>();
-        abilities.add(new Ability(1, new IAbilityAction() {
+        /*abilities.add(new Ability(1, new IAbilityAction() {
             @Override
             public double getDuration() {
                 return 0;
@@ -139,12 +141,27 @@ public class GameTest {
             public void apply(ILevel level, double timePassed) {
             }
         }) {
+        });*/
+        abilities.add(new Ability(1) {
+            @Override
+            public IAbilityAction createAction(IEntity<?> user, IEntity<?> target) {
+                return new IAbilityAction() {
+                    @Override
+                    public double getDuration() {
+                        return 0;
+                    }
+
+                    @Override
+                    public void apply(ILevel level, double timePassed) {
+                    }
+                };
+            }
         });
 
         e1.setAbilityBehaviour(new AbilityBehaviour(abilities) {
             @Override
-            public IAbilityAction apply(ILevel level) {
-                return abilities.get(0).use();
+            public IAbilityAction apply(IEntity<?> user, IEntity<?> target) {
+                return abilities.get(0).use(user, target);
             }
         });
         enemies.add(e1);
@@ -159,6 +176,7 @@ public class GameTest {
         assertEquals(1, game.getActiveAbilityActions().size());
     }
 
+
     @Test
     public void testAbilityRemovedFromAbilityActionList() {
         Player player = EntityFactory.basicPlayer(500, 500);
@@ -168,22 +186,26 @@ public class GameTest {
         double duration = 0.5;
 
         List<IAbility> abilities = new ArrayList<>();
-        abilities.add(new Ability(1, new IAbilityAction() {
+        abilities.add(new Ability(1) {
             @Override
-            public double getDuration() {
-                return duration;
-            }
+            public IAbilityAction createAction(IEntity<?> user, IEntity<?> target) {
+                return new IAbilityAction() {
+                    @Override
+                    public double getDuration() {
+                        return duration;
+                    }
 
-            @Override
-            public void apply(ILevel level, double timePassed) {
+                    @Override
+                    public void apply(ILevel level, double timePassed) {
+                    }
+                };
             }
-        }) {
         });
 
         e1.setAbilityBehaviour(new AbilityBehaviour(abilities) {
             @Override
-            public IAbilityAction apply(ILevel level) {
-                return abilities.get(0).use();
+            public IAbilityAction apply(IEntity<?> user, IEntity<?> target) {
+                return abilities.get(0).use(user, target);
             }
         });
         enemies.add(e1);
@@ -206,5 +228,4 @@ public class GameTest {
 
         assertEquals(0, game.getActiveAbilityActions().size());
     }
-*/
 }
