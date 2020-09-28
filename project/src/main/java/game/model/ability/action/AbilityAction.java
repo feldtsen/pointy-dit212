@@ -1,14 +1,12 @@
 package game.model.ability.action;
 
-import game.model.entity.Entity;
 import game.model.entity.IEntity;
-import game.model.entity.movable.LivingEntity;
 import game.model.level.ILevel;
 
 public abstract class AbilityAction implements IAbilityAction{
-    IEntity<?> user; // The user of the ability.
-    IEntity<?> target; // The target of the ability (also the user in cases like shockwave etc.).
-    double duration;
+    private IEntity<?> user; // The user of the ability.
+    private IEntity<?> target; // The target of the ability (also the user in cases like shockwave etc.).
+    private double duration;
 
     public AbilityAction(IEntity<?> user, IEntity<?> target, double duration) {
         this.user = user;
