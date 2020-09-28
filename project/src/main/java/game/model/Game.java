@@ -54,7 +54,8 @@ public class Game implements IGame {
         e1.setFriction(3);
         enemies.add(e1);
 
-        Enemy e2 = EntityFactory.basicEnemy(900, 850, player, 5);
+        //Enemy e2 = EntityFactory.basicEnemy(900, 850, player, 5);
+        Enemy e2 = EntityFactory.bulletEnemy(900, 850, player, 5, GameLoop.SECOND / 10, 10, 1000, 1);
         e2.setFriction(3);
         enemies.add(e2);
 
@@ -102,7 +103,7 @@ public class Game implements IGame {
         containToBounds(player);
 
         // Check for collisions between player and projectiles. Adjust players hit points if collision occurs.
-        for (int i = currentLevel.getProjectiles().size(); i >= 0; i--) {
+        for (int i = currentLevel.getProjectiles().size() - 1; i >= 0; i--) {
             IProjectile<?> projectile = currentLevel.getProjectiles().get(i);
             projectile.update(delta, timeStep);
 
