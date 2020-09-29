@@ -59,7 +59,7 @@ to information of the level and its entities, i.e. their type (player, enemy, ob
 as well as instance variables not handled by the factory. Levels are loaded through the static class "LevelLoader"
 which parses the JSON file corresponding to a certain level ID, creates an object of type "Level" and returns this
 object to be used by the "Game" class. Each level is contained within a separate file and is only loaded when needed
-to save memory resources.
+to save memory resources. The parsing is done using the GSON library. 
 
 Future possible functionality includes storing and parsing level data as ascii to enable easier level development, 
 saving player progress made up to that point, as well as keeping top scores.  
