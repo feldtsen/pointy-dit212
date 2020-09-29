@@ -28,6 +28,7 @@ public class Shockwave extends Ability{
     }
 
     public IAbilityAction createAction(IEntity<?> user, IEntity<?> target){
+        // Anonymous implementation of an ability action is created on each use.
         return new IAbilityAction() {
             @Override
             public double getDuration() {
@@ -36,28 +37,32 @@ public class Shockwave extends Ability{
 
             @Override
             public void apply(ILevel level, double timePassed) {
-                List<IEnemy> enemies = level.getEnemies();
-                IPlayer player = level.getPlayer();
-                List<IMovable<?>> entities = new ArrayList<>(enemies);
-                entities.add(player);
+                // Collect all entities which can be affected by the ability in one list of movables.
+                List<IMovable<?>> entities = new ArrayList<>(level.getEnemies());
+                entities.add(level.getPlayer());
 
-                for(IMovable<?> entity : entities){
-                    if (user == entity) {
-                        continue;
-                    }
-                    Point2D v = entity.getPosition().subtract(user.getPosition());
-                    if (Math.pow(v.getX(),2)+ Math.pow(v.getY(),2) <= Math.pow(radius,2)){
+                // Iterate over list to check which entities are to be affected
+                for(IMovable<?> target : entities){
+                    // Do not affect user of ability
+                    if (user == target) continue;
+
+                    // Create vector pointing from user to target entity
+                    Point2D v = target.getPosition().subtract(user.getPosition());
+
+                    // Check if the target entity is within radius
+                    if (Math.pow(v.getX(), 2) + Math.pow(v.getY(), 2) <= Math.pow(radius, 2)) {
+                        // Calculate the distance between the user and the target
                         double distance = v.magnitude();
+
+                        // Calculate "power", signifying how effective the ability will be.
+                        // Power will approach 1 as the target's distance to the user approaches 0.
                         double power = 1 - distance/radius;
 
+                        // Create an acceleration vector which will be applied to the target.
                         Point2D acceleration = Utils.setMagnitude(v, power * force);
-
-                        //entity.addForce(acceleration);
-                        entity.setAcceleration(entity.getAcceleration().add(acceleration));
-
+                        target.setAcceleration(target.getAcceleration().add(acceleration));
                     }
                 }
-
             }
         };
     }

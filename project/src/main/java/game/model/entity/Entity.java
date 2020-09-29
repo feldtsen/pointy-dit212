@@ -6,7 +6,6 @@ import javafx.geometry.Point2D;
 
 
 public abstract class Entity<T extends IShape2D> implements IEntity<T> {
-    //TODO: avoid protected variable possibly?
     protected Point2D position;
     private final T shape;
 
@@ -25,6 +24,7 @@ public abstract class Entity<T extends IShape2D> implements IEntity<T> {
         return shape;
     }
 
+    // Checks collision with another entity. A helper method from the Shapes helper class is used for this purpose.
     @Override
     public <V extends IShape2D> boolean checkCollision(IEntity<V> entity) {
         return Shapes.testCollision(shape, position, entity.getShape(), entity.getPosition());

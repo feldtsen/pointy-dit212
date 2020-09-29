@@ -1,6 +1,5 @@
 package game.model.behavior;
 
-import game.model.entity.IEntity;
-
+// Conceptual marker interface, applied on anything considered to be a behavior.
 public interface IBehaviour {
 }

@@ -8,12 +8,15 @@ import game.util.Utils;
 import javafx.geometry.Point2D;
 
 public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> implements IMovable<T> {
+    // Max force is the maximum acceleration which can be applied to the movable entity (using the addForce method)
     private final double maxForce;
+    // Max speed is the maximum speed which can be reached by manipulating the entity using the addForce method
     private final double maxSpeed;
 
     private Point2D acceleration;
     private Point2D velocity;
 
+    // Friction is applied each update, effectively reducing the velocity of the movable entity with the set amount.
     private double friction;
 
     public MovableEntity(Point2D position, double maxForce, double maxSpeed, T shape) {
@@ -24,11 +27,14 @@ public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> imple
         super(position, shape);
 
         this.velocity = velocity;
+        // By default, the entity has no acceleration
         this.acceleration = new Point2D(0, 0);
 
         this.maxForce = maxForce;
         this.maxSpeed = maxSpeed;
 
+        // Friction has to be set externally. This is the case since friction might have to be updated/changed
+        // each update.
         this.friction = 0.0;
     }
 
@@ -42,7 +48,6 @@ public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> imple
         setVelocity(velocity.add(acceleration));
 
         /* Add friction to velocity, and limit the velocity to max speed */
-        //TODO: possible to simplify friction calculation?
         setVelocity(Utils.limit(velocity.add(velocity.multiply(-friction * delta * timeStep)), maxSpeed));
 
         /* Add velocity to position */

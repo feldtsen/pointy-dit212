@@ -8,11 +8,11 @@
 
 ## 1. Introduction
 
-Pointy [temporary name] is a topdown 2D game. The player is a simple geometrical shape which navigates a hostile, equally geometrical, world. In this world, the player is attacked by various hostiles which shoot different kinds of projectiles at the player. The player itself has no weapon,but a set of abilities which (with some creativity) can be used to defeat the enemies. Some of these abilities are reflection (reflecting enemy projectiles), shockwave (pushing enemies away), time manipulation (slowing down time around the player) and dash (making the player invulnerable and very fast for a short period of time).
+Pointy is a topdown 2D game. The player is a simple geometrical shape which navigates a hostile, equally geometrical, world. In this world, the player is attacked by various enemies which shoot different kinds of projectiles at the player. The player itself has no weapon, but instead a set of abilities which (with some creativity) can be used to defeat the enemies. A few of these abilities are "reflection" (reflecting enemy projectiles), "shockwave" (pushing enemies away), "time manipulation" (slowing down time around the player) and "dash" (making the player invulnerable and very fast for a short period of time).
 
 The map contains different neutral elements, such as walls, spikes and traps, which can both be dangerous for the player, or cleverly used to aid the player in their mission.
 
-The goal of the player is to defeat all the elements, reach the map exit, or perform a specific task.
+The goal of the player is to defeat all the elements, reach the map exit, or perform a specific task. The game contains multiple levels, and by defeating one level, the player can progress to the next.
 
 ### 1.1. Definitions, acronyms, abbreviations
 
@@ -29,6 +29,18 @@ here and show how they are dependent on each other and how they communicate
 You will to describe the ‘flow’ of the application at a high level. What happens if
 the application is started (and later stopped) and what the normal flow of operation
 is. Relate this to the different components (if any) in your application.
+
+The general architecture of the application is rather simple. No external servers or databases is used -- the game is all run locally on the machine of the user. 
+
+OpenJFX is used for the graphical end of the game, reading keyboard input, and handling sound. OpenJFX also manages the runnable application itself, which means a javaFX "Application" class is created to launch the game.
+
+Persistent data storage all handled locally by an external JSON-parser. More can be read below (4. Persistent Data Storage). 
+
+When the application is started, the JavaFX Application loads a game window controller using an FXML loader. This game window controller then creates a new "Game" object, a game loop, and launches the game. At this point, all stored levels, user progress, and score, is read from disk, enabling the player to keep playing from where they last left of.
+
+The player is prompted by a menu which controls the level settings, the starting and stopping of the game itself, and displaying score and other progress indicators. When the player starts the game, it will run until they stop it themselves, or until the game is finished.
+
+When the player exits the application, all progress is stored locally. The same process is reapplied when the game is opened anew.
 
 ## 3. System Design
 

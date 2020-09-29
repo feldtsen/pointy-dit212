@@ -15,6 +15,8 @@ public interface IGame extends IUpdatable {
     boolean setLevel(ILevel level);
 
     int getScore();
+
+    // This method returns true on player death.
     boolean isGameOver();
 
     ILevel getCurrentLevel();
