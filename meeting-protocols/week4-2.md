@@ -35,7 +35,7 @@ Participants: Everyone
 - Ability
     - Change implementation of behaviours
     - Anton will work on ability
-- Rework userstories as a group and create more tasks
+- Rework user stories as a group and create more tasks
 
 ## Wrap up
 - Next meeting 2020-09-28
