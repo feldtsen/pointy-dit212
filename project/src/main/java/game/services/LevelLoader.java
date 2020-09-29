@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LevelLoader implements ILevelLoader {
+public class LevelLoader {
 
     private static JsonObject jsonObject;
 
