@@ -32,17 +32,15 @@ public class AbilityTest {
     }
 
     private IAbility getAbility(long cooldown) {
-        Ability ability = new Ability(cooldown) {
+        return new Ability(cooldown) {
             @Override
             public IAbilityAction createAction(IEntity<?> user, IEntity<?> target) {
-                IAbilityAction action = new AbilityAction(user, target, 0) {
+                return new AbilityAction(0) {
                     @Override
                     public void apply(ILevel level, double timePassed) { }
                 };
-                return action;
             }
         };
-        return ability;
     }
 
 
