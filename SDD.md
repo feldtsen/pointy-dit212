@@ -54,9 +54,15 @@ an in what order
 
 ## 4. Persistent data management
 
->If your application makes use of persistent data (for example stores user profiles etc.),
-then explain how you store data (and other resources such as icons, images, audio,
-etc.).
+The application currently makes use of JSON to handle level data. The level files contain JSON objects pertaining
+to information of the level and its entities, i.e. their type (player, enemy, obstacle), variants (e.g. type of enemy) 
+as well as instance variables not handled by the factory. Levels are loaded through the static class "LevelLoader"
+which parses the JSON file corresponding to a certain level ID, creates an object of type "Level" and returns this
+object to be used by the "Game" class. Each level is contained within a separate file and is only loaded when needed
+to save memory resources.
+
+Future possible functionality includes storing and parsing level data as ascii to enable easier level development, 
+saving player progress made up to that point, as well as keeping top scores.  
 
 ## 5. Quality
 
