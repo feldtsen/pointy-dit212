@@ -14,7 +14,6 @@ public class Shapes {
     // Detects collisions between shapes using the separating axis theorem.
     public static boolean testCollision(IShape2D shape1, Point2D position1, IShape2D shape2, Point2D position2) {
 
-
         // Check if collision is possible. If not, return false.
         if (shape1.largestInnerDistance() + shape2.largestInnerDistance() < position1.distance(position2)) {
             return false;

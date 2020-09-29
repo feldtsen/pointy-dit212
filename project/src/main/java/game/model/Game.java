@@ -49,33 +49,37 @@ public class Game implements IGame {
         this(dummyLevels());
     }
 
+    // TODO: dummy levels is a temporary method used for testing. Replace with levels loaded from level loader
     public static List<ILevel> dummyLevels() {
-
-
+        // Create player with shockwave ability
         IPlayer player = EntityFactory.basicPlayer(375, 200);
         player.setFriction(3);
         player.addAbility(new Shockwave(GameLoop.SECOND * 2, 300, 100000, 0.1));
 
+        // Create basic enemy
         List<IEnemy> enemies = new ArrayList<>();
         Enemy e1 = EntityFactory.basicEnemy(500, 650, player, 5);
         e1.setFriction(3);
         enemies.add(e1);
 
-        //Enemy e2 = EntityFactory.basicEnemy(900, 850, player, 5);
+        // Create bullet enemy
         Enemy e2 = EntityFactory.bulletEnemy(900, 850, player, 5, GameLoop.SECOND / 2, 10, 800, 1);
         e2.setFriction(3);
         enemies.add(e2);
 
+        // Create empty lists for projectiles and obstacles
         List<IProjectile<?>> projectiles = new ArrayList<>();
-
         List<IObstacle> obstacles = new ArrayList<>();
 
+        // Build level(s)
         ILevel level = new Level(enemies, projectiles, obstacles, player, 1200, 800);
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
         return levels;
     }
 
+    // Activate ability adds an ability to the active ability actions list, together with the
+    // corresponding activation time.
     //TODO: should probably not be public, for testing purposes only
     public void activateAbility(IAbilityAction action, long now) {
         if(action == null) return;
@@ -83,11 +87,14 @@ public class Game implements IGame {
         activationTimes.add(now);
     }
 
+    // Deactivates (removes) an ability action at a particular index of the list.
     private void deactivateAbility(int index) {
         activeAbilityActions.remove(index);
         activationTimes.remove(index);
     }
 
+    // Update is called every game loop iteration (frame). Update is the method responsible for
+    // handling all model updates.
     @Override
     public void update(double delta, double timeStep) {
         // Nanos passed since last update
@@ -101,18 +108,22 @@ public class Game implements IGame {
         // Update player
         IPlayer player = currentLevel.getPlayer();
         player.update(delta, timeStep);
-        containToBounds(player);
+        containToBounds(player); // Ensures the player cannot leave the map
 
         // Check for collisions between player and projectiles. Adjust players hit points if collision occurs.
+        // Iterates backwards to enable removing projectiles from the list at the same time as looping.
         for (int i = currentLevel.getProjectiles().size() - 1; i >= 0; i--) {
             IProjectile<?> projectile = currentLevel.getProjectiles().get(i);
+            // Update projectile
             projectile.update(delta, timeStep);
 
+            // Remove projectile from list if out of bounds
             if(isOutOfBounds(projectile)) {
                 currentLevel.getProjectiles().remove(i);
                 continue;
             }
 
+            // Check collision with player, and reduce player hit points if collision.
             if (player.checkCollision(projectile)) {
                 player.setHitPoints(player.getHitPoints() - projectile.getStrength());
             }
@@ -121,13 +132,10 @@ public class Game implements IGame {
         // Update all enemies
         for (IEnemy enemy : currentLevel.getEnemies()) {
             enemy.update(delta, timeStep);
-            containToBounds(enemy);
+            containToBounds(enemy); // Ensure enemies cannot leave map.
 
             // Activate enemy abilities
-            IAbilityAction abilityAction = enemy.applyAbility();
-            if(abilityAction != null) {
-                activateAbility(abilityAction, now);
-            }
+            activateAbility(enemy.applyAbility(), now);
         }
 
         // Apply active abilities
@@ -146,19 +154,21 @@ public class Game implements IGame {
             for (int j = i + 1; j < currentLevel.getEnemies().size(); j++ ){
                 IEnemy e2 = currentLevel.getEnemies().get(j);
                 if (e1.checkCollision(e2)) {
-                    //TODO invent the wheel
+                    //TODO: at this point, collision is not handled at all
                     handleCollision(e1,e2);
                 }
             }
 
             // Check player-enemy collision
             if (player.checkCollision(e1)){
-                // If enemy is stronger than player, player dies :(
+                // If enemy is stronger than player, player dies
                 if (player.getStrength() < e1.getStrength()){
                     player.setHitPoints(0);
                 } else {
+                // Else, the enemy dies
                     e1.setHitPoints(0);
                     currentLevel.removeEnemy(e1);
+                    //TODO: update score?
                 }
             }
         }
@@ -176,11 +186,12 @@ public class Game implements IGame {
         }
     }
 
+    // TODO: handle player death
     private void gameOver() {
-        // TODO: handle player death
         this.gameOver = true;
     }
 
+    // Checks if an entity is out of bounds. Used for removing out of bounds projectiles
     public boolean isOutOfBounds(IEntity<?> entity) {
         return entity.getPosition().getX() < 0 || entity.getPosition().getX() >= currentLevel.getWidth() ||
                entity.getPosition().getY() < 0 || entity.getPosition().getY() >= currentLevel.getHeight();
@@ -252,10 +263,8 @@ public class Game implements IGame {
         return gameOver;
     }
 
+    //TODO: handle collision
     private void handleCollision(IEntity<?> e1, IEntity<?> e2){
-        //TODO inventing the wheel
-
-
     }
 }
 
