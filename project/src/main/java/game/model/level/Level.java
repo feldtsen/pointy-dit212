@@ -10,6 +10,8 @@ import game.model.entity.projectile.IProjectile;
 
 import java.util.List;
 
+//Holds all relevant data about a level.
+//Used by "Game" class
 public class Level implements ILevel {
 
     private final List<IEnemy> enemies;

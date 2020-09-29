@@ -3,6 +3,7 @@ import game.model.entity.Entity;
 import game.model.shape2d.Rectangle;
 import javafx.geometry.Point2D;
 
+//Basic obstacle which entities can collide with and use for cover.
 public class Wall extends Entity<Rectangle> implements IObstacle{
 
     public Wall(Point2D position, double width, double height) {

@@ -5,6 +5,8 @@ import game.model.ILiving;
 import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;
 
+//Class from which all living entities inherits.
+//Has hit points which upon reaching zero will cause the death of the entity.
 public abstract class LivingEntity<T extends IShape2D> extends MovableEntity<T> implements ILiving {
 
     private int hitPoints;
