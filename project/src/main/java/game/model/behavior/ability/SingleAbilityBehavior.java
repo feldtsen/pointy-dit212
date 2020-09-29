@@ -6,6 +6,7 @@ import game.model.entity.IEntity;
 
 import java.util.List;
 
+// Defines a simple ability behavior with only one ability, which is always applied.
 public class SingleAbilityBehavior extends AbilityBehaviour {
     public SingleAbilityBehavior(IAbility ability) {
         super(List.of(ability));
