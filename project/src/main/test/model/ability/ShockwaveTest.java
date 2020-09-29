@@ -23,7 +23,7 @@ public class ShockwaveTest {
     Enemy enemy1 = EntityFactory.basicEnemy(500,650, player, 10);
     Enemy enemy2 = EntityFactory.basicEnemy(500, 750, player, 10);
 
-    List<Enemy> enemies = new ArrayList<>(List.of(enemy1, enemy2));
+    List<IEnemy> enemies = new ArrayList<>(List.of(enemy1, enemy2));
 
     ILevel level = new Level(enemies,null,null, player, 1200, 800);
 

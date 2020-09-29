@@ -10,7 +10,9 @@ import game.model.level.ILevel;
 import game.model.shape2d.ICircle;
 import game.model.shape2d.IShape2D;
 
-public interface IEnemy extends IEntity<ICircle>, ILiving, IMovable {
+import java.time.chrono.IsoChronology;
+
+public interface IEnemy extends ILiving, IMovable<ICircle> {
     void setMovementBehaviour(IMovementBehaviour movementBehaviour);
     void setAbilityBehaviour(IAbilityBehaviour abilityBehaviour);
     boolean setTarget(IEntity<?> target);

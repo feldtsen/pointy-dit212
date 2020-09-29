@@ -6,7 +6,9 @@ import com.google.gson.JsonParser;
 import game.model.entity.Entity;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
+import game.model.entity.enemy.IEnemy;
 import game.model.entity.obstacle.IObstacle;
+import game.model.entity.player.IPlayer;
 import game.model.entity.player.Player;
 import game.model.entity.projectile.IProjectile;
 import game.model.level.Level;
@@ -21,10 +23,10 @@ public class LevelLoader implements ILevelLoader {
 
     private static JsonObject jsonObject;
 
-    private static List<Enemy> enemies;
+    private static List<IEnemy> enemies;
     private static List<IProjectile<?>> projectiles;
     private static List<IObstacle> obstacles;
-    private static Player player;
+    private static IPlayer player;
     private static double width;
     private static double height;
 
@@ -44,8 +46,8 @@ public class LevelLoader implements ILevelLoader {
 
 
     //TODO: Fix target to be dynamic as well as implement other variables
-    private static List<Enemy> loadEnemies() {
-        List<Enemy> enemies = new ArrayList<>();
+    private static List<IEnemy> loadEnemies() {
+        List<IEnemy> enemies = new ArrayList<>();
         JsonArray enemyArr = jsonObject.getAsJsonArray("Enemies");
         for (int i = 0; i < enemyArr.size(); i++) {
             double x = enemyArr.get(i).getAsJsonObject().get("x").getAsDouble();
@@ -63,7 +65,7 @@ public class LevelLoader implements ILevelLoader {
         //TODO: Implement obstacles
         return new ArrayList<>();
     }
-    private static Player loadPlayer() {
+    private static IPlayer loadPlayer() {
         double x = jsonObject.getAsJsonObject("Player").get("x").getAsDouble();
         double y = jsonObject.getAsJsonObject("Player").get("y").getAsDouble();
         return EntityFactory.basicPlayer(x,y);

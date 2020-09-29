@@ -7,7 +7,7 @@ import game.model.shape2d.IShape2D;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 
-public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> implements IMovable {
+public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> implements IMovable<T> {
     private final double maxForce;
     private final double maxSpeed;
 

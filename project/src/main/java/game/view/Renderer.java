@@ -1,6 +1,7 @@
 package game.view;
 
 import game.model.entity.enemy.Enemy;
+import game.model.entity.enemy.IEnemy;
 import game.model.entity.player.Player;
 import game.model.entity.projectile.Bullet;
 import game.model.entity.projectile.IProjectile;
@@ -34,12 +35,14 @@ public class Renderer implements IRenderer{
 
         RendererUtils.drawShape(graphicsContext, colors.get(level.getPlayer().getClass()) ,level.getPlayer().getShape(), level.getPlayer().getPosition());
 
+
         for(IProjectile<?> projectile : level.getProjectiles()) {
             //TODO: ICircle cast is temporary solution...
             RendererUtils.drawShape(graphicsContext, colors.get(projectile.getClass()), (ICircle)projectile.getShape(), projectile.getPosition());
         }
 
-        for (Enemy enemy : level.getEnemies()) {
+
+        for (IEnemy enemy : level.getEnemies()) {
             RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), enemy.getShape(), enemy.getPosition());
             RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), testRect, enemy.getPosition());
         }

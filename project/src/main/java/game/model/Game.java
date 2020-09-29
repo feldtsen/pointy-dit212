@@ -4,8 +4,10 @@ import game.model.ability.Shockwave;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
+import game.model.entity.enemy.IEnemy;
 import game.model.entity.movable.MovableEntity;
 import game.model.entity.obstacle.IObstacle;
+import game.model.entity.player.IPlayer;
 import game.model.entity.projectile.IProjectile;
 import game.controller.gameLoop.GameLoop;
 import game.model.level.ILevel;
@@ -49,11 +51,12 @@ public class Game implements IGame {
 
     public static List<ILevel> dummyLevels() {
 
-        Player player = EntityFactory.basicPlayer(375, 200);
+
+        IPlayer player = EntityFactory.basicPlayer(375, 200);
         player.setFriction(3);
         player.addAbility(new Shockwave(GameLoop.SECOND * 2, 300, 100000, 0.1));
 
-        List<Enemy> enemies = new ArrayList<>();
+        List<IEnemy> enemies = new ArrayList<>();
         Enemy e1 = EntityFactory.basicEnemy(500, 650, player, 5);
         e1.setFriction(3);
         enemies.add(e1);
@@ -96,7 +99,7 @@ public class Game implements IGame {
         }
 
         // Update player
-        Player player = currentLevel.getPlayer();
+        IPlayer player = currentLevel.getPlayer();
         player.update(delta, timeStep);
         containToBounds(player);
 
@@ -116,7 +119,7 @@ public class Game implements IGame {
         }
 
         // Update all enemies
-        for (Enemy enemy : currentLevel.getEnemies()) {
+        for (IEnemy enemy : currentLevel.getEnemies()) {
             enemy.update(delta, timeStep);
             containToBounds(enemy);
 
@@ -137,11 +140,11 @@ public class Game implements IGame {
 
         // Check collision between players and enemies, and enemies and other enemies
         for (int i = 0; i < currentLevel.getEnemies().size(); i++) {
-            Enemy e1 = currentLevel.getEnemies().get(i);
+            IEnemy e1 = currentLevel.getEnemies().get(i);
             // Loop from i + 1 to ensure collision is not checked twice for each entity pair, and to avoid checking
             // self collision checking.
             for (int j = i + 1; j < currentLevel.getEnemies().size(); j++ ){
-                Enemy e2 = currentLevel.getEnemies().get(j);
+                IEnemy e2 = currentLevel.getEnemies().get(j);
                 if (e1.checkCollision(e2)) {
                     //TODO invent the wheel
                     handleCollision(e1,e2);
@@ -184,7 +187,7 @@ public class Game implements IGame {
     }
 
     // Makes sure an entity does not leave the map bounds
-    public void containToBounds(MovableEntity<ICircle> entity) {
+    public void containToBounds(IMovable<ICircle> entity) {
         double width = currentLevel.getWidth();
         double height = currentLevel.getHeight();
 
