@@ -1,9 +1,11 @@
 package game.model;
 
+import game.model.entity.IEntity;
+import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;
 
 // IMovable is an interface for physics operations, to be applied on the object which implements the interface.
-public interface IMovable extends IPositionable, IUpdatable {
+public interface IMovable<T extends IShape2D> extends IUpdatable, IEntity<T> {
     // Offsets the object by set amount.
     void move(Point2D offset);
 

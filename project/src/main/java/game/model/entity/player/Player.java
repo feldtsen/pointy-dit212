@@ -4,6 +4,7 @@ import game.model.ability.IAbility;
 import game.model.entity.movable.LivingEntity;
 import game.model.shape2d.Circle;
 import game.model.shape2d.ICircle;
+import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;

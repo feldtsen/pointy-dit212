@@ -13,14 +13,14 @@ import java.util.List;
 
 // This interface represents a single level of the game, and manages all entities.
 public interface ILevel {
-    List<Enemy> getEnemies();
+    List<IEnemy> getEnemies();
     List<IProjectile<?>> getProjectiles();
     List<IObstacle> getObstacles();
-    Player getPlayer();
+    IPlayer getPlayer();
     double getWidth();
     double getHeight();
 
-    void removeEnemy(Enemy e);
+    void removeEnemy(IEnemy e);
     void removeObstacle(IObstacle o);
     void removeProjectile(IProjectile<?> p);
 

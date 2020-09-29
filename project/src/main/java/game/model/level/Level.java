@@ -12,14 +12,14 @@ import java.util.List;
 
 public class Level implements ILevel {
 
-    private final List<Enemy> enemies;
+    private final List<IEnemy> enemies;
     private final List<IProjectile<?>> projectiles;
     private final List<IObstacle> obstacles;
-    private final Player player;
+    private final IPlayer player;
     private final double width;
     private final double height;
 
-    public Level(List<Enemy> enemies, List<IProjectile<?>> projectiles, List<IObstacle> obstacles, Player player, double width, double height) {
+    public Level(List<IEnemy> enemies, List<IProjectile<?>> projectiles, List<IObstacle> obstacles, IPlayer player, double width, double height) {
         this.enemies = enemies;
         this.projectiles = projectiles;
         this.obstacles = obstacles;
@@ -29,7 +29,7 @@ public class Level implements ILevel {
     }
 
     @Override
-    public List<Enemy> getEnemies() {
+    public List<IEnemy> getEnemies() {
         return this.enemies;
     }
 
@@ -44,7 +44,7 @@ public class Level implements ILevel {
     }
 
     @Override
-    public Player getPlayer() {
+    public IPlayer getPlayer() {
         return this.player;
     };
 
@@ -59,7 +59,7 @@ public class Level implements ILevel {
     }
 
     @Override
-    public void removeEnemy(Enemy e) {
+    public void removeEnemy(IEnemy e) {
         enemies.remove(e);
     }
 

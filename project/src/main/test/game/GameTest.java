@@ -8,6 +8,7 @@ import game.model.ability.action.IAbilityAction;
 import game.model.behavior.ability.AbilityBehaviour;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
+import game.model.entity.enemy.IEnemy;
 import game.model.entity.movable.MovableEntity;
 import game.model.entity.player.Player;
 import game.model.level.ILevel;
@@ -67,7 +68,7 @@ public class GameTest {
     public void testUpdatePlayerLessStrength(){
         Player player = EntityFactory.basicPlayer(500, 500);
 
-        List<Enemy> enemies= new ArrayList<>();
+        List<IEnemy> enemies= new ArrayList<>();
         Enemy e1 = EntityFactory.basicEnemy(500,500, player,5);
         enemies.add(e1);
 
@@ -86,7 +87,7 @@ public class GameTest {
     public void testUpdatePlayerSameStrength(){
         Player player = EntityFactory.basicPlayer(500, 500);
 
-        List<Enemy> enemies= new ArrayList<>();
+        List<IEnemy> enemies= new ArrayList<>();
         Enemy e1 = EntityFactory.basicEnemy(500,500, player,0);
         enemies.add(e1);
 
@@ -106,7 +107,7 @@ public class GameTest {
     public void testUpdatePlayerMoreStrength(){
         Player player = EntityFactory.basicPlayer(500, 500);
 
-        List<Enemy> enemies= new ArrayList<>();
+        List<IEnemy> enemies= new ArrayList<>();
         Enemy e1 = EntityFactory.basicEnemy(500,500, player,-2);
         enemies.add(e1);
 
@@ -127,7 +128,7 @@ public class GameTest {
     public void testAbilityAddedToAbilityActionList() {
         Player player = EntityFactory.basicPlayer(500, 500);
 
-        List<Enemy> enemies= new ArrayList<>();
+        List<IEnemy> enemies= new ArrayList<>();
         Enemy e1 = EntityFactory.basicEnemy(500,500, player,-2);
 
         List<IAbility> abilities = new ArrayList<>();
@@ -181,7 +182,7 @@ public class GameTest {
     public void testAbilityRemovedFromAbilityActionList() {
         Player player = EntityFactory.basicPlayer(500, 500);
 
-        List<Enemy> enemies= new ArrayList<>();
+        List<IEnemy> enemies= new ArrayList<>();
         Enemy e1 = EntityFactory.basicEnemy(500,500, player,-2);
         double duration = 0.5;
 
