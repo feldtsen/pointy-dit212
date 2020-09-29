@@ -29,6 +29,7 @@ public class EntityFactory {
         return new Enemy(new Point2D(x,y), 50, 1000, 1000, 1,null, new SeekingBehaviour(), target, strength);
     }
 
+    //Creates an enemy with the ability of shooting bullets.
     public static Enemy bulletEnemy(double x, double y, IEntity<?> target, int strength, long frequency, double bulletRadius, double bulletSpeed, int bulletStrength) {
         ShootBullet shootBullet = new ShootBullet(frequency, bulletRadius, bulletSpeed, bulletSpeed, bulletStrength);
         Enemy enemy = basicEnemy(x, y, target, strength);
