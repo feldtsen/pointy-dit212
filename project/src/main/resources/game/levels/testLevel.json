@@ -3,36 +3,7 @@
     "width": "1200",
     "height": "800"
   },
-  "Obstacles": [
-    {
-      "type": "wall",
-      "x": "0",
-      "y": "0",
-      "length": "1200",
-      "width": "10"
-    },
-    {
-      "type": "wall",
-      "x": "0",
-      "y": "10",
-      "length": "1200",
-      "width": "10"
-    },
-    {
-      "type": "wall",
-      "x": "0",
-      "y": "0",
-      "length": "10",
-      "width": "1200"
-    },
-    {
-      "type": "wall",
-      "x": "10",
-      "y": "0",
-      "length": "10",
-      "width": "1200"
-    }
-  ],
+  "Obstacles": [],
   "Enemies": [
     {
       "x": "900",
