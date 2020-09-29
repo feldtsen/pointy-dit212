@@ -36,4 +36,9 @@ public class EntityFactory {
     public static Enemy rectangleEnemy(double x, double y, IEntity<?> target, int strength) {
         return new Enemy(new Point2D(x,y), 50, 1000, 1000, 1,null, new SeekingBehaviour(), target, strength);
     }
+
+    public static Enemy missileEnemy(double x, double y, IEntity<?> target, int strength) {
+        //TODO
+        return null;
+    }
 }
