@@ -51,7 +51,7 @@ public class Game implements IGame {
 
         Player player = EntityFactory.basicPlayer(375, 200);
         player.setFriction(3);
-        player.addAbility(new Shockwave(1, 300, 5000, 0.1));
+        player.addAbility(new Shockwave(GameLoop.SECOND * 2, 300, 100000, 0.1));
 
         List<Enemy> enemies = new ArrayList<>();
         Enemy e1 = EntityFactory.basicEnemy(500, 650, player, 5);

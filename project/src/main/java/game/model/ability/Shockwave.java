@@ -49,7 +49,8 @@ public class Shockwave extends Ability{
 
                         Point2D acceleration = Utils.setMagnitude(v, power * force);
 
-                        entity.addForce(acceleration);
+                        //entity.addForce(acceleration);
+                        entity.setAcceleration(entity.getAcceleration().add(acceleration));
 
                     }
                 }
