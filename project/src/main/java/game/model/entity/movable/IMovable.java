@@ -17,6 +17,7 @@ public interface IMovable<T extends IShape2D> extends IUpdatable, IEntity<T> {
     void setPosition(Point2D position);
     void setVelocity(Point2D velocity);
     void setAcceleration(Point2D acceleration);
+    void setMinSpeed(double minSpeed);
 
     // Friction is applied to the velocity. The friction should depend on the velocity itself.
     void setFriction(double friction);
