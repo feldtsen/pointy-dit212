@@ -1,5 +1,6 @@
 package game.controller;
 
+import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -24,17 +25,17 @@ public  class KeyboardInputHandler {
     private final Map<KeyCode, List<Action>> actions;
 
     // Init feeds the input handler a stack pane which is required for setting up key pressed and key released callbacks.
-    public static void init(StackPane gamePane) {
-        INSTANCE = new KeyboardInputHandler(gamePane);
+    public static void init(Node node) {
+        INSTANCE = new KeyboardInputHandler(node);
     }
 
-    private KeyboardInputHandler(StackPane gamePane) {
+    private KeyboardInputHandler(Node node) {
         pressedKeys = new ConcurrentSkipListSet<>();
         actions = new HashMap<>();
 
         // The register and unregister methods will be called on key press and key release, respectively.
-        gamePane.setOnKeyPressed(this::register);
-        gamePane.setOnKeyReleased(this::unregister);
+        node.setOnKeyPressed(this::register);
+        node.setOnKeyReleased(this::unregister);
     }
 
     // Simply adds a keycode to the set of currently pressed keys.
