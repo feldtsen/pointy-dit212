@@ -22,14 +22,6 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 - Topdown game - A game that is viewed from above.
 
 ## 2. System architecture
->The most overall, top level description of your application. If your application uses
-multiple components (such as servers, databases, etc.), describe their responsibilities
-here and show how they are dependent on each other and how they communicate
-(which protocols etc.)
-You will to describe the ‘flow’ of the application at a high level. What happens if
-the application is started (and later stopped) and what the normal flow of operation
-is. Relate this to the different components (if any) in your application.
-
 The general architecture of the application is rather simple. No external servers or databases is used -- the game is all run locally on the machine of the user. 
 
 OpenJFX is used for the graphical end of the game, reading keyboard input, and handling sound. OpenJFX also manages the runnable application itself, which means a javaFX "Application" class is created to launch the game.
@@ -72,6 +64,12 @@ necessary to describe the dynamic design of your application as well. You can us
 UML sequence diagram to show the different parts of your application communicate
 an in what order
 
+A few design patterns we've implemented are 
+* the singleton pattern, for the keyboard input controller.
+* the factory (method) pattern, for simplifying the creation of game entities such as players and enemies
+* the command pattern, which is used for executing actions when a key is pressed.
+* the composite pattern, allowing players and enemies to have different abilities and behaviors. The construction of these entities is simplified using the factory pattern.
+
 ## 4. Persistent data management
 
 The application currently makes use of JSON to handle level data. The level files contain JSON objects pertaining
@@ -96,13 +94,6 @@ The application is tested using unit tests with the framework JUnit. These tests
 >     - Quality tool reports, like PMD.
 
 > NOTE: Each Java, XML, etc. file should have a header comment: Author, responsibility, used by ..., uses ..., etc.
-
-
-
-### 5.1. Access control and security
-
-> If you applications has some kind of access control, for example a login, of has different user roles (admin, standard, etc.), then explain how you application manages
-this
 
 ## 6. References
 - JavaFX - https://openjfx.io/
