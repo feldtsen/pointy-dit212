@@ -23,6 +23,7 @@ public class Missile extends Projectile<ICircle> {
         this.minSpeed = minSpeed;
         this.target = target;
         this.movementBehaviour = movementBehaviour;
+        setMinSpeed(minSpeed);
     }
 
 
@@ -39,6 +40,5 @@ public class Missile extends Projectile<ICircle> {
     public void update(double delta, double timeStep) {
         movementBehaviour.apply(this, target);
         super.update(delta, timeStep);
-        setVelocity(Utils.lowerLimit(getVelocity(), minSpeed));
     }
 }

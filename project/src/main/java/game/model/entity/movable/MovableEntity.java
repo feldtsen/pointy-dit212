@@ -14,6 +14,7 @@ public abstract class MovableEntity<T extends IShape2D> extends Entity<T> implem
 
     private Point2D acceleration;
     private Point2D velocity;
+    private double minSpeed = 0;
 
     // Friction is applied each update, effectively reducing the velocity of the movable entity with the set amount.
     private double friction;
@@ -48,6 +49,9 @@ public abstract class MovableEntity<T extends IShape2D> extends Entity<T> implem
 
         /* Add friction to velocity, and limit the velocity to max speed */
         setVelocity(Utils.limit(velocity.add(velocity.multiply(-friction * delta * timeStep)), maxSpeed));
+
+        /* Limit minimum velocity to minSpeed */
+        velocity = Utils.lowerLimit(velocity, minSpeed);
 
         /* Add velocity to position */
         move(velocity.multiply(delta * timeStep));
@@ -104,5 +108,10 @@ public abstract class MovableEntity<T extends IShape2D> extends Entity<T> implem
     @Override
     public void setFriction(double friction) {
         this.friction = friction;
+    }
+
+    @Override
+    public void setMinSpeed(double minSpeed) {
+        this.minSpeed = minSpeed;
     }
 }
