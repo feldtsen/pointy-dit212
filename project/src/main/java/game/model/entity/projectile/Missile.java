@@ -38,11 +38,14 @@ public class Missile extends Projectile<ICircle> {
             // Create acceleration vector pointed towards target.
             Point2D acceleration = target.getPosition().subtract(getPosition());
 
-            // Set acceleration to maxForce.
-            acceleration = Utils.setMagnitude(acceleration, getMaxForce());
+            // Multiply acceleration with delta and timeStep and limit to maxForce.
+            acceleration = Utils.setMagnitude(acceleration.multiply(delta * timeStep), getMaxForce());
 
-            // Apply acceleration to velocity and apply lowerLimit at minSpeed.
+            // Add acceleration to velocity and set lower limit at minSpeed.
             setVelocity(Utils.lowerLimit(getVelocity().add(acceleration), minSpeed));
+
+            // Set acceleration to 0 after it has been applied.
+            setAcceleration(new Point2D(0, 0));
         }
         super.update(delta, timeStep);
     }
