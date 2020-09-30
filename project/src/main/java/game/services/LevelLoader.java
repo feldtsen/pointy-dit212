@@ -3,7 +3,6 @@ package game.services;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import game.model.entity.IEntity;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.obstacle.IObstacle;
 import game.model.entity.player.IPlayer;

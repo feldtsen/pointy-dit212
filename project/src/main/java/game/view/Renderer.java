@@ -13,45 +13,50 @@ import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 
-public class Renderer implements IRenderer{
+public class Renderer implements IRenderer {
+    // A map linking a class of objects to a particular color. Used to render different entities with different
+    // colors.
     private final HashMap<Class<?>, Color> colors = new HashMap<>();
+
+    // The graphics object used to draw on screen.
     private final GraphicsContext graphicsContext;
 
+    //TODO: for testing
     private final Rectangle testRect = new Rectangle(40, 40, 0);
 
     public Renderer(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
-        colors.put(Player.class, Color.rgb(200, 200, 200));
-        colors.put(Enemy.class, Color.rgb(100, 200, 150));
-        colors.put(Bullet.class, Color.rgb(100, 100, 100));
-        colors.put(GraphicsContext.class, Color.rgb(30, 30, 30));
+
+        // Initialize different entity classes with different colors
+        colors.put(Player.class,          Color.rgb(200, 200, 200));
+        colors.put(Enemy.class,           Color.rgb(100, 200, 150));
+        colors.put(Bullet.class,          Color.rgb(100, 100, 100));
+        colors.put(GraphicsContext.class, Color.rgb(30,  30,  30 ));
     }
 
-
+    @Override
     public void draw(ILevel level) {
+        // Clear the screen
         RendererUtils.clear(graphicsContext);
 
+        // Set background color
         RendererUtils.setBackgroundColor(graphicsContext, colors.get(graphicsContext.getClass()));
 
+        // Render player
         RendererUtils.drawShape(graphicsContext, colors.get(level.getPlayer().getClass()) ,level.getPlayer().getShape(), level.getPlayer().getPosition());
 
-
+        // Render all projectiles
         for(IProjectile<?> projectile : level.getProjectiles()) {
             //TODO: ICircle cast is temporary solution...
+            //TODO: later, all projectiles will not be circles
             RendererUtils.drawShape(graphicsContext, colors.get(projectile.getClass()), (ICircle)projectile.getShape(), projectile.getPosition());
         }
 
-
+        // Render all enemies
         for (IEnemy enemy : level.getEnemies()) {
             RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), enemy.getShape(), enemy.getPosition());
+            //TODO: test for drawing rotated shapes
             RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), testRect, enemy.getPosition());
         }
-
-
-
-        //TODO: remove this (used for testing)
-        //RendererUtils.translateRectangle(graphicsContext, testRect);
-        //testRect.setRotation(testRect.getRotation() + 1);
     }
-
 }

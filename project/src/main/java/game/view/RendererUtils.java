@@ -6,6 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class RendererUtils {
+    // Method for clearing the screen
     public static void clear(GraphicsContext graphicsContext) {
         graphicsContext.clearRect(
                 0,
@@ -15,6 +16,7 @@ public class RendererUtils {
         );
     }
 
+    // Method for setting a background color
     public static void setBackgroundColor(GraphicsContext graphicsContext, Color color) {
         graphicsContext.setFill(color);
 
@@ -28,6 +30,7 @@ public class RendererUtils {
     }
 
 
+    // Draws a particular shape (TODO: so far, just a circle) to the screen
     public static void drawShape(GraphicsContext graphicsContext, Color color, ICircle circle, Point2D position) {
         graphicsContext.setFill(color);
         graphicsContext.fillOval(
@@ -38,6 +41,7 @@ public class RendererUtils {
         );
     }
 
+    // Draws a rotatable shape to the screen
     public static void drawShape(GraphicsContext graphicsContext, Color color, IRotatableShape shape, Point2D position) {
         double rotationCenterX = shape.getWidth() / 2;
         double rotationCenterY = shape.getHeight() / 2;
@@ -56,5 +60,4 @@ public class RendererUtils {
         shape.setRotation(shape.getRotation()+1);
 
     }
-
 }
