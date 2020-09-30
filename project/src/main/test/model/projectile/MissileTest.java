@@ -1,14 +1,11 @@
 
 package model.projectile;
 
-import game.model.entity.Entity;
 import game.model.entity.movable.MovableEntity;
-import game.model.entity.projectile.IProjectile;
+import game.model.entity.movable.FollowingBehaviour;
 import game.model.entity.projectile.Missile;
 import game.model.entity.projectile.Projectile;
 import game.model.shape2d.Circle;
-import game.model.shape2d.IShape2D;
-import game.util.Utils;
 import javafx.geometry.Point2D;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -24,7 +21,7 @@ public class MissileTest {
         Point2D velocity = target.getPosition();
 
         missile = new Missile(new Point2D(0, 0), 0.1, 1, 3, 5,
-                1, velocity, target);
+                1, velocity, target, new FollowingBehaviour());
     }
 
     @Test

@@ -1,5 +1,6 @@
 package game.model.entity.projectile;
 
+import game.model.behavior.movement.IMovementBehaviour;
 import game.model.entity.IEntity;
 import game.model.shape2d.Circle;
 import game.model.shape2d.ICircle;
@@ -12,14 +13,16 @@ public class Missile extends Projectile<ICircle> {
 
     private IEntity<?> target;
     double minSpeed; // The minimum speed that the missile can have.
-    //TODO: add movement behavior. (Are movement behaviours needed?)
+    IMovementBehaviour movementBehaviour;
 
     // The responsiveness of the missile to the movement of the target is dictated by the size of maxForce. The more
     // responsive the missile should be, the larger maxForce it should have.
-    public Missile(Point2D position, double radius, double maxForce, double minSpeed, double maxSpeed, int strength, Point2D velocity, IEntity<?> target) {
+    public Missile(Point2D position, double radius, double maxForce, double minSpeed, double maxSpeed, int strength,
+                   Point2D velocity, IEntity<?> target, IMovementBehaviour movementBehaviour) {
         super(position, maxForce, maxSpeed, strength, velocity, new Circle(radius));
         this.minSpeed = minSpeed;
         this.target = target;
+        this.movementBehaviour = movementBehaviour;
     }
 
 
@@ -34,15 +37,8 @@ public class Missile extends Projectile<ICircle> {
 
     @Override
     public void update(double delta, double timeStep) {
-        if (target != null) {
-            // Create acceleration vector pointed towards target.
-            Point2D acceleration = target.getPosition().subtract(getPosition());
-            addForce(acceleration);
-        }
-
+        movementBehaviour.apply(this, target);
         super.update(delta, timeStep);
-
-        // Set lower velocity limit to minSpeed.
         setVelocity(Utils.lowerLimit(getVelocity(), minSpeed));
     }
 }
