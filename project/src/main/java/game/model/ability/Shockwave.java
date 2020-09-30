@@ -1,13 +1,8 @@
 package game.model.ability;
 
-import game.model.IMovable;
+import game.model.entity.movable.IMovable;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
-import game.model.entity.enemy.Enemy;
-import game.model.entity.enemy.IEnemy;
-import game.model.entity.movable.LivingEntity;
-import game.model.entity.player.IPlayer;
-import game.model.entity.player.Player;
 import game.model.level.ILevel;
 import game.util.Utils;
 import javafx.geometry.Point2D;

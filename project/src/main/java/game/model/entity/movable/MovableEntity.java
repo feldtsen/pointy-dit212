@@ -1,8 +1,6 @@
 package game.model.entity.movable;
 
-import game.model.IMovable;
 import game.model.entity.Entity;
-import game.model.entity.IEntity;
 import game.model.shape2d.IShape2D;
 import game.util.Utils;
 import javafx.geometry.Point2D;
