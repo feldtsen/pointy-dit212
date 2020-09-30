@@ -1,6 +1,6 @@
 package model.entity;
 
-import game.model.ILiving;
+import game.model.entity.movable.ILiving;
 import game.model.entity.movable.LivingEntity;
 import game.model.shape2d.Circle;
 import game.model.shape2d.IShape2D;
