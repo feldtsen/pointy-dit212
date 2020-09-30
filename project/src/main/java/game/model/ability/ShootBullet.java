@@ -16,7 +16,7 @@ import javafx.geometry.Point2D;
 
 import java.util.List;
 
-public class ShootBullet extends Ability {
+public class ShootBullet extends Shoot {
     private final double bulletRadius;
     private final double maxForce;
     private final double maxSpeed;
@@ -31,24 +31,13 @@ public class ShootBullet extends Ability {
     }
 
     @Override
-    // The returned AbilityAction creates and adds a bullet to the levels list of projectiles.
-    public IAbilityAction createAction(IEntity<?> user, IEntity<?> target) {
-        return new AbilityAction(0) {
+    IProjectile<?> createProjectile(IEntity<?> user, IEntity<?> target) {
+        // Gets velocity by subtracting the users position from the targets position and setting speed to max.
+        Point2D bulletVelocity = target.getPosition().subtract(user.getPosition());
+        bulletVelocity = Utils.setMagnitude(bulletVelocity, maxSpeed);
 
-            @Override
-            public void apply(ILevel level, double timePassed) {
-
-                // Gets velocity by subtracting the users position from the targets position and setting speed to max.
-                Point2D bulletVelocity = target.getPosition().subtract(user.getPosition());
-                bulletVelocity = Utils.setMagnitude(bulletVelocity, maxSpeed);
-
-                // Create new bullet.
-                Projectile<ICircle> bullet = new Bullet(user.getPosition(), bulletRadius, maxForce, maxSpeed, strength, bulletVelocity);
-
-                // Get levels list of projectiles and add bullet.
-                List<IProjectile<?>> projectiles = level.getProjectiles();
-                projectiles.add(bullet);
-            }
-        };
+        // Create new bullet.
+        Projectile<ICircle> bullet = new Bullet(user.getPosition(), bulletRadius, maxForce, maxSpeed, strength, bulletVelocity);
+        return bullet;
     }
 }
