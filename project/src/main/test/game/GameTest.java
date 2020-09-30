@@ -132,17 +132,6 @@ public class GameTest {
         Enemy e1 = EntityFactory.basicEnemy(500,500, player,-2);
 
         List<IAbility> abilities = new ArrayList<>();
-        /*abilities.add(new Ability(1, new IAbilityAction() {
-            @Override
-            public double getDuration() {
-                return 0;
-            }
-
-            @Override
-            public void apply(ILevel level, double timePassed) {
-            }
-        }) {
-        });*/
         abilities.add(new Ability(1) {
             @Override
             public IAbilityAction createAction(IEntity<?> user, IEntity<?> target) {
@@ -228,5 +217,39 @@ public class GameTest {
         game.update(1.0, 1);
 
         assertEquals(0, game.getActiveAbilityActions().size());
+    }
+
+    @Test
+    public void testPlayerFacingMouse() {
+        Player player = EntityFactory.basicPlayer(600, 400);
+
+        ILevel level = new Level(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), player, 1200, 800);
+        List<ILevel> levels = new ArrayList<>();
+        levels.add(level);
+
+        Game game = new Game(levels);
+
+        Point2D mousePosition = new Point2D(310, 515);
+        game.setPlayerFacingMouse(mousePosition);
+
+        assertEquals(mousePosition.subtract(player.getPosition()).normalize(), player.getFacingDirection());
+    }
+
+    @Test
+    public void testPlayerFacingMouseOnPlayerPosition() {
+        Player player = EntityFactory.basicPlayer(600, 400);
+
+        ILevel level = new Level(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), player, 1200, 800);
+        List<ILevel> levels = new ArrayList<>();
+        levels.add(level);
+
+        Game game = new Game(levels);
+
+        Point2D mousePosition = new Point2D(600, 400);
+
+        Point2D previousFacingDirection = player.getFacingDirection();
+        game.setPlayerFacingMouse(mousePosition);
+
+        assertEquals(previousFacingDirection, player.getFacingDirection());
     }
 }

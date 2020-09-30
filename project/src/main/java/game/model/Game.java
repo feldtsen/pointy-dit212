@@ -79,8 +79,7 @@ public class Game implements IGame {
 
     // Activate ability adds an ability to the active ability actions list, together with the
     // corresponding activation time.
-    //TODO: should probably not be public, for testing purposes only
-    public void activateAbility(IAbilityAction action, long now) {
+    private void activateAbility(IAbilityAction action, long now) {
         if(action == null) return;
         activeAbilityActions.add(action);
         activationTimes.add(now);
@@ -186,6 +185,22 @@ public class Game implements IGame {
                 deactivateAbility(i);
             }
         }
+    }
+
+    @Override
+    public boolean activatePlayerAbility(int index) {
+        IAbilityAction action = currentLevel.getPlayer().activateAbility(index);
+        if(action != null) {
+            activateAbility(action, System.nanoTime());
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void setPlayerFacingMouse(Point2D mousePosition) {
+        Point2D direction = mousePosition.subtract(currentLevel.getPlayer().getPosition());
+        currentLevel.getPlayer().setFacingDirection(direction);
     }
 
     // TODO: handle player death

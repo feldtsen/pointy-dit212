@@ -92,17 +92,21 @@ public class GameWindowController implements Initializable {
 
         // Initialize the keyboard input handler.
         KeyboardInputHandler.init(gamePane);
+        // Initialize the mouse input handler
+        MouseInputHandler.init(gamePane);
 
         // Give key codes registered by the game pane a given action
         KeyboardInputHandler.registerAction(KeyCode.W, game.getCurrentLevel().getPlayer()::moveUp);
         KeyboardInputHandler.registerAction(KeyCode.A, game.getCurrentLevel().getPlayer()::moveLeft);
         KeyboardInputHandler.registerAction(KeyCode.S, game.getCurrentLevel().getPlayer()::moveDown);
         KeyboardInputHandler.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
-        KeyboardInputHandler.registerAction(KeyCode.E, () -> {
-                //TODO: very ugly and temporary player ability activation code
-                IAbilityAction action = game.getCurrentLevel().getPlayer().activateAbility(0);
-                ((Game) game).activateAbility(action, System.nanoTime()); // Ugh, used for testing only...
-        });
         KeyboardInputHandler.registerAction(KeyCode.ESCAPE, this::pauseGame);
+        //KeyboardInputHandler.registerAction(KeyCode.E, () -> {
+        //    game.activatePlayerAbility(0);
+        //});
+
+        // Register for mouse events
+        MouseInputHandler.registerActionOnLeftClick(() -> game.activatePlayerAbility(0));
+        MouseInputHandler.registerActionOnMove(     () -> game.setPlayerFacingMouse(MouseInputHandler.getMousePosition()));
     }
 }
