@@ -49,9 +49,8 @@ public class LevelLoader {
         for (int i = 0; i < enemyArr.size(); i++) {
             double x = enemyArr.get(i).getAsJsonObject().get("x").getAsDouble();
             double y = enemyArr.get(i).getAsJsonObject().get("y").getAsDouble();
-            IEntity target = player;
             int strength = enemyArr.get(i).getAsJsonObject().get("strength").getAsInt();
-            enemies.add(EntityFactory.basicEnemy(x, y, target, strength));
+            enemies.add(EntityFactory.basicEnemy(x, y, player, strength));
         }
         return enemies;
     }

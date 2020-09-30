@@ -6,9 +6,8 @@ import javafx.scene.effect.Light;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Circle implements ICircle{
-
-    private double radius;
+public class Circle implements ICircle {
+    private final double radius;
 
     public Circle(double radius){
         this.radius = radius;

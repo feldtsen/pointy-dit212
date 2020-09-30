@@ -11,7 +11,6 @@ import javafx.geometry.Point2D;
 //Speed vector is calulated from the distance between the two positions' x and y coordinates.
 //Velocity is normalized to maxSpeed using Util limit.
 public class MovingWall extends MovableEntity<Rectangle> implements IObstacle {
-
     private final Point2D startPosition;
     private final Point2D endPosition;
 

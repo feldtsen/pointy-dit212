@@ -2,12 +2,12 @@ package game.model.entity.movable;
 
 import game.model.IMovable;
 import game.model.entity.Entity;
-import game.model.entity.IEntity;
 import game.model.shape2d.IShape2D;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 
-public abstract class MovableEntity<T extends  IShape2D> extends Entity<T> implements IMovable<T> {
+// A movable entity is any entity with a velocity and acceleration, that is, any entity affected by game physics
+public abstract class MovableEntity<T extends IShape2D> extends Entity<T> implements IMovable<T> {
     // Max force is the maximum acceleration which can be applied to the movable entity (using the addForce method)
     private final double maxForce;
     // Max speed is the maximum speed which can be reached by manipulating the entity using the addForce method

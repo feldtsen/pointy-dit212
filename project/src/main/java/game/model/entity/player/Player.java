@@ -11,6 +11,8 @@ import javafx.geometry.Point2D;
 import java.util.ArrayList;
 
 public class Player extends LivingEntity<ICircle> implements IPlayer {
+    // Unit vectors in all four directions. These are used as helper vectors
+    // for defining different movement actions.
     private final static Point2D LEFT  = new Point2D(-1, 0);
     private final static Point2D RIGHT = new Point2D(1, 0);
     private final static Point2D UP    = new Point2D(0, -1);
@@ -55,6 +57,8 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
     }
 
     private void moveDirection(Point2D direction) {
+        // Adds a force in the direction of movement. The vector is multiplied to reach the
+        // length of max force, which will be the movement acceleration of the player.
        addForce(direction.multiply(getMaxForce()));
     }
 }

@@ -24,7 +24,7 @@ public class Game implements IGame {
     private int score;
     private boolean gameOver;
 
-    private List<ILevel> levels;
+    private final List<ILevel> levels;
     private ILevel currentLevel;
 
     // This list is continuously updated with the active ability actions.

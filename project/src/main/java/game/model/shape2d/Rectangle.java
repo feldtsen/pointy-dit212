@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rectangle implements IRectangle{
-    private double width;
-    private double height;
+    private final double width;
+    private final double height;
     private double rotation;
 
     public Rectangle(double width, double height, double rotation) {

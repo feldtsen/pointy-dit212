@@ -12,14 +12,12 @@ import game.model.shape2d.ICircle;
 import javafx.geometry.Point2D;
 
 public class Enemy extends LivingEntity<ICircle> implements IEnemy {
-
-    private IEntity<?> target;
+    private IEntity<?> target; // Target may be null, if the enemy has no particular goal
     private IMovementBehaviour movementBehaviour;
     private IAbilityBehaviour abilityBehaviour;
 
     public Enemy(Point2D position, double radius, double maxForce, double maxSpeed, int hitPoints, int strength, IAbilityBehaviour abilityBehaviour, IMovementBehaviour movementBehaviour, IEntity<?> target){
         this(position, radius, maxForce, maxSpeed, hitPoints, abilityBehaviour, movementBehaviour, target, strength);
-
     }
 
     public Enemy(Point2D position, double radius, double maxForce, double maxSpeed, int hitPoints, IAbilityBehaviour abilityBehaviour, IMovementBehaviour movementBehaviour, IEntity<?> target, int strength) {
@@ -41,6 +39,7 @@ public class Enemy extends LivingEntity<ICircle> implements IEnemy {
 
     @Override
     public boolean setTarget(IEntity<?> target) {
+        // If the target is the enemy itself, return false
         if(target == this) {
             return false;
         }
@@ -50,14 +49,17 @@ public class Enemy extends LivingEntity<ICircle> implements IEnemy {
 
     @Override
     public IAbilityAction applyAbility() {
-        if(abilityBehaviour == null) return null;
+        // Do not apply ability if there is no abilityBehavior
+        if(abilityBehaviour == null) return null; // Game will disregard an ability action if null is returned
         return abilityBehaviour.apply(this, target);
     }
 
     @Override
     public void update(double delta, double timeStep) {
-        super.update(delta, timeStep);
+        // And apply movement behavior
         movementBehaviour.apply(this, target);
+        // Call movable entity update method
+        super.update(delta, timeStep);
     }
 
 }

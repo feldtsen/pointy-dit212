@@ -4,7 +4,6 @@ import game.model.shape2d.IShape2D;
 import game.model.shape2d.Shapes;
 import javafx.geometry.Point2D;
 
-
 public abstract class Entity<T extends IShape2D> implements IEntity<T> {
     protected Point2D position;
     private final T shape;

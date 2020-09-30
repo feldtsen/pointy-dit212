@@ -6,10 +6,12 @@ import game.model.shape2d.ICircle;
 import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;
 
+// Missiles are a hoaming projectile which steers towards its target.
 public class Missile extends Projectile<ICircle> {
 
     private double steering; //How fast a missile turns towards the player
     private IEntity<?> target;
+    //TODO: add movement behavior
 
     public Missile(Point2D position, double radius, double maxForce, double maxSpeed, int strength, Point2D velocity, IEntity<?> target) {
         super(position, maxForce, maxSpeed, strength, velocity, new Circle(radius));
@@ -25,7 +27,6 @@ public class Missile extends Projectile<ICircle> {
     public IEntity<?> getTarget(){
         return target;
     }
-
 
     //TODO: Use this to implement missile homing
     @Override
