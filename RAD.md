@@ -66,7 +66,7 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 - **Non-functional:** 
 
     Responsiveness:
-    - Does the enemies respond in a reasonable way?
+    - Do the enemies respond in a reasonable way?
 
     Visibility:
     - Is the enemy actions visible to the user?
@@ -101,7 +101,7 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 **Time estimate:** 1 day
 
-**Desscription:** As a player I want the ability to reflect projectiles, to protect myself and hurt hostile elements. If the ability has a cooldown, it would force me to use it strategically and introduce an interesting gameplay element.
+**Description:** As a player I want the ability to reflect projectiles, to protect myself and hurt hostile elements. If the ability has a cooldown, it would force me to use it strategically and introduce an interesting gameplay element.
 
 **Confirmation:**
 
@@ -125,7 +125,7 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 **Time estimate:** 5 days
 
-**Desscription:** As a user, I want a variety of levels, so that the gameplay doesn't become to similair.
+**Dessription:** As a user, I want a variety of levels, so that the gameplay doesn't become to similair.
 
 **Confirmation:**
 
@@ -143,7 +143,7 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 **Time estimate:** 4 days
 
-**Desscription:** As a player, I'd like to have a way to transition from one section of the game to another, to get a sense of progression.
+**Description:** As a player, I'd like to have a way to transition from one section of the game to another, to get a sense of progression.
 
 **Confirmation:**
 
@@ -193,7 +193,7 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 **Time estimate:** 1 day
 
-**Desscription:** As a player, I'd like an ability to dash, to avoid dangerous elements. If the ability has a cooldown, it would make the gameplay more interesting, and force me to be more strategic and conservative with the use of this ability.
+**Description:** As a player, I'd like an ability to dash, to avoid dangerous elements. If the ability has a cooldown, it would make the gameplay more interesting, and force me to be more strategic and conservative with the use of this ability.
 
 **Confirmation:**
 
@@ -217,7 +217,7 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 **Time estimate:** 4 days
 
-**Desscription:** As a player I need an ability to perform a shockwave so that I can push enemies away from me.
+**Description:** As a player I need an ability to perform a shockwave so that I can push enemies away from me.
 
 **Confirmation:**
 
@@ -243,7 +243,7 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 **Time estimate:** 5 days
 
-**Desscription:** As a player, I want to fight against enemies which can shoot bullets for me to avoid, to increase the difficulty of the game and make it more enjoyable to play.
+**Description:** As a player, I want to fight against enemies which can shoot bullets for me to avoid, to increase the difficulty of the game and make it more enjoyable to play.
 
 **Confirmation:**
 
@@ -269,7 +269,7 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 **Time estimate:** 5 days
 
-**Desscription:** As a player, I want to fight against enemies which can shoot homing missiles which target me as the player. This would increase the difficulty and propose a different game mechanic, making the game more fun to play.
+**Description:** As a player, I want to fight against enemies which can shoot homing missiles which target me as the player. This would increase the difficulty and propose a different game mechanic, making the game more fun to play.
 
 **Confirmation:**
 
@@ -296,7 +296,7 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 **Time estimate:** 2 days
 
-**Desscription:** As a player, I'd like a set of obstacles to navigate around, to make the gameplay more varied and strategic.
+**Description:** As a player, I'd like a set of obstacles to navigate around, to make the gameplay more varied and strategic.
 
 **Confirmation:**
 
@@ -320,7 +320,7 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 **Time estimate:** 2 days
 
-**Desscription:** As a player, I want there to exist "spikes", or dangerous, static game elements, for me to avoid. This would create more interesting gameplay, especially since also enemies could be hurt by spikes.
+**Description:** As a player, I want there to exist "spikes", or dangerous, static game elements, for me to avoid. This would create more interesting gameplay, especially since also enemies could be hurt by spikes.
 
 **Confirmation:**
 
@@ -343,7 +343,7 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 **Time estimate:** 6 days
 
-**Desscription:** As a user, I want a way to keep track of my score, so that I get motivated to improve at the game.
+**Description:** As a user, I want a way to keep track of my score, so that I get motivated to improve at the game.
 
 **Confirmation:**
 
@@ -364,7 +364,7 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 **Time estimate:** 14 days
 
-**Desscription:** As a user, I want background music, so that I get a more immersive gameplay experience.
+**Description:** As a user, I want background music, so that I get a more immersive gameplay experience.
 
 **Confirmation:**
 
@@ -395,6 +395,63 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
     
     - Do sound effects indicate which abilities have been used?
     
+---
+**Story Identifier:** STK017
+
+**Story Name:** Slowmotion
+
+**Time estimate:** 4 days
+
+
+**Description:** As a player, I need an ability that lets me slow the environment around me so that I can escape dangers more easily.
+
+**Confirmation**
+
+List all acceptance criteria; you should be able to test/confirm these.
+
+**Functional**
+
+    - Can I push a button and have the ability function reliably?
+    - Is everything around me slowed down when using the ability?
+
+**Non-functional**
+
+    Gameplay
+    - Is there a clear benefit to using the ability?
+
+    Availability
+    - Can I see when my ability is available and when it's not?
+    - Can I easily figure out how my to access my ability?
+
+    Usability
+    - Is my ability easily accessible?
+    - Can I easily figure out how my ability works? 
+    
+---
+**Story Identifier:** STK018
+
+**Story Name:** Moving obstacles
+
+**Time estimate:** 1 days
+
+**Description:** As a player, I want there to exist moving game elements which would make for a more dynamic gameplay.
+
+**Confirmation**
+
+**Functional**
+
+    - Do obstacles move?
+    - Do obtacles stop entities only when they are in that exact position?
+
+**Non-functional**
+
+    Gameplay
+    - Can I use the moving obstacles to my advantage?
+    
+    Visibility
+    - Can I understand how the obstacle moves?
+
+       
 ## 2.2. Definition of done
 For a user story to be considered to be done, the following criteria have to be fullfilled:
 
