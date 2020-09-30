@@ -13,11 +13,6 @@ import java.util.concurrent.ConcurrentSkipListSet;
 public  class KeyboardInputHandler {
     private static KeyboardInputHandler INSTANCE = null; // Global instance
 
-    // Helper interface for defining an action which is to be applied on a certain keyboard input.
-    public interface Action {
-        void apply();
-    }
-
     // Set containing all the currently pressed keys.
     private final Set<KeyCode> pressedKeys;
     // Map of actions associated with each pressed key. If a key is pressed, its corresponding actions
