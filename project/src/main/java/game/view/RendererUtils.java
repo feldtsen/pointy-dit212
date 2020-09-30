@@ -42,7 +42,7 @@ public class RendererUtils {
     }
 
     // Draws a rotatable shape to the screen
-    public static void drawShape(GraphicsContext graphicsContext, Color color, IRotatableShape shape, Point2D position) {
+    public static void drawShape(GraphicsContext graphicsContext, Color color, IShape2D shape, Point2D position) {
         double rotationCenterX = shape.getWidth() / 2;
         double rotationCenterY = shape.getHeight() / 2;
 

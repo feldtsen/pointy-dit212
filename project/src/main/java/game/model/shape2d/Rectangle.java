@@ -93,8 +93,6 @@ public class Rectangle implements IRectangle{
         double halfWidth = width/2;
 
         // Get distance to corner by using Pythagoras theorem.
-        double distance = Math.sqrt(Math.pow(halfHeight, 2) + Math.pow(halfWidth, 2));
-
-        return distance;
+        return Math.sqrt(Math.pow(halfHeight, 2) + Math.pow(halfWidth, 2));
     }
 }

@@ -25,4 +25,12 @@ public interface IShape2D {
 
     // Returns the largest internal distance from the center point of the shape.
     double largestInnerDistance();
+
+    // The rotation of the shape in radians
+    double getRotation();
+    void setRotation(double rotation);
+
+    // The (max) width and height of the shape
+    double getWidth();
+    double getHeight();
 }
