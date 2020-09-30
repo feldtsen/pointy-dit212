@@ -20,12 +20,9 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
 
     private final ArrayList<IAbility> abilities;
 
-    private Point2D facingDirection;
-
     public Player(Point2D position, double radius, double responsiveness, double maxSpeed, int strength) {
         super(position, responsiveness, maxSpeed, 1, new Circle(radius), strength);
         this.abilities = new ArrayList<>();
-        this.facingDirection = new Point2D(0, -1); // Default facing direction is straight up
     }
 
     @Override
@@ -63,16 +60,5 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
         // Adds a force in the direction of movement. The vector is multiplied to reach the
         // length of max force, which will be the movement acceleration of the player.
        addForce(direction.multiply(getMaxForce()));
-    }
-
-    public void setFacingDirection(Point2D facingDirection) {
-        // If no direction, return
-        if(facingDirection.getX() == 0 && facingDirection.getY() == 0) return;
-        // Set facing direction to normalized version of argument
-        this.facingDirection = facingDirection.normalize();
-    }
-
-    public Point2D getFacingDirection() {
-        return facingDirection;
     }
 }

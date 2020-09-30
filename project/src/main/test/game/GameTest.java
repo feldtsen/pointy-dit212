@@ -16,6 +16,7 @@ import game.model.level.Level;
 import game.model.shape2d.Circle;
 import game.model.shape2d.ICircle;
 import game.services.EntityFactory;
+import game.util.Utils;
 import javafx.geometry.Point2D;
 import org.junit.Before;
 import org.junit.Test;
@@ -232,7 +233,11 @@ public class GameTest {
         Point2D mousePosition = new Point2D(310, 515);
         game.setPlayerFacingMouse(mousePosition);
 
-        assertEquals(mousePosition.subtract(player.getPosition()).normalize(), player.getFacingDirection());
+        Point2D expected = mousePosition.subtract(player.getPosition()).normalize();
+        Point2D actual = Utils.vectorFromHeading(player.getShape().getRotation(), 1.0);
+
+        assertEquals(expected.getX(), actual.getX(), 0.00000001);
+        assertEquals(expected.getY(), actual.getY(), 0.00000001);
     }
 
     @Test
@@ -247,9 +252,9 @@ public class GameTest {
 
         Point2D mousePosition = new Point2D(600, 400);
 
-        Point2D previousFacingDirection = player.getFacingDirection();
+        double previousFacingDirection = player.getShape().getRotation();
         game.setPlayerFacingMouse(mousePosition);
 
-        assertEquals(previousFacingDirection, player.getFacingDirection());
+        assertEquals(previousFacingDirection, player.getShape().getRotation(), 0.0);
     }
 }

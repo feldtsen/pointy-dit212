@@ -14,6 +14,7 @@ import game.model.level.ILevel;
 import game.model.level.Level;
 import game.model.shape2d.ICircle;
 import game.services.EntityFactory;
+import game.util.Utils;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
@@ -200,7 +201,8 @@ public class Game implements IGame {
     @Override
     public void setPlayerFacingMouse(Point2D mousePosition) {
         Point2D direction = mousePosition.subtract(currentLevel.getPlayer().getPosition());
-        currentLevel.getPlayer().setFacingDirection(direction);
+        double angle = Utils.heading(direction);
+        currentLevel.getPlayer().getShape().setRotation(angle);
     }
 
     // TODO: handle player death

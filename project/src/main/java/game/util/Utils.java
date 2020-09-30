@@ -38,4 +38,15 @@ public class Utils {
             return vector;
         }
     }
+
+    // Calculates the heading angle of a vector
+    public static double heading(Point2D vector) {
+        double a = Math.atan2(vector.getY(), vector.getX());
+        return (2 * Math.PI + a) % (2 * Math.PI);
+    }
+
+    // Creates a vector of a particular angle and length
+    public static Point2D vectorFromHeading(double heading, double length) {
+        return new Point2D(Math.cos(heading), Math.sin(heading)).multiply(length);
+    }
 }

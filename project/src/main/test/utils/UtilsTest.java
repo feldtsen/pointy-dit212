@@ -4,6 +4,8 @@ import game.util.Utils;
 import javafx.geometry.Point2D;
 import org.junit.Test;
 
+import java.nio.channels.Pipe;
+
 import static org.junit.Assert.assertEquals;
 
 public class UtilsTest {
@@ -69,5 +71,29 @@ public class UtilsTest {
     @Test(expected = IllegalArgumentException.class)
     public void testLimitNegativeLimit() {
         Utils.limit(new Point2D(1, 1), -2);
+    }
+
+    @Test
+    public void testHeading() {
+        for(int i = 0; i < 100; i++) {
+            double angle = Math.random() * Math.PI * 2;
+            double x = Math.cos(angle);
+            double y = Math.sin(angle);
+
+            double heading = Utils.heading(new Point2D(x, y));
+            assertEquals(angle, heading, 0.0000001);
+        }
+    }
+
+    @Test
+    public void testFromHeading() {
+        for(int i = 0; i < 100; i++) {
+            double angle = Math.random() * Math.PI * 2;
+            double length = Math.abs(Math.random() * 10);
+
+            Point2D vector = Utils.vectorFromHeading(angle, length);
+            assertEquals(angle, Utils.heading(vector), 0.00000001);
+            assertEquals(length, vector.magnitude(), 0.00000001);
+        }
     }
 }

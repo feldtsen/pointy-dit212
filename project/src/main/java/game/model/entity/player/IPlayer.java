@@ -5,16 +5,11 @@ import game.model.entity.movable.IMovable;
 import game.model.ability.IAbility;
 import game.model.ability.action.IAbilityAction;
 import game.model.shape2d.ICircle;
-import javafx.geometry.Point2D;
 
 // Interface defining the actions and abilities of the player.
 public interface IPlayer extends ILiving, IMovable<ICircle> {
     // Activates an ability at a particular index. A player might have multiple abilities.
     IAbilityAction activateAbility(int index);
-
-    // Sets the facing direction of the player
-    void setFacingDirection(Point2D direction);
-    Point2D getFacingDirection();
 
     // Methods defining how a player moves across the screen
     void moveUp();
