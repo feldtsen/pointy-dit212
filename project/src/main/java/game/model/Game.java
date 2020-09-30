@@ -117,8 +117,8 @@ public class Game implements IGame {
             // Update projectile
             projectile.update(delta, timeStep);
 
-            // Remove projectile from list if out of bounds
-            if(isOutOfBounds(projectile)) {
+            // Remove projectile from list if destroyed or out of bounds
+            if(projectile.isDestroyed() || isOutOfBounds(projectile)) {
                 currentLevel.getProjectiles().remove(i);
                 continue;
             }
@@ -154,7 +154,6 @@ public class Game implements IGame {
             for (int j = i + 1; j < currentLevel.getEnemies().size(); j++ ){
                 IEnemy e2 = currentLevel.getEnemies().get(j);
                 if (e1.checkCollision(e2)) {
-                    //TODO: at this point, collision is not handled at all
                     handleCollision(e1,e2);
                 }
             }
@@ -165,11 +164,15 @@ public class Game implements IGame {
                 if (player.getStrength() < e1.getStrength()){
                     player.setHitPoints(0);
                 } else {
-                // Else, the enemy dies
+                    // Else, the enemy dies and the score is updated
+                    score += e1.getStrength();
                     e1.setHitPoints(0);
-                    currentLevel.removeEnemy(e1);
-                    //TODO: update score?
                 }
+            }
+
+            // Check if enemy is dead
+            if(!e1.isAlive()) {
+                currentLevel.removeEnemy(e1);
             }
         }
 
