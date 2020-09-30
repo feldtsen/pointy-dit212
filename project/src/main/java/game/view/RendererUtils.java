@@ -60,4 +60,11 @@ public class RendererUtils {
         shape.setRotation(shape.getRotation()+1);
 
     }
+
+    // Draws a line from a start to stop
+    public static void drawLine(GraphicsContext graphicsContext, Color color, Point2D start, Point2D stop, double width) {
+        graphicsContext.setStroke(color);
+        graphicsContext.setLineWidth(width);
+        graphicsContext.strokeLine(start.getX(), start.getY(), stop.getX(), stop.getY());
+    }
 }

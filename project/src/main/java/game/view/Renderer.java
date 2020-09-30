@@ -8,6 +8,8 @@ import game.model.entity.projectile.IProjectile;
 import game.model.level.ILevel;
 import game.model.shape2d.ICircle;
 import game.model.shape2d.Rectangle;
+import game.util.Utils;
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -43,7 +45,15 @@ public class Renderer implements IRenderer {
         RendererUtils.setBackgroundColor(graphicsContext, colors.get(graphicsContext.getClass()));
 
         // Render player
-        RendererUtils.drawShape(graphicsContext, colors.get(level.getPlayer().getClass()) ,level.getPlayer().getShape(), level.getPlayer().getPosition());
+        RendererUtils.drawShape(graphicsContext, colors.get(level.getPlayer().getClass()), level.getPlayer().getShape(), level.getPlayer().getPosition());
+
+        // TODO: temporary testing code, to show facing direction of player
+        Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), 100);
+        RendererUtils.drawLine(graphicsContext,
+                colors.get(level.getPlayer().getClass()),
+                level.getPlayer().getPosition(),
+                level.getPlayer().getPosition().add(direction),
+                2);
 
         // Render all projectiles
         for(IProjectile<?> projectile : level.getProjectiles()) {

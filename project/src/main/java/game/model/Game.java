@@ -27,6 +27,8 @@ public class Game implements IGame {
     private final List<ILevel> levels;
     private ILevel currentLevel;
 
+    private Point2D playerFacingPosition;
+
     // This list is continuously updated with the active ability actions.
     // An action is removed when it's duration has run out.
     private final List<IAbilityAction> activeAbilityActions;
@@ -43,6 +45,8 @@ public class Game implements IGame {
 
         this.activeAbilityActions = new ArrayList<>();
         this.activationTimes = new ArrayList<>();
+
+        this.playerFacingPosition = new Point2D(currentLevel.getWidth()/2, currentLevel.getHeight()/2); // Default direciton
     }
 
     public Game() {
@@ -108,6 +112,11 @@ public class Game implements IGame {
         IPlayer player = currentLevel.getPlayer();
         player.update(delta, timeStep);
         containToBounds(player); // Ensures the player cannot leave the map
+
+        // Sett the facing direction of the player
+        Point2D direction = playerFacingPosition.subtract(player.getPosition());
+        double angle = Utils.heading(direction);
+        player.getShape().setRotation(angle);
 
         // Check for collisions between player and projectiles. Adjust players hit points if collision occurs.
         // Iterates backwards to enable removing projectiles from the list at the same time as looping.
@@ -199,10 +208,8 @@ public class Game implements IGame {
     }
 
     @Override
-    public void setPlayerFacingMouse(Point2D mousePosition) {
-        Point2D direction = mousePosition.subtract(currentLevel.getPlayer().getPosition());
-        double angle = Utils.heading(direction);
-        currentLevel.getPlayer().getShape().setRotation(angle);
+    public void setPlayerFacingPosition(Point2D playerFacingPosition) {
+        this.playerFacingPosition = playerFacingPosition;
     }
 
     // TODO: handle player death

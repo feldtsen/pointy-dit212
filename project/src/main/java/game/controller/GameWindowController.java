@@ -7,7 +7,6 @@ import game.model.Game;
 import game.controller.gameLoop.GameLoop;
 import game.controller.gameLoop.IGameLoop;
 import game.model.IGame;
-import game.model.ability.action.IAbilityAction;
 import game.view.Renderer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -107,6 +106,6 @@ public class GameWindowController implements Initializable {
 
         // Register for mouse events
         MouseInputHandler.registerActionOnLeftClick(() -> game.activatePlayerAbility(0));
-        MouseInputHandler.registerActionOnMove(     () -> game.setPlayerFacingMouse(MouseInputHandler.getMousePosition()));
+        MouseInputHandler.registerActionOnMove(     () -> game.setPlayerFacingPosition(MouseInputHandler.getMousePosition()));
     }
 }

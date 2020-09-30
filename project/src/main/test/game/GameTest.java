@@ -1,6 +1,5 @@
 package game;
 
-import game.controller.gameLoop.GameLoop;
 import game.model.Game;
 import game.model.ability.Ability;
 import game.model.ability.IAbility;
@@ -231,7 +230,9 @@ public class GameTest {
         Game game = new Game(levels);
 
         Point2D mousePosition = new Point2D(310, 515);
-        game.setPlayerFacingMouse(mousePosition);
+        game.setPlayerFacingPosition(mousePosition);
+
+        game.update(1.0, 1.0);
 
         Point2D expected = mousePosition.subtract(player.getPosition()).normalize();
         Point2D actual = Utils.vectorFromHeading(player.getShape().getRotation(), 1.0);
@@ -253,7 +254,9 @@ public class GameTest {
         Point2D mousePosition = new Point2D(600, 400);
 
         double previousFacingDirection = player.getShape().getRotation();
-        game.setPlayerFacingMouse(mousePosition);
+        game.setPlayerFacingPosition(mousePosition);
+
+        game.update(1.0, 1.0);
 
         assertEquals(previousFacingDirection, player.getShape().getRotation(), 0.0);
     }
