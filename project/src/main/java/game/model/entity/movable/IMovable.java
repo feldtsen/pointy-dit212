@@ -1,5 +1,6 @@
-package game.model;
+package game.model.entity.movable;
 
+import game.model.IUpdatable;
 import game.model.entity.IEntity;
 import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;

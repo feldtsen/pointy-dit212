@@ -1,6 +1,5 @@
 package game.model.entity.movable;
 
-import game.model.IMovable;
 import game.model.entity.Entity;
 import game.model.shape2d.IShape2D;
 import game.util.Utils;

@@ -1,4 +1,4 @@
-package game.model;
+package game.model.entity.movable;
 
 import game.model.entity.IStrength;
 

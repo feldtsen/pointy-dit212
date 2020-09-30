@@ -1,8 +1,6 @@
 package game.services;
 
 import game.model.ability.ShootBullet;
-import game.model.ability.action.IAbilityAction;
-import game.model.behavior.ability.AbilityBehaviour;
 import game.model.behavior.ability.SingleAbilityBehavior;
 import game.model.behavior.movement.SeekingBehaviour;
 import game.model.entity.IEntity;
@@ -10,7 +8,6 @@ import game.model.entity.enemy.Enemy;
 import game.model.entity.player.Player;
 import javafx.geometry.Point2D;
 
-import java.util.List;
 
 
 public class EntityFactory {

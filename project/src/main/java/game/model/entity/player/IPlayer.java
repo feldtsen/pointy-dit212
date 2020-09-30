@@ -1,7 +1,7 @@
 package game.model.entity.player;
 
-import game.model.ILiving;
-import game.model.IMovable;
+import game.model.entity.movable.ILiving;
+import game.model.entity.movable.IMovable;
 import game.model.ability.IAbility;
 import game.model.ability.action.IAbilityAction;
 import game.model.shape2d.ICircle;
