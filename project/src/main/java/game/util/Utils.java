@@ -26,4 +26,16 @@ public class Utils {
             return vector;
         }
     }
+
+    // Sets the magnitude of vector to minMagnitude if vector.magnitude subceeds minMagnitude.
+    public static Point2D lowerLimit(Point2D vector, double minMagnitude) {
+        if (vector == null || minMagnitude < 0) throw new IllegalArgumentException();
+
+        if (Math.pow(vector.getX(), 2) + Math.pow(vector.getY(), 2) > minMagnitude * minMagnitude) {
+            return setMagnitude(vector, minMagnitude);
+        }
+        else {
+            return vector;
+        }
+    }
 }
