@@ -31,6 +31,17 @@ public class RendererUtils {
     }
 
 
+    // Draws a particular shape (TODO: so far, just a circle) to the screen
+    public static void drawShape(GraphicsContext graphicsContext, Color color, ICircle circle, Point2D position) {
+        graphicsContext.setFill(color);
+        graphicsContext.fillOval(
+                position.getX() - circle.getRadius(),
+                position.getY() - circle.getRadius(),
+                2*circle.getRadius(),
+                2*circle.getRadius()
+        );
+    }
+
     // Draws a rotatable shape to the screen
     public static void drawShape(GraphicsContext graphicsContext, Color color, IShape2D shape, Point2D position) {
         double rotationCenterX = shape.getWidth() / 2;

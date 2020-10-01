@@ -69,7 +69,8 @@ public class Renderer implements IRenderer {
             testRect.setRotation(radians);
             enemy.getShape().setRotation(radians);
 
-            Point2D direction2 = Utils.vectorFromHeading(enemy.getShape().getRotation(), 100);
+            // TODO: visual indicator for testing
+            Point2D direction2 = Utils.vectorFromHeading(enemy.getShape().getRotation(), 60);
             RendererUtils.drawLine(graphicsContext,
                     colors.get(enemy.getClass()),
                     enemy.getPosition(),
@@ -79,7 +80,6 @@ public class Renderer implements IRenderer {
 
             //RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), enemy.getShape(), enemy.getPosition());
             //TODO: test for drawing rotated shapes
-
             RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), testRect, enemy.getPosition());
         }
     }
