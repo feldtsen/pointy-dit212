@@ -8,6 +8,7 @@ import game.model.shape2d.ICircle;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends LivingEntity<ICircle> implements IPlayer {
     // Unit vectors in all four directions. These are used as helper vectors
@@ -17,7 +18,7 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
     private final static Point2D UP    = new Point2D(0, -1);
     private final static Point2D DOWN  = new Point2D(0, 1);
 
-    private final ArrayList<IAbility> abilities;
+    private final List<IAbility> abilities;
 
     public Player(Point2D position, double radius, double responsiveness, double maxSpeed, int strength) {
         super(position, responsiveness, maxSpeed, 1, new Circle(radius), strength);

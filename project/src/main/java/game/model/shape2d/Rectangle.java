@@ -1,5 +1,6 @@
 package game.model.shape2d;
 
+import game.util.Shapes;
 import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;

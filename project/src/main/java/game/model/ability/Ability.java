@@ -39,7 +39,7 @@ public abstract class Ability implements IAbility{
     }
 
     // This method will be implemented by all ability implementations.
-    public abstract IAbilityAction createAction(IEntity<?> user, IEntity<?> target);
+    protected abstract IAbilityAction createAction(IEntity<?> user, IEntity<?> target);
 }
 
 

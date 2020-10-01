@@ -7,9 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-/**
- * JavaFX App
- */
 // Top level class for initializing the application
 public class App extends Application {
 

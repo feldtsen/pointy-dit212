@@ -24,7 +24,7 @@ public class ShootBullet extends Shoot {
     }
 
     @Override
-    IProjectile<?> createProjectile(IEntity<?> user, IEntity<?> target) {
+    protected IProjectile<?> createProjectile(IEntity<?> user, IEntity<?> target) {
         // Gets velocity by subtracting the users position from the targets position and setting speed to max.
         Point2D bulletVelocity = target.getPosition().subtract(user.getPosition());
         bulletVelocity = Utils.setMagnitude(bulletVelocity, maxSpeed);

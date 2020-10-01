@@ -33,5 +33,5 @@ public abstract class Shoot extends Ability {
     }
 
     // Concrete subclasses will implement createProjectile to determine what kind of projectiles the Ability should add.
-    abstract IProjectile<?> createProjectile(IEntity<?> user, IEntity<?> target);
+    protected abstract IProjectile<?> createProjectile(IEntity<?> user, IEntity<?> target);
 }
