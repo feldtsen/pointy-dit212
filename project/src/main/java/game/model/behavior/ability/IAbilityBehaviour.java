@@ -17,4 +17,6 @@ public interface IAbilityBehaviour extends IBehaviour {
     // "user" is the entity which applies the ability, "target" is its target. Target may be null, of
     // an ability behavior has no particular target.
     IAbilityAction apply(IEntity<?> user, IEntity<?> target);
+
+    List<IAbility> getAbilities();
 }
