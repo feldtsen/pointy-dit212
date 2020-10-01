@@ -64,7 +64,8 @@ necessary to describe the dynamic design of your application as well. You can us
 UML sequence diagram to show the different parts of your application communicate
 an in what order
 
-A few design patterns we've implemented are 
+A few design patterns we've implemented are
+* MVP (Model View Presenter) for separating game logic, user input and graphical interface.
 * the singleton pattern, for the keyboard input controller.
 * the factory (method) pattern, for simplifying the creation of game entities such as players and enemies
 * the command pattern, which is used for executing actions when a key is pressed.
