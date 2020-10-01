@@ -1,6 +1,7 @@
 package game.view;
 
 import game.model.shape2d.*;
+import game.util.Utils;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -49,7 +50,7 @@ public class RendererUtils {
         graphicsContext.save();
 
         graphicsContext.translate(position.getX(), position.getY() );
-        graphicsContext.rotate(shape.getRotation());
+        graphicsContext.rotate(Utils.radianToDegrees(shape.getRotation()));
         graphicsContext.translate(-position.getX() - rotationCenterX, -position.getY() - rotationCenterY);
 
         graphicsContext.setFill(color);

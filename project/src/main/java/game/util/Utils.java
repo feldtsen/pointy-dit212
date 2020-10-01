@@ -49,4 +49,10 @@ public class Utils {
     public static Point2D vectorFromHeading(double heading, double length) {
         return new Point2D(Math.cos(heading), Math.sin(heading)).multiply(length);
     }
+
+    // Converts radians to degrees
+    public static double radianToDegrees(double radians) {
+        return radians * (180 / Math.PI);
+    }
+
 }

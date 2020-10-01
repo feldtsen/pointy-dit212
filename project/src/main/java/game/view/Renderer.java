@@ -65,12 +65,13 @@ public class Renderer implements IRenderer {
         // Render all enemies
         for (IEnemy enemy : level.getEnemies()) {
             double radians = Utils.heading(enemy.getVelocity());
-            double degrees = radians * ( 180 / Math.PI );
 
-            testRect.setRotation(degrees);
-            enemy.getShape().setRotation(degrees);
+            testRect.setRotation(radians);
+            enemy.getShape().setRotation(radians);
+
 
             System.out.println(enemy.getShape().getRotation());
+
 
             Point2D direction2 = Utils.vectorFromHeading(enemy.getShape().getRotation(), 100);
             RendererUtils.drawLine(graphicsContext,
