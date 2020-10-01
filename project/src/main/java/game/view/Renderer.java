@@ -68,6 +68,16 @@ public class Renderer implements IRenderer {
             double degrees = radians * ( 180 / Math.PI );
 
             testRect.setRotation(degrees);
+            enemy.getShape().setRotation(degrees);
+
+            System.out.println(enemy.getShape().getRotation());
+
+            Point2D direction2 = Utils.vectorFromHeading(enemy.getShape().getRotation(), 100);
+            RendererUtils.drawLine(graphicsContext,
+                    colors.get(enemy.getClass()),
+                    enemy.getPosition(),
+                    enemy.getPosition().add(direction2),
+                    2);
 
 
             //RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), enemy.getShape(), enemy.getPosition());
