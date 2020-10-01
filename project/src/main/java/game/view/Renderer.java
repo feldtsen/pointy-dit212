@@ -8,6 +8,7 @@ import game.model.entity.projectile.IProjectile;
 import game.model.level.ILevel;
 import game.model.shape2d.ICircle;
 import game.model.shape2d.Rectangle;
+import game.model.shape2d.Triangle;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -26,6 +27,7 @@ public class Renderer implements IRenderer {
 
     //TODO: for testing
     private final Rectangle testRect = new Rectangle(100, 100, 0);
+    private final Triangle testTriangle = new Triangle(100, 100, 0);
 
     public Renderer(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
@@ -69,6 +71,7 @@ public class Renderer implements IRenderer {
 
             testRect.setRotation(radians);
             enemy.getShape().setRotation(radians);
+            testTriangle.setRotation(radians);
 
             // TODO: visual indicator for testing
             Point2D direction2 = Utils.vectorFromHeading(enemy.getShape().getRotation(), 80);
@@ -82,8 +85,8 @@ public class Renderer implements IRenderer {
             //RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), enemy.getShape(), enemy.getPosition());
             //TODO: test for drawing rotated shapes
             RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), testRect, enemy.getPosition());
+            RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), testTriangle, enemy.getPosition());
         }
 
-        graphicsContext.fillPolygon(new double[]{100, 150, 125}, new double[]{100, 100, 50}, 3);
     }
 }

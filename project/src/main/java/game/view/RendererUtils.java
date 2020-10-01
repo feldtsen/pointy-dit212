@@ -59,6 +59,36 @@ public class RendererUtils {
 
 
     }
+    public static void drawShape(GraphicsContext graphicsContext, Color color, Triangle shape, Point2D position) {
+        double rotationCenterX = shape.getWidth() / 2;
+        double rotationCenterY = shape.getHeight() / 2;
+
+
+
+        graphicsContext.save();
+
+        graphicsContext.translate(position.getX(), position.getY() );
+        graphicsContext.rotate(Utils.radianToDegrees(shape.getRotation()));
+        graphicsContext.translate(-position.getX() - rotationCenterX, -position.getY() - rotationCenterY );
+
+        graphicsContext.setFill(Color.RED);
+        /*
+        graphicsContext.fillPolygon(
+                new double[]{100, 100 + shape.getWidth(), 100 + (shape.getWidth()/2)},
+                new double[]{100, 100,                    100 - shape.getHeight()},
+                3);
+         */
+
+        graphicsContext.fillPolygon(
+                new double[]{position.getX(), position.getX(),                         position.getX() + shape.getWidth()},
+                new double[]{position.getY(), position.getY() + shape.getHeight(),     position.getY() + (shape.getHeight()/2)},
+                3);
+
+
+        graphicsContext.restore();
+
+
+    }
 
     // Draws a line from a start to stop
     public static void drawLine(GraphicsContext graphicsContext, Color color, Point2D start, Point2D stop, double width) {
