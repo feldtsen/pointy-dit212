@@ -16,6 +16,7 @@ import javafx.geometry.Point2D;
 
 import java.util.List;
 
+// Ability for shooting projectiles
 public abstract class Shoot extends Ability {
 
     public Shoot(long cooldown) {

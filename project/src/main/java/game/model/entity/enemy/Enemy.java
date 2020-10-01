@@ -21,6 +21,7 @@ public class Enemy extends LivingEntity<ICircle> implements IEnemy {
     }
 
     public Enemy(Point2D position, double radius, double maxForce, double maxSpeed, int hitPoints, IAbilityBehaviour abilityBehaviour, IMovementBehaviour movementBehaviour, IEntity<?> target, int strength) {
+        // All enemies have a circle shape
         super(position, maxForce, maxSpeed, hitPoints, new Circle(radius),strength);
         this.abilityBehaviour = abilityBehaviour;
         this.movementBehaviour = movementBehaviour;

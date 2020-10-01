@@ -11,8 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shockwave extends Ability{
+    // Radius of ability, entities outside radius will not be affected
     private final double radius;
+    // The strength of the force which will be applied on affected entities
     private final double force;
+
     private final double duration;
 
     public Shockwave(long cooldown, double radius, double force, double duration) {
@@ -22,6 +25,7 @@ public class Shockwave extends Ability{
         this.duration = duration;
     }
 
+    @Override
     public IAbilityAction createAction(IEntity<?> user, IEntity<?> target){
         // Anonymous implementation of an ability action is created on each use.
         return new IAbilityAction() {

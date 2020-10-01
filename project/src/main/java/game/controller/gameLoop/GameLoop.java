@@ -54,6 +54,7 @@ public abstract class GameLoop implements IGameLoop {
     }
 
     /* Delta signifies the change in time since last update. */
+    @Override
     public abstract void update(double delta);
 
     @Override

@@ -16,9 +16,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 
 public class GameWindowController implements Initializable {
+    private IGame     game;     // Model
+    private Renderer  renderer; // view
     private IGameLoop gameLoop;
-    private IGame game;
-    private Renderer renderer;
 
     // Game pane is loaded from an FXML file, where the game view is created.
     @FXML

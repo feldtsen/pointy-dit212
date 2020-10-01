@@ -7,7 +7,7 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.List;
 
-// Helper class for working iwth shapes.
+// Helper class for working with shapes.
 public class Shapes {
 
     private Shapes(){}

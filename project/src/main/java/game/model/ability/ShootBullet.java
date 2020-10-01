@@ -16,6 +16,7 @@ import javafx.geometry.Point2D;
 
 import java.util.List;
 
+// Ability for shooting bullets
 public class ShootBullet extends Shoot {
     private final double bulletRadius;
     private final double maxForce;
@@ -37,7 +38,6 @@ public class ShootBullet extends Shoot {
         bulletVelocity = Utils.setMagnitude(bulletVelocity, maxSpeed);
 
         // Create new bullet.
-        Projectile<ICircle> bullet = new Bullet(user.getPosition(), bulletRadius, maxForce, maxSpeed, strength, bulletVelocity);
-        return bullet;
+        return new Bullet(user.getPosition(), bulletRadius, maxForce, maxSpeed, strength, bulletVelocity);
     }
 }

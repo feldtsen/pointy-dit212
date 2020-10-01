@@ -24,6 +24,7 @@ public abstract class Ability implements IAbility{
     @Override
     public long getCooldown(){return cooldown;}
 
+    @Override
     public IAbilityAction use(IEntity<?> user, IEntity<?> target){
         // Store the current nano time
         long currentTime = System.nanoTime();
