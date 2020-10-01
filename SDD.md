@@ -48,6 +48,11 @@ There should be a clear and logical relation between the two. Make sure that the
 models stay in ‘sync’ during the development of your application.
 
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/toplevel.png" width=100%>
+
+The controller package interacts with the view by letting GameWindowController store a Renderer object that can be used to draw to the screen. It also has an IGame attribute, that will refer to the instance of Game used to run the game, through which it can interact with the gampelay. GameWindowController also creates a game loop, in which the renderer will be used to draw the current state of the game to the screen. In the loop, a call will be made to the model telling it to update its state.
+
+Both the Model and View packages make use of the functions implemented in the util package to affect vectors.
+
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/gameloop.png" width=100%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/model.png" width=100%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/controller.png" width=100%>
