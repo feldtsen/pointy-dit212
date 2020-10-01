@@ -46,18 +46,17 @@ public class RendererUtils {
         double rotationCenterX = shape.getWidth() / 2;
         double rotationCenterY = shape.getHeight() / 2;
 
-        graphicsContext.setFill(color);
-
         graphicsContext.save();
-        graphicsContext.translate(position.getX(), position.getY());
-        graphicsContext.rotate(shape.getRotation());
-        graphicsContext.translate(-position.getX(), -position.getY());
 
+        graphicsContext.translate(position.getX(), position.getY() );
+        graphicsContext.rotate(shape.getRotation());
+        graphicsContext.translate(-position.getX() - rotationCenterX, -position.getY() - rotationCenterY);
+
+        graphicsContext.setFill(color);
         graphicsContext.fillRect(position.getX(), position.getY(), shape.getWidth(), shape.getHeight());
+
         graphicsContext.restore();
 
-
-        shape.setRotation(shape.getRotation()+1);
 
     }
 

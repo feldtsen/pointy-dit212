@@ -24,7 +24,7 @@ public class Renderer implements IRenderer {
     private final GraphicsContext graphicsContext;
 
     //TODO: for testing
-    private final Rectangle testRect = new Rectangle(40, 40, 0);
+    private final Rectangle testRect = new Rectangle(100, 100, 0);
 
     public Renderer(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
@@ -64,8 +64,15 @@ public class Renderer implements IRenderer {
 
         // Render all enemies
         for (IEnemy enemy : level.getEnemies()) {
-            RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), enemy.getShape(), enemy.getPosition());
+            double radians = Math.atan2(level.getPlayer().getPosition().getY() - enemy.getPosition().getY(), level.getPlayer().getPosition().getX() - enemy.getPosition().getX());
+            double degrees = radians * ( 180 / Math.PI );
+
+            System.out.println(Math.abs(degrees));
+            testRect.setRotation(degrees);
+
+            //RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), enemy.getShape(), enemy.getPosition());
             //TODO: test for drawing rotated shapes
+
             RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), testRect, enemy.getPosition());
         }
     }
