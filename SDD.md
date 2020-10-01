@@ -1,10 +1,10 @@
-# System Design Document for...
+# System Design Document for Pointy
 
 **Authors:** Anton Hildingsson, Erik Magnusson, Joachim Ørfeldt Pedersen, Mattias Oom, Simon Genne
 
-**Version:**
+**Version:** 1.0
 
-**Date:**
+**Date:** 1/10/2020
 
 ## 1. Introduction
 
@@ -81,6 +81,8 @@ Both the Model and View packages make use of the functions implemented in the ut
 
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/domain-model.png" width=100%>
 
+### 3.1 Relation between domain model and design model
+
 In the domain model, The Game class is said to run the Level which contains a Player, Enemies, Obstacles, and Projectiles. This is reflected in the design model, where Game has a reference to an ILevel (currentLevel) and a list of ILevels (levels). Level holds references to the Enemies, Obstacles, Player, and Projectiles, that are to be shown while on the level that is represented by that object. Game will, during gameplay, access these and update them according to the state of the game and input from the user. 
 
 The domain model shows Enemy to have two Behaviours. In the design model, this is the case since Enemy has a reference to an IAbilityBehaviour and an IMovementBehaviour. These will dictate what actions are carried out by the enemy.
@@ -96,7 +98,8 @@ necessary to describe the dynamic design of your application as well. You can us
 UML sequence diagram to show the different parts of your application communicate
 an in what order
 
-A few design patterns we've implemented are
+### 3.2 Implemented design patterns
+
 * MVP (Model View Presenter) for separating game logic, user input and graphical interface.
 * the singleton pattern, for the keyboard input controller.
 * the factory (method) pattern, for simplifying the creation of game entities such as players and enemies
