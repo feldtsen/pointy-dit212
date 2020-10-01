@@ -14,6 +14,7 @@ import game.model.level.ILevel;
 import game.model.level.Level;
 import game.model.shape2d.ICircle;
 import game.services.EntityFactory;
+import game.util.Utils;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class Game implements IGame {
 
     private final List<ILevel> levels;
     private ILevel currentLevel;
+
+    private Point2D playerFacingPosition;
 
     // This list is continuously updated with the active ability actions.
     // An action is removed when it's duration has run out.
@@ -42,6 +45,8 @@ public class Game implements IGame {
 
         this.activeAbilityActions = new ArrayList<>();
         this.activationTimes = new ArrayList<>();
+
+        this.playerFacingPosition = new Point2D(currentLevel.getWidth()/2, currentLevel.getHeight()/2); // Default direciton
     }
 
     public Game() {
@@ -79,8 +84,7 @@ public class Game implements IGame {
 
     // Activate ability adds an ability to the active ability actions list, together with the
     // corresponding activation time.
-    //TODO: should probably not be public, for testing purposes only
-    public void activateAbility(IAbilityAction action, long now) {
+    private void activateAbility(IAbilityAction action, long now) {
         if(action == null) return;
         activeAbilityActions.add(action);
         activationTimes.add(now);
@@ -108,6 +112,11 @@ public class Game implements IGame {
         IPlayer player = currentLevel.getPlayer();
         player.update(delta, timeStep);
         containToBounds(player); // Ensures the player cannot leave the map
+
+        // Sett the facing direction of the player
+        Point2D direction = playerFacingPosition.subtract(player.getPosition());
+        double angle = Utils.heading(direction);
+        player.getShape().setRotation(angle);
 
         // Check for collisions between player and projectiles. Adjust players hit points if collision occurs.
         // Iterates backwards to enable removing projectiles from the list at the same time as looping.
@@ -186,6 +195,21 @@ public class Game implements IGame {
                 deactivateAbility(i);
             }
         }
+    }
+
+    @Override
+    public boolean activatePlayerAbility(int index) {
+        IAbilityAction action = currentLevel.getPlayer().activateAbility(index);
+        if(action != null) {
+            activateAbility(action, System.nanoTime());
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void setPlayerFacingPosition(Point2D playerFacingPosition) {
+        this.playerFacingPosition = playerFacingPosition;
     }
 
     // TODO: handle player death

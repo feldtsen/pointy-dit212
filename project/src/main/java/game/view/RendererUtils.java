@@ -42,7 +42,7 @@ public class RendererUtils {
     }
 
     // Draws a rotatable shape to the screen
-    public static void drawShape(GraphicsContext graphicsContext, Color color, IRotatableShape shape, Point2D position) {
+    public static void drawShape(GraphicsContext graphicsContext, Color color, IShape2D shape, Point2D position) {
         double rotationCenterX = shape.getWidth() / 2;
         double rotationCenterY = shape.getHeight() / 2;
 
@@ -59,5 +59,12 @@ public class RendererUtils {
 
         shape.setRotation(shape.getRotation()+1);
 
+    }
+
+    // Draws a line from a start to stop
+    public static void drawLine(GraphicsContext graphicsContext, Color color, Point2D start, Point2D stop, double width) {
+        graphicsContext.setStroke(color);
+        graphicsContext.setLineWidth(width);
+        graphicsContext.strokeLine(start.getX(), start.getY(), stop.getX(), stop.getY());
     }
 }

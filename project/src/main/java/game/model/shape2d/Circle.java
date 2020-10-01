@@ -8,10 +8,13 @@ import java.util.List;
 
 public class Circle implements ICircle {
     private final double radius;
+    private double rotation;
 
     public Circle(double radius){
         this.radius = radius;
+        this.rotation = 0;
     }
+
 
     @Override
     public double getRadius() {
@@ -64,5 +67,25 @@ public class Circle implements ICircle {
     // Returns the radius
     public double largestInnerDistance() {
         return radius;
+    }
+
+    @Override
+    public double getRotation() {
+        return rotation;
+    }
+
+    @Override
+    public void setRotation(double rotation) {
+        this.rotation = rotation;
+    }
+
+    @Override
+    public double getWidth() {
+        return radius * 2;
+    }
+
+    @Override
+    public double getHeight() {
+        return radius * 2;
     }
 }
