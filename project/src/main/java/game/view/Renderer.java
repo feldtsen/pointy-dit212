@@ -82,9 +82,9 @@ public class Renderer implements IRenderer {
                     10);
 
 
-            //RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), enemy.getShape(), enemy.getPosition());
             //TODO: test for drawing rotated shapes
             RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), testRect, enemy.getPosition());
+            RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), enemy.getShape(), enemy.getPosition());
             RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), testTriangle, enemy.getPosition());
         }
 

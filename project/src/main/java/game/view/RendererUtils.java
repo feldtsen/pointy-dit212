@@ -32,7 +32,9 @@ public class RendererUtils {
 
     // Draws a particular shape (TODO: so far, just a circle) to the screen
     public static void drawShape(GraphicsContext graphicsContext, Color color, ICircle circle, Point2D position) {
-        graphicsContext.setFill(color);
+        //graphicsContext.setFill(color);
+        //TODO fixed color for testing
+        graphicsContext.setFill(Color.SEAGREEN);
         graphicsContext.fillOval(
                 position.getX() - circle.getRadius(),
                 position.getY() - circle.getRadius(),
@@ -71,7 +73,7 @@ public class RendererUtils {
         graphicsContext.rotate(Utils.radianToDegrees(shape.getRotation()));
         graphicsContext.translate(-position.getX() - rotationCenterX, -position.getY() - rotationCenterY );
 
-        graphicsContext.setFill(Color.RED);
+        graphicsContext.setFill(Color.DARKGREEN);
         /*
         graphicsContext.fillPolygon(
                 new double[]{100, 100 + shape.getWidth(), 100 + (shape.getWidth()/2)},
