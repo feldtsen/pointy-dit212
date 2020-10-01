@@ -12,6 +12,7 @@ import game.util.Utils;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 
 import java.util.HashMap;
 
@@ -48,12 +49,12 @@ public class Renderer implements IRenderer {
         RendererUtils.drawShape(graphicsContext, colors.get(level.getPlayer().getClass()), level.getPlayer().getShape(), level.getPlayer().getPosition());
 
         // TODO: temporary testing code, to show facing direction of player
-        Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), 100);
+        Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), 50);
         RendererUtils.drawLine(graphicsContext,
                 colors.get(level.getPlayer().getClass()),
                 level.getPlayer().getPosition(),
                 level.getPlayer().getPosition().add(direction),
-                2);
+                7);
 
         // Render all projectiles
         for(IProjectile<?> projectile : level.getProjectiles()) {
@@ -70,17 +71,19 @@ public class Renderer implements IRenderer {
             enemy.getShape().setRotation(radians);
 
             // TODO: visual indicator for testing
-            Point2D direction2 = Utils.vectorFromHeading(enemy.getShape().getRotation(), 60);
+            Point2D direction2 = Utils.vectorFromHeading(enemy.getShape().getRotation(), 80);
             RendererUtils.drawLine(graphicsContext,
                     colors.get(enemy.getClass()),
                     enemy.getPosition(),
                     enemy.getPosition().add(direction2),
-                    2);
+                    10);
 
 
             //RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), enemy.getShape(), enemy.getPosition());
             //TODO: test for drawing rotated shapes
             RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), testRect, enemy.getPosition());
         }
+
+        graphicsContext.fillPolygon(new double[]{100, 150, 125}, new double[]{100, 100, 50}, 3);
     }
 }
