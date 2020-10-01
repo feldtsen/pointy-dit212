@@ -64,10 +64,12 @@ public class Renderer implements IRenderer {
 
         // Render all enemies
         for (IEnemy enemy : level.getEnemies()) {
-            double radians = Math.atan2(level.getPlayer().getPosition().getY() - enemy.getPosition().getY(), level.getPlayer().getPosition().getX() - enemy.getPosition().getX());
+            //double radians = Math.atan2(level.getPlayer().getPosition().getY() - enemy.getPosition().getY(), level.getPlayer().getPosition().getX() - enemy.getPosition().getX());
+            double radians = Math.atan2(enemy.getVelocity().getY(), enemy.getVelocity().getX());
             double degrees = radians * ( 180 / Math.PI );
 
-            System.out.println(Math.abs(degrees));
+            System.out.println(degrees);
+
             testRect.setRotation(degrees);
 
             //RendererUtils.drawShape(graphicsContext, colors.get(enemy.getClass()), enemy.getShape(), enemy.getPosition());
