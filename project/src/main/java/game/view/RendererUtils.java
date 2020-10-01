@@ -20,14 +20,13 @@ public class RendererUtils {
     // Method for setting a background color
     public static void setBackgroundColor(GraphicsContext graphicsContext, Color color) {
         graphicsContext.setFill(color);
-
-        //TODO: should we repeat fillRect instead? Now we heap allocate a new rectangle every frame.
-        RendererUtils.drawShape(
-                graphicsContext,
-                color,
-                new Rectangle(graphicsContext.getCanvas().getWidth(), graphicsContext.getCanvas().getHeight(), 0),
-                new Point2D(0, 0)
+        graphicsContext.fillRect(
+                0,
+                0,
+                graphicsContext.getCanvas().getWidth(),
+                graphicsContext.getCanvas().getHeight()
         );
+
     }
 
 
