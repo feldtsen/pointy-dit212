@@ -53,6 +53,8 @@ The controller package interacts with the view by letting GameWindowController s
 
 Both the Model and View packages make use of the functions implemented in the util package to affect vectors.
 
+As of now, the MVC implementation is not typical. The controller (in this case, the GameWindowController) has access to both the view and the model. However, there's no clear relationship between the view and the model themselves. Instead, the controller passes part of the model as a attribute to the draw method in the view (Renderer class). For the moment, we see no reason to have the view use polling or another design pattern to query the model for data, since all the required data in our case easily can be passed by the GameWindowController.
+
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/gameloop.png" width=100%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/model.png" width=100%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/controller.png" width=100%>
