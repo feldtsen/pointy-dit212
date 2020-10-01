@@ -1,8 +1,8 @@
 
 package model.projectile;
 
+import game.model.behavior.movement.SeekingBehaviour;
 import game.model.entity.movable.MovableEntity;
-import game.model.entity.movable.FollowingBehaviour;
 import game.model.entity.projectile.Missile;
 import game.model.entity.projectile.Projectile;
 import game.model.shape2d.Circle;
@@ -21,7 +21,7 @@ public class MissileTest {
         Point2D velocity = target.getPosition();
 
         missile = new Missile(new Point2D(0, 0), 0.1, 1, 3, 5,
-                1, velocity, target, new FollowingBehaviour());
+                1, velocity, target, new SeekingBehaviour());
     }
 
     @Test
