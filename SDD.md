@@ -69,6 +69,7 @@ A few design patterns we've implemented are
 * the factory (method) pattern, for simplifying the creation of game entities such as players and enemies
 * the command pattern, which is used for executing actions when a key is pressed.
 * the composite pattern, allowing players and enemies to have different abilities and behaviors. The construction of these entities is simplified using the factory pattern.
+* the template method pattern, by letting Ability implement a method that is dependent on an abstract method implemented by subclasses.
 
 ## 4. Persistent data management
 
