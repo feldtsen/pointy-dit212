@@ -47,6 +47,13 @@ implemented the MVC design pattern.
 There should be a clear and logical relation between the two. Make sure that these
 models stay in ‘sync’ during the development of your application.
 
+**Domain model:**
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/domain-model.png" width=100%>
+
+**Design model:**
+
+<img src=https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/design-model.png width=100%>
+
 In the domain model, The Game class is said to run the Level which contains a Player, Enemies, Obstacles, and Projectiles. This is reflected in the design model, where Game has a reference to an ILevel (currentLevel) and a list of ILevels (levels). Level holds references to the Enemies, Obstacles, Player, and Projectiles, that are to be shown while on the level that is represented by that object. Game will, during gameplay, access these and update them according to the state of the game and input from the user. 
 
 The domain model shows Enemy to have two Behaviours. In the design model, this is the case since Enemy has a reference to an IAbilityBehaviour and an IMovementBehaviour. These will dictate what actions are carried out by the enemy.
@@ -54,8 +61,6 @@ The domain model shows Enemy to have two Behaviours. In the design model, this i
 Both the Player and Behaviour in the domain model have references to Ability. In the design model, Player has  a reference to one to three IAbilties. These abilities will be used by the player during the gameplay to affect the environment/the state of the player in some way. The multiplicity of Behaviours relation to Ability is 0..* in the domain model. In the design model, some behaviours will have no knowledge of Abilities (MovementBehaviours), while some will be able to hold many (AbilityBehaviours). 
 
 The Ability in the domain model creates 0..* Projectiles. In the design model, some concrete ability classes have references to projectiles. These abilities are supposed to create projectiles and add them to the level. Other abilities have no knowledge of projectiles at all.
-
-<img src=https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/design-model.png width=100%>
 
 
 >Describe which (if any) design patterns you have used.
