@@ -1,5 +1,6 @@
-package game.model.shape2d;
+package game.util;
 
+import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;
 import javafx.scene.transform.Rotate;
 import java.util.List;

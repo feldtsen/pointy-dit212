@@ -9,7 +9,7 @@ public class FollowingBehaviour implements IMovementBehaviour {
 
     @Override
     // Adds a force to the subject in the direction of the object.
-    public boolean apply(MovableEntity<?> subject, IEntity<?> object) {
+    public boolean apply(IMovable<?> subject, IEntity<?> object) {
         if (object == null) return false;
 
         // Create and apply acceleration vector pointed towards object.

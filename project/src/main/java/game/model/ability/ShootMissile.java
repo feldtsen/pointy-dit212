@@ -26,9 +26,9 @@ public class ShootMissile extends Shoot {
         this.movementBehaviour = movementBehaviour;
     }
 
-    @Override
     // Creates and returns a missile starting at the position of the user, aimed at the given target
-    IProjectile<?> createProjectile(IEntity<?> user, IEntity<?> target) {
+    @Override
+    protected IProjectile<?> createProjectile(IEntity<?> user, IEntity<?> target) {
         // Create initial velocity aimed at the target
         Point2D missileVelocity = target.getPosition().subtract(user.getPosition());
 

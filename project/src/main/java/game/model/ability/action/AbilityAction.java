@@ -14,6 +14,7 @@ public abstract class AbilityAction implements IAbilityAction {
     @Override
     public abstract void apply(ILevel level, double timePassed);
 
+    @Override
     public double getDuration() {
         return duration;
     }

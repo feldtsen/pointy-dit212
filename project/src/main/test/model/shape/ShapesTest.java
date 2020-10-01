@@ -2,11 +2,9 @@ package model.shape;
 
 import game.model.shape2d.Circle;
 import game.model.shape2d.Rectangle;
-import game.model.shape2d.Shapes;
+import game.util.Shapes;
 import javafx.geometry.Point2D;
 import org.junit.Test;
-
-import java.awt.*;
 
 import static org.junit.Assert.*;
 public class ShapesTest {
