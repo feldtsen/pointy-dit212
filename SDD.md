@@ -16,8 +16,6 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 
 ### 1.1. Definitions, acronyms, abbreviations
 
->(Definitions etc. probably same as in RAD)
-
 - 2D - Two dimensional
 - Topdown game - A game that is viewed from above.
 
@@ -35,18 +33,6 @@ The player is prompted by a menu which controls the level settings, the starting
 When the player exits the application, all progress is stored locally. The same process is reapplied when the game is opened anew.
 
 ## 3. System Design
-
->Draw an UML package diagram for the top level for all components that you have
-identified above (which can be just one if you develop a standalone application). Describe the interfaces and dependencies between the packages. Describe how you have
-implemented the MVC design pattern.
-
->Create an UML class diagram for every package.
-
->One of the packages will contain the model of your application. This will be the design model of your application,
-~~describe in detail the relation between your domain model and your design model.~~
-There should be a clear and logical relation between the two. Make sure that these
-models stay in ‘sync’ during the development of your application.
-
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/toplevel.png" width=100%>
 
 The controller package interacts with the view by letting GameWindowController store a Renderer object that can be used to draw to the screen. It also has an IGame attribute, that will refer to the instance of Game used to run the game, through which it can interact with the gampelay. GameWindowController also creates a game loop, in which the renderer will be used to draw the current state of the game to the screen. In the loop, a call will be made to the model telling it to update its state.
@@ -54,6 +40,8 @@ The controller package interacts with the view by letting GameWindowController s
 Both the Model and View packages make use of the functions implemented in the util package to affect vectors.
 
 As of now, the MVC implementation is not typical. The controller (in this case, the GameWindowController) has access to both the view and the model. However, there's no clear relationship between the view and the model themselves. Instead, the controller passes part of the model as a attribute to the draw method in the view (Renderer class). For the moment, we see no reason to have the view use polling or another design pattern to query the model for data, since all the required data in our case easily can be passed by the GameWindowController.
+
+Here follows a set of diagrams over all our packages.
 
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/gameloop.png" width=100%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/model.png" width=100%>
@@ -93,13 +81,6 @@ Both the Player and Behaviour in the domain model have references to Ability. In
 
 The Ability in the domain model creates 0..* Projectiles. In the design model, some concrete ability classes have references to projectiles. These abilities are supposed to create projectiles and add them to the level. Other abilities have no knowledge of projectiles at all.
 
-
->Describe which (if any) design patterns you have used.
-The above describes the static design of your application. It may sometimes be
-necessary to describe the dynamic design of your application as well. You can use an
-UML sequence diagram to show the different parts of your application communicate
-an in what order
-
 ### 3.2 Implemented design patterns
 
 * MVP (Model View Presenter) for separating game logic, user input and graphical interface.
@@ -123,16 +104,7 @@ saving player progress made up to that point, as well as keeping top scores.
 
 ## 5. Quality
 
-> - Describe how you test your application  and where to find these tests. If applicable, give a link to your continuous integration.
-
 The application is tested using unit tests with the framework JUnit. These tests can be found under: project/src/main/test.
-
-> - List all known issues.
-> -  Run analytical tools on your software and show the results. Use for example:
->    - Dependencies: STAN or similar.
->     - Quality tool reports, like PMD.
-
-> NOTE: Each Java, XML, etc. file should have a header comment: Author, responsibility, used by ..., uses ..., etc.
 
 ## 6. References
 - JavaFX - https://openjfx.io/
