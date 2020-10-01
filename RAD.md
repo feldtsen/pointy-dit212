@@ -1,4 +1,4 @@
-# Requirements and Analysis Document for ... 
+# Requirements and Analysis Document for Pointy 
 
 **Authors:** Anton Hildingsson, Erik Magnusson, Joachim Ørfeldt Pedersen, Mattias Oom, Simon Genne
 
@@ -463,8 +463,6 @@ For a user story to be considered to be done, the following criteria have to be 
 
 ## 2.3. User Interface
 
-(Include sketches, drawings and explanations of the application’s user interface. Describe the navigation between the different views.)
-
 
 **GUI sketch**
 
@@ -494,7 +492,6 @@ Displayed when the game is launched.
 
 # 3. Diagrams
 
-(Give a high level view overview of the application using a UML diagram.)
 
 ## 3.1 Domain Model
 **UML of domain model**
@@ -514,7 +511,6 @@ Displayed when the game is launched.
 
 # 4. References
 
-(List all references to external tools, platforms, libraries, papers, etc.)
 
 - JavaFX - https://openjfx.io/
 - Maven - https://maven.apache.org/
