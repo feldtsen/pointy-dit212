@@ -2,20 +2,13 @@ package game.model.ability;
 
 import game.model.ability.action.AbilityAction;
 import game.model.ability.action.IAbilityAction;
-import game.model.entity.Entity;
 import game.model.entity.IEntity;
-import game.model.entity.movable.LivingEntity;
-import game.model.entity.projectile.Bullet;
 import game.model.entity.projectile.IProjectile;
-import game.model.entity.projectile.Projectile;
 import game.model.level.ILevel;
-import game.model.shape2d.Circle;
-import game.model.shape2d.ICircle;
-import game.util.Utils;
-import javafx.geometry.Point2D;
 
 import java.util.List;
 
+// Ability for shooting projectiles
 public abstract class Shoot extends Ability {
 
     public Shoot(long cooldown) {
@@ -40,5 +33,5 @@ public abstract class Shoot extends Ability {
     }
 
     // Concrete subclasses will implement createProjectile to determine what kind of projectiles the Ability should add.
-    abstract IProjectile<?> createProjectile(IEntity<?> user, IEntity<?> target);
+    protected abstract IProjectile<?> createProjectile(IEntity<?> user, IEntity<?> target);
 }

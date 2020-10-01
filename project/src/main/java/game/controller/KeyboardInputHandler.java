@@ -67,7 +67,7 @@ public  class KeyboardInputHandler {
             List<Action> l = INSTANCE.actions.get(c);
             // If the currently pressed key has no actions associated with it, continue.
             if(l == null) continue;
-            // Iteratue over all actions, and apply.
+            // Iterate over all actions, and apply.
             for(Action a : l) {
                 a.apply();
             }

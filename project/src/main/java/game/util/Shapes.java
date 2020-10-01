@@ -1,13 +1,11 @@
-package game.model.shape2d;
+package game.util;
 
+import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;
 import javafx.scene.transform.Rotate;
-
-import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.List;
 
-// Helper class for working iwth shapes.
+// Helper class for working with shapes.
 public class Shapes {
 
     private Shapes(){}

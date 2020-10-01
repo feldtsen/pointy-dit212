@@ -12,6 +12,7 @@ public abstract class AbilityBehaviour implements IAbilityBehaviour {
         this.abilities = abilities;
     }
 
+    @Override
     public List<IAbility> getAbilities() {
         return abilities;
     }

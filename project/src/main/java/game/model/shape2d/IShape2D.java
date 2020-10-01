@@ -1,7 +1,6 @@
 package game.model.shape2d;
 
 import javafx.geometry.Point2D;
-
 import java.util.List;
 
 public interface IShape2D {

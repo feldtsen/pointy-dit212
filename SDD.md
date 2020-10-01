@@ -1,10 +1,10 @@
-# System Design Document for...
+# System Design Document for Pointy
 
 **Authors:** Anton Hildingsson, Erik Magnusson, Joachim Ørfeldt Pedersen, Mattias Oom, Simon Genne
 
-**Version:**
+**Version:** 1.0
 
-**Date:**
+**Date:** 1/10/2020
 
 ## 1. Introduction
 
@@ -47,6 +47,44 @@ implemented the MVC design pattern.
 There should be a clear and logical relation between the two. Make sure that these
 models stay in ‘sync’ during the development of your application.
 
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/toplevel.png" width=100%>
+
+The controller package interacts with the view by letting GameWindowController store a Renderer object that can be used to draw to the screen. It also has an IGame attribute, that will refer to the instance of Game used to run the game, through which it can interact with the gampelay. GameWindowController also creates a game loop, in which the renderer will be used to draw the current state of the game to the screen. In the loop, a call will be made to the model telling it to update its state.
+
+Both the Model and View packages make use of the functions implemented in the util package to affect vectors.
+
+As of now, the MVC implementation is not typical. The controller (in this case, the GameWindowController) has access to both the view and the model. However, there's no clear relationship between the view and the model themselves. Instead, the controller passes part of the model as a attribute to the draw method in the view (Renderer class). For the moment, we see no reason to have the view use polling or another design pattern to query the model for data, since all the required data in our case easily can be passed by the GameWindowController.
+
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/gameloop.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/model.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/controller.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/ability.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/action.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/behavior.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/behavior-ability.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/movement.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/entitiy.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/enemy.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/movable.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/obstacle.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/player.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/projectile.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/level.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/shape2d.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/services.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/util.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/view.png" width=100%>
+
+**Design model:**
+
+<img src=https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/design-model.png width=100%>
+
+**Domain model:**
+
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/domain-model.png" width=100%>
+
+### 3.1 Relation between domain model and design model
+
 In the domain model, The Game class is said to run the Level which contains a Player, Enemies, Obstacles, and Projectiles. This is reflected in the design model, where Game has a reference to an ILevel (currentLevel) and a list of ILevels (levels). Level holds references to the Enemies, Obstacles, Player, and Projectiles, that are to be shown while on the level that is represented by that object. Game will, during gameplay, access these and update them according to the state of the game and input from the user. 
 
 The domain model shows Enemy to have two Behaviours. In the design model, this is the case since Enemy has a reference to an IAbilityBehaviour and an IMovementBehaviour. These will dictate what actions are carried out by the enemy.
@@ -55,8 +93,6 @@ Both the Player and Behaviour in the domain model have references to Ability. In
 
 The Ability in the domain model creates 0..* Projectiles. In the design model, some concrete ability classes have references to projectiles. These abilities are supposed to create projectiles and add them to the level. Other abilities have no knowledge of projectiles at all.
 
-<img src=https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/design-model.png width=100%>
-
 
 >Describe which (if any) design patterns you have used.
 The above describes the static design of your application. It may sometimes be
@@ -64,7 +100,9 @@ necessary to describe the dynamic design of your application as well. You can us
 UML sequence diagram to show the different parts of your application communicate
 an in what order
 
-A few design patterns we've implemented are 
+### 3.2 Implemented design patterns
+
+* MVP (Model View Presenter) for separating game logic, user input and graphical interface.
 * the singleton pattern, for the keyboard input controller.
 * the factory (method) pattern, for simplifying the creation of game entities such as players and enemies
 * the command pattern, which is used for executing actions when a key is pressed.

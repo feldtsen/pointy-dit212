@@ -21,12 +21,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game implements IGame {
-    private int score;
+    private int score; // Player score
     private boolean gameOver;
 
     private final List<ILevel> levels;
     private ILevel currentLevel;
 
+    // This value represents the position the player is "looking towards".
     private Point2D playerFacingPosition;
 
     // This list is continuously updated with the active ability actions.
