@@ -47,12 +47,34 @@ implemented the MVC design pattern.
 There should be a clear and logical relation between the two. Make sure that these
 models stay in ‘sync’ during the development of your application.
 
-**Domain model:**
-<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/domain-model.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/toplevel.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/gameloop.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/model.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/controller.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/ability.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/action.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/behavior.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/behavior-ability.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/movement.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/entitiy.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/enemy.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/movable.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/obstacle.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/player.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/projectile.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/level.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/shape2d.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/services.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/util.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/view.png" width=100%>
 
 **Design model:**
 
 <img src=https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/design-model.png width=100%>
+
+**Domain model:**
+
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/domain-model.png" width=100%>
 
 In the domain model, The Game class is said to run the Level which contains a Player, Enemies, Obstacles, and Projectiles. This is reflected in the design model, where Game has a reference to an ILevel (currentLevel) and a list of ILevels (levels). Level holds references to the Enemies, Obstacles, Player, and Projectiles, that are to be shown while on the level that is represented by that object. Game will, during gameplay, access these and update them according to the state of the game and input from the user. 
 
