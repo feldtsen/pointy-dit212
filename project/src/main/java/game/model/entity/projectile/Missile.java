@@ -4,8 +4,6 @@ import game.model.behavior.movement.IMovementBehaviour;
 import game.model.entity.IEntity;
 import game.model.shape2d.Circle;
 import game.model.shape2d.ICircle;
-import game.model.shape2d.IShape2D;
-import game.util.Utils;
 import javafx.geometry.Point2D;
 
 // Missiles are a homing projectile which steers towards its target.

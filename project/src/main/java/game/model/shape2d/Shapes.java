@@ -2,9 +2,6 @@ package game.model.shape2d;
 
 import javafx.geometry.Point2D;
 import javafx.scene.transform.Rotate;
-
-import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.List;
 
 // Helper class for working iwth shapes.

@@ -8,7 +8,6 @@ import game.model.entity.obstacle.IObstacle;
 import game.model.entity.player.IPlayer;
 import game.model.entity.projectile.IProjectile;
 import game.model.level.Level;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
