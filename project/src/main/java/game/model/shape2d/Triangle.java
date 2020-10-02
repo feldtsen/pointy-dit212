@@ -48,7 +48,7 @@ public class Triangle implements ITriangle{
 
         for (int i = 0; i < points.size(); i++) {
             // Get vector between two corners.
-            Point2D vector = points.get(i).subtract(points.get(i + 1 % points.size()));
+            Point2D vector = points.get(i).subtract(points.get((i + 1) % points.size()));
 
             // Get normal and set length to 1.
             Point2D normal = new Point2D(-vector.getY(), vector.getX()).normalize();

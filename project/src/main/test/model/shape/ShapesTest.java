@@ -2,12 +2,24 @@ package model.shape;
 
 import game.model.shape2d.Circle;
 import game.model.shape2d.Rectangle;
+import game.model.shape2d.Triangle;
 import game.util.Shapes;
 import javafx.geometry.Point2D;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 public class ShapesTest {
+
+    @Test
+    public void testCircleTriangleCollision() {
+        Circle c1 = new Circle(1);
+        Point2D p1 = new Point2D(0, 0);
+
+        Triangle t1 = new Triangle(2, 2, 0);
+        Point2D p2 = new Point2D(2, 1);
+
+        assertTrue(Shapes.testCollision(c1, p1, t1, p2));
+    }
 
     @Test
     public void testCircleCollision(){
