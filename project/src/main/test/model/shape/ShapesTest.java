@@ -7,18 +7,47 @@ import game.util.Shapes;
 import javafx.geometry.Point2D;
 import org.junit.Test;
 
+import java.awt.*;
+
 import static org.junit.Assert.*;
 public class ShapesTest {
 
     @Test
-    public void testCircleTriangleCollision() {
-        Circle c1 = new Circle(1);
-        Point2D p1 = new Point2D(0, 0);
+    public void testCircleTriangleEdgeCollision() {
+        Circle c = new Circle(1);
+        Point2D pc = new Point2D(0, 0);
 
         Triangle t1 = new Triangle(2, 2, 0);
-        Point2D p2 = new Point2D(2, 1);
+        Point2D p1 = new Point2D(2, 1);
 
-        assertTrue(Shapes.testCollision(c1, p1, t1, p2));
+        Triangle t2 = new Triangle(2, 2, 0);
+        Point2D p2 = new Point2D(0, 2);
+
+        Triangle t3 = new Triangle(2, 4, Math.PI/2);
+        Point2D p3 = new Point2D(-3, 0);
+
+        Triangle t4 = new Triangle(2, 2, 0);
+        Point2D p4 = new Point2D(0, 2);
+
+        assertTrue(Shapes.testCollision(c, pc, t1, p1));
+        assertTrue(Shapes.testCollision(c, pc, t2, p2));
+        assertTrue(Shapes.testCollision(c, pc, t3, p3));
+        assertTrue(Shapes.testCollision(c, pc, t4, p4));
+    }
+
+    @Test
+    public void testTriangleRectangleNoCollision() {
+        Rectangle r = new Rectangle(2, 2, Math.PI/4);
+        Point2D pr = new Point2D(0, 0);
+
+        Triangle t1 = new Triangle(2, 2, Math.PI/4);
+        Point2D p1 = new Point2D(1, 2);
+
+        Triangle t2 = new Triangle(3, 1.5, 0);
+        Point2D p2 = new Point2D(-1.5, -0.75);
+
+        assertFalse(Shapes.testCollision(r, pr, t1, p1));
+        assertFalse(Shapes.testCollision(r, pr, t2, p2));
     }
 
     @Test
