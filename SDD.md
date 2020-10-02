@@ -43,9 +43,9 @@ As of now, the MVC implementation is not typical. The controller (in this case, 
 
 Here follows a set of diagrams over all our packages.
 
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/controller.png" width=100%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/gameloop.png" width=100%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/model.png" width=100%>
-<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/controller.png" width=100%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/ability.png" width=100%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/action.png" width=100%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/behavior.png" width=100%>
