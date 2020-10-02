@@ -22,7 +22,7 @@ The goal of the player is to defeat all the elements, reach the map exit, or per
 ## 2. System architecture
 The general architecture of the application is rather simple. No external servers or databases is used -- the game is all run locally on the machine of the user. 
 
-OpenJFX is used for the graphical end of the game, reading keyboard input, and handling sound. OpenJFX also manages the runnable application itself, which means a javaFX "Application" class is created to launch the game.
+OpenJFX is used for the graphical end of the game, reading keyboard input, and handling sound. OpenJFX also manages the runnable application itself, which means a javaFX `Application` class is created to launch the game.
 
 Persistent data storage is all handled locally by an external JSON-parser. More can be read below (4. Persistent Data Storage). 
 
@@ -35,7 +35,7 @@ When the player exits the application, all progress is stored locally. The same 
 ## 3. System Design
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/toplevel.png" width=100%>
 
-The controller package interacts with the view by letting `GameWindowController` store a `Renderer` object that can be used to draw to the screen. It also has an `IGame` attribute, that will refer to the instance of `Game` used to run the game, through which it can interact with the gampelay. `GameWindowController` also creates a game loop, in which the renderer will be used to draw the current state of the game to the screen. In the loop, a call will be made to the model telling it to update its state.
+The controller package interacts with the view by letting `GameWindowController` store a `Renderer` object that can be used to draw to the screen. It also has an `IGame` attribute, that will refer to the instance of `Game` used to run the game, through which it can interact with the gameplay. `GameWindowController` also creates a game loop, in which the renderer will be used to draw the current state of the game to the screen. In the loop, a call will be made to the model telling it to update its state.
 
 Both the `Model` and `View` packages make use of the functions implemented in the util package to affect vectors.
 
@@ -77,13 +77,13 @@ In the domain model, The `Game` class is said to run the `Level` which contains 
 
 The domain model shows `Enemy` to have two behaviours. In the design model, this is the case since `Enemy` has a reference to an `IAbilityBehaviour` and an `IMovementBehaviour`. These will dictate what actions are carried out by the enemy.
 
-Both the `Player` and `Behaviour` in the domain model have references to `Ability`. In the design model, `Player` has  a reference to one to three `IAbilties`. These abilities will be used by the player during the gameplay to affect the environment/the state of the player in some way. The multiplicity of behaviours relation to `Ability` is 0..* in the domain model. In the design model, some behaviours will have no knowledge of bbilities (movementBehaviours), while some will be able to hold many (abilityBehaviours). 
+Both the `Player` and `Behaviour` in the domain model have references to `Ability`. In the design model, `Player` has  a reference to one to three `IAbilties`. These abilities will be used by the player during the gameplay to affect the environment/state of the player in some way. The multiplicity of behaviours relation to `Ability` is 0..* in the domain model. In the design model, some behaviours will have no knowledge of abilities (movementBehaviours), while some will be able to hold many (abilityBehaviours). 
 
 The `Ability` in the domain model creates 0..* projectiles. In the design model, some concrete ability classes have references to projectiles. These abilities are supposed to create projectiles and add them to the level. Other abilities have no knowledge of projectiles at all.
 
 ### 3.2 Implemented design patterns
 
-* MVP (Model View Presenter) for separating game logic, user input and graphical interface.
+* MVC (Model View Controller) for separating game logic, user input and graphical interface.
 * the singleton pattern, for the keyboard input controller.
 * the factory (method) pattern, for simplifying the creation of game entities such as players and enemies
 * the command pattern, which is used for executing actions when a key is pressed.
@@ -92,7 +92,7 @@ The `Ability` in the domain model creates 0..* projectiles. In the design model,
 
 ## 4. Persistent data management
 
-The application currently makes use of JSON to handle level data. The level files contain JSON objects pertaining to information of the level and its entities, i.e. their type (player, enemy, obstacle), variants (e.g. type of enemy) as well as instance variables not handled by the factory. Levels are loaded through the static class `LevelLoader` which parses the JSON file corresponding to a certain level ID, creates an object of type "Level" and returns this object to be used by the "Game" class. Each level is contained within a separate file and is only loaded when needed to save memory resources. The parsing is done using the GSON library. 
+The application currently makes use of JSON to handle level data. The level files contain JSON objects pertaining to information of the level and its entities, i.e. their type (player, enemy, obstacle), variants (e.g. type of enemy) as well as instance variables not handled by the factory. Levels are loaded through the static class `LevelLoader` which parses the JSON file corresponding to a certain level ID, creates an object of type `Level` and returns this object to be used by the `Game` class. Each level is contained within a separate file and is only loaded when needed to save memory resources. The parsing is done using the GSON library. 
 
 Future possible functionality includes storing and parsing level data as ascii to enable easier level development, saving player progress made up to that point, as well as keeping top scores.  
 
