@@ -82,8 +82,8 @@ public class RendererUtils {
          */
 
         graphicsContext.fillPolygon(
-                new double[]{position.getX(), position.getX(),                         position.getX() + shape.getWidth()},
-                new double[]{position.getY(), position.getY() + shape.getHeight(),     position.getY() + (shape.getHeight()/2)},
+                new double[]{position.getX(), position.getX(),                     position.getX() + shape.getHeight()},
+                new double[]{position.getY(), position.getY() + shape.getWidth(),  position.getY() + (shape.getWidth()/2)},
                 3);
 
 
