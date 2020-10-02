@@ -89,10 +89,7 @@ public class Rectangle implements IRectangle{
     @Override
     // Returns the distance from the center point to one of the corners.
     public double largestInnerDistance() {
-        double halfHeight = height/2;
-        double halfWidth = width/2;
-
         // Get distance to corner by using Pythagoras theorem.
-        return Math.sqrt(Math.pow(halfHeight, 2) + Math.pow(halfWidth, 2));
+        return Math.sqrt(Math.pow(height/2, 2) + Math.pow(width/2, 2));
     }
 }
