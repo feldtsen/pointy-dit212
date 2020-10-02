@@ -4,7 +4,7 @@
 
 **Version:** 1.0
 
-**Date:** 1/10/2020
+**Date:** 2/10/2020
 
 ## 1. Introduction
 
@@ -26,7 +26,7 @@ OpenJFX is used for the graphical end of the game, reading keyboard input, and h
 
 Persistent data storage all handled locally by an external JSON-parser. More can be read below (4. Persistent Data Storage). 
 
-When the application is started, the JavaFX Application loads a game window controller using an FXML loader. This game window controller then creates a new "Game" object, a game loop, and launches the game. At this point, all stored levels, user progress, and score, is read from disk, enabling the player to keep playing from where they last left of.
+When the application is started, the JavaFX Application loads a game window controller using an FXML loader. This game window controller then creates a new `Game` object, a game loop, and launches the game. At this point, all stored levels, user progress, and score, is read from disk, enabling the player to keep playing from where they last left of.
 
 The player is prompted by a menu which controls the level settings, the starting and stopping of the game itself, and displaying score and other progress indicators. When the player starts the game, it will run until they stop it themselves, or until the game is finished.
 
@@ -35,13 +35,13 @@ When the player exits the application, all progress is stored locally. The same 
 ## 3. System Design
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/toplevel.png" width=100%>
 
-The controller package interacts with the view by letting GameWindowController store a Renderer object that can be used to draw to the screen. It also has an IGame attribute, that will refer to the instance of Game used to run the game, through which it can interact with the gampelay. GameWindowController also creates a game loop, in which the renderer will be used to draw the current state of the game to the screen. In the loop, a call will be made to the model telling it to update its state.
+The controller package interacts with the view by letting `GameWindowController` store a `Renderer` object that can be used to draw to the screen. It also has an `IGame` attribute, that will refer to the instance of `Game` used to run the game, through which it can interact with the gampelay. `GameWindowController` also creates a game loop, in which the renderer will be used to draw the current state of the game to the screen. In the loop, a call will be made to the model telling it to update its state.
 
-Both the Model and View packages make use of the functions implemented in the util package to affect vectors.
+Both the `Model` and `View` packages make use of the functions implemented in the util package to affect vectors.
 
-As of now, the MVC implementation is not typical. The controller (in this case, the GameWindowController) has access to both the view and the model. However, there's no clear relationship between the view and the model themselves. Instead, the controller passes part of the model as a attribute to the draw method in the view (Renderer class). For the moment, we see no reason to have the view use polling or another design pattern to query the model for data, since all the required data in our case easily can be passed by the GameWindowController.
+As of now, the MVC implementation is not typical. The controller (in this case, the `GameWindowController`) has access to both the view and the model. However, there's no clear relationship between the view and the model themselves. Instead, the controller passes part of the model as a attribute to the draw method in the view (Renderer class). For the moment, we see no reason to have the view use polling or another design pattern to query the model for data, since all the required data in our case easily can be passed by the `GameWindowController`. Because of this, we think our implementation of MVC is perfect for our purposes. 
 
-Here follows a set of diagrams over all our packages.
+Here follows a set of diagrams over all our packages. We have decided to leave the fields containing lists of objects in the package diagrams, since the package diagrams otherwise cannot show the relationship between packages. However, we have left out these fields in the design model. Instead, these fields are represented by multiplicities. 
 
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/controller.png" width=100%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/gameloop.png" width=100%>
@@ -73,13 +73,13 @@ Here follows a set of diagrams over all our packages.
 
 ### 3.1 Relation between domain model and design model
 
-In the domain model, The Game class is said to run the Level which contains a Player, Enemies, Obstacles, and Projectiles. This is reflected in the design model, where Game has a reference to an ILevel (currentLevel) and a list of ILevels (levels). Level holds references to the Enemies, Obstacles, Player, and Projectiles, that are to be shown while on the level that is represented by that object. Game will, during gameplay, access these and update them according to the state of the game and input from the user. 
+In the domain model, The `Game` class is said to run the `Level` which contains a player, enemies, obstacles, and projectiles. This is reflected in the design model, where `Game` has a reference to an `ILevel` (currentLevel) and a list of `ILevels` (levels). `Level` holds references to the enemies, obstacles, player, and projectiles, that are to be shown while on the level that is represented by that object. `Game` will, during gameplay, access these and update them according to the state of the game and input from the user. 
 
-The domain model shows Enemy to have two Behaviours. In the design model, this is the case since Enemy has a reference to an IAbilityBehaviour and an IMovementBehaviour. These will dictate what actions are carried out by the enemy.
+The domain model shows `Enemy` to have two behaviours. In the design model, this is the case since `Enemy` has a reference to an `IAbilityBehaviour` and an `IMovementBehaviour`. These will dictate what actions are carried out by the enemy.
 
-Both the Player and Behaviour in the domain model have references to Ability. In the design model, Player has  a reference to one to three IAbilties. These abilities will be used by the player during the gameplay to affect the environment/the state of the player in some way. The multiplicity of Behaviours relation to Ability is 0..* in the domain model. In the design model, some behaviours will have no knowledge of Abilities (MovementBehaviours), while some will be able to hold many (AbilityBehaviours). 
+Both the `Player` and `Behaviour` in the domain model have references to `Ability`. In the design model, `Player` has  a reference to one to three `IAbilties`. These abilities will be used by the player during the gameplay to affect the environment/the state of the player in some way. The multiplicity of behaviours relation to `Ability` is 0..* in the domain model. In the design model, some behaviours will have no knowledge of bbilities (movementBehaviours), while some will be able to hold many (abilityBehaviours). 
 
-The Ability in the domain model creates 0..* Projectiles. In the design model, some concrete ability classes have references to projectiles. These abilities are supposed to create projectiles and add them to the level. Other abilities have no knowledge of projectiles at all.
+The `Ability` in the domain model creates 0..* projectiles. In the design model, some concrete ability classes have references to projectiles. These abilities are supposed to create projectiles and add them to the level. Other abilities have no knowledge of projectiles at all.
 
 ### 3.2 Implemented design patterns
 
@@ -92,15 +92,10 @@ The Ability in the domain model creates 0..* Projectiles. In the design model, s
 
 ## 4. Persistent data management
 
-The application currently makes use of JSON to handle level data. The level files contain JSON objects pertaining
-to information of the level and its entities, i.e. their type (player, enemy, obstacle), variants (e.g. type of enemy) 
-as well as instance variables not handled by the factory. Levels are loaded through the static class "LevelLoader"
-which parses the JSON file corresponding to a certain level ID, creates an object of type "Level" and returns this
-object to be used by the "Game" class. Each level is contained within a separate file and is only loaded when needed
-to save memory resources. The parsing is done using the GSON library. 
+The application currently makes use of JSON to handle level data. The level files contain JSON objects pertaining to information of the level and its entities, i.e. their type (player, enemy, obstacle), variants (e.g. type of enemy) as well as instance variables not handled by the factory. Levels are loaded through the static class `LevelLoader` which parses the JSON file corresponding to a certain level ID, creates an object of type "Level" and returns this object to be used by the "Game" class. Each level is contained within a separate file and is only loaded when needed to save memory resources. The parsing is done using the GSON library. 
 
-Future possible functionality includes storing and parsing level data as ascii to enable easier level development, 
-saving player progress made up to that point, as well as keeping top scores.  
+Future possible functionality includes storing and parsing level data as ascii to enable easier level development, saving player progress made up to that point, as well as keeping top scores.  
+
 
 ## 5. Quality
 
