@@ -24,7 +24,7 @@ The general architecture of the application is rather simple. No external server
 
 OpenJFX is used for the graphical end of the game, reading keyboard input, and handling sound. OpenJFX also manages the runnable application itself, which means a javaFX "Application" class is created to launch the game.
 
-Persistent data storage all handled locally by an external JSON-parser. More can be read below (4. Persistent Data Storage). 
+Persistent data storage is all handled locally by an external JSON-parser. More can be read below (4. Persistent Data Storage). 
 
 When the application is started, the JavaFX Application loads a game window controller using an FXML loader. This game window controller then creates a new `Game` object, a game loop, and launches the game. At this point, all stored levels, user progress, and score, is read from disk, enabling the player to keep playing from where they last left of.
 
