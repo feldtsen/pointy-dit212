@@ -1,5 +1,6 @@
 package game.model;
 
+import game.model.ability.Dash;
 import game.model.ability.Shockwave;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
@@ -59,7 +60,7 @@ public class Game implements IGame {
         // Create player with shockwave ability
         IPlayer player = EntityFactory.basicPlayer(375, 200);
         player.setFriction(3);
-        player.addAbility(new Shockwave(GameLoop.SECOND * 2, 300, 100000, 0.1));
+        player.addAbility(new Dash(GameLoop.SECOND * 2));
 
         // Create basic enemy
         List<IEnemy> enemies = new ArrayList<>();
