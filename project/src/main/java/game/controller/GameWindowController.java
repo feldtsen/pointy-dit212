@@ -20,6 +20,10 @@ public class GameWindowController implements Initializable {
     private Renderer  renderer; // view
     private IGameLoop gameLoop;
 
+    // Controllers
+    private KeyboardInputController keyboardInputController;
+    private MouseInputController mouseInputController;
+
     // Game pane is loaded from an FXML file, where the game view is created.
     @FXML
     private StackPane gamePane;
@@ -46,7 +50,7 @@ public class GameWindowController implements Initializable {
                 renderer.draw(game.getCurrentLevel());
 
                 // Apply all registered keyboard actions
-                KeyboardInputHandler.applyRegisteredActions();
+                keyboardInputController.applyRegisteredActions();
 
                 // Update the game model with a global time step of 1 (normal speed)
                 game.update(delta, 1);
@@ -90,22 +94,22 @@ public class GameWindowController implements Initializable {
         game = new Game();
 
         // Initialize the keyboard input handler.
-        KeyboardInputHandler.init(gamePane);
+        keyboardInputController = new KeyboardInputController(gamePane);
         // Initialize the mouse input handler
-        MouseInputHandler.init(gamePane);
+        mouseInputController = new MouseInputController(gamePane);
 
         // Give key codes registered by the game pane a given action
-        KeyboardInputHandler.registerAction(KeyCode.W, game.getCurrentLevel().getPlayer()::moveUp);
-        KeyboardInputHandler.registerAction(KeyCode.A, game.getCurrentLevel().getPlayer()::moveLeft);
-        KeyboardInputHandler.registerAction(KeyCode.S, game.getCurrentLevel().getPlayer()::moveDown);
-        KeyboardInputHandler.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
-        KeyboardInputHandler.registerAction(KeyCode.ESCAPE, this::pauseGame);
+        keyboardInputController.registerAction(KeyCode.W, game.getCurrentLevel().getPlayer()::moveUp);
+        keyboardInputController.registerAction(KeyCode.A, game.getCurrentLevel().getPlayer()::moveLeft);
+        keyboardInputController.registerAction(KeyCode.S, game.getCurrentLevel().getPlayer()::moveDown);
+        keyboardInputController.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
+        keyboardInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
         //KeyboardInputHandler.registerAction(KeyCode.E, () -> {
         //    game.activatePlayerAbility(0);
         //});
 
         // Register for mouse events
-        MouseInputHandler.registerActionOnLeftClick(() -> game.activatePlayerAbility(0));
-        MouseInputHandler.registerActionOnMove(     () -> game.setPlayerFacingPosition(MouseInputHandler.getMousePosition()));
+        mouseInputController.registerActionOnLeftClick(() -> game.activatePlayerAbility(0));
+        mouseInputController.registerActionOnMove(     () -> game.setPlayerFacingPosition(mouseInputController.getMousePosition()));
     }
 }

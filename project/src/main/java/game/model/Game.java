@@ -60,7 +60,8 @@ public class Game implements IGame {
         // Create player with shockwave ability
         IPlayer player = EntityFactory.basicPlayer(375, 200);
         player.setFriction(3);
-        player.addAbility(new Dash(GameLoop.SECOND * 2));
+        //player.addAbility(new Dash(GameLoop.SECOND * 2));
+        player.addAbility(new Shockwave(GameLoop.SECOND * 2, 350, 100000, 0.1));
 
         // Create basic enemy
         List<IEnemy> enemies = new ArrayList<>();
@@ -69,9 +70,9 @@ public class Game implements IGame {
         enemies.add(e1);
 
         // Create bullet enemy
-        //Enemy e2 = EntityFactory.bulletEnemy(900, 850, player, 5, GameLoop.SECOND / 2, 10, 300, 1);
-        // e2.setFriction(10);
-        //enemies.add(e2);
+        Enemy e2 = EntityFactory.bulletEnemy(900, 850, player, 5, GameLoop.SECOND / 2, 10, 300, 1);
+         e2.setFriction(10);
+        enemies.add(e2);
 
         // Create empty lists for projectiles and obstacles
         List<IProjectile<?>> projectiles = new ArrayList<>();

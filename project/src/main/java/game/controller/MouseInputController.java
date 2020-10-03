@@ -8,9 +8,7 @@ import java.util.List;
 
 // Singleton class for handling mouse events.
 // This class needs to be instantiated by calling init before calling any other methods.
-public class MouseInputHandler {
-    private static MouseInputHandler INSTANCE = null; // Global instance
-
+public class MouseInputController {
     private Point2D mousePosition;
 
     // Actions to be performed on different mouse events
@@ -18,11 +16,7 @@ public class MouseInputHandler {
     private final List<Action> onLeftClick;
     private final List<Action> onRightClick;
 
-    public static void init(Node node) {
-        INSTANCE = new MouseInputHandler(node);
-    }
-
-    private MouseInputHandler(Node node) {
+    public MouseInputController(Node node) {
         this.onMove = new ArrayList<>();
         this.onLeftClick = new ArrayList<>();
         this.onRightClick = new ArrayList<>();
@@ -52,17 +46,17 @@ public class MouseInputHandler {
     }
 
 
-    public static void registerActionOnMove(Action action) {
-        INSTANCE.onMove.add(action);
+    public void registerActionOnMove(Action action) {
+        onMove.add(action);
     }
-    public static void registerActionOnLeftClick(Action action) {
-        INSTANCE.onLeftClick.add(action);
+    public void registerActionOnLeftClick(Action action) {
+        onLeftClick.add(action);
     }
-    public static void registerActionOnRightClick(Action action) {
-        INSTANCE.onRightClick.add(action);
+    public void registerActionOnRightClick(Action action) {
+        onRightClick.add(action);
     }
 
-    public static Point2D getMousePosition() {
-        return INSTANCE.mousePosition;
+    public Point2D getMousePosition() {
+        return mousePosition;
     }
 }
