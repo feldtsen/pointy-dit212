@@ -1,3 +1,7 @@
+.mainWindow {
+    -fx-background-color: rgb(30, 30, 30);
+}
+
 .button {
     -fx-focus-color:       transparent;
     -fx-background-radius: 0;
@@ -7,9 +11,9 @@
     -fx-font-size:         2.4em;
 }
 .button:hover {
-   -fx-background-color: green;
+   -fx-background-color: rgba(40, 40, 40, 0.7);
 }
 .menuButton {
-    -fx-background-color: red;
-    -fx-pref-height: 5em;
+    -fx-background-color: rgba(60, 60, 60, 0.5);
+    -fx-pref-height: 7em;
 }

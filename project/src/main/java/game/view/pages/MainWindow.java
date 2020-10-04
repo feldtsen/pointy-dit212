@@ -12,8 +12,6 @@ public class MainWindow extends StackPane {
     GameCanvas gameCanvas;
     StartMenu startMenu;
 
-    private boolean isMenuFront = true;
-
     public MainWindow(Stage primaryStage, GameWindowController gameWindowController) {
         gameCanvas = new GameCanvas();
         startMenu  = new StartMenu(gameWindowController);
@@ -23,6 +21,9 @@ public class MainWindow extends StackPane {
 
         // Add a stylesheet
         this.getStylesheets().add(ViewResourceLoader.stylesheet);
+
+        // Add class for styling
+        this.getStyleClass().add("mainWindow");
 
         // Add what you want to display
        this.getChildren().setAll(
@@ -49,13 +50,4 @@ public class MainWindow extends StackPane {
         startMenu.toFront();
     }
 
-    public void toggleMenu() {
-        if (isMenuFront) {
-            isMenuFront = false;
-            startMenu.toBack();
-        } else {
-            isMenuFront = true;
-            startMenu.toFront();
-        }
-    }
 }

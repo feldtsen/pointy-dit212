@@ -7,6 +7,7 @@ import game.model.IGame;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
+import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
@@ -15,15 +16,15 @@ public class GameWindowController {
     private final Renderer  renderer; // view
     private final IGameLoop gameLoop;
     private final MainWindow window;
-    private final GameCanvas gameCanvas;
 
     private KeyboardInputController keyboardInputController;
     private MouseInputController mouseInputController;
 
     public GameWindowController(Stage primaryStage) {
         window = new MainWindow(primaryStage, this);
+        window.widthProperty().addListener(e -> this.resize());
 
-        gameCanvas = window.getGameCanvas();
+        GameCanvas gameCanvas = window.getGameCanvas();
         // Create a new renderer using the graphics context supplied by the canvas.
         renderer = new Renderer(gameCanvas.getGraphicsContext2D());
 
@@ -56,13 +57,17 @@ public class GameWindowController {
 
     }
 
+    private void resize() {
+        System.out.println("resize");
+    }
 
-    private void handleMenuLevelButton () {
+
+    public void handleMenuLevelButton() {
         System.out.println("Level button clicked");
     }
 
     //TODO: to implement
-    private void handleMenuScoreButton() {
+    public void handleMenuScoreButton() {
         System.out.println("Score button clicked ");
     }
 
@@ -74,6 +79,14 @@ public class GameWindowController {
     private void pauseGame() {
         gameLoop.setPaused(true);
         window.showMenu();
+    }
+
+    public MainWindow getWindow() {
+        return window;
+    }
+
+    public void handleMenuExitButton() {
+        Platform.exit();
     }
 
     private void gameSetup() {
@@ -99,7 +112,5 @@ public class GameWindowController {
         mouseInputController.registerActionOnMove(     () -> game.setPlayerFacingPosition(mouseInputController.getMousePosition()));
     }
 
-    public MainWindow getWindow() {
-        return window;
-    }
+
 }
