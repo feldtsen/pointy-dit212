@@ -31,7 +31,8 @@ public class MainWindow extends StackPane {
                startMenu
        );
 
-        // Bind the size of different components to the window size
+        // Bind the size of different components to the window size, making the components responsive
+        // (relative to its parent)
         gameCanvas.widthProperty().bind(this.widthProperty());
         gameCanvas.heightProperty().bind(this.heightProperty());
 

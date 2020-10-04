@@ -32,8 +32,6 @@ public class App extends Application {
         primaryStage.setScene(scene);
         // Display the stage (window)
         primaryStage.show();
-
-
     }
 
     // Launch the application

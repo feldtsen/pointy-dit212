@@ -21,6 +21,7 @@ public class GameWindowController {
     private MouseInputController mouseInputController;
 
     public GameWindowController() {
+        // Init. view component
         window = new MainWindow(this);
 
         // Listen for window resize
@@ -39,6 +40,9 @@ public class GameWindowController {
         gameLoop = new GameLoop(1000) {
             @Override
             public void update(double delta) {
+                // TODO: do it elsewhere?
+                resize();
+
                 // Render the current level
                 renderer.draw(game.getCurrentLevel());
 
@@ -52,8 +56,6 @@ public class GameWindowController {
                 // TODO: handle player death properly
                 if(game.isGameOver()) gameSetup();
 
-                // TODO: do it elsewhere?
-                resize();
             }
         };
 

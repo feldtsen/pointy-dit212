@@ -29,7 +29,7 @@ public class StartMenu extends HBox {
         levelButton.getStyleClass().add(MENU_BUTTON_CLASS);
         scoreButton.getStyleClass().add(MENU_BUTTON_CLASS);
 
-        // Add menu buttons
+        // Add menu buttons to the menu container
         this.getChildren().addAll(
                 startButton,
                 levelButton,
