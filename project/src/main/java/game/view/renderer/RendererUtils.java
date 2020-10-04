@@ -34,7 +34,7 @@ public class RendererUtils {
     public static void drawShape(GraphicsContext graphicsContext, Color color, ICircle circle, Point2D position) {
         //graphicsContext.setFill(color);
         //TODO fixed color for testing
-        graphicsContext.setFill(Color.SEAGREEN);
+        graphicsContext.setFill(Color.WHITESMOKE);
         graphicsContext.fillOval(
                 position.getX() - circle.getRadius(),
                 position.getY() - circle.getRadius(),
@@ -73,7 +73,7 @@ public class RendererUtils {
         graphicsContext.rotate(Utils.radianToDegrees(shape.getRotation()));
         graphicsContext.translate(-position.getX() - rotationCenterX, -position.getY() - rotationCenterY );
 
-        graphicsContext.setFill(Color.DARKGREEN);
+        graphicsContext.setFill(Color.GRAY);
         /*
         graphicsContext.fillPolygon(
                 new double[]{100, 100 + shape.getWidth(), 100 + (shape.getWidth()/2)},

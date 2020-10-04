@@ -13,6 +13,12 @@
 .button:hover {
    -fx-background-color: rgba(40, 40, 40, 0.7);
 }
+
+.startMenu {
+    -fx-padding: 1em;
+    -fx-spacing: 1em;
+}
+
 .menuButton {
     -fx-background-color: rgba(60, 60, 60, 0.5);
     -fx-pref-height: 7em;

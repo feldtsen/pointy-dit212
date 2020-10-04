@@ -12,7 +12,7 @@ public class MainWindow extends StackPane {
     GameCanvas gameCanvas;
     StartMenu startMenu;
 
-    public MainWindow(Stage primaryStage, GameWindowController gameWindowController) {
+    public MainWindow(GameWindowController gameWindowController) {
         gameCanvas = new GameCanvas();
         startMenu  = new StartMenu(gameWindowController);
 
@@ -32,8 +32,8 @@ public class MainWindow extends StackPane {
        );
 
         // Bind the size of different components to the window size
-        gameCanvas.widthProperty().bind(primaryStage.widthProperty());
-        gameCanvas.heightProperty().bind(primaryStage.heightProperty());
+        gameCanvas.widthProperty().bind(this.widthProperty());
+        gameCanvas.heightProperty().bind(this.heightProperty());
 
 
     }

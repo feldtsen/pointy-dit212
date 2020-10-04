@@ -33,7 +33,7 @@ public class Renderer implements IRenderer {
 
         // Initialize different entity classes with different colors
         colors.put(Player.class,          Color.rgb(200, 200, 200));
-        colors.put(Enemy.class,           Color.rgb(100, 200, 150));
+        colors.put(Enemy.class,           Color.rgb(80, 80, 80));
         colors.put(Bullet.class,          Color.rgb(100, 100, 100));
         colors.put(GraphicsContext.class, Color.rgb(30,  30,  30 ));
     }
@@ -50,7 +50,7 @@ public class Renderer implements IRenderer {
         RendererUtils.drawShape(graphicsContext, colors.get(level.getPlayer().getClass()), level.getPlayer().getShape(), level.getPlayer().getPosition());
 
         // TODO: temporary testing code, to show facing direction of player
-        Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), 50);
+        Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), level.getPlayer().getShape().getRadius() - 5);
         RendererUtils.drawLine(graphicsContext,
                 colors.get(level.getPlayer().getClass()),
                 level.getPlayer().getPosition(),
@@ -71,14 +71,6 @@ public class Renderer implements IRenderer {
             testRect.setRotation(radians);
             enemy.getShape().setRotation(radians);
             testTriangle.setRotation(radians);
-
-            // TODO: visual indicator for testing
-            Point2D direction2 = Utils.vectorFromHeading(enemy.getShape().getRotation(), 80);
-            RendererUtils.drawLine(graphicsContext,
-                    colors.get(enemy.getClass()),
-                    enemy.getPosition(),
-                    enemy.getPosition().add(direction2),
-                    10);
 
 
             //TODO: test for drawing rotated shapes

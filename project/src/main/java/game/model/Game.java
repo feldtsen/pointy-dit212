@@ -59,7 +59,7 @@ public class Game implements IGame {
     // TODO: dummy levels is a temporary method used for testing. Replace with levels loaded from level loader
     public static List<ILevel> dummyLevels() {
         // Create player with shockwave ability
-        IPlayer player = EntityFactory.basicPlayer(375, 200);
+        IPlayer player = EntityFactory.basicPlayer(400, 250);
         player.setFriction(3);
         //player.addAbility(new Dash(GameLoop.SECOND * 2));
         //player.addAbility(new Shockwave(GameLoop.SECOND * 2, 350, 100000, 0.1));
@@ -67,12 +67,12 @@ public class Game implements IGame {
 
         // Create basic enemy
         List<IEnemy> enemies = new ArrayList<>();
-        Enemy e1 = EntityFactory.basicEnemy(500, 650, player, 5);
+        Enemy e1 = EntityFactory.basicEnemy(800, 250, player, 5);
         e1.setFriction(3);
-        //enemies.add(e1);
+        enemies.add(e1);
 
         // Create bullet enemy
-        Enemy e2 = EntityFactory.bulletEnemy(900, 850, player, 5, GameLoop.SECOND / 2, 10, 300, 1);
+        Enemy e2 = EntityFactory.bulletEnemy(800, 500, player, 5, GameLoop.SECOND / 2, 10, 300, 1);
         e2.setFriction(10);
         enemies.add(e2);
 
@@ -81,7 +81,7 @@ public class Game implements IGame {
         List<IObstacle> obstacles = new ArrayList<>();
 
         // Build level(s)
-        ILevel level = new Level(enemies, projectiles, obstacles, player, 1200, 800);
+        ILevel level = new Level(enemies, projectiles, obstacles, player, 675, 1200);
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
         return levels;

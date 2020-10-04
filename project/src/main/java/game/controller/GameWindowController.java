@@ -4,24 +4,26 @@ import game.model.Game;
 import game.controller.gameLoop.GameLoop;
 import game.controller.gameLoop.IGameLoop;
 import game.model.IGame;
+import game.model.level.ILevel;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
-import javafx.stage.Stage;
 
 public class GameWindowController {
-    private IGame     game;     // Model
+    private IGame game;               // Model
     private final Renderer  renderer; // view
+    private final MainWindow window;  // view
     private final IGameLoop gameLoop;
-    private final MainWindow window;
 
     private KeyboardInputController keyboardInputController;
     private MouseInputController mouseInputController;
 
-    public GameWindowController(Stage primaryStage) {
-        window = new MainWindow(primaryStage, this);
+    public GameWindowController() {
+        window = new MainWindow(this);
+
+        // Listen for window resize
         window.widthProperty().addListener(e -> this.resize());
 
         GameCanvas gameCanvas = window.getGameCanvas();
@@ -49,6 +51,9 @@ public class GameWindowController {
                 // Reinitialize game on player death
                 // TODO: handle player death properly
                 if(game.isGameOver()) gameSetup();
+
+                // TODO: do it elsewhere?
+                resize();
             }
         };
 
@@ -58,7 +63,10 @@ public class GameWindowController {
     }
 
     private void resize() {
-        System.out.println("resize");
+        //TODO what todo here
+        ILevel currentLevel = game.getCurrentLevel();
+        currentLevel.setWidth(window.getWidth());
+        currentLevel.setHeight(window.getHeight());
     }
 
 
@@ -110,6 +118,7 @@ public class GameWindowController {
         // Register for mouse events
         mouseInputController.registerActionOnLeftClick(() -> game.activatePlayerAbility(0));
         mouseInputController.registerActionOnMove(     () -> game.setPlayerFacingPosition(mouseInputController.getMousePosition()));
+
     }
 
 

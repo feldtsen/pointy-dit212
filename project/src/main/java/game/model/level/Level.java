@@ -15,8 +15,8 @@ public class Level implements ILevel {
     private final List<IProjectile<?>> projectiles;
     private final List<IObstacle> obstacles;
     private final IPlayer player;
-    private final double width;
-    private final double height;
+    private double width;
+    private double height;
 
     public Level(List<IEnemy> enemies, List<IProjectile<?>> projectiles, List<IObstacle> obstacles, IPlayer player, double width, double height) {
         this.enemies = enemies;
@@ -55,6 +55,16 @@ public class Level implements ILevel {
     @Override
     public double getHeight(){
         return this.height;
+    }
+
+    @Override
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    @Override
+    public void setHeight(double height) {
+       this.height = height;
     }
 
     @Override

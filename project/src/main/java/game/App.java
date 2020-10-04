@@ -1,6 +1,7 @@
 package game;
 
 import game.controller.GameWindowController;
+import game.view.pages.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -23,7 +24,7 @@ public class App extends Application {
         primaryStage.setMinWidth(MIN_SIZE);
 
         //TODO: is there a better way?
-        GameWindowController gameWindowController = new GameWindowController(primaryStage);
+        GameWindowController gameWindowController = new GameWindowController();
 
         // Load game window
         Scene scene = new Scene(gameWindowController.getWindow());
