@@ -1,4 +1,4 @@
-package game.view;
+package game.view.renderer;
 
 import game.model.level.ILevel;
 

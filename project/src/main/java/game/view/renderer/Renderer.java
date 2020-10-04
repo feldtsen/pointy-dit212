@@ -1,4 +1,4 @@
-package game.view;
+package game.view.renderer;
 
 import game.model.entity.enemy.Enemy;
 import game.model.entity.enemy.IEnemy;
@@ -13,7 +13,6 @@ import game.util.Utils;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
 
 import java.util.HashMap;
 

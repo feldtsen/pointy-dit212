@@ -7,7 +7,7 @@ import game.model.Game;
 import game.controller.gameLoop.GameLoop;
 import game.controller.gameLoop.IGameLoop;
 import game.model.IGame;
-import game.view.Renderer;
+import game.view.renderer.Renderer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
