@@ -1,41 +1,31 @@
 package game.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import game.model.Game;
 import game.controller.gameLoop.GameLoop;
 import game.controller.gameLoop.IGameLoop;
 import game.model.IGame;
+import game.view.pages.MainWindow;
+import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
-public class GameWindowController implements Initializable {
+public class GameWindowController {
     private IGame     game;     // Model
-    private Renderer  renderer; // view
-    private IGameLoop gameLoop;
+    private final Renderer  renderer; // view
+    private final IGameLoop gameLoop;
+    private final MainWindow window;
+    private final GameCanvas gameCanvas;
 
-    // Controllers
     private KeyboardInputController keyboardInputController;
     private MouseInputController mouseInputController;
 
-    // Game pane is loaded from an FXML file, where the game view is created.
-    @FXML
-    private StackPane gamePane;
+    public GameWindowController(Stage primaryStage) {
+        window = new MainWindow(primaryStage, this);
 
-    // The canvas is also loaded from the same FXML file.
-    @FXML
-    private Canvas canvas;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+        gameCanvas = window.getGameCanvas();
         // Create a new renderer using the graphics context supplied by the canvas.
-        renderer = new Renderer(canvas.getGraphicsContext2D());
+        renderer = new Renderer(gameCanvas.getGraphicsContext2D());
 
         // Initialize the game and map all the keys to their corresponding actions.
         gameSetup();
@@ -63,40 +53,36 @@ public class GameWindowController implements Initializable {
 
         // Start the game loop. At this point, the game is running.
         gameLoop.start();
+
     }
 
-    //TODO: to implement
-    @FXML
+
     private void handleMenuLevelButton () {
         System.out.println("Level button clicked");
     }
 
     //TODO: to implement
-    @FXML
     private void handleMenuScoreButton() {
         System.out.println("Score button clicked ");
     }
 
-    @FXML
-    private void handleMenuStartButton() {
+    public void handleMenuStartButton() {
         gameLoop.setPaused(false);
-        gamePane.lookup("#menuContainer").toBack();
-        ((Button) gamePane.lookup("#menuStartButton")).setText("RETURN");
+        window.hideMenu();
     }
 
-    @FXML
     private void pauseGame() {
         gameLoop.setPaused(true);
-        gamePane.lookup("#menuContainer").toFront();
+        window.showMenu();
     }
 
     private void gameSetup() {
         game = new Game();
 
         // Initialize the keyboard input handler.
-        keyboardInputController = new KeyboardInputController(gamePane);
+        keyboardInputController = new KeyboardInputController(window);
         // Initialize the mouse input handler
-        mouseInputController = new MouseInputController(gamePane);
+        mouseInputController = new MouseInputController(window);
 
         // Give key codes registered by the game pane a given action
         keyboardInputController.registerAction(KeyCode.W, game.getCurrentLevel().getPlayer()::moveUp);
@@ -111,5 +97,9 @@ public class GameWindowController implements Initializable {
         // Register for mouse events
         mouseInputController.registerActionOnLeftClick(() -> game.activatePlayerAbility(0));
         mouseInputController.registerActionOnMove(     () -> game.setPlayerFacingPosition(mouseInputController.getMousePosition()));
+    }
+
+    public MainWindow getWindow() {
+        return window;
     }
 }

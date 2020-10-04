@@ -1,5 +1,6 @@
 package game.view.pages;
 
+import game.controller.GameWindowController;
 import game.view.ViewResourceLoader;
 import game.view.pages.canvas.GameCanvas;
 import game.view.pages.menu.StartMenu;
@@ -7,17 +8,18 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class RootParent extends StackPane {
+public class MainWindow extends StackPane {
     GameCanvas gameCanvas;
     StartMenu startMenu;
 
-    public RootParent(Stage primaryStage) {
+    private boolean isMenuFront = true;
+
+    public MainWindow(Stage primaryStage, GameWindowController gameWindowController) {
         gameCanvas = new GameCanvas();
-        startMenu  = new StartMenu();
+        startMenu  = new StartMenu(gameWindowController);
 
         // Align the component
         startMenu.setAlignment(Pos.BOTTOM_CENTER);
-        startMenu.setStyle("-fx-background-color: blue");
 
         // Add a stylesheet
         this.getStylesheets().add(ViewResourceLoader.stylesheet);
@@ -35,4 +37,25 @@ public class RootParent extends StackPane {
 
     }
 
+    public GameCanvas getGameCanvas () {
+        return gameCanvas;
+    }
+
+    public void hideMenu() {
+        startMenu.toBack();
+    }
+
+    public void showMenu() {
+        startMenu.toFront();
+    }
+
+    public void toggleMenu() {
+        if (isMenuFront) {
+            isMenuFront = false;
+            startMenu.toBack();
+        } else {
+            isMenuFront = true;
+            startMenu.toFront();
+        }
+    }
 }

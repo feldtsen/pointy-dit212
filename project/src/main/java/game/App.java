@@ -1,10 +1,8 @@
 package game;
 
-import game.view.pages.RootParent;
-import game.view.pages.canvas.GameCanvas;
+import game.controller.GameWindowController;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
 // Top level class for initializing the application
@@ -23,16 +21,18 @@ public class App extends Application {
         primaryStage.maxHeightProperty().bind(primaryStage.widthProperty().multiply(WIDTH_TO_HEIGHT_RATIO));
         // Set constraint to the minimum allowed size
         primaryStage.setMinWidth(MIN_SIZE);
-        // As default maximize screen
-        //primaryStage.setMaximized(true);
+
+        //TODO: is there a better way?
+        GameWindowController gameWindowController = new GameWindowController(primaryStage);
 
         // Load game window
-        RootParent rootParent = new RootParent(primaryStage);
-        Scene scene = new Scene(rootParent);
+        Scene scene = new Scene(gameWindowController.getWindow());
         // Set the scene to the main stage (window)
         primaryStage.setScene(scene);
         // Display the stage (window)
         primaryStage.show();
+
+
     }
 
     // Launch the application
