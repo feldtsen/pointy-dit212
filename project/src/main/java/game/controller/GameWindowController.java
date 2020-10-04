@@ -8,8 +8,10 @@ import game.model.level.ILevel;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
+import javafx.util.Duration;
 
 public class GameWindowController {
     private IGame game;               // Model

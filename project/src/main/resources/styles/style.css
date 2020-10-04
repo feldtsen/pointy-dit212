@@ -1,6 +1,12 @@
 .mainWindow {
     -fx-background-color: rgb(30, 30, 30);
 }
+.activeMainWindow {
+    -fx-opacity: .9;
+}
+.idleMainWindow {
+    -fx-opacity: 0;
+}
 
 .button {
     -fx-focus-color:       transparent;

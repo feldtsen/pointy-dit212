@@ -5,7 +5,9 @@ import game.view.pages.menu.buttons.ExitButton;
 import game.view.pages.menu.buttons.LevelButton;
 import game.view.pages.menu.buttons.ScoreButton;
 import game.view.pages.menu.buttons.StartButton;
+import javafx.animation.FadeTransition;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 
 public class StartMenu extends HBox {
     private final static String MENU_BUTTON_CLASS = "menuButton";
@@ -21,6 +23,9 @@ public class StartMenu extends HBox {
         levelButton.setOnMouseClicked(e -> gameWindowController.handleMenuLevelButton());
         scoreButton.setOnMouseClicked(e -> gameWindowController.handleMenuScoreButton());
         exitButton.setOnMouseClicked( e -> gameWindowController.handleMenuExitButton());
+
+
+
 
         // Set css classes for styling
         this.getStyleClass().add("startMenu");

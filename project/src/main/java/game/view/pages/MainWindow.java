@@ -4,11 +4,15 @@ import game.controller.GameWindowController;
 import game.view.ViewResourceLoader;
 import game.view.pages.canvas.GameCanvas;
 import game.view.pages.menu.StartMenu;
+import javafx.animation.FadeTransition;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class MainWindow extends StackPane {
+    private static final String MAIN_WINDOW_CSS = "mainWindow";
+    FadeTransition startMenuFade = new FadeTransition(new Duration(200));
+
     GameCanvas gameCanvas;
     StartMenu startMenu;
 
@@ -23,7 +27,10 @@ public class MainWindow extends StackPane {
         this.getStylesheets().add(ViewResourceLoader.stylesheet);
 
         // Add class for styling
-        this.getStyleClass().add("mainWindow");
+        this.getStyleClass().add(MAIN_WINDOW_CSS);
+
+        // Animations
+        startMenuFade.setNode(startMenu);
 
         // Add what you want to display
        this.getChildren().setAll(
@@ -44,11 +51,19 @@ public class MainWindow extends StackPane {
     }
 
     public void hideMenu() {
-        startMenu.toBack();
+        startMenuFade.setFromValue(1);
+        startMenuFade.setToValue(0);
+        startMenuFade.playFromStart();
+        // Making all children of start menu transparent to mouse events
+        startMenu.setMouseTransparent(true);
     }
 
     public void showMenu() {
-        startMenu.toFront();
+        startMenuFade.setFromValue(0);
+        startMenuFade.setToValue(1);
+        startMenuFade.playFromStart();
+        // Making all children of start menu visible to mouse events
+        startMenu.setMouseTransparent(false);
     }
 
 }
