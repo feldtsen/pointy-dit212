@@ -32,9 +32,9 @@ public class Renderer implements IRenderer {
         this.graphicsContext = graphicsContext;
 
         // Initialize different entity classes with different colors
-        colors.put(Player.class,          Color.rgb(200, 200, 200));
+        colors.put(Player.class,          Color.rgb(150, 150, 150));
         colors.put(Enemy.class,           Color.rgb(80, 80, 80));
-        colors.put(Bullet.class,          Color.rgb(100, 100, 100));
+        colors.put(Bullet.class,          Color.rgb(90, 90, 90));
         colors.put(GraphicsContext.class, Color.rgb(30,  30,  30 ));
     }
 
