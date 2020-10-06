@@ -20,7 +20,6 @@ public class Dash extends Ability {
         IPlayer player = (IPlayer) user;
         player.setIsInvulnerable(true);
 
-
         return new IAbilityAction() {
 
             Point2D dir = null;
@@ -34,15 +33,16 @@ public class Dash extends Ability {
             public void apply(ILevel level, double timePassed) {
 
                 if (dir == null) {
-                    player.setMaxSpeed(player.getMaxSpeed()*2);
+                    player.setMaxSpeed(player.getMaxSpeed()*7);
                     dir = Utils.vectorFromHeading(player.getShape().getRotation(), player.getMaxSpeed());
                 }
-                System.out.println(dir);
                 player.setVelocity(dir);
             }
 
             @Override
             public void onFinished(ILevel level) {
+                player.setMaxSpeed(player.getMaxSpeed() / 7);
+                player.setIsInvulnerable(false);
             }
         };
     }
