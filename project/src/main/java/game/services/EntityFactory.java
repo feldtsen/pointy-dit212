@@ -1,5 +1,6 @@
 package game.services;
 
+import game.controller.gameLoop.GameLoop;
 import game.model.ability.ShootBullet;
 import game.model.behavior.ability.SingleAbilityBehavior;
 import game.model.behavior.movement.SeekingBehaviour;
@@ -11,6 +12,12 @@ import javafx.geometry.Point2D;
 
 
 public class EntityFactory {
+    private static final long BASEFREQUENCY = GameLoop.SECOND;
+    private static final int BASEENEMYSTRENGTH = 5;
+    private static final double BASEBULLETRADIUS = 10;
+    private static final double BASEBULLETSPEED = 300 + 100;
+    private static final int BASEBULLETSTRENGTH = 1;
+
 
     public static Player basicPlayer(double x, double y) {
         return new Player(new Point2D(x, y), 30, 2500, 1000,0);
@@ -26,10 +33,10 @@ public class EntityFactory {
         return new Enemy(new Point2D(x,y), 50, 1000, 1000, 1,null, new SeekingBehaviour(), target, strength);
     }
 
-    //Creates an enemy with the ability of shooting bullets.
-    public static Enemy bulletEnemy(double x, double y, IEntity<?> target, int strength, long frequency, double bulletRadius, double bulletSpeed, int bulletStrength) {
-        ShootBullet shootBullet = new ShootBullet(frequency, bulletRadius, bulletSpeed, bulletSpeed, bulletStrength);
-        Enemy enemy = basicEnemy(x, y, target, strength);
+    //Creates an enemy with the ability of shooting bullets. The higher the given difficulty is, the higher the shooting frequency.
+    public static Enemy bulletEnemy(double x, double y, IEntity<?> target, int difficulty) {
+        ShootBullet shootBullet = new ShootBullet((long ) (BASEFREQUENCY / (difficulty * 0.5)), BASEBULLETRADIUS, 0, BASEBULLETSPEED, BASEBULLETSTRENGTH);
+        Enemy enemy = basicEnemy(x, y, target, BASEENEMYSTRENGTH);
         enemy.setAbilityBehaviour(new SingleAbilityBehavior(shootBullet));
         return enemy;
     }
