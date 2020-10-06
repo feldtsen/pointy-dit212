@@ -35,10 +35,14 @@ public class EntityFactory {
     // Dictates how much the difficulty changes the max speed of the missiles.
     private static final double MISSILEMAXSPEEDFACTOR = 25;
 
+    private static final double FRICTION = 3;
+
     private EntityFactory() {}
 
     public static Player basicPlayer(double x, double y) {
-        return new Player(new Point2D(x, y), 30, 2500, 1000,0);
+        Player player = new Player(new Point2D(x, y), 30, 2500, 1000,0);
+        player.setFriction(FRICTION);
+        return player;
     }
 
     //Creates a player with a higher strength than basicPlayer.
@@ -48,7 +52,9 @@ public class EntityFactory {
 
     //Creates and enemy without abilities which only follows a target.
     public static Enemy basicEnemy(double x, double y, IEntity<?> target, int strength) {
-        return new Enemy(new Point2D(x,y), 50, 1000, 1000, 1,null, new SeekingBehaviour(), target, strength);
+        Enemy enemy = new Enemy(new Point2D(x,y), 50, 1000, 1000, 1,null, new SeekingBehaviour(), target, strength);
+        enemy.setFriction(FRICTION);
+        return enemy;
     }
 
     //Creates an enemy with the ability of shooting bullets. The higher the given difficulty is, the higher the shooting frequency.
@@ -62,6 +68,7 @@ public class EntityFactory {
         ShootBullet shootBullet = new ShootBullet(bulletFrequency, BULLETRADIUS, 0, BULLETSPEED, BULLETSTRENGTH);
         Enemy enemy = basicEnemy(x, y, target, BASEENEMYSTRENGTH);
         enemy.setAbilityBehaviour(new SingleAbilityBehavior(shootBullet));
+        enemy.setFriction(FRICTION);
 
         return enemy;
     }
@@ -85,6 +92,7 @@ public class EntityFactory {
         ShootMissile shootMissile = new ShootMissile(MISSILEFREQEUNCY, MISSILERADIUS, maxForce, maxSpeed , MISSILEMINSPEED, MISSILESTRENGTH, movementBehaviour);
         Enemy enemy = basicEnemy(x, y, target, BASEENEMYSTRENGTH);
         enemy.setAbilityBehaviour(new SingleAbilityBehavior(shootMissile));
+        enemy.setFriction(FRICTION);
 
         return enemy;
     }

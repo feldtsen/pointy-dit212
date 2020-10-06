@@ -13,6 +13,8 @@ import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 
+import java.io.FileNotFoundException;
+
 public class GameWindowController {
     private IGame game;               // Model
     private final Renderer  renderer; // view
@@ -102,7 +104,12 @@ public class GameWindowController {
     }
 
     private void gameSetup() {
-        game = new Game();
+        try {
+            game = new Game();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
 
         // Initialize the keyboard input handler.
         keyboardInputController = new KeyboardInputController(window);

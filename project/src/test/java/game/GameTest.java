@@ -20,6 +20,7 @@ import javafx.geometry.Point2D;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +35,14 @@ public class GameTest {
     }
 
     @Before
-    public void init() {
-        game = new Game();
+    public void init()  {
+        try {
+            game = new Game();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Test

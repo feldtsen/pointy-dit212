@@ -7,21 +7,28 @@
   "Enemies": [
     {
       "type": "basic",
-      "x": "900",
-      "y": "850",
+      "x": "600",
+      "y": "400",
       "target": "player",
-      "difficulty" : "2"
+      "difficulty" : "5"
     },
     {
       "type": "bullet",
-      "x": "900",
-      "y": "850",
+      "x": "700",
+      "y": "500",
       "target": "player",
-      "difficulty" : "2"
+      "difficulty" : "5"
+    },
+    {
+      "type": "missile",
+      "x": "500",
+      "y": "600",
+      "target": "player",
+      "difficulty" : "5"
     }
   ],
   "Player": {
-    "x": "500",
-    "y": "650"
+    "x": "300",
+    "y": "250"
   }
 }

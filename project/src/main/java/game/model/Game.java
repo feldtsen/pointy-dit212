@@ -16,9 +16,11 @@ import game.model.level.ILevel;
 import game.model.level.Level;
 import game.model.shape2d.ICircle;
 import game.services.EntityFactory;
+import game.services.LevelLoader;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,42 +54,23 @@ public class Game implements IGame {
         this.playerFacingPosition = new Point2D(currentLevel.getWidth()/2, currentLevel.getHeight()/2); // Default direciton
     }
 
-    public Game() {
+    public Game() throws FileNotFoundException {
         this(dummyLevels());
     }
 
     // TODO: dummy levels is a temporary method used for testing. Replace with levels loaded from level loader
-    public static List<ILevel> dummyLevels() {
-        // Create player with shockwave ability
-        IPlayer player = EntityFactory.basicPlayer(400, 250);
-        player.setFriction(3);
-        player.addAbility(new Dash(GameLoop.SECOND * 2));
-        //player.addAbility(new Shockwave(GameLoop.SECOND * 2, 350, 100000, 0.1));
+    public static List<ILevel> dummyLevels() throws FileNotFoundException {
 
-        //player.addAbility(new Reflect(GameLoop.SECOND / 2, Math.PI/2, 100, 0.5, 0.1));
-
-        //player.addAbility(new Reflect(GameLoop.SECOND / 2, Math.PI/2, 100, 0.5, 0.1, 1000));
-
-
-        // Create basic enemy
-        List<IEnemy> enemies = new ArrayList<>();
-        Enemy e1 = EntityFactory.basicEnemy(800, 250, player, 5);
-        e1.setFriction(3);
-        enemies.add(e1);
-
-        // Create bullet enemy
-        Enemy e2 = EntityFactory.bulletEnemy(800, 500, player, 3);
-        e2.setFriction(10);
-        enemies.add(e2);
-
-        // Create empty lists for projectiles and obstacles
-        List<IProjectile<?>> projectiles = new ArrayList<>();
-        List<IObstacle> obstacles = new ArrayList<>();
 
         // Build level(s)
-        ILevel level = new Level(enemies, projectiles, obstacles, player, 675, 1200);
+        ILevel level = LevelLoader.load("testLevel");
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
+
+        // Add abilities
+        level.getPlayer().setFriction(3);
+        level.getPlayer().addAbility(new Dash(GameLoop.SECOND * 2));
+
         return levels;
     }
 
