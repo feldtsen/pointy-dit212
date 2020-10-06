@@ -3,6 +3,7 @@ package game.services;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import game.model.entity.IEntity;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.obstacle.IObstacle;
 import game.model.entity.player.IPlayer;
@@ -39,12 +40,27 @@ public class LevelLoader {
         List<IEnemy> enemies = new ArrayList<>();
         JsonArray enemyArr = levelJSON.getAsJsonArray("Enemies");
         for (int i = 0; i < enemyArr.size(); i++) {
+            String type = enemyArr.get(i).getAsJsonObject().get("type").getAsString();
             double x = enemyArr.get(i).getAsJsonObject().get("x").getAsDouble();
             double y = enemyArr.get(i).getAsJsonObject().get("y").getAsDouble();
-            int strength = enemyArr.get(i).getAsJsonObject().get("strength").getAsInt();
-            enemies.add(EntityFactory.basicEnemy(x, y, player, strength));
+            int difficulty = enemyArr.get(i).getAsJsonObject().get("difficulty").getAsInt();
+            enemies.add(selectEnemy(x, y, player, difficulty, type));
         }
         return enemies;
+    }
+
+    private static IEnemy selectEnemy(double x, double y, IEntity target, int difficulty, String type) {
+        IEnemy enemy = null;
+        if (type.equals("basic")) {
+            enemy = EntityFactory.basicEnemy(x, y,target, difficulty);
+        }
+        else if (type.equals("bullet")) {
+            enemy = EntityFactory.bulletEnemy(x, y, target, difficulty);
+        }
+        else if (type.equals("missile")) {
+            enemy = EntityFactory.missileEnemy(x, y, target, difficulty);
+        }
+        return enemy;
     }
 
     //Returns an empty list since no projectiles are loaded at the start of a level.

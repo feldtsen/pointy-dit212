@@ -6,16 +6,18 @@
   "Obstacles": [],
   "Enemies": [
     {
+      "type": "basic",
       "x": "900",
       "y": "850",
       "target": "player",
-      "strength" : "5"
+      "difficulty" : "2"
     },
     {
+      "type": "bullet",
       "x": "900",
       "y": "850",
       "target": "player",
-      "strength" : "5"
+      "difficulty" : "2"
     }
   ],
   "Player": {
