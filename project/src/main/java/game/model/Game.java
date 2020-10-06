@@ -68,13 +68,18 @@ public class Game implements IGame {
         // Create basic enemy
         List<IEnemy> enemies = new ArrayList<>();
         Enemy e1 = EntityFactory.basicEnemy(800, 250, player, 5);
-        e1.setFriction(3);
+        e1.setFriction(2);
         enemies.add(e1);
 
         // Create bullet enemy
-        Enemy e2 = EntityFactory.bulletEnemy(800, 500, player, 5, GameLoop.SECOND / 2, 10, 300, 1);
+        Enemy e2 = EntityFactory.bulletEnemy(800, 500, player, 5, GameLoop.SECOND, 10, 300, 1);
         e2.setFriction(10);
         enemies.add(e2);
+
+        // Create missile enemy
+        Enemy e3 = EntityFactory.missileEnemy(800, 150, player, 5, GameLoop.SECOND * 2, 30, 50, 200, 200, 1);
+        e3.setFriction(30);
+        enemies.add(e3);
 
         // Create empty lists for projectiles and obstacles
         List<IProjectile<?>> projectiles = new ArrayList<>();

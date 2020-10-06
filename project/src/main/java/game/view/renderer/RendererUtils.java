@@ -31,10 +31,8 @@ public class RendererUtils {
 
 
     // Draws a particular shape (TODO: so far, just a circle) to the screen
-    public static void drawShape(GraphicsContext graphicsContext, Color color, ICircle circle, Point2D position) {
-        //graphicsContext.setFill(color);
-        //TODO fixed color for testing
-        graphicsContext.setFill(Color.WHITESMOKE);
+    public static void drawCircle(GraphicsContext graphicsContext, Color color, ICircle circle, Point2D position) {
+        graphicsContext.setFill(color);
         graphicsContext.fillOval(
                 position.getX() - circle.getRadius(),
                 position.getY() - circle.getRadius(),
@@ -44,52 +42,27 @@ public class RendererUtils {
     }
 
     // Draws a rotatable shape to the screen
-    public static void drawShape(GraphicsContext graphicsContext, Color color, IShape2D shape, Point2D position) {
-        double rotationCenterX = shape.getWidth() / 2;
-        double rotationCenterY = shape.getHeight() / 2;
-
-        graphicsContext.save();
-
-        graphicsContext.translate(position.getX(), position.getY() );
-        graphicsContext.rotate(Utils.radianToDegrees(shape.getRotation()));
-        graphicsContext.translate(-position.getX() - rotationCenterX, -position.getY() - rotationCenterY);
+    public static void drawRectangle(GraphicsContext graphicsContext, Color color, IRectangle shape, Point2D position) {
+        SaveAndTranslate(graphicsContext, shape, position);
 
         graphicsContext.setFill(color);
         graphicsContext.fillRect(position.getX(), position.getY(), shape.getWidth(), shape.getHeight());
 
         graphicsContext.restore();
-
-
     }
-    public static void drawShape(GraphicsContext graphicsContext, Color color, Triangle shape, Point2D position) {
-        double rotationCenterX = shape.getWidth() / 2;
-        double rotationCenterY = shape.getHeight() / 2;
 
 
+    public static void drawTriangle(GraphicsContext graphicsContext, Color color, ITriangle shape, Point2D position) {
+        SaveAndTranslate(graphicsContext, shape, position);
 
-        graphicsContext.save();
-
-        graphicsContext.translate(position.getX(), position.getY() );
-        graphicsContext.rotate(Utils.radianToDegrees(shape.getRotation()));
-        graphicsContext.translate(-position.getX() - rotationCenterX, -position.getY() - rotationCenterY );
-
-        graphicsContext.setFill(Color.GRAY);
-        /*
+        graphicsContext.setFill(color);
         graphicsContext.fillPolygon(
-                new double[]{100, 100 + shape.getWidth(), 100 + (shape.getWidth()/2)},
-                new double[]{100, 100,                    100 - shape.getHeight()},
-                3);
-         */
-
-        graphicsContext.fillPolygon(
-                new double[]{position.getX(), position.getX(),                     position.getX() + shape.getHeight()},
-                new double[]{position.getY(), position.getY() + shape.getWidth(),  position.getY() + (shape.getWidth()/2)},
+                new double[]{position.getX(), position.getX() + shape.getWidth(), position.getX() + shape.getWidth()/2},
+                new double[]{position.getY(), position.getY()                   , position.getY() + shape.getHeight()},
                 3);
 
 
         graphicsContext.restore();
-
-
     }
 
     // Draws a line from a start to stop
@@ -98,4 +71,12 @@ public class RendererUtils {
         graphicsContext.setLineWidth(width);
         graphicsContext.strokeLine(start.getX(), start.getY(), stop.getX(), stop.getY());
     }
+
+    private static void SaveAndTranslate(GraphicsContext graphicsContext, IShape2D shape, Point2D position) {
+        graphicsContext.save();
+        graphicsContext.translate(position.getX(), position.getY());
+        graphicsContext.rotate(Utils.radianToDegrees(shape.getRotation()) - 90);
+        graphicsContext.translate(-position.getX() - shape.getWidth()/2, -position.getY() - shape.getHeight()/2);
+    }
+
 }

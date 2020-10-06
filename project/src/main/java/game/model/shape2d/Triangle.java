@@ -2,6 +2,7 @@ package game.model.shape2d;
 
 import game.util.Shapes;
 import game.util.Utils;
+import game.view.IVisitor;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
@@ -107,5 +108,10 @@ public class Triangle implements ITriangle{
         double dist1 = Math.sqrt(Math.pow(width/2, 2) + Math.pow(height/2, 2)); //Distance from center to one of bottom left and right.
         double dist2 = height/2; // Distance from center to top corner.
         return Math.max(dist1, dist2); // Return max of distances.
+    }
+
+    @Override
+    public void accept(IVisitor visitor) {
+        visitor.visit(this);
     }
 }

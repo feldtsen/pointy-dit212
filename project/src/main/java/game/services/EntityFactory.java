@@ -1,6 +1,7 @@
 package game.services;
 
 import game.model.ability.ShootBullet;
+import game.model.ability.ShootMissile;
 import game.model.behavior.ability.SingleAbilityBehavior;
 import game.model.behavior.movement.SeekingBehaviour;
 import game.model.entity.IEntity;
@@ -39,8 +40,11 @@ public class EntityFactory {
     }
 
     //Creates an enemy with the ability of homing missiles.
-    public static Enemy missileEnemy(double x, double y, IEntity<?> target, int strength) {
-        //TODO
-        return null;
+    public static Enemy missileEnemy(double x, double y, IEntity<?> target, int strength, long frequency, double missileWidth, double missileHeight, double missileForce, double missileSpeed, int missileStrength) {
+        ShootMissile shootMissle = new ShootMissile(frequency, missileWidth, missileHeight, missileForce, missileSpeed, missileSpeed, 1, new SeekingBehaviour());
+        Enemy enemy = basicEnemy(x, y, target, strength);
+        enemy.setAbilityBehaviour(new SingleAbilityBehavior(shootMissle));
+
+        return enemy;
     }
 }
