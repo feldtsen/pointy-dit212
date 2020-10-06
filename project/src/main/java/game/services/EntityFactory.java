@@ -35,6 +35,7 @@ public class EntityFactory {
     // Dictates how much the difficulty changes the max speed of the missiles.
     private static final double MISSILEMAXSPEEDFACTOR = 25;
 
+    private EntityFactory() {}
 
     public static Player basicPlayer(double x, double y) {
         return new Player(new Point2D(x, y), 30, 2500, 1000,0);
