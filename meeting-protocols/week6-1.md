@@ -23,6 +23,7 @@ Participants: Everyone
 - Responsibilities
     - we've been a bit divided, this week we need to share responsibilities more.
 - Peer review
+- Write more tests
 
 ## Outcomes and assignments (5 min)
 - Finish dash ability (Erik)
