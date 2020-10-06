@@ -144,6 +144,10 @@ public class GameTest {
                     @Override
                     public void apply(ILevel level, double timePassed) {
                     }
+
+                    @Override
+                    public void onFinished(ILevel level) {
+                    }
                 };
             }
         });
@@ -187,6 +191,10 @@ public class GameTest {
 
                     @Override
                     public void apply(ILevel level, double timePassed) {
+                    }
+
+                    @Override
+                    public void onFinished(ILevel level) {
                     }
                 };
             }

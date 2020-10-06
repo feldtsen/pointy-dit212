@@ -213,6 +213,7 @@ public class Game implements IGame {
             // Check if the time since activation time exceeds the duration of the abilityAction.
             if(now - activationTime >= abilityAction.getDuration() * GameLoop.SECOND) {
                 // If true, deactivate ability.
+                abilityAction.onFinished(currentLevel); //Method called for cleanup
                 deactivateAbility(i);
             }
         }

@@ -63,6 +63,10 @@ public class Shockwave extends Ability{
                     }
                 }
             }
+
+            @Override
+            public void onFinished(ILevel level) {
+            }
         };
     }
 }

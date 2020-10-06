@@ -61,6 +61,10 @@ public class Reflect extends Ability {
                     projectile.setStrength(strength);
                 }
             }
+
+            @Override
+            public void onFinished(ILevel level) {
+            }
         };
     }
 }

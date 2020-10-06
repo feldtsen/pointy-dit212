@@ -8,4 +8,7 @@ public interface IAbilityAction {
     double getDuration();
     // The apply method will apply all changes, possibly adjusted depending on how much time has passed since activation.
     void apply(ILevel level, double timePassed);
+
+    // This method is called when the IAbilityAction is done, for cleanup
+    void onFinished(ILevel level);
 }

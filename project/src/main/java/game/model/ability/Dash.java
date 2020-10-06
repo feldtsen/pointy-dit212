@@ -30,6 +30,10 @@ public class Dash extends Ability {
                 // Moves the player the distance in the direction it's currently facing.
                 player.setPosition(player.getPosition().add(new Point2D(distance*Math.cos(player.getShape().getRotation()),distance*Math.sin(player.getShape().getRotation()))));
             }
+
+            @Override
+            public void onFinished(ILevel level) {
+            }
         };
     }
 }

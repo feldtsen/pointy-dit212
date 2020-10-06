@@ -29,6 +29,10 @@ public abstract class Shoot extends Ability {
                 List<IProjectile<?>> projectiles = level.getProjectiles();
                 projectiles.add(projectile);
             }
+
+            @Override
+            public void onFinished(ILevel level) {
+            }
         };
     }
 
