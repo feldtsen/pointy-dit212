@@ -28,6 +28,11 @@ public class AbilityTest {
             @Override
             public void apply(ILevel level, double timePassed) {
             }
+
+            @Override
+            public void onFinished(ILevel level) {
+
+            }
         };
     }
 
@@ -38,6 +43,11 @@ public class AbilityTest {
                 return new AbilityAction(0) {
                     @Override
                     public void apply(ILevel level, double timePassed) { }
+
+                    @Override
+                    public void onFinished(ILevel level) {
+
+                    }
                 };
             }
         };

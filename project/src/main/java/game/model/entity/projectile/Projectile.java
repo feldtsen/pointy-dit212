@@ -6,7 +6,7 @@ import javafx.geometry.Point2D;
 
 // Abstract helper implementation of projectiles.
 public abstract class Projectile<T extends IShape2D> extends MovableEntity<T> implements IProjectile<T> {
-    private final int strength;
+    private int strength;
     private boolean isDestroyed;
 
     public Projectile(Point2D position, double maxForce, double maxSpeed, int strength, Point2D velocity, T shape) {
@@ -18,6 +18,11 @@ public abstract class Projectile<T extends IShape2D> extends MovableEntity<T> im
     @Override
     public int getStrength() {
         return strength;
+    }
+
+    @Override
+    public void setStrength(int strength) {
+        this.strength = strength;
     }
 
     @Override

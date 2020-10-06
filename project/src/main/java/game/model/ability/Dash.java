@@ -40,6 +40,10 @@ public class Dash extends Ability {
                 System.out.println(dir);
                 player.setVelocity(dir);
             }
+
+            @Override
+            public void onFinished(ILevel level) {
+            }
         };
     }
 }

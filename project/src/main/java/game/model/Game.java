@@ -63,7 +63,11 @@ public class Game implements IGame {
         player.setFriction(3);
         player.addAbility(new Dash(GameLoop.SECOND * 2));
         //player.addAbility(new Shockwave(GameLoop.SECOND * 2, 350, 100000, 0.1));
+
         //player.addAbility(new Reflect(GameLoop.SECOND / 2, Math.PI/2, 100, 0.5, 0.1));
+
+        //player.addAbility(new Reflect(GameLoop.SECOND / 2, Math.PI/2, 100, 0.5, 0.1, 1000));
+
 
         // Create basic enemy
         List<IEnemy> enemies = new ArrayList<>();
@@ -130,15 +134,31 @@ public class Game implements IGame {
             // Update projectile
             projectile.update(delta, timeStep);
 
-            // Remove projectile from list if destroyed or out of bounds
-            if(projectile.isDestroyed() || isOutOfBounds(projectile)) {
-                currentLevel.getProjectiles().remove(i);
-                continue;
-            }
-
             // Check collision with player, and reduce player hit points if collision.
             if (player.checkCollision(projectile) && !player.isInvulnerable()) {
                 player.setHitPoints(player.getHitPoints() - projectile.getStrength());
+                // set destroyed on hit
+                projectile.setDestroyed();
+            }
+
+            // Iterate over all the enemies
+            for(IEnemy enemy : getCurrentLevel().getEnemies()) {
+                // Check collision with projectiles
+                if(projectile.checkCollision(enemy)) {
+                    // If the strength of the projectiles is grater than that of the enemies
+                    if (projectile.getStrength() > enemy.getStrength()) {
+                        // If the enemy dies the score is updated
+                        score += enemy.getStrength();
+                        enemy.setHitPoints(0);
+                        // Set destroyed on hit
+                        projectile.setDestroyed();
+                    }
+                }
+            }
+
+            // Remove projectile from list if destroyed or out of bounds
+            if(projectile.isDestroyed() || isOutOfBounds(projectile)) {
+                currentLevel.getProjectiles().remove(i);
             }
         }
 
@@ -164,7 +184,7 @@ public class Game implements IGame {
             IEnemy e1 = currentLevel.getEnemies().get(i);
             // Loop from i + 1 to ensure collision is not checked twice for each entity pair, and to avoid checking
             // self collision checking.
-            for (int j = i + 1; j < currentLevel.getEnemies().size(); j++ ){
+            for (int j = i + 1; j < currentLevel.getEnemies().size(); j++){
                 IEnemy e2 = currentLevel.getEnemies().get(j);
                 if (e1.checkCollision(e2)) {
                     handleCollision(e1,e2);
@@ -197,8 +217,9 @@ public class Game implements IGame {
             IAbilityAction abilityAction = activeAbilityActions.get(i);
             long activationTime = activationTimes.get(i);
             // Check if the time since activation time exceeds the duration of the abilityAction.
-            if(now - activationTime > abilityAction.getDuration() * GameLoop.SECOND) {
+            if(now - activationTime >= abilityAction.getDuration() * GameLoop.SECOND) {
                 // If true, deactivate ability.
+                abilityAction.onFinished(currentLevel); //Method called for cleanup
                 deactivateAbility(i);
             }
         }
