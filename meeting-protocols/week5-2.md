@@ -22,7 +22,7 @@ Participants: Everyone
 
 - Decide how to present the UML diagrams - as one large image or several small, and what to include in the SDD.
 - Describe in the SDD how we have implemented the MVC pattern.
-
+- We still need to flesh out the details of how the MVC pattern is implemented.
 
 ## Outcomes and assignments (5 min)
 - We decided to have individual images for the UML-diagrams and add the detailed design model.
@@ -35,5 +35,5 @@ Participants: Everyone
 
 
 ## Wrap up
+Next meeting: 2020-10-06
 
-- We still need to flesh out the details of how the MVC pattern is implemented.
