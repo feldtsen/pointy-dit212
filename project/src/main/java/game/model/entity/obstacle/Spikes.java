@@ -6,10 +6,10 @@ import game.model.shape2d.Rectangle;
 import javafx.geometry.Point2D;
 
 //Spike obstacle which entities risk injury or death if colliding with.
-//Strength marks damage done and is implemented through interface IStrenght.
+//Strength marks damage done and is implemented through interface IStrength.
 //However, spikes cannot be killed by entities with higher strength as is normally the case.
 public class Spikes extends Entity<Rectangle> implements IObstacle, IStrength {
-    private final int strength;
+    private int strength;
 
     public Spikes(Point2D position, double width, double height, int strength) {
         super(position, new Rectangle(width, height,0));
@@ -19,6 +19,11 @@ public class Spikes extends Entity<Rectangle> implements IObstacle, IStrength {
     @Override
     public int getStrength() {
         return strength;
+    }
+
+    @Override
+    public void setStrength(int strength) {
+        this.strength = strength;
     }
 
     @Override

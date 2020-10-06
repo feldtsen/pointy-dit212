@@ -5,6 +5,7 @@ package game.model.entity;
 // Potential hit points are not adjusted.
 public interface IStrength {
     int getStrength();
+    void setStrength(int strength);
     default boolean isStrongerThan(IStrength other) {
         return this.getStrength() > other.getStrength();
     }

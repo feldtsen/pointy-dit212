@@ -12,14 +12,16 @@ public class Reflect extends Ability {
     private final double radius;   // Distance or reach
     private final double control;    // How strongly reflected projectiles are affected
     private final double duration; // How long the ability is active
+    private final int strength; // The strenght of the reflected projectiles
 
-    public Reflect(long cooldown, double angle, double radius, double control, double duration) {
+    public Reflect(long cooldown, double angle, double radius, double control, double duration, int strength) {
         super(cooldown);
         if(control < 0 || control > 1) throw new IllegalArgumentException();
         this.angle = angle;
         this.radius = radius;
         this.control = control;
         this.duration = duration;
+        this.strength = strength;
     }
 
     @Override
@@ -55,7 +57,8 @@ public class Reflect extends Ability {
                     // Calculate and set new velocity
                     Point2D velocity = Utils.setMagnitude(velocityDirection, projectile.getVelocity().magnitude());
                     projectile.setVelocity(velocity);
-                    //TODO: also change projectile strength!
+
+                    projectile.setStrength(strength);
                 }
             }
         };
