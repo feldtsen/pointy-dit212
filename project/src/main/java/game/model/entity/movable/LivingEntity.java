@@ -10,11 +10,14 @@ public abstract class LivingEntity<T extends IShape2D> extends MovableEntity<T> 
 
     private int hitPoints;
     private final int strength;
+    private boolean isInvulnerable;
+
 
     public LivingEntity(Point2D position, double maxForce, double maxSpeed, int hitPoints, T shape, int strength) {
         super(position, maxForce, maxSpeed, shape);
         this.hitPoints = hitPoints;
         this.strength = strength;
+        this.isInvulnerable = false;
     }
 
     @Override
@@ -33,5 +36,15 @@ public abstract class LivingEntity<T extends IShape2D> extends MovableEntity<T> 
     @Override
     public boolean isAlive() {
         return this.hitPoints > 0;
+    }
+    
+    @Override
+    public boolean isInvulnerable() {
+        return isInvulnerable;
+    }
+
+    @Override
+    public void setIsInvulnerable(boolean invulnerable) {
+        isInvulnerable = invulnerable;
     }
 }

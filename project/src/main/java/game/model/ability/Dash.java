@@ -5,6 +5,7 @@ import game.model.entity.IEntity;
 import game.model.entity.player.IPlayer;
 import game.model.level.ILevel;
 
+import game.util.Utils;
 import javafx.geometry.Point2D;
 
 public class Dash extends Ability {
@@ -16,19 +17,28 @@ public class Dash extends Ability {
     @Override
     protected IAbilityAction createAction(IEntity<?> user, IEntity<?> target) {
         // Anonymous implementation of an ability action is created on each use.
+        IPlayer player = (IPlayer) user;
+        player.setIsInvulnerable(true);
+
+
         return new IAbilityAction() {
+
+            Point2D dir = null;
+
             @Override
             public double getDuration() {
-                return 0;
+                return 0.05;
             }
 
             @Override
             public void apply(ILevel level, double timePassed) {
-                IPlayer player = level.getPlayer();
-                // Sets the distance dashed proportional to the size of the level.
-                double distance = Math.sqrt(Math.pow(level.getHeight(),2) + Math.pow(level.getWidth(),2)) / 3;
-                // Moves the player the distance in the direction it's currently facing.
-                player.setPosition(player.getPosition().add(new Point2D(distance*Math.cos(player.getShape().getRotation()),distance*Math.sin(player.getShape().getRotation()))));
+
+                if (dir == null) {
+                    player.setMaxSpeed(player.getMaxSpeed()*2);
+                    dir = Utils.vectorFromHeading(player.getShape().getRotation(), player.getMaxSpeed());
+                }
+                System.out.println(dir);
+                player.setVelocity(dir);
             }
         };
     }

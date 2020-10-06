@@ -61,9 +61,9 @@ public class Game implements IGame {
         // Create player with shockwave ability
         IPlayer player = EntityFactory.basicPlayer(400, 250);
         player.setFriction(3);
-        //player.addAbility(new Dash(GameLoop.SECOND * 2));
+        player.addAbility(new Dash(GameLoop.SECOND * 2));
         //player.addAbility(new Shockwave(GameLoop.SECOND * 2, 350, 100000, 0.1));
-        player.addAbility(new Reflect(GameLoop.SECOND / 2, Math.PI/2, 100, 0.5, 0.1));
+        //player.addAbility(new Reflect(GameLoop.SECOND / 2, Math.PI/2, 100, 0.5, 0.1));
 
         // Create basic enemy
         List<IEnemy> enemies = new ArrayList<>();
@@ -137,7 +137,7 @@ public class Game implements IGame {
             }
 
             // Check collision with player, and reduce player hit points if collision.
-            if (player.checkCollision(projectile)) {
+            if (player.checkCollision(projectile) && !player.isInvulnerable()) {
                 player.setHitPoints(player.getHitPoints() - projectile.getStrength());
             }
         }
@@ -173,10 +173,12 @@ public class Game implements IGame {
 
             // Check player-enemy collision
             if (player.checkCollision(e1)){
+
                 // If enemy is stronger than player, player dies
-                if (player.getStrength() < e1.getStrength()){
+                if (player.getStrength() < e1.getStrength() && !player.isInvulnerable()){
                     player.setHitPoints(0);
-                } else {
+                }
+                else if (player.getStrength() > e1.getStrength()) {
                     // Else, the enemy dies and the score is updated
                     score += e1.getStrength();
                     e1.setHitPoints(0);

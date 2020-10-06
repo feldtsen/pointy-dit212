@@ -10,4 +10,9 @@ public interface ILiving extends IStrength {
 
     // Returns true if hitPoints is greater than 0.
     boolean isAlive();
+
+    // Returns true if the entity cannot die
+    boolean isInvulnerable();
+
+    void setIsInvulnerable(boolean invulnerable);
 }

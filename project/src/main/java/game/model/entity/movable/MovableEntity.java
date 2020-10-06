@@ -10,11 +10,12 @@ public abstract class MovableEntity<T extends IShape2D> extends Entity<T> implem
     // Max force is the maximum acceleration which can be applied to the movable entity (using the addForce method)
     private final double maxForce;
     // Max speed is the maximum speed which can be reached by manipulating the entity using the addForce method
-    private final double maxSpeed;
+
 
     private Point2D acceleration;
     private Point2D velocity;
     private double minSpeed = 0;
+    private double maxSpeed;
 
     // Friction is applied each update, effectively reducing the velocity of the movable entity with the set amount.
     private double friction;
@@ -113,5 +114,10 @@ public abstract class MovableEntity<T extends IShape2D> extends Entity<T> implem
     @Override
     public void setMinSpeed(double minSpeed) {
         this.minSpeed = minSpeed;
+    }
+
+    @Override
+    public void setMaxSpeed(double maxSpeed) {
+        this.maxSpeed = maxSpeed;
     }
 }
