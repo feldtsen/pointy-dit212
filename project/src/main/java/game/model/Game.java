@@ -60,7 +60,32 @@ public class Game implements IGame {
 
     // TODO: dummy levels is a temporary method used for testing. Replace with levels loaded from level loader
     public static List<ILevel> dummyLevels() throws FileNotFoundException {
+        // Create player with shockwave ability
+        IPlayer player = EntityFactory.basicPlayer(400, 250);
+        player.setFriction(3);
+        //player.addAbility(new Dash(GameLoop.SECOND * 2));
+        //player.addAbility(new Shockwave(GameLoop.SECOND * 2, 350, 100000, 0.1));
+        player.addAbility(new Reflect(GameLoop.SECOND / 2, Math.PI/2, 100, 0.5, 0.1, 1000));
 
+        // Create basic enemy
+        List<IEnemy> enemies = new ArrayList<>();
+        Enemy e1 = EntityFactory.basicEnemy(800, 250, player, 2);
+        e1.setFriction(2);
+        enemies.add(e1);
+
+        // Create bullet enemy
+        Enemy e2 = EntityFactory.bulletEnemy(800, 500, player, 6);
+        e2.setFriction(10);
+        enemies.add(e2);
+
+        // Create missile enemy
+        Enemy e3 = EntityFactory.missileEnemy(800, 150, player, 1);
+        e3.setFriction(30);
+        enemies.add(e3);
+
+        // Create empty lists for projectiles and obstacles
+        List<IProjectile<?>> projectiles = new ArrayList<>();
+        List<IObstacle> obstacles = new ArrayList<>();
 
         // Build level(s)
         ILevel level = LevelLoader.load("testLevel");

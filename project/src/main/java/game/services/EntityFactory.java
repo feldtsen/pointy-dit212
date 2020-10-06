@@ -27,7 +27,8 @@ public class EntityFactory {
     private static final double MISSILEMINSPEED = 200;
     private static final int MISSILESTRENGTH = 3;
     private static final long MISSILEFREQEUNCY = GameLoop.SECOND * 2;
-    private static final double MISSILERADIUS = 10;
+    private static final double MISSISLEWIDTH = 10;
+    private static final double MISSILEHEIGHT = 10;
 
     // Dictates how much the difficulty changes the max force of the missiles.
     private static final double MISSILEMAXFORCEFACTOR = 300;
@@ -89,7 +90,7 @@ public class EntityFactory {
         double maxSpeed = MISSILEMAXSPEED + MISSILEMAXSPEEDFACTOR * difficulty;
 
         // Create Enemy with Ability ShootMissile.
-        ShootMissile shootMissile = new ShootMissile(MISSILEFREQEUNCY, MISSILERADIUS, maxForce, maxSpeed , MISSILEMINSPEED, MISSILESTRENGTH, movementBehaviour);
+        ShootMissile shootMissile = new ShootMissile(MISSILEFREQEUNCY, MISSISLEWIDTH, MISSILEHEIGHT, maxForce, maxSpeed , MISSILEMINSPEED, MISSILESTRENGTH, movementBehaviour);
         Enemy enemy = basicEnemy(x, y, target, BASEENEMYSTRENGTH);
         enemy.setAbilityBehaviour(new SingleAbilityBehavior(shootMissile));
         enemy.setFriction(FRICTION);

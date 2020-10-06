@@ -1,6 +1,8 @@
 package game.model.shape2d;
 
+import game.model.entity.IEntity;
 import game.util.Shapes;
+import game.view.IVisitor;
 import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,5 +93,10 @@ public class Rectangle implements IRectangle{
     public double largestInnerDistance() {
         // Get distance to corner by using Pythagoras theorem.
         return Math.sqrt(Math.pow(height/2, 2) + Math.pow(width/2, 2));
+    }
+
+    @Override
+    public void accept(IVisitor visitor) {
+        visitor.visit(this);
     }
 }

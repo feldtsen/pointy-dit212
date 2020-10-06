@@ -20,7 +20,7 @@ public class MissileTest {
 
         Point2D velocity = target.getPosition();
 
-        missile = new Missile(new Point2D(0, 0), 0.1, 1, 3, 5,
+        missile = new Missile(new Point2D(0, 0), 0.1, 1, 1, 3, 5,
                 1, velocity, target, new SeekingBehaviour());
     }
 
