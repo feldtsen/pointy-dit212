@@ -76,7 +76,7 @@ public class Game implements IGame {
         enemies.add(e1);
 
         // Create bullet enemy
-        Enemy e2 = EntityFactory.bulletEnemy(800, 500, player, 5, GameLoop.SECOND / 2, 10, 300, 1);
+        Enemy e2 = EntityFactory.bulletEnemy(800, 500, player, 3);
         e2.setFriction(10);
         enemies.add(e2);
 
