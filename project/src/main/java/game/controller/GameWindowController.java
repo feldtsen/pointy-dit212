@@ -129,12 +129,12 @@ public class GameWindowController {
         keyboardInputController.registerAction(KeyCode.S, game.getCurrentLevel().getPlayer()::moveDown);
         keyboardInputController.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
         keyboardInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
-        //KeyboardInputHandler.registerAction(KeyCode.E, () -> {
-        //    game.activatePlayerAbility(0);
-        //});
+
+        keyboardInputController.registerAction(KeyCode.SPACE, () -> game.activatePlayerAbility(0));
+        keyboardInputController.registerAction(KeyCode.E, () -> game.activatePlayerAbility(1));
 
         // Register for mouse events
-        mouseInputController.registerActionOnLeftClick(() -> game.activatePlayerAbility(0));
+        mouseInputController.registerActionOnLeftClick(() -> game.activatePlayerAbility(2));
         mouseInputController.registerActionOnMove(     () -> game.setPlayerFacingPosition(mouseInputController.getMousePosition()));
 
     }

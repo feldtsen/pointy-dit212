@@ -27,6 +27,7 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
 
     @Override
     public IAbilityAction activateAbility(int index) {
+        if(index >= abilities.size()) return null;
         return abilities.get(index).use(this, null);
     }
 
