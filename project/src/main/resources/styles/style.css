@@ -30,3 +30,8 @@
     -fx-background-color: rgba(60, 60, 60, 0.5);
     -fx-pref-height: 7em;
 }
+
+#scorePanel {
+    -fx-font: 32px Tahoma;
+    -fx-fill: BBBBBB;
+}

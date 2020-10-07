@@ -8,9 +8,12 @@ import game.model.level.ILevel;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
+import game.view.score.IScorePanel;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.input.KeyCode;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
@@ -24,6 +27,8 @@ public class GameWindowController {
     private KeyboardInputController keyboardInputController;
     private MouseInputController mouseInputController;
 
+    private IScorePanel scorePanel;
+
     public GameWindowController() {
         // Init. view component
         window = new MainWindow(this);
@@ -34,6 +39,9 @@ public class GameWindowController {
         GameCanvas gameCanvas = window.getGameCanvas();
         // Create a new renderer using the graphics context supplied by the canvas.
         renderer = new Renderer(gameCanvas.getGraphicsContext2D());
+
+        // Set scorePanel to instance created by window.
+        scorePanel = window.getScorePanel();
 
         // Initialize the game and map all the keys to their corresponding actions.
         gameSetup();
@@ -49,6 +57,9 @@ public class GameWindowController {
 
                 // Render the current level
                 renderer.draw(game.getCurrentLevel());
+
+                // Update score panel
+                scorePanel.updateScore(game.getCurrentLevel().getPlayer(), game.getScore());
 
                 // Apply all registered keyboard actions
                 keyboardInputController.applyRegisteredActions();
