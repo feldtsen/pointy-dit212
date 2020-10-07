@@ -11,6 +11,7 @@ import game.view.renderer.Renderer;
 import game.view.pages.score.IScorePanel;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.io.FileNotFoundException;
 
@@ -130,7 +131,7 @@ public class GameWindowController {
         keyboardInputController.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
         keyboardInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
 
-        keyboardInputController.registerAction(KeyCode.SPACE, () -> game.activatePlayerAbility(0));
+        keyboardInputController.registerAction(KeyCode.Q, () -> game.activatePlayerAbility(0));
         keyboardInputController.registerAction(KeyCode.E, () -> game.activatePlayerAbility(1));
 
         // Register for mouse events
