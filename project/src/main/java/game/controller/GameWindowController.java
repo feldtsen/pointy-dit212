@@ -131,7 +131,7 @@ public class GameWindowController {
         keyboardInputController.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
         keyboardInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
 
-        keyboardInputController.registerAction(KeyCode.Q, () -> game.activatePlayerAbility(0));
+        keyboardInputController.registerAction(KeyCode.SHIFT, () -> game.activatePlayerAbility(0));
         keyboardInputController.registerAction(KeyCode.E, () -> game.activatePlayerAbility(1));
 
         // Register for mouse events
