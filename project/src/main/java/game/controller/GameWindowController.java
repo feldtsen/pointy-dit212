@@ -8,13 +8,9 @@ import game.model.level.ILevel;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
-import game.view.score.IScorePanel;
-import javafx.animation.FadeTransition;
+import game.view.pages.score.IScorePanel;
 import javafx.application.Platform;
-import javafx.geometry.Pos;
 import javafx.scene.input.KeyCode;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
 

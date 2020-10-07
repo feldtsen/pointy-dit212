@@ -1,4 +1,4 @@
-package game.view.score;
+package game.view.pages.score;
 
 import game.model.entity.player.IPlayer;
 import javafx.scene.text.Text;
@@ -13,10 +13,10 @@ public class ScorePanel extends Text implements IScorePanel {
 
         // Set id for css.
         setId("scorePanel");
-
     }
 
     @Override
+    // Update the score panel with the current score.
     public void updateScore(IPlayer player, int score) {
         setText("Score: " + score);
         // TODO: Check if player is underneath text. If true, change opacity.
