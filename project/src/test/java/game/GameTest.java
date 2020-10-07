@@ -145,7 +145,7 @@ public class GameTest {
                 return new IAbilityAction() {
                     @Override
                     public double getDuration() {
-                        return 0;
+                        return 1;
                     }
 
                     @Override
