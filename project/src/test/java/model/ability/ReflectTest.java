@@ -50,7 +50,7 @@ public class ReflectTest {
         double control = 0;
         testSetup(control, new Point2D(515,500));
 
-        Point2D bulletPosition = level.getProjectiles().get(0).getPosition();
+        Point2D bulletPosition = projectile.getPosition();
         Point2D playerPosition = player.getPosition();
 
         // Vector between player and projectile
@@ -62,8 +62,8 @@ public class ReflectTest {
         reflect();
 
         Point2D newVelocity = newProjectileVelocity(vector, control);
-        assertEquals(newVelocity.getX(), level.getProjectiles().get(0).getVelocity().getX(),0.0);
-        assertEquals(newVelocity.getY(), level.getProjectiles().get(0).getVelocity().getY(), 0.0);
+        assertEquals(newVelocity.getX(), projectile.getVelocity().getX(),0.0);
+        assertEquals(newVelocity.getY(), projectile.getVelocity().getY(), 0.0);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class ReflectTest {
         double control = 0.5;
         testSetup(control, new Point2D(515,500));
 
-        Point2D bulletPosition = level.getProjectiles().get(0).getPosition();
+        Point2D bulletPosition = projectile.getPosition();
         Point2D playerPosition = player.getPosition();
 
         // Vector between player and projectile
@@ -83,8 +83,8 @@ public class ReflectTest {
         reflect();
 
         Point2D newVelocity = newProjectileVelocity(vector, control);
-        assertEquals(newVelocity.getX(), level.getProjectiles().get(0).getVelocity().getX(),0.0);
-        assertEquals(newVelocity.getY(), level.getProjectiles().get(0).getVelocity().getY(), 0.0);
+        assertEquals(newVelocity.getX(), projectile.getVelocity().getX(),0.0);
+        assertEquals(newVelocity.getY(), projectile.getVelocity().getY(), 0.0);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class ReflectTest {
         double control = 1.0;
         testSetup(control, new Point2D(515,500));
 
-        Point2D bulletPosition = level.getProjectiles().get(0).getPosition();
+        Point2D bulletPosition = projectile.getPosition();
         Point2D playerPosition = player.getPosition();
 
         // Vector between player and projectile
@@ -104,8 +104,8 @@ public class ReflectTest {
         reflect();
 
         Point2D newVelocity = newProjectileVelocity(vector, control);
-        assertEquals(newVelocity.getX(), level.getProjectiles().get(0).getVelocity().getX(),0.0);
-        assertEquals(newVelocity.getY(), level.getProjectiles().get(0).getVelocity().getY(), 0.0);
+        assertEquals(newVelocity.getX(), projectile.getVelocity().getX(),0.0);
+        assertEquals(newVelocity.getY(), projectile.getVelocity().getY(), 0.0);
     }
     @Test
     public void maximumReflectRange() {
@@ -113,7 +113,7 @@ public class ReflectTest {
         double control = 0;
         testSetup(control, new Point2D(600,500));
 
-        Point2D bulletPosition = level.getProjectiles().get(0).getPosition();
+        Point2D bulletPosition = projectile.getPosition();
         Point2D playerPosition = player.getPosition();
 
         // Vector between player and projectile
@@ -125,16 +125,16 @@ public class ReflectTest {
         reflect();
 
         Point2D newVelocity = newProjectileVelocity(vector, control);
-        assertEquals(newVelocity.getX(), level.getProjectiles().get(0).getVelocity().getX(),0.0);
-        assertEquals(newVelocity.getY(), level.getProjectiles().get(0).getVelocity().getY(), 0.0);
+        assertEquals(newVelocity.getX(), projectile.getVelocity().getX(),0.0);
+        assertEquals(newVelocity.getY(), projectile.getVelocity().getY(), 0.0);
     }
     @Test
-    public void projectileNotInRange() {
+    public void reflectOutofRange() {
 
         double control = 0;
-        testSetup(control, new Point2D(50,50));
+        testSetup(control, new Point2D(601,500));
 
-        Point2D bulletPosition = level.getProjectiles().get(0).getPosition();
+        Point2D bulletPosition = projectile.getPosition();
         Point2D playerPosition = player.getPosition();
 
         // Vector between player and projectile
@@ -142,12 +142,34 @@ public class ReflectTest {
 
         double dir = Utils.heading(vector);
         player.getShape().setRotation(dir);
-        double vx =  level.getProjectiles().get(0).getVelocity().getX();
-        double vy =  level.getProjectiles().get(0).getVelocity().getY();
+
+        double vx =  projectile.getVelocity().getX();
+        double vy =  projectile.getVelocity().getY();
         reflect();
 
-        assertEquals(vx, level.getProjectiles().get(0).getVelocity().getX(),0.0);
-        assertEquals(vy, level.getProjectiles().get(0).getVelocity().getY(), 0.0);
+        assertEquals(vx, projectile.getVelocity().getX(),0.0);
+        assertEquals(vy, projectile.getVelocity().getY(), 0.0);
+    }
+    @Test
+    public void projectileNotInRange() {
+
+        double control = 0;
+        testSetup(control, new Point2D(50,50));
+
+        Point2D bulletPosition = projectile.getPosition();
+        Point2D playerPosition = player.getPosition();
+
+        // Vector between player and projectile
+        Point2D vector = bulletPosition.subtract(playerPosition);
+
+        double dir = Utils.heading(vector);
+        player.getShape().setRotation(dir);
+        double vx =  projectile.getVelocity().getX();
+        double vy =  projectile.getVelocity().getY();
+        reflect();
+
+        assertEquals(vx, projectile.getVelocity().getX(),0.0);
+        assertEquals(vy, projectile.getVelocity().getY(), 0.0);
     }
 
     private Point2D newProjectileVelocity(Point2D vector, double control){
@@ -162,7 +184,7 @@ public class ReflectTest {
         return Utils.setMagnitude(newVelocityDirection, projectile.getVelocity().magnitude());
     }
     private void testSetup(double control, Point2D vector){
-        level.getProjectiles().get(0).setPosition(vector);
+        projectile.setPosition(vector);
         IAbility reflect = new Reflect(9, Math.PI / 2, 100, control, 0.1, 1000);
         player.addAbility(reflect);
     }
