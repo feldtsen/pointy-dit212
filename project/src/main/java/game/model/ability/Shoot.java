@@ -18,7 +18,7 @@ public abstract class Shoot extends Ability {
     @Override
     // The returned AbilityAction creates and adds a bullet to the levels list of projectiles.
     public IAbilityAction createAction(IEntity<?> user, IEntity<?> target) {
-        return new AbilityAction(0) {
+        return new AbilityAction(user, 0) {
 
             @Override
             public void apply(ILevel level, double timePassed) {

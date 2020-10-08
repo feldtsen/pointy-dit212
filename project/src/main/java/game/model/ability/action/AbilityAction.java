@@ -1,12 +1,15 @@
 package game.model.ability.action;
 
+import game.model.entity.IEntity;
 import game.model.level.ILevel;
 
 // Abstract helper implementation of ability actions.
 public abstract class AbilityAction implements IAbilityAction {
+    protected final IEntity<?> user;
     private final double duration; // The duration (in seconds) when the ability is active
 
-    public AbilityAction(double duration) {
+    public AbilityAction(IEntity<?> user, double duration) {
+        this.user = user;
         this.duration = duration;
     }
 
@@ -17,5 +20,10 @@ public abstract class AbilityAction implements IAbilityAction {
     @Override
     public double getDuration() {
         return duration;
+    }
+
+    @Override
+    public IEntity<?> getUser() {
+        return user;
     }
 }

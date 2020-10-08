@@ -155,6 +155,11 @@ public class GameTest {
                     @Override
                     public void onFinished(ILevel level) {
                     }
+
+                    @Override
+                    public IEntity<?> getUser() {
+                        return null;
+                    }
                 };
             }
         });
@@ -202,6 +207,11 @@ public class GameTest {
 
                     @Override
                     public void onFinished(ILevel level) {
+                    }
+
+                    @Override
+                    public IEntity<?> getUser() {
+                        return null;
                     }
                 };
             }

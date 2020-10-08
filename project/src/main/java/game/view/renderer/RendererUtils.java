@@ -30,7 +30,7 @@ public class RendererUtils {
     }
 
 
-    // Draws a particular shape (TODO: so far, just a circle) to the screen
+    // Draws a circle to the screen
     public static void drawCircle(GraphicsContext graphicsContext, Color color, ICircle circle, Point2D position) {
         graphicsContext.setFill(color);
         graphicsContext.fillOval(
@@ -40,8 +40,18 @@ public class RendererUtils {
                 2*circle.getRadius()
         );
     }
+    // Draws a ring to the screen
+    public static void drawRing(GraphicsContext graphicsContext, Color color, ICircle circle, Point2D position) {
+        graphicsContext.setStroke(color);
+        graphicsContext.strokeOval(
+                position.getX() - circle.getRadius(),
+                position.getY() - circle.getRadius(),
+                2*circle.getRadius(),
+                2*circle.getRadius()
+        );
+    }
 
-    // Draws a rotatable shape to the screen
+    // Draws a rectangle to the screen
     public static void drawRectangle(GraphicsContext graphicsContext, Color color, IRectangle shape, Point2D position) {
         SaveAndTranslate(graphicsContext, shape, position);
 

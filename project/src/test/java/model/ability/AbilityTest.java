@@ -33,6 +33,11 @@ public class AbilityTest {
             public void onFinished(ILevel level) {
 
             }
+
+            @Override
+            public IEntity<?> getUser() {
+                return null;
+            }
         };
     }
 
@@ -40,7 +45,7 @@ public class AbilityTest {
         return new Ability(cooldown) {
             @Override
             public IAbilityAction createAction(IEntity<?> user, IEntity<?> target) {
-                return new AbilityAction(0) {
+                return new AbilityAction(user, 0) {
                     @Override
                     public void apply(ILevel level, double timePassed) { }
 

@@ -1,5 +1,6 @@
 package game.model.ability.action;
 
+import game.model.entity.IEntity;
 import game.model.level.ILevel;
 
 // An ability action is a set of instructions for how the contents
@@ -11,4 +12,7 @@ public interface IAbilityAction {
 
     // This method is called when the IAbilityAction is done, for cleanup
     void onFinished(ILevel level);
+
+    // Returns the user of the action
+    IEntity<?> getUser();
 }

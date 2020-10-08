@@ -1,5 +1,8 @@
 package game.view.renderer;
 
+import game.model.ability.Dash;
+import game.model.ability.Shockwave;
+import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
 import game.model.entity.enemy.IEnemy;
@@ -16,16 +19,24 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Renderer implements IRenderer, IVisitor  {
+    public interface Effect {
+        void render(IAbilityAction action, double time);
+    }
+
     // A map linking a class of objects to a particular color. Used to render different entities with different
     // colors.
     private final HashMap<Class<?>, Color> colors = new HashMap<>();
 
+    // A map linking an effect to an ability action
+    private final HashMap<Class<? extends IAbilityAction>, Effect> abilityEffects = new HashMap<>();
+
     // The graphics object used to draw on screen.
     private final GraphicsContext graphicsContext;
 
-    private IEntity entity;
+    private IEntity<?> entity;
 
     public Renderer(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
@@ -36,10 +47,28 @@ public class Renderer implements IRenderer, IVisitor  {
         colors.put(Bullet.class,          Color.rgb(90, 90, 200));
         colors.put(Missile.class,         Color.rgb(200, 90, 90));
         colors.put(GraphicsContext.class, Color.rgb(30,  30,  30 ));
+
+        abilityEffects.put(Dash.DashAction.class, createDashEffect());
+        abilityEffects.put(Shockwave.ShockwaveAction.class, createShockwaveEffect());
+    }
+
+    private Effect createDashEffect() {
+        return (action, time) -> {
+           //TODO
+        };
+    }
+
+    private Effect createShockwaveEffect() {
+        double radius = 100; //TODO how to get radius?
+        return (action, time) -> {
+            Point2D position = action.getUser().getPosition();
+            ICircle circle = new Circle(radius * time);
+            RendererUtils.drawRing(graphicsContext, Color.rgb(150, 120, 140), circle, position);
+        };
     }
 
     @Override
-    public void draw(ILevel level) {
+    public void drawEntities(ILevel level) {
         // Clear the screen
         RendererUtils.clear(graphicsContext);
 
@@ -72,7 +101,18 @@ public class Renderer implements IRenderer, IVisitor  {
             enemy.getShape().setRotation(radians);
             enemy.getShape().accept(this);
         }
+    }
 
+    public void drawAbilities(List<IAbilityAction> actions, List<Double> times) {
+        for(int i = 0; i < actions.size(); i++) {
+            IAbilityAction action = actions.get(i);
+            double time = times.get(i);
+
+            Effect effect = abilityEffects.get(action.getClass());
+            if(effect != null) {
+                effect.render(action, time);
+            }
+        }
     }
 
     @Override
