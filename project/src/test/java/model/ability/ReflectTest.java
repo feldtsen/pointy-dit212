@@ -129,6 +129,28 @@ public class ReflectTest {
         assertEquals(newVelocity.getY(), projectile.getVelocity().getY(), 0.0);
     }
     @Test
+    public void reflectOutofRange() {
+
+        double control = 0;
+        testSetup(control, new Point2D(601,500));
+
+        Point2D bulletPosition = projectile.getPosition();
+        Point2D playerPosition = player.getPosition();
+
+        // Vector between player and projectile
+        Point2D vector = bulletPosition.subtract(playerPosition);
+
+        double dir = Utils.heading(vector);
+        player.getShape().setRotation(dir);
+
+        double vx =  projectile.getVelocity().getX();
+        double vy =  projectile.getVelocity().getY();
+        reflect();
+
+        assertEquals(vx, projectile.getVelocity().getX(),0.0);
+        assertEquals(vy, projectile.getVelocity().getY(), 0.0);
+    }
+    @Test
     public void projectileNotInRange() {
 
         double control = 0;
