@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Triangle implements ITriangle{
-    private final double width;
-    private final double height;
+    private double width;
+    private double height;
+    private final double originWidth;
+    private final double originHeight;
+
 
     private double rotation;
 
@@ -18,6 +21,8 @@ public class Triangle implements ITriangle{
         this.rotation = rotation;
         this.width = width;
         this.height = height;
+        originWidth = width;
+        originHeight = height;
     }
 
 
@@ -29,6 +34,12 @@ public class Triangle implements ITriangle{
     @Override
     public double getHeight() {
         return height;
+    }
+
+    @Override
+    public void resize(double scaleRatio) {
+        width = originWidth * scaleRatio;
+        height = originHeight * scaleRatio;
     }
 
     @Override

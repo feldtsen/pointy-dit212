@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Circle implements ICircle {
-    private final double radius;
+    private double radius;
+    private final double originRadius;
     private double rotation;
 
     public Circle(double radius){
         this.radius = radius;
+        originRadius = radius;
         this.rotation = 0;
     }
 
@@ -86,6 +88,11 @@ public class Circle implements ICircle {
     @Override
     public double getHeight() {
         return radius * 2;
+    }
+
+    @Override
+    public void resize(double scaleRatio) {
+        this.radius = originRadius * scaleRatio;
     }
 
     @Override

@@ -8,13 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rectangle implements IRectangle{
-    private final double width;
-    private final double height;
+    private double width;
+    private double height;
+    private final double originWidth;
+    private final double originHeight;
     private double rotation;
 
     public Rectangle(double width, double height, double rotation) {
         this.height = height;
         this.width = width;
+        originWidth = width;
+        originHeight = height;
         this.rotation = rotation;
     }
 
@@ -26,6 +30,12 @@ public class Rectangle implements IRectangle{
     @Override
     public double getHeight() {
         return height;
+    }
+
+    @Override
+    public void resize(double scaleRatio) {
+        width = originWidth * scaleRatio;
+        height = originHeight * scaleRatio;
     }
 
     @Override

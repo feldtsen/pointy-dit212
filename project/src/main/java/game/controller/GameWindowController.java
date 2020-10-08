@@ -4,6 +4,7 @@ import game.model.Game;
 import game.controller.gameLoop.GameLoop;
 import game.controller.gameLoop.IGameLoop;
 import game.model.IGame;
+import game.model.entity.enemy.IEnemy;
 import game.model.entity.player.IPlayer;
 import game.model.level.ILevel;
 import game.view.pages.MainWindow;
@@ -81,13 +82,18 @@ public class GameWindowController {
         //TODO what todo here
         ILevel currentLevel = game.getCurrentLevel();
         IPlayer player = currentLevel.getPlayer();
+        double scalingRatio = 1000 / window.getWidth();
+        System.out.println(scalingRatio);
 
         currentLevel.setWidth(window.getWidth());
         currentLevel.setHeight(window.getHeight());
 
-        Double scalingRatio = 1000 / window.getWidth();
 
-        //game.getCurrentLevel().getPlayer().getShape().getRadius() * scalingRatio;
+        player.getShape().resize(scalingRatio);
+
+        for (IEnemy enemy : currentLevel.getEnemies()) {
+            enemy.getShape().resize(scalingRatio);
+        }
 
     }
 
