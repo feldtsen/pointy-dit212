@@ -18,6 +18,9 @@ public interface IGame extends IUpdatable {
     // This method returns the abilities (in the form of ability actions) which is currently active.
     List<IAbilityAction> getActiveAbilityActions();
 
+    // THis method returns the times for which an ability action has been active
+    List<Double> getActiveAbilityTimes();
+
     boolean setLevel(ILevel level);
 
     int getScore();

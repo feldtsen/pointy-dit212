@@ -13,7 +13,6 @@ import game.view.renderer.Renderer;
 import game.view.pages.score.IScorePanel;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 import java.io.FileNotFoundException;
 
@@ -55,7 +54,9 @@ public class GameWindowController {
                 resize();
 
                 // Render the current level
-                renderer.draw(game.getCurrentLevel());
+                renderer.drawEntities(game.getCurrentLevel());
+                // Render ability effects
+                renderer.drawAbilities(game.getActiveAbilityActions(), game.getActiveAbilityTimes());
 
                 // Update score panel
                 scorePanel.updateScore(game.getCurrentLevel().getPlayer(), game.getScore());

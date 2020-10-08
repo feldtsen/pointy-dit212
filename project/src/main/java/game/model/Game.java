@@ -13,7 +13,6 @@ import game.model.entity.player.IPlayer;
 import game.model.entity.projectile.IProjectile;
 import game.controller.gameLoop.GameLoop;
 import game.model.level.ILevel;
-import game.model.level.Level;
 import game.model.shape2d.ICircle;
 import game.services.EntityFactory;
 import game.services.LevelLoader;
@@ -37,6 +36,10 @@ public class Game implements IGame {
     // This list is continuously updated with the active ability actions.
     // An action is removed when it's duration has run out.
     private final List<IAbilityAction> activeAbilityActions;
+
+    // This is a helper list which contains "times" (in range [0, 1]) which represent the amount of time
+    // an ability has been active
+    private final List<Double> currentAbilityTimes;
     // This is a helper list containing the nano time of the activation of a certain ability.
     // Index n in this list corresponds to index n in activeAbilityActions.
     private final List<Long> activationTimes;
@@ -49,6 +52,7 @@ public class Game implements IGame {
         this.gameOver = false;
 
         this.activeAbilityActions = new ArrayList<>();
+        this.currentAbilityTimes = new ArrayList<>();
         this.activationTimes = new ArrayList<>();
 
         this.playerFacingPosition = new Point2D(currentLevel.getWidth()/2, currentLevel.getHeight()/2); // Default direciton
@@ -104,12 +108,14 @@ public class Game implements IGame {
     private void activateAbility(IAbilityAction action, long now) {
         if(action == null) return;
         activeAbilityActions.add(action);
+        currentAbilityTimes.add(0.0D);
         activationTimes.add(now);
     }
 
     // Deactivates (removes) an ability action at a particular index of the list.
     private void deactivateAbility(int index) {
         activeAbilityActions.remove(index);
+        currentAbilityTimes.remove(index);
         activationTimes.remove(index);
     }
 
@@ -183,8 +189,13 @@ public class Game implements IGame {
         for(int i = 0; i < activeAbilityActions.size(); i++) {
             IAbilityAction abilityAction = activeAbilityActions.get(i);
             long activationTime = activationTimes.get(i);
-            // Feed the ability the time since activation (in seconds). Some ability will depend on this value.
-            abilityAction.apply(currentLevel, (double)(now - activationTime) / GameLoop.SECOND);
+
+            // Normalized time value representing how long an ability action has been active
+            double time = (now - activationTime) / (GameLoop.SECOND * abilityAction.getDuration());
+            currentAbilityTimes.set(i, time);
+
+            // Feed the ability the time since activation. Some ability will depend on this value.
+            abilityAction.apply(currentLevel, time);
         }
 
         // Check collision between players and enemies, and enemies and other enemies
@@ -314,6 +325,9 @@ public class Game implements IGame {
     public List<IAbilityAction> getActiveAbilityActions() {
         return activeAbilityActions;
     }
+
+    @Override
+    public List<Double> getActiveAbilityTimes() { return currentAbilityTimes; }
 
     @Override
     public int getScore() {
