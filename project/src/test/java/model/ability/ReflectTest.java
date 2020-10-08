@@ -151,11 +151,16 @@ public class ReflectTest {
         assertEquals(vy, projectile.getVelocity().getY(), 0.0);
     }
     @Test
-    public void projectileNotInRange() {
+    public void projectileInRangeNotInAngle() {
 
         double control = 0;
-        testSetup(control, new Point2D(50,50));
+        testSetup(control, new Point2D(450,500));
 
+        Point2D bulletPosition = projectile.getPosition();
+        Point2D playerPosition = player.getPosition();
+        Point2D vector = bulletPosition.subtract(playerPosition);
+        double dir = Utils.heading(vector);
+        player.getShape().setRotation(dir+Math.PI);
         double vx =  projectile.getVelocity().getX();
         double vy =  projectile.getVelocity().getY();
         reflect();
