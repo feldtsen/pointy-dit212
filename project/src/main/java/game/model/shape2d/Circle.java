@@ -1,6 +1,6 @@
 package game.model.shape2d;
 
-import game.view.IVisitor;
+import game.view.IShapeVisitor;
 import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +96,7 @@ public class Circle implements ICircle {
     }
 
     @Override
-    public void accept(IVisitor visitor) {
+    public void acceptShapeVisitor(IShapeVisitor visitor) {
         visitor.visit(this);
     }
 }

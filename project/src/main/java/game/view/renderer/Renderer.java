@@ -13,7 +13,7 @@ import game.model.entity.projectile.Missile;
 import game.model.level.ILevel;
 import game.model.shape2d.*;
 import game.util.Utils;
-import game.view.IVisitor;
+import game.view.IShapeVisitor;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -21,7 +21,7 @@ import javafx.scene.paint.Color;
 import java.util.HashMap;
 import java.util.List;
 
-public class Renderer implements IRenderer, IVisitor  {
+public class Renderer implements IRenderer, IShapeVisitor {
     public interface Effect {
         void render(IAbilityAction action, double time);
     }
@@ -89,8 +89,7 @@ public class Renderer implements IRenderer, IVisitor  {
         for(IProjectile<?> projectile : level.getProjectiles()) {
             entity = projectile;
             projectile.getShape().setRotation(Utils.heading(projectile.getVelocity()));
-            //RendererUtils.drawShape(graphicsContext, colors.get(projectile.getClass()), projectile.getShape(), projectile.getPosition());
-            projectile.getShape().accept(this);
+            projectile.getShape().acceptShapeVisitor(this);
         }
 
         // Render all enemies
@@ -99,7 +98,7 @@ public class Renderer implements IRenderer, IVisitor  {
 
             double radians = Utils.heading(enemy.getVelocity());
             enemy.getShape().setRotation(radians);
-            enemy.getShape().accept(this);
+            enemy.getShape().acceptShapeVisitor(this);
         }
     }
 
@@ -127,6 +126,7 @@ public class Renderer implements IRenderer, IVisitor  {
 
     @Override
     public void visit(ITriangle triangle) {
+        ICircle circle = new Circle(triangle.getWidth());
         RendererUtils.drawTriangle(graphicsContext, colors.get(entity.getClass()), triangle, entity.getPosition());
     }
 }

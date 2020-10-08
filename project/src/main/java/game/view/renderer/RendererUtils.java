@@ -83,9 +83,16 @@ public class RendererUtils {
     }
 
     private static void SaveAndTranslate(GraphicsContext graphicsContext, IShape2D shape, Point2D position) {
+        // Saves  attributes, such as paint data and transform data
         graphicsContext.save();
+
+        // Translates the shape to a position
         graphicsContext.translate(position.getX(), position.getY());
+
+        // Rotates the current transform
         graphicsContext.rotate(Utils.radianToDegrees(shape.getRotation()) - 90);
+
+        // Translate to where you want it
         graphicsContext.translate(-position.getX() - shape.getWidth()/2, -position.getY() - shape.getHeight()/2);
     }
 

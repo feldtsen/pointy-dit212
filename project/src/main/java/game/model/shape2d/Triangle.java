@@ -1,14 +1,13 @@
 package game.model.shape2d;
 
 import game.util.Shapes;
-import game.util.Utils;
-import game.view.IVisitor;
+import game.view.IShapeVisitor;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Triangle implements ITriangle{
+public class Triangle implements ITriangle {
     private double width;
     private double height;
     private final double originWidth;
@@ -122,7 +121,7 @@ public class Triangle implements ITriangle{
     }
 
     @Override
-    public void accept(IVisitor visitor) {
+    public void acceptShapeVisitor(IShapeVisitor visitor) {
         visitor.visit(this);
     }
 }

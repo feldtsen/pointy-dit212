@@ -1,13 +1,12 @@
 package game.model.shape2d;
 
-import game.model.entity.IEntity;
 import game.util.Shapes;
-import game.view.IVisitor;
+import game.view.IShapeVisitor;
 import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rectangle implements IRectangle{
+public class Rectangle implements IRectangle {
     private double width;
     private double height;
     private final double originWidth;
@@ -106,7 +105,7 @@ public class Rectangle implements IRectangle{
     }
 
     @Override
-    public void accept(IVisitor visitor) {
+    public void acceptShapeVisitor(IShapeVisitor visitor) {
         visitor.visit(this);
     }
 }

@@ -2,8 +2,6 @@ package game.model.entity.projectile;
 
 import game.model.behavior.movement.IMovementBehaviour;
 import game.model.entity.IEntity;
-import game.model.shape2d.Circle;
-import game.model.shape2d.ICircle;
 import game.model.shape2d.ITriangle;
 import game.model.shape2d.Triangle;
 import javafx.geometry.Point2D;
