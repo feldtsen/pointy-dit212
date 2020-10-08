@@ -34,7 +34,7 @@ public class Dash extends Ability {
 
                 if (dir == null) {
                     player.setMaxSpeed(player.getMaxSpeed()*7);
-                    dir = Utils.vectorFromHeading(player.getShape().getRotation(), player.getMaxSpeed());
+                    dir = player.getVelocity().multiply(player.getMaxSpeed());
                 }
                 player.setVelocity(dir);
             }
