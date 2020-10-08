@@ -156,14 +156,6 @@ public class ReflectTest {
         double control = 0;
         testSetup(control, new Point2D(50,50));
 
-        Point2D bulletPosition = projectile.getPosition();
-        Point2D playerPosition = player.getPosition();
-
-        // Vector between player and projectile
-        Point2D vector = bulletPosition.subtract(playerPosition);
-
-        double dir = Utils.heading(vector);
-        player.getShape().setRotation(dir);
         double vx =  projectile.getVelocity().getX();
         double vy =  projectile.getVelocity().getY();
         reflect();
@@ -172,6 +164,32 @@ public class ReflectTest {
         assertEquals(vy, projectile.getVelocity().getY(), 0.0);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void controlLessThanZero() {
+
+        double control = -1;
+        testSetup(control, new Point2D(50,50));
+
+        double vx =  projectile.getVelocity().getX();
+        double vy =  projectile.getVelocity().getY();
+        reflect();
+
+        assertEquals(vx, projectile.getVelocity().getX(),0.0);
+        assertEquals(vy, projectile.getVelocity().getY(), 0.0);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void controlGreaterThanOne() {
+
+        double control = 2;
+        testSetup(control, new Point2D(50,50));
+
+        double vx =  projectile.getVelocity().getX();
+        double vy =  projectile.getVelocity().getY();
+        reflect();
+
+        assertEquals(vx, projectile.getVelocity().getX(),0.0);
+        assertEquals(vy, projectile.getVelocity().getY(), 0.0);
+    }
     private Point2D newProjectileVelocity(Point2D vector, double control){
 
         Point2D n = vector.normalize();
