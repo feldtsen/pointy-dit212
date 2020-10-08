@@ -55,4 +55,10 @@ public class Utils {
         return radians * (180 / Math.PI);
     }
 
+    public static double limitAngle(double angle) {
+        while(angle < 0)            angle += Math.PI * 2;
+        while(angle >= Math.PI * 2) angle -= Math.PI * 2;
+        return angle;
+    }
+
 }

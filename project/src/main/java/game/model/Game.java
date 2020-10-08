@@ -64,8 +64,6 @@ public class Game implements IGame {
         IPlayer player = EntityFactory.basicPlayer(400, 250);
         player.setFriction(3);
         //player.addAbility(new Dash(GameLoop.SECOND * 2));
-        //player.addAbility(new Shockwave(GameLoop.SECOND * 2, 350, 100000, 0.1));
-        player.addAbility(new Reflect(GameLoop.SECOND / 2, Math.PI/2, 100, 0.5, 0.1, 1000));
 
         // Create basic enemy
         List<IEnemy> enemies = new ArrayList<>();
@@ -92,9 +90,11 @@ public class Game implements IGame {
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
 
-        // Add abilities
-        level.getPlayer().setFriction(3);
-        level.getPlayer().addAbility(new Dash(GameLoop.SECOND * 2));
+        player = level.getPlayer();
+
+        player.addAbility(new Dash(GameLoop.SECOND * 2)); // First ability activated on shift
+        player.addAbility(new Shockwave(GameLoop.SECOND * 2, 300, 100000, 0.1)); // Second ability activated on E
+        player.addAbility(new Reflect(GameLoop.SECOND / 2, Math.PI/2, 200, 0.5, 0.1, 1000)); // Third ability activated on click
 
         return levels;
     }

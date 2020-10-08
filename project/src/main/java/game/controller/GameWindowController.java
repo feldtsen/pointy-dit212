@@ -8,10 +8,10 @@ import game.model.level.ILevel;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
-import javafx.animation.FadeTransition;
+import game.view.pages.score.IScorePanel;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
-import javafx.util.Duration;
+import javafx.scene.input.KeyEvent;
 
 import java.io.FileNotFoundException;
 
@@ -24,6 +24,8 @@ public class GameWindowController {
     private KeyboardInputController keyboardInputController;
     private MouseInputController mouseInputController;
 
+    private IScorePanel scorePanel;
+
     public GameWindowController() {
         // Init. view component
         window = new MainWindow(this);
@@ -34,6 +36,9 @@ public class GameWindowController {
         GameCanvas gameCanvas = window.getGameCanvas();
         // Create a new renderer using the graphics context supplied by the canvas.
         renderer = new Renderer(gameCanvas.getGraphicsContext2D());
+
+        // Set scorePanel to instance created by window.
+        scorePanel = window.getScorePanel();
 
         // Initialize the game and map all the keys to their corresponding actions.
         gameSetup();
@@ -49,6 +54,9 @@ public class GameWindowController {
 
                 // Render the current level
                 renderer.draw(game.getCurrentLevel());
+
+                // Update score panel
+                scorePanel.updateScore(game.getCurrentLevel().getPlayer(), game.getScore());
 
                 // Apply all registered keyboard actions
                 keyboardInputController.applyRegisteredActions();
@@ -122,12 +130,12 @@ public class GameWindowController {
         keyboardInputController.registerAction(KeyCode.S, game.getCurrentLevel().getPlayer()::moveDown);
         keyboardInputController.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
         keyboardInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
-        //KeyboardInputHandler.registerAction(KeyCode.E, () -> {
-        //    game.activatePlayerAbility(0);
-        //});
+
+        keyboardInputController.registerAction(KeyCode.SHIFT, () -> game.activatePlayerAbility(0));
+        keyboardInputController.registerAction(KeyCode.E, () -> game.activatePlayerAbility(1));
 
         // Register for mouse events
-        mouseInputController.registerActionOnLeftClick(() -> game.activatePlayerAbility(0));
+        mouseInputController.registerActionOnLeftClick(() -> game.activatePlayerAbility(2));
         mouseInputController.registerActionOnMove(     () -> game.setPlayerFacingPosition(mouseInputController.getMousePosition()));
 
     }
