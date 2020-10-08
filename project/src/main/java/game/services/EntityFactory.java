@@ -4,6 +4,7 @@ import game.controller.gameLoop.GameLoop;
 import game.model.ability.ShootBullet;
 import game.model.ability.ShootMissile;
 import game.model.behavior.ability.SingleAbilityBehavior;
+import game.model.behavior.movement.FleeingBehaviour;
 import game.model.behavior.movement.IMovementBehaviour;
 import game.model.behavior.movement.SeekingBehaviour;
 import game.model.entity.IEntity;
@@ -12,29 +13,32 @@ import game.model.entity.player.Player;
 import javafx.geometry.Point2D;
 
 public class EntityFactory {
-    private static final int BASEENEMYSTRENGTH = 5;
+    private static final double FLEEING_ENEMY_CLOSEST_DISTANCE = 300; // The closest distance an enemy with FleeingBehaviour will get to the target before moving away.
+    private static final double FLEEING_ENEMY_FURTHEST_DISTANCE = 500; // The furthest distance an enemy with Fleeing can have before moving towards target.
 
-    private static final long BULLETFREQUENCY = GameLoop.SECOND;
-    private static final double BULLETRADIUS = 10;
-    private static final double BULLETSPEED = 700;
-    private static final int BULLETSTRENGTH = 1;
+    private static final int BASE_ENEMY_STRENGTH = 5;
+
+    private static final long BULLET_FREQUENCY = GameLoop.SECOND;
+    private static final double BULLET_RADIUS = 10;
+    private static final double BULLET_SPEED = 700;
+    private static final int BULLET_STRENGTH = 1;
 
     // Dictates how much increasing the difficulty increases the frequency of bullets. The higher the more frequent.
-    private static final double BULLETFREQUENCYFACTOR = 0.5;
+    private static final double BULLET_FREQUENCY_FACTOR = 0.5;
 
-    private static final double MISSILEMAXFORCE = 200;
-    private static final double MISSILEMAXSPEED = 400;
-    private static final double MISSILEMINSPEED = 400;
-    private static final int MISSILESTRENGTH = 3;
-    private static final long MISSILEFREQEUNCY = GameLoop.SECOND * 2;
-    private static final double MISSISLEWIDTH = 20;
-    private static final double MISSILEHEIGHT = 30;
+    private static final double MISSILE_MAX_FORCE = 200;
+    private static final double MISSILE_MAX_SPEED = 400;
+    private static final double MISSILE_MIN_SPEED = 400;
+    private static final int MISSILE_STRENGTH = 3;
+    private static final long MISSILE_FREQUENCY = GameLoop.SECOND * 2;
+    private static final double MISSILE_WIDTH = 20;
+    private static final double MISSILE_HEIGHT = 30;
 
     // Dictates how much the difficulty changes the max force of the missiles.
-    private static final double MISSILEMAXFORCEFACTOR = 300;
+    private static final double MISSILE_MAX_FORCE_FACTOR = 300;
 
     // Dictates how much the difficulty changes the max speed of the missiles.
-    private static final double MISSILEMAXSPEEDFACTOR = 25;
+    private static final double MISSILE_MAX_SPEED_FACTOR = 25;
 
     private static final double FRICTION = 3;
 
@@ -63,11 +67,14 @@ public class EntityFactory {
         if (difficulty < 1) throw new IllegalArgumentException();
 
         // Bullet frequency is impacted by given difficulty.
-        long bulletFrequency = (long ) (BULLETFREQUENCY / (difficulty * BULLETFREQUENCYFACTOR));
+        long bulletFrequency = (long ) (BULLET_FREQUENCY / (difficulty * BULLET_FREQUENCY_FACTOR));
+
+        IMovementBehaviour movementBehaviour = new FleeingBehaviour(FLEEING_ENEMY_CLOSEST_DISTANCE, FLEEING_ENEMY_FURTHEST_DISTANCE);
 
         // Create Enemy with Ability ShootBullet.
-        ShootBullet shootBullet = new ShootBullet(bulletFrequency, BULLETRADIUS, 0, BULLETSPEED, BULLETSTRENGTH);
-        Enemy enemy = basicEnemy(x, y, target, BASEENEMYSTRENGTH);
+        ShootBullet shootBullet = new ShootBullet(bulletFrequency, BULLET_RADIUS, 0, BULLET_SPEED, BULLET_STRENGTH);
+        Enemy enemy = basicEnemy(x, y, target, BASE_ENEMY_STRENGTH);
+        enemy.setMovementBehaviour(movementBehaviour);
         enemy.setAbilityBehaviour(new SingleAbilityBehavior(shootBullet));
         enemy.setFriction(FRICTION);
 
@@ -83,15 +90,18 @@ public class EntityFactory {
         if (difficulty < 1) throw new IllegalArgumentException();
 
         // MovementBehaviour to be used by missiles fired by the Enemy.
-        IMovementBehaviour movementBehaviour = new SeekingBehaviour();
+        IMovementBehaviour missileMovementBehaviour = new SeekingBehaviour();
+
+        IMovementBehaviour movementBehaviour = new FleeingBehaviour(FLEEING_ENEMY_CLOSEST_DISTANCE, FLEEING_ENEMY_FURTHEST_DISTANCE);
 
         // Max force and max speed of missile are impacted by difficulty.
-        double maxForce = MISSILEMAXFORCE + MISSILEMAXFORCEFACTOR * difficulty;
-        double maxSpeed = MISSILEMAXSPEED + MISSILEMAXSPEEDFACTOR * difficulty;
+        double maxForce = MISSILE_MAX_FORCE + MISSILE_MAX_FORCE_FACTOR * difficulty;
+        double maxSpeed = MISSILE_MAX_SPEED + MISSILE_MAX_SPEED_FACTOR * difficulty;
 
         // Create Enemy with Ability ShootMissile.
-        ShootMissile shootMissile = new ShootMissile(MISSILEFREQEUNCY, MISSISLEWIDTH, MISSILEHEIGHT, maxForce, maxSpeed , MISSILEMINSPEED, MISSILESTRENGTH, movementBehaviour);
-        Enemy enemy = basicEnemy(x, y, target, BASEENEMYSTRENGTH);
+        ShootMissile shootMissile = new ShootMissile(MISSILE_FREQUENCY, MISSILE_WIDTH, MISSILE_HEIGHT, maxForce, maxSpeed , MISSILE_MIN_SPEED, MISSILE_STRENGTH, missileMovementBehaviour);
+        Enemy enemy = basicEnemy(x, y, target, BASE_ENEMY_STRENGTH);
+        enemy.setMovementBehaviour(movementBehaviour);
         enemy.setAbilityBehaviour(new SingleAbilityBehavior(shootMissile));
         enemy.setFriction(FRICTION);
 
