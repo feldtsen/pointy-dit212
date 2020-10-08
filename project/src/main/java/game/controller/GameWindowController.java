@@ -82,7 +82,7 @@ public class GameWindowController {
         //TODO what todo here
         ILevel currentLevel = game.getCurrentLevel();
         IPlayer player = currentLevel.getPlayer();
-        double scalingRatio = 1000 / window.getWidth();
+        double scalingRatio = window.getWidth() / 1000;
         System.out.println(scalingRatio);
 
         currentLevel.setWidth(window.getWidth());
