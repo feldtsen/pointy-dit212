@@ -17,23 +17,27 @@ import java.util.List;
 
 public class ShockwaveTest {
 
-    Player player = EntityFactory.basicPlayer(500, 700);
-    IAbility shockwave = new Shockwave(10, 100, 1500, 0.1);
+    ILevel level;
 
-    Enemy enemy1 = EntityFactory.basicEnemy(500,650, player, 10);
-    Enemy enemy2 = EntityFactory.basicEnemy(500, 750, player, 10);
-
-    List<IEnemy> enemies = new ArrayList<>(List.of(enemy1, enemy2));
-
-    ILevel level = new Level(enemies,null,null, player, 1200, 800);
 
     @Before
     public void before (){
+        IPlayer player = EntityFactory.basicPlayer(500, 700);
+        IAbility shockwave = new Shockwave(10, 100, 1500, 0.1);
+
+        Enemy enemy1 = EntityFactory.basicEnemy(500,650, player, 10);
+        Enemy enemy2 = EntityFactory.basicEnemy(500, 750, player, 10);
+
+        List<IEnemy> enemies = new ArrayList<>(List.of(enemy1, enemy2));
+
+        level = new Level(enemies,null,null, player, 1200, 800);
         player.addAbility(shockwave);
     }
 
     @Test
     public void EnemyPushed (){
-        player.activateAbility(0);
+
+        level.getPlayer().activateAbility(0);
+
     }
 }
