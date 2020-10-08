@@ -33,15 +33,16 @@ public class Dash extends Ability {
             public void apply(ILevel level, double timePassed) {
 
                 if (dir == null) {
-                    player.setMaxSpeed(player.getMaxSpeed()*7);
+                    player.setMaxSpeed(player.getMaxSpeed()*5);
                     dir = player.getVelocity().multiply(player.getMaxSpeed());
+                    player.setVelocity(dir);
                 }
-                player.setVelocity(dir);
+
             }
 
             @Override
             public void onFinished(ILevel level) {
-                player.setMaxSpeed(player.getMaxSpeed() / 7);
+                player.setMaxSpeed(player.getMaxSpeed() / 5);
                 player.setIsInvulnerable(false);
             }
         };
