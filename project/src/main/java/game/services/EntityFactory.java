@@ -16,15 +16,15 @@ public class EntityFactory {
 
     private static final long BULLETFREQUENCY = GameLoop.SECOND;
     private static final double BULLETRADIUS = 10;
-    private static final double BULLETSPEED = 300;
+    private static final double BULLETSPEED = 700;
     private static final int BULLETSTRENGTH = 1;
 
     // Dictates how much increasing the difficulty increases the frequency of bullets. The higher the more frequent.
     private static final double BULLETFREQUENCYFACTOR = 0.5;
 
     private static final double MISSILEMAXFORCE = 200;
-    private static final double MISSILEMAXSPEED = 200;
-    private static final double MISSILEMINSPEED = 200;
+    private static final double MISSILEMAXSPEED = 400;
+    private static final double MISSILEMINSPEED = 400;
     private static final int MISSILESTRENGTH = 3;
     private static final long MISSILEFREQEUNCY = GameLoop.SECOND * 2;
     private static final double MISSISLEWIDTH = 20;
