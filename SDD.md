@@ -84,7 +84,6 @@ The `Ability` in the domain model creates 0..* projectiles. In the design model,
 ### 3.2 Implemented design patterns
 
 * MVC (Model View Controller) for separating game logic, user input and graphical interface.
-* the singleton pattern, for the keyboard input controller.
 * the factory (method) pattern, for simplifying the creation of game entities such as players and enemies
 * the command pattern, which is used for executing actions when a key is pressed.
 * the composite pattern, allowing players and enemies to have different abilities and behaviors. The construction of these entities is simplified using the factory pattern.
