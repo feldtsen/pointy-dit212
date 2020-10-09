@@ -22,8 +22,7 @@
       "y": "5",
       "target": "player",
       "difficulty" : "1"
-    },
-
+    }
   ],
   "Player": {
     "x": "4",
