@@ -36,11 +36,11 @@ public class ShootMissileTest {
         // Initially the number of projectiles should be 0.
         assertTrue(level.getProjectiles().size() == 0);
 
-        // Apply ability (create missile)
+        // Apply ability (create missile).
         IAbilityAction abilityAction = user.applyAbility();
         abilityAction.apply(level, 0);
 
-        // Test that a projectile gets added to level and that it is a missile.
+        // THe number of projectiles should now be 1 and that projectile should be a missile.
         assertTrue(level.getProjectiles().size() == 1 && level.getProjectiles().get(0) instanceof Missile);
     }
 }
