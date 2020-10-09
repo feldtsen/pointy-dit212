@@ -54,6 +54,21 @@ public class ShockwaveTest {
 
     }
 
+    @Test
+    public void EnemyOutOfRange (){
+        force = 1500;
+        testSetup(radius, force);
+        enemy.setPosition(new Point2D(500,599));
+        // Create vector pointing from user to target entity
+        Point2D vector = enemy.getPosition().subtract(player.getPosition());
+        double expectedAccelerationX = enemy.getAcceleration().getX();
+        double expectedAccelerationY = enemy.getAcceleration().getY();
+        shockwave();
+
+        assertEquals(expectedAccelerationX, enemy.getAcceleration().getX(),0.0);
+        assertEquals(expectedAccelerationY, enemy.getAcceleration().getY(),0.0);
+
+    }
     private void shockwave(){
         IAbilityAction abilityAction = player.activateAbility(0);
         abilityAction.apply(level, 0);
