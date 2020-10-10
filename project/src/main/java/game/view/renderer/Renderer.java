@@ -46,7 +46,7 @@ public class Renderer implements IRenderer, IShapeVisitor {
         colors.put(Enemy.class,           Color.rgb(80, 100, 80));
         colors.put(Bullet.class,          Color.rgb(90, 90, 200));
         colors.put(Missile.class,         Color.rgb(200, 90, 90));
-        colors.put(GraphicsContext.class, Color.rgb(30,  30,  30 ));
+        colors.put(GraphicsContext.class, Color.rgb(20,  20,  20 ));
 
         abilityEffects.put(Dash.DashAction.class, createDashEffect());
         abilityEffects.put(Shockwave.ShockwaveAction.class, createShockwaveEffect());
@@ -76,8 +76,11 @@ public class Renderer implements IRenderer, IShapeVisitor {
         RendererUtils.setBackgroundColor(graphicsContext, colors.get(graphicsContext.getClass()));
 
         // Render player
-        RendererUtils.drawCircle(graphicsContext, colors.get(level.getPlayer().getClass()), level.getPlayer().getShape(), level.getPlayer().getPosition());
+        entity = level.getPlayer();
+        setRotation(level.getPlayer().getVelocity());
+        entity.getShape().acceptShapeVisitor(this);
 
+        /*
         Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), level.getPlayer().getShape().getRadius() - 5);
         RendererUtils.drawLine(graphicsContext,
                 colors.get(level.getPlayer().getClass()),
@@ -85,10 +88,12 @@ public class Renderer implements IRenderer, IShapeVisitor {
                 level.getPlayer().getPosition().add(direction),
                 7);
 
+         */
+
         // Render all projectiles
         for(IProjectile<?> projectile : level.getProjectiles()) {
             entity = projectile;
-            projectile.getShape().setRotation(Utils.heading(projectile.getVelocity()));
+            setRotation(projectile.getVelocity());
             projectile.getShape().acceptShapeVisitor(this);
         }
 
@@ -96,8 +101,7 @@ public class Renderer implements IRenderer, IShapeVisitor {
         for (IEnemy enemy : level.getEnemies()) {
             entity = enemy;
 
-            double radians = Utils.heading(enemy.getVelocity());
-            enemy.getShape().setRotation(radians);
+            setRotation(enemy.getVelocity());
             enemy.getShape().acceptShapeVisitor(this);
         }
     }
@@ -116,7 +120,11 @@ public class Renderer implements IRenderer, IShapeVisitor {
 
     @Override
     public void visit(ICircle circle) {
-        RendererUtils.drawCircle(graphicsContext, colors.get(entity.getClass()), circle, entity.getPosition());
+        RendererUtils.drawCircle(graphicsContext,
+                colors.get(entity.getClass()),
+                circle,
+                entity.getPosition()
+        );
     }
 
     @Override
@@ -126,7 +134,18 @@ public class Renderer implements IRenderer, IShapeVisitor {
 
     @Override
     public void visit(ITriangle triangle) {
-        ICircle circle = new Circle(triangle.getWidth());
         RendererUtils.drawTriangle(graphicsContext, colors.get(entity.getClass()), triangle, entity.getPosition());
     }
+
+    private double widthScaling(double oldValue) {
+        return  Utils.map(oldValue, 0, 1200, 0, graphicsContext.getCanvas().getWidth());
+    }
+    private double heightScaling(double oldValue) {
+        return  Utils.map(oldValue, 0, 1200*.5625, 0, graphicsContext.getCanvas().getHeight());
+    }
+
+    private void setRotation(Point2D velocity) {
+       entity.getShape().setRotation(Utils.heading(velocity));
+    }
+
 }

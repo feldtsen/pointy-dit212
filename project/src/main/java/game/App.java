@@ -20,8 +20,6 @@ public class App extends Application {
         primaryStage.setWidth(INITIAL_WIDTH);
         primaryStage.minHeightProperty().bind(primaryStage.widthProperty().multiply(WIDTH_TO_HEIGHT_RATIO));
         primaryStage.maxHeightProperty().bind(primaryStage.widthProperty().multiply(WIDTH_TO_HEIGHT_RATIO));
-        // Set constraint to the minimum allowed size
-        primaryStage.setMinWidth(MIN_SIZE);
 
         //TODO: is there a better way?
         GameWindowController gameWindowController = new GameWindowController();

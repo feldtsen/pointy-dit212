@@ -19,7 +19,7 @@ public class EntityFactory {
     private static final int BASE_ENEMY_STRENGTH = 5;
 
     private static final long BULLET_FREQUENCY = GameLoop.SECOND;
-    private static final double BULLET_RADIUS = 10;
+    private static final double BULLET_RADIUS = 5;
     private static final double BULLET_SPEED = 700;
     private static final int BULLET_STRENGTH = 1;
 
@@ -31,8 +31,8 @@ public class EntityFactory {
     private static final double MISSILE_MIN_SPEED = 400;
     private static final int MISSILE_STRENGTH = 3;
     private static final long MISSILE_FREQUENCY = GameLoop.SECOND * 2;
-    private static final double MISSILE_WIDTH = 20;
-    private static final double MISSILE_HEIGHT = 30;
+    private static final double MISSILE_WIDTH = 10;
+    private static final double MISSILE_HEIGHT = 15;
 
     // Dictates how much the difficulty changes the max force of the missiles.
     private static final double MISSILE_MAX_FORCE_FACTOR = 300;
@@ -45,7 +45,7 @@ public class EntityFactory {
     private EntityFactory() {}
 
     public static Player basicPlayer(double x, double y) {
-        Player player = new Player(new Point2D(x, y), 30, 2500, 1000,0);
+        Player player = new Player(new Point2D(x, y), 20, 2500, 1000,0);
         player.setFriction(FRICTION);
         return player;
     }
@@ -57,7 +57,7 @@ public class EntityFactory {
 
     //Creates and enemy without abilities which only follows a target.
     public static Enemy basicEnemy(double x, double y, IEntity<?> target, int strength) {
-        Enemy enemy = new Enemy(new Point2D(x,y), 50, 1000, 1000, 1,null, new SeekingBehaviour(), target, strength);
+        Enemy enemy = new Enemy(new Point2D(x,y), 25, 1000, 1000, 1,null, new SeekingBehaviour(), target, strength);
         enemy.setFriction(FRICTION);
         return enemy;
     }

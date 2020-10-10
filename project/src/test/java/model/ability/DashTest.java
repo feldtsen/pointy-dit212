@@ -27,6 +27,6 @@ public class DashTest {
     @Before
     public void before(){
         player = EntityFactory.basicPlayer(500, 500);
-        enemy = EntityFactory.basicEnemy()
+        //enemy = EntityFactory.basicEnemy()
     }
 }

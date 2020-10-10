@@ -61,4 +61,9 @@ public class Utils {
         return angle;
     }
 
+    public static double map(double oldValue, double oldMin, double oldMax, double newMin, double newMax) {
+        double normalized = (oldValue - oldMin) / (oldMax - oldMin);
+        return normalized * (newMax - newMin) + newMin;
+    }
+
 }
