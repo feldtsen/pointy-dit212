@@ -4,6 +4,7 @@ import game.controller.GameWindowController;
 import game.view.pages.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 // Top level class for initializing the application
@@ -18,8 +19,15 @@ public class App extends Application {
         // Initialize with the correct aspect ratio, and bind the relation between the width and the height
         primaryStage.minHeightProperty().bind(primaryStage.widthProperty().multiply(WIDTH_TO_HEIGHT_RATIO));
         primaryStage.maxHeightProperty().bind(primaryStage.widthProperty().multiply(WIDTH_TO_HEIGHT_RATIO));
+
+        // Get screen bound
+        System.out.println(Screen.getPrimary().getBounds().getWidth());
+
         // Set constraint to the minimum allowed size
         primaryStage.setMinWidth(MIN_SIZE);
+
+        // Start bordered fullscreen
+        primaryStage.setWidth(Screen.getPrimary().getBounds().getWidth());
 
         //TODO: is there a better way?
         GameWindowController gameWindowController = new GameWindowController();
