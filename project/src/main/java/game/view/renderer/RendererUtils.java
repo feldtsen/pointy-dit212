@@ -48,12 +48,18 @@ public class RendererUtils {
     }
     // Draws a ring to the screen
     public static void drawRing(GraphicsContext graphicsContext, Color color, ICircle circle, Point2D position) {
+        double scaledRadiusW = scaleRespectToWidth(graphicsContext, circle.getRadius());
+        double scaledRadiusH = scaleRespectToHeight(graphicsContext, circle.getRadius());
+
+        double scaledXPosition = scaleRespectToWidth(graphicsContext, position.getX());
+        double scaledYPosition = scaleRespectToWidth(graphicsContext, position.getY());
+
         graphicsContext.setStroke(color);
         graphicsContext.strokeOval(
-                position.getX() - circle.getRadius(),
-                position.getY() - circle.getRadius(),
-                2*circle.getRadius(),
-                2*circle.getRadius()
+                scaledXPosition - scaledRadiusW,
+                scaledYPosition - scaledRadiusH,
+                2 * scaledRadiusW,
+                2 * scaledRadiusH
         );
     }
 
@@ -104,9 +110,17 @@ public class RendererUtils {
 
     // Draws a line from a start to stop
     public static void drawLine(GraphicsContext graphicsContext, Color color, Point2D start, Point2D stop, double width) {
+        double scaledWidth = scaleRespectToWidth(graphicsContext, width);
+
+        double scaledStartX = scaleRespectToWidth(graphicsContext, start.getX());
+        double scaledStartY = scaleRespectToHeight(graphicsContext, start.getY());
+
+        double scaledStopX = scaleRespectToWidth(graphicsContext, stop.getX());
+        double scaledStopY = scaleRespectToHeight(graphicsContext, stop.getY());
+
         graphicsContext.setStroke(color);
-        graphicsContext.setLineWidth(width);
-        graphicsContext.strokeLine(start.getX(), start.getY(), stop.getX(), stop.getY());
+        graphicsContext.setLineWidth(scaledWidth);
+        graphicsContext.strokeLine(scaledStartX, scaledStartY, scaledStopX, scaledStopY);
     }
 
     private static void SaveAndTranslate(GraphicsContext graphicsContext, double shapeWidth, double shapeHeight, double shapeRotation, double xPosition, double yPosition) {

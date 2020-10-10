@@ -42,11 +42,11 @@ public class Renderer implements IRenderer, IShapeVisitor {
         this.graphicsContext = graphicsContext;
 
         // Initialize different entity classes with different colors
-        colors.put(Player.class,          Color.rgb(150, 150, 150));
-        colors.put(Enemy.class,           Color.rgb(80, 100, 80));
-        colors.put(Bullet.class,          Color.rgb(90, 90, 200));
-        colors.put(Missile.class,         Color.rgb(200, 90, 90));
-        colors.put(GraphicsContext.class, Color.rgb(20,  20,  20 ));
+        colors.put(Player.class,          Color.rgb(192, 197, 206));
+        colors.put(Enemy.class,           Color.rgb(167, 173, 186));
+        colors.put(Bullet.class,          Color.rgb(96, 106, 116));
+        colors.put(Missile.class,         Color.rgb(153, 163, 156));
+        colors.put(GraphicsContext.class, Color.rgb(52, 61, 70));
 
         abilityEffects.put(Dash.DashAction.class, createDashEffect());
         abilityEffects.put(Shockwave.ShockwaveAction.class, createShockwaveEffect());
@@ -63,7 +63,7 @@ public class Renderer implements IRenderer, IShapeVisitor {
         return (action, time) -> {
             Point2D position = action.getUser().getPosition();
             ICircle circle = new Circle(radius * time);
-            RendererUtils.drawRing(graphicsContext, Color.rgb(150, 120, 140), circle, position);
+            RendererUtils.drawRing(graphicsContext, colors.get(action.getUser().getClass()), circle, position);
         };
     }
 
@@ -80,15 +80,13 @@ public class Renderer implements IRenderer, IShapeVisitor {
         setRotation(level.getPlayer().getVelocity());
         entity.getShape().acceptShapeVisitor(this);
 
-        /*
         Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), level.getPlayer().getShape().getRadius() - 5);
         RendererUtils.drawLine(graphicsContext,
-                colors.get(level.getPlayer().getClass()),
+                colors.get(level.getEnemies().get(0).getClass()),
                 level.getPlayer().getPosition(),
                 level.getPlayer().getPosition().add(direction),
                 7);
 
-         */
 
         // Render all projectiles
         for(IProjectile<?> projectile : level.getProjectiles()) {
