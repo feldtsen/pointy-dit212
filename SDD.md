@@ -102,8 +102,4 @@ The application is tested using unit tests with the framework JUnit. These tests
 
 ## 6. References
 - JavaFX - https://openjfx.io/
-- Maven - https://maven.apache.org/
-- Lucidchart - https://www.lucidchart.com/
 - JUnit - https://junit.org/
-- Git - https://git-scm.com/
-- Trello - https://www.trello.com/
