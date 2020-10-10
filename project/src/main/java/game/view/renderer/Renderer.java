@@ -137,13 +137,6 @@ public class Renderer implements IRenderer, IShapeVisitor {
         RendererUtils.drawTriangle(graphicsContext, colors.get(entity.getClass()), triangle, entity.getPosition());
     }
 
-    private double widthScaling(double oldValue) {
-        return  Utils.map(oldValue, 0, 1200, 0, graphicsContext.getCanvas().getWidth());
-    }
-    private double heightScaling(double oldValue) {
-        return  Utils.map(oldValue, 0, 1200*.5625, 0, graphicsContext.getCanvas().getHeight());
-    }
-
     private void setRotation(Point2D velocity) {
        entity.getShape().setRotation(Utils.heading(velocity));
     }

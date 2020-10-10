@@ -69,6 +69,7 @@ public class Game implements IGame {
         player.setFriction(3);
         //player.addAbility(new Dash(GameLoop.SECOND * 2));
 
+        /*
         // Create basic enemy
         List<IEnemy> enemies = new ArrayList<>();
         Enemy e1 = EntityFactory.basicEnemy(800, 250, player, 2);
@@ -84,6 +85,7 @@ public class Game implements IGame {
         Enemy e3 = EntityFactory.missileEnemy(800, 150, player, 1);
         e3.setFriction(30);
         enemies.add(e3);
+        */
 
         // Create empty lists for projectiles and obstacles
         List<IProjectile<?>> projectiles = new ArrayList<>();

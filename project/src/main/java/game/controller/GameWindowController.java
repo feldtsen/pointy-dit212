@@ -13,6 +13,7 @@ import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
 import game.view.pages.score.IScorePanel;
+import game.view.renderer.RendererUtils;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 
@@ -60,7 +61,7 @@ public class GameWindowController {
                 // Render ability effects
                 renderer.drawAbilities(game.getActiveAbilityActions(), game.getActiveAbilityTimes());
 
-                // Update score panelw
+                // Update score panel
                 scorePanel.updateScore(game.getCurrentLevel().getPlayer(), game.getScore());
 
                 // Apply all registered keyboard actions
@@ -87,8 +88,6 @@ public class GameWindowController {
         IPlayer player = currentLevel.getPlayer();
         double scalingRatio = window.getWidth() / 1000;
 
-        currentLevel.setWidth(window.getGameCanvas().getWidth());
-        currentLevel.setHeight(window.getGameCanvas().getHeight());
 
 
         //player.getShape().resize(scalingRatio);
