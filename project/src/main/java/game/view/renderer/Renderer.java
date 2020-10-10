@@ -82,7 +82,7 @@ public class Renderer implements IRenderer, IShapeVisitor {
 
         Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), level.getPlayer().getShape().getRadius() - 5);
         RendererUtils.drawLine(graphicsContext,
-                colors.get(level.getEnemies().get(0).getClass()),
+                colors.get(Enemy.class),
                 level.getPlayer().getPosition(),
                 level.getPlayer().getPosition().add(direction),
                 7);

@@ -32,12 +32,6 @@ public class Rectangle implements IRectangle {
     }
 
     @Override
-    public void resize(double scaleRatio) {
-        width = originWidth * scaleRatio;
-        height = originHeight * scaleRatio;
-    }
-
-    @Override
     public double getRotation() {
         return rotation;
     }
