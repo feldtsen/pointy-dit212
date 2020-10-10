@@ -11,11 +11,17 @@ Pointy is a topdown 2D game. The player is a simple geometrical shape which navi
 
 The map contains different neutral elements, such as walls, spikes and traps, which can both be dangerous for the player, or cleverly used to aid the player in their mission.
 
-The goal of the player is to defeat all the elements, reach the map exit, or perform a specific task. The game contains multiple levels, and by defeating one level, the player can progress to the next.
+The goal of the player is to defeat all the enemies, reach the map exit, or perform a specific task. The game contains multiple levels, and by defeating one level, the player can progress to the next.
 
 ## 1.1. Definitions, acronyms, and abbreviations
 - 2D - Two dimensional
 - Topdown game - A game that is viewed from above.
+- Projectile - Object fired by some entity towards some other entity. Can cause harm to the player or enemies.
+- Obstacle - Neutral object placed on the level. Some obstacles may hinder the movement of the player, enemies, and projectiles in the game, while others may cause harm towards the player or the enemies.  
+- Ability - Can be used by the player or enemies to impact the flow of the game in some way. This can, for example, be by adding a projectile to the game, or by directly impacting the surrounding entities in some way.
+- Player - Entity controlled by the user of the Game. 
+- Enemies - Opponents of the player. Will use their abilities to try to defeat the player. 
+	   
 
 # 2. Requirements
 
