@@ -509,14 +509,5 @@ Displayed when the game is launched.
 
 <img src=https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/design-model.png width=100%>
 
-# 4. References
-
-
-- JavaFX - https://openjfx.io/
-- Maven - https://maven.apache.org/
-- Lucidchart - https://www.lucidchart.com/
-- JUnit - https://junit.org/
-- Git - https://git-scm.com/
-- Trello - https://www.trello.com/
 
 
