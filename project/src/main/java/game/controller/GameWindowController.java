@@ -5,12 +5,15 @@ import game.controller.gameLoop.GameLoop;
 import game.controller.gameLoop.IGameLoop;
 import game.model.IGame;
 import game.model.entity.enemy.IEnemy;
+import game.model.entity.obstacle.IObstacle;
 import game.model.entity.player.IPlayer;
+import game.model.entity.projectile.IProjectile;
 import game.model.level.ILevel;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
 import game.view.pages.score.IScorePanel;
+import game.view.renderer.RendererUtils;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 
@@ -85,16 +88,22 @@ public class GameWindowController {
         IPlayer player = currentLevel.getPlayer();
         double scalingRatio = window.getWidth() / 1000;
 
-        currentLevel.setWidth(window.getWidth());
-        currentLevel.setHeight(window.getHeight());
 
 
-        player.getShape().resize(scalingRatio);
+        //player.getShape().resize(scalingRatio);
 
         for (IEnemy enemy : currentLevel.getEnemies()) {
-            enemy.getShape().resize(scalingRatio);
+            //enemy.getShape().resize(scalingRatio);
         }
 
+        for (IProjectile projectile : currentLevel.getProjectiles()) {
+            //projectile.getShape().resize();
+        }
+
+        for (IObstacle obstacle : currentLevel.getObstacles()) {
+            // obstacle.getShape().resize();
+
+        }
     }
 
 

@@ -16,8 +16,6 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Initialize with the correct aspect ratio, and bind the relation between the width and the height
-        primaryStage.setHeight(INITIAL_HEIGHT); // this will also be set when minimizing a maximized screen
-        primaryStage.setWidth(INITIAL_WIDTH);
         primaryStage.minHeightProperty().bind(primaryStage.widthProperty().multiply(WIDTH_TO_HEIGHT_RATIO));
         primaryStage.maxHeightProperty().bind(primaryStage.widthProperty().multiply(WIDTH_TO_HEIGHT_RATIO));
         // Set constraint to the minimum allowed size
