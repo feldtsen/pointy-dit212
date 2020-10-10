@@ -59,7 +59,6 @@ public class RendererUtils {
 
     // Draws a rectangle to the screen
     public static void drawRectangle(GraphicsContext graphicsContext, Color color, IRectangle shape, Point2D position) {
-
         double scaledShapeWidth  = scaleRespectToWidth(graphicsContext, shape.getWidth());
         double scaledShapeHeight = scaleRespectToHeight(graphicsContext, shape.getHeight());
 
@@ -74,6 +73,9 @@ public class RendererUtils {
         graphicsContext.restore();
     }
 
+    private static final double[] xs = new double[3];
+    private static final double[] ys = new double[3];
+
 
     public static void drawTriangle(GraphicsContext graphicsContext, Color color, ITriangle shape, Point2D position) {
         double scaledShapeWidth  = scaleRespectToWidth(graphicsContext, shape.getWidth());
@@ -84,12 +86,17 @@ public class RendererUtils {
 
         SaveAndTranslate(graphicsContext, scaledShapeWidth, scaledShapeHeight, shape.getRotation(), scaledXPosition, scaledYPosition);
 
-        graphicsContext.setFill(color);
-        graphicsContext.fillPolygon(
-                new double[]{scaledXPosition, scaledXPosition + scaledShapeWidth, scaledXPosition + scaledShapeWidth/2},
+        xs[0] = scaledXPosition;
+        xs[1] = scaledXPosition + scaledShapeWidth;
+        xs[2] = scaledXPosition + scaledShapeWidth / 2;
 
-                new double[]{scaledYPosition, scaledYPosition                   , scaledYPosition + scaledShapeHeight},
-                3);
+
+        ys[0] = scaledYPosition;
+        ys[1] = scaledYPosition;
+        ys[2] = scaledYPosition + scaledShapeHeight;
+
+        graphicsContext.setFill(color);
+        graphicsContext.fillPolygon(xs, ys, xs.length);
 
 
         graphicsContext.restore();
@@ -120,7 +127,6 @@ public class RendererUtils {
         return Utils.map(oldValue, 0, 1200, 0, graphicsContext.getCanvas().getWidth());
     }
     public static double scaleRespectToHeight (GraphicsContext graphicsContext, double oldValue) {
-        System.out.println(graphicsContext.getCanvas().getHeight());
         return Utils.map(oldValue, 0, 1200*.5625, 0, graphicsContext.getCanvas().getHeight());
     }
 
