@@ -1,15 +1,14 @@
 package game.view.pages.abilityBar;
 
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 public class AbilityBar extends HBox {
 
     public AbilityBar() {
 
-      Label dash = new Label("Dash");
-      Label reflect = new Label("Reflect");
-      Label shockwave = new Label("Shockwave");
+      AbilityHolder dash = new AbilityHolder("Dash");
+      AbilityHolder reflect = new AbilityHolder("Reflect");
+      AbilityHolder shockwave = new AbilityHolder("Shockwave");
 
       this.getStyleClass().add("abilityBar");
 

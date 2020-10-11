@@ -61,6 +61,6 @@
 
 }
 
-.abilityBar > .label {
+.abilityBar > * > .label {
     -fx-text-fill: white;
 }

@@ -43,7 +43,7 @@ public class Renderer implements IRenderer, IShapeVisitor {
 
         // Initialize different entity classes with different colors
         colors.put(Player.class,          Color.rgb(255, 255, 255));
-        colors.put(Enemy.class,           Color.rgb(167, 173, 186));
+        colors.put(Enemy.class,           Color.rgb(167, 173, 186, .96));
         colors.put(Bullet.class,          Color.rgb(96, 106, 116));
         colors.put(Missile.class,         Color.rgb(153, 163, 156));
         colors.put(GraphicsContext.class, Color.rgb(52, 61, 70));

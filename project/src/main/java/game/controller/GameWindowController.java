@@ -31,9 +31,6 @@ public class GameWindowController {
         // Create a new renderer using the graphics context supplied by the canvas.
         renderer = new Renderer(gameCanvas.getGraphicsContext2D());
 
-        // Set scorePanel to instance created by window.
-        IScorePanel scorePanel = window.getScorePanel();
-
         // Initialize the game and map all the keys to their corresponding actions.
         gameSetup();
 
@@ -48,8 +45,9 @@ public class GameWindowController {
                 // Render ability effects
                 renderer.drawAbilities(game.getActiveAbilityActions(), game.getActiveAbilityTimes());
 
-                // Update score panel
-                scorePanel.updateScore(game.getCurrentLevel().getPlayer(), game.getScore());
+                // Updated the UI with relevant information (like cooldown time and game score)
+               updateUI();
+
 
                 // Apply all registered keyboard actions
                 keyboardInputController.applyRegisteredActions();
@@ -66,6 +64,12 @@ public class GameWindowController {
 
         // Start the game loop. At this point, the game is running.
         gameLoop.start();
+
+    }
+
+    private void updateUI() {
+        // Update score panel
+        window.getScorePanel().updateScore(game.getCurrentLevel().getPlayer(), game.getScore());
 
     }
 
