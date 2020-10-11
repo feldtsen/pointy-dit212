@@ -53,9 +53,6 @@ public class GameWindowController {
         gameLoop = new GameLoop(1000) {
             @Override
             public void update(double delta) {
-                // TODO: do it elsewhere?
-                resize();
-
                 // Render the current level
                 renderer.drawEntities(game.getCurrentLevel());
                 // Render ability effects
@@ -80,30 +77,6 @@ public class GameWindowController {
         // Start the game loop. At this point, the game is running.
         gameLoop.start();
 
-    }
-
-    private void resize() {
-        //TODO what todo here
-        ILevel currentLevel = game.getCurrentLevel();
-        IPlayer player = currentLevel.getPlayer();
-        double scalingRatio = window.getWidth() / 1000;
-
-
-
-        //player.getShape().resize(scalingRatio);
-
-        for (IEnemy enemy : currentLevel.getEnemies()) {
-            //enemy.getShape().resize(scalingRatio);
-        }
-
-        for (IProjectile projectile : currentLevel.getProjectiles()) {
-            //projectile.getShape().resize();
-        }
-
-        for (IObstacle obstacle : currentLevel.getObstacles()) {
-            // obstacle.getShape().resize();
-
-        }
     }
 
 
