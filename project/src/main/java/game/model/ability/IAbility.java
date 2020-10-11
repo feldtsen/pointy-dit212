@@ -14,4 +14,7 @@ public interface IAbility {
 
     // Each ability has a cooldown, which is the time (in nanoseconds) before the ability can be activated again.
     long getCooldown();
+
+    double getCooldownCountdown();
+
 }

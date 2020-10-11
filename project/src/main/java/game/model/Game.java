@@ -92,7 +92,7 @@ public class Game implements IGame {
         List<IObstacle> obstacles = new ArrayList<>();
 
         // Build level(s)
-        ILevel level = LevelLoader.load("testLevel");
+        ILevel level = LevelLoader.load("emptyLevel");
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
 

@@ -22,18 +22,28 @@ public abstract class Ability implements IAbility{
     }
 
     @Override
-    public long getCooldown(){return cooldown;}
+    public long getCooldown(){
+        return cooldown;
+    }
+
+    @Override
+    public double getCooldownCountdown() {
+        return Math.max((double)(cooldown - (System.nanoTime() - lastUsed))/1000000000, 0);
+    }
 
     @Override
     public IAbilityAction use(IEntity<?> user, IEntity<?> target){
+
         // Store the current nano time
         long currentTime = System.nanoTime();
         // Check if the time passed exceeds that of cool down
         if (currentTime - lastUsed >= cooldown){
+            System.out.println("inside");
             lastUsed = currentTime;
             // If true, create an ability action and return
             return createAction(user, target);
         }
+
         // Return null if cool down is still active.
         return null;
     }

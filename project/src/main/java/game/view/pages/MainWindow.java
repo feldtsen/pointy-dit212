@@ -3,6 +3,7 @@ package game.view.pages;
 import game.controller.GameWindowController;
 import game.view.ViewResourceLoader;
 import game.view.pages.abilityBar.AbilityBar;
+import game.view.pages.abilityBar.AbilityHolder;
 import game.view.pages.canvas.GameCanvas;
 import game.view.pages.menu.StartMenu;
 import game.view.pages.score.ScorePanel;
@@ -17,12 +18,13 @@ public class MainWindow extends StackPane {
     GameCanvas gameCanvas;
     StartMenu startMenu;
     ScorePanel scorePanel;
+    AbilityBar abilityBar;
 
     public MainWindow(GameWindowController gameWindowController) {
         gameCanvas = new GameCanvas();
         startMenu  = new StartMenu(gameWindowController);
         scorePanel = new ScorePanel();
-        AbilityBar abilityBar = new AbilityBar();
+        abilityBar = new AbilityBar();
 
 
         // Add a stylesheet
@@ -65,6 +67,10 @@ public class MainWindow extends StackPane {
     }
 
     public ScorePanel getScorePanel () {return scorePanel;}
+
+    public AbilityBar getAbilityBar () {
+        return abilityBar;
+    }
 
     public void menuFadeIn() {
         ViewResourceLoader.fadeIn().setNode(startMenu);
