@@ -27,15 +27,20 @@ public class App extends Application {
         primaryStage.setMinWidth(MIN_SIZE);
 
         // To begin with, occupy 70% of the width
-        primaryStage.setWidth(Screen.getPrimary().getBounds().getWidth() * .7);
+        double screenWidth = Screen.getPrimary().getBounds().getWidth();
+        primaryStage.setWidth(screenWidth * .7);
+        // Used to force the position of the window to be centered
+        primaryStage.setX(screenWidth / 2 - primaryStage.getWidth() / 2);
 
         //TODO: is there a better way?
         GameWindowController gameWindowController = new GameWindowController();
 
         // Load game window
         Scene scene = new Scene(gameWindowController.getWindow());
+
         // Set the scene to the main stage (window)
         primaryStage.setScene(scene);
+
         // Display the stage (window)
         primaryStage.show();
     }
