@@ -1,5 +1,6 @@
 package model.ability;
 
+import game.model.ability.Dash;
 import game.model.ability.IAbility;
 import game.model.ability.Shockwave;
 import game.model.ability.action.IAbilityAction;
@@ -24,9 +25,40 @@ public class DashTest {
     IPlayer player;
     IEnemy enemy;
 
+
+    // TODO: Maybe change implementation of dash before creating more tests
     @Before
     public void before(){
         player = EntityFactory.basicPlayer(500, 500);
-        //enemy = EntityFactory.basicEnemy()
+        enemy = EntityFactory.basicEnemy(550,500,player , 5);
+        IAbility dash = new Dash(10);
+        player.addAbility(dash);
+
+        //Vector between player and enemy, used to make the player face the enemy
+        Point2D vector = enemy.getPosition().subtract(player.getPosition());
+        double dir = Utils.heading(vector);
+        player.getShape().setRotation(dir);
     }
+
+    private void dash(){
+        IAbilityAction abilityAction = player.activateAbility(0);
+        abilityAction.apply(level,0);
+    }
+
+    @Test
+    public void testDashWhileMoving(){
+
+        player.setVelocity(new Point2D(100,0));
+        Point2D newVelocity = player.getVelocity().multiply(player.getMaxSpeed()*5);
+        double oldMaxSpeed = player.getMaxSpeed();
+
+        dash();
+
+        assertEquals(newVelocity.getX(), player.getVelocity().getX(),0.0);
+        assertEquals(newVelocity.getY(), player.getVelocity().getY(),0.0);
+        // assertEquals(oldMaxSpeed, player.getMaxSpeed(),0.0);
+
+    }
+
+
 }
