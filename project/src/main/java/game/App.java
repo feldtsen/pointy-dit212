@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 // Top level class for initializing the application
 public class App extends Application {
     private final static double WIDTH_TO_HEIGHT_RATIO = .5625; // 16:9 (reversed)
-    private final static double INITIAL_WIDTH = 1200;
+    private final static double INITIAL_WIDTH = Screen.getPrimary().getBounds().getWidth() * .7;
     private final static double INITIAL_HEIGHT = INITIAL_WIDTH * WIDTH_TO_HEIGHT_RATIO;
     private final static double MIN_SIZE = 800;
 
@@ -20,17 +20,16 @@ public class App extends Application {
         primaryStage.minHeightProperty().bind(primaryStage.widthProperty().multiply(WIDTH_TO_HEIGHT_RATIO));
         primaryStage.maxHeightProperty().bind(primaryStage.widthProperty().multiply(WIDTH_TO_HEIGHT_RATIO));
 
-        // Get screen bound
-        System.out.println(Screen.getPrimary().getBounds().getWidth());
-
         // Set constraint to the minimum allowed size
         primaryStage.setMinWidth(MIN_SIZE);
 
-        // To begin with, occupy 70% of the width
         double screenWidth = Screen.getPrimary().getBounds().getWidth();
-        primaryStage.setWidth(screenWidth * .7);
+        double screenHeight = Screen.getPrimary().getBounds().getHeight();
+        // To begin with, occupy 70% of the width
+        primaryStage.setWidth(INITIAL_WIDTH);
         // Used to force the position of the window to be centered
-        primaryStage.setX(screenWidth / 2 - primaryStage.getWidth() / 2);
+        primaryStage.setX(screenWidth / 2 - INITIAL_WIDTH / 2);
+        primaryStage.setY(screenHeight / 2 - INITIAL_HEIGHT / 2);
 
         //TODO: is there a better way?
         GameWindowController gameWindowController = new GameWindowController();
