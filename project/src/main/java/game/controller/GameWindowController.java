@@ -28,7 +28,6 @@ public class GameWindowController {
     private KeyboardInputController keyboardInputController;
     private MouseInputController mouseInputController;
 
-    private IScorePanel scorePanel;
 
     public GameWindowController() {
         // Init. view component
@@ -39,7 +38,7 @@ public class GameWindowController {
         renderer = new Renderer(gameCanvas.getGraphicsContext2D());
 
         // Set scorePanel to instance created by window.
-        scorePanel = window.getScorePanel();
+        IScorePanel scorePanel = window.getScorePanel();
 
         // Initialize the game and map all the keys to their corresponding actions.
         gameSetup();

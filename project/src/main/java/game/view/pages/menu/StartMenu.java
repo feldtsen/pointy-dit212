@@ -13,10 +13,10 @@ public class StartMenu extends HBox {
     private final static String MENU_BUTTON_CLASS = "menuButton";
 
     public StartMenu(GameWindowController gameWindowController) {
-        StartButton startButton = new StartButton("Start");
-        LevelButton levelButton = new LevelButton("Level");
-        ScoreButton scoreButton = new ScoreButton("Score");
-        ExitButton exitButton   = new ExitButton("Exit");
+        StartButton startButton = new StartButton("START");
+        LevelButton levelButton = new LevelButton("LEVEL");
+        ScoreButton scoreButton = new ScoreButton("SCORE");
+        ExitButton exitButton   = new ExitButton("EXIT");
 
         // Connect button to an event
         startButton.setOnMouseClicked(e -> gameWindowController.handleMenuStartButton());

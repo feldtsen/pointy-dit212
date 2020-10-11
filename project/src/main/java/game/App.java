@@ -26,8 +26,8 @@ public class App extends Application {
         // Set constraint to the minimum allowed size
         primaryStage.setMinWidth(MIN_SIZE);
 
-        // Start bordered fullscreen
-        primaryStage.setWidth(Screen.getPrimary().getBounds().getWidth());
+        // To begin with, occupy 70% of the width
+        primaryStage.setWidth(Screen.getPrimary().getBounds().getWidth() * .7);
 
         //TODO: is there a better way?
         GameWindowController gameWindowController = new GameWindowController();

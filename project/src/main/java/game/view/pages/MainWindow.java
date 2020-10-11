@@ -46,8 +46,6 @@ public class MainWindow extends StackPane {
         // Align scorePanel to top right corner
         this.setAlignment(scorePanel, Pos.TOP_RIGHT);
 
-        // Add some margin to the right of score panel
-        this.setMargin(scorePanel, new Insets(0, 8, 0, 0));
 
         // Bind the size of different components to the window size, making the components responsive
         // (relative to its parent)
