@@ -4,16 +4,10 @@ import game.model.Game;
 import game.controller.gameLoop.GameLoop;
 import game.controller.gameLoop.IGameLoop;
 import game.model.IGame;
-import game.model.entity.enemy.IEnemy;
-import game.model.entity.obstacle.IObstacle;
-import game.model.entity.player.IPlayer;
-import game.model.entity.projectile.IProjectile;
-import game.model.level.ILevel;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
 import game.view.pages.score.IScorePanel;
-import game.view.renderer.RendererUtils;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 
@@ -87,12 +81,12 @@ public class GameWindowController {
 
     public void handleMenuStartButton() {
         gameLoop.setPaused(false);
-        window.hideMenu();
+        window.menuFadeIn();
     }
 
     private void pauseGame() {
         gameLoop.setPaused(true);
-        window.showMenu();
+        window.menuFadeOut();
     }
 
     public MainWindow getWindow() {

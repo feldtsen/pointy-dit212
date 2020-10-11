@@ -1,11 +1,13 @@
 package game.view.pages.menu;
 
 import game.controller.GameWindowController;
+import game.view.ViewResourceLoader;
 import game.view.pages.menu.buttons.ExitButton;
 import game.view.pages.menu.buttons.LevelButton;
 import game.view.pages.menu.buttons.ScoreButton;
 import game.view.pages.menu.buttons.StartButton;
 import javafx.animation.FadeTransition;
+import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
@@ -26,7 +28,6 @@ public class StartMenu extends HBox {
 
 
 
-
         // Set css classes for styling
         this.getStyleClass().add("startMenu");
         startButton.getStyleClass().add(MENU_BUTTON_CLASS);
@@ -43,5 +44,6 @@ public class StartMenu extends HBox {
         );
 
     }
+
 
 }
