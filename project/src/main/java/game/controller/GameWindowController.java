@@ -34,9 +34,6 @@ public class GameWindowController {
         // Init. view component
         window = new MainWindow(this);
 
-        // Listen for window resize
-        window.widthProperty().addListener(e -> this.resize());
-
         GameCanvas gameCanvas = window.getGameCanvas();
         // Create a new renderer using the graphics context supplied by the canvas.
         renderer = new Renderer(gameCanvas.getGraphicsContext2D());
