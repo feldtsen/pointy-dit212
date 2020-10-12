@@ -169,6 +169,11 @@ public class Game implements IGame {
                     }
                 }
             }
+            for (IObstacle obstacle: getCurrentLevel().getObstacles()) {
+                if (projectile.checkCollision(obstacle)) {
+                    projectile.setDestroyed();
+                }
+            }
 
             // Remove projectile from list if destroyed or out of bounds
             if(projectile.isDestroyed() || isOutOfBounds(projectile)) {
@@ -223,6 +228,13 @@ public class Game implements IGame {
                     e1.setHitPoints(0);
                 }
             }
+            for (IObstacle obstacle: getCurrentLevel().getObstacles()){
+                if (e1.checkCollision(obstacle)) {
+                    handleCollision(e1,obstacle);
+                }
+
+            }
+            
 
             // Check if enemy is dead
             if(!e1.isAlive()) {
