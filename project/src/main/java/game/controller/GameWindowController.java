@@ -34,6 +34,9 @@ public class GameWindowController {
         // Initialize the game and map all the keys to their corresponding actions.
         gameSetup();
 
+        // Make sure view listens for ability action events
+        game.registerListener(renderer);
+
         // Create a game loop. The update method will be called every frame.
         // Game loop is initialized with a improbably high desired fps value, to ensure the
         // game is run at max fps possible.
