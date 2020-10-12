@@ -52,7 +52,7 @@ public class Game implements IGame {
 
     public Game() {
 
-        //TODO:
+        //TODO: Fix proper function
         List<String> id = new ArrayList<>();
         id.add("1");
         id.add("2");
@@ -62,6 +62,7 @@ public class Game implements IGame {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
         this.score = 0;
         this.gameOver = false;
 
@@ -78,12 +79,8 @@ public class Game implements IGame {
     }
 
 
-
-
     // Ability action event listeners
     private final List<AbilityActionEventListener> listeners;
-    
-
 
     public void nextLevel() {
         try {
@@ -95,25 +92,6 @@ public class Game implements IGame {
         }
 
     }
-
-    // TODO: dummy levels is a temporary method used for testing. Replace with levels loaded from level loader
-
-    public static List<ILevel> dummyLevels() throws FileNotFoundException {
-
-        // Build level(s)
-        ILevel level = LevelLoader.load("testLevel");
-        List<ILevel> levels = new ArrayList<>();
-        levels.add(level);
-
-        IPlayer player = level.getPlayer();
-
-        player.addAbility(new Dash((GameLoop.SECOND * 2), 3000)); // First ability activated on shift
-        player.addAbility(new Shockwave(GameLoop.SECOND * 2, 300, 100000, 0.1)); // Second ability activated on E
-        player.addAbility(new Reflect(GameLoop.SECOND / 2, Math.PI/2, 200, 0.5, 0.1, 1000)); // Third ability activated on click
-
-        return levels;
-    }
-
 
     // Activate ability adds an ability to the active ability actions list, together with the
     // corresponding activation time.
