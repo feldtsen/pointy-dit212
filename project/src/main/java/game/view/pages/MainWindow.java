@@ -15,6 +15,10 @@ import javafx.util.Duration;
 
 public class MainWindow extends StackPane {
     private static final String MAIN_WINDOW_CSS = "mainWindow";
+    private static final String GAME_TITLE = "  JERK EVERT  ";
+
+    public final static FadeTransition fadeTransitionGameMenu = new FadeTransition(new Duration(200));
+    public final static FadeTransition fadeTransitionGameTitle = new FadeTransition(new Duration(200));
 
     GameCanvas gameCanvas;
     StartMenu startMenu;
@@ -28,7 +32,7 @@ public class MainWindow extends StackPane {
         scorePanel = new ScorePanel();
         abilityBar = new AbilityBar();
 
-        gameTitle = new Label("GAME");
+        gameTitle = new Label(GAME_TITLE);
 
         // Add a stylesheet
         this.getStylesheets().add(ViewResourceLoader.stylesheet);
@@ -38,7 +42,8 @@ public class MainWindow extends StackPane {
         gameTitle.getStyleClass().add("gameTitle");
 
         // Animations
-        ViewResourceLoader.fadeIn().setNode(startMenu);
+        ViewResourceLoader.fadeIn(fadeTransitionGameMenu).setNode(startMenu);
+        ViewResourceLoader.fadeIn(fadeTransitionGameTitle).setNode(gameTitle);
 
         // Add what you want to display
         this.getChildren().setAll(
@@ -79,19 +84,17 @@ public class MainWindow extends StackPane {
     }
 
     public void menuFadeIn() {
-        ViewResourceLoader.fadeIn().setNode(startMenu);
+        ViewResourceLoader.fadeIn(fadeTransitionGameMenu).setNode(startMenu);
+        ViewResourceLoader.fadeIn(fadeTransitionGameTitle).setNode(gameTitle);
         // Making all children of start menu transparent to mouse events
         startMenu.setMouseTransparent(true);
     }
 
     public void menuFadeOut() {
-        ViewResourceLoader.fadeOut().setNode(startMenu);
+        ViewResourceLoader.fadeOut(fadeTransitionGameMenu).setNode(startMenu);
+        ViewResourceLoader.fadeOut(fadeTransitionGameTitle).setNode(gameTitle);
         // Making all children of start menu visible to mouse events
         startMenu.setMouseTransparent(false);
-    }
-
-    public void removeGameTitle () {
-        gameTitle.setText("");
     }
 
 
