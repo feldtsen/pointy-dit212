@@ -26,6 +26,7 @@ public abstract class Ability implements IAbility{
         return cooldown;
     }
 
+    // Returns the time until the ability can be used again in seconds
     @Override
     public double getCooldownCountdown() {
         return Math.max((double)(cooldown - (System.nanoTime() - lastUsed))/1000000000, 0);
