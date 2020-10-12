@@ -1,11 +1,13 @@
 package game.model;
 
+import game.controller.event.AbilityActionEvent;
+import game.controller.event.AbilityActionEventListener;
+import game.controller.event.IAbilityActionEvent;
 import game.model.ability.Dash;
 import game.model.ability.Reflect;
 import game.model.ability.Shockwave;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
-import game.model.entity.enemy.Enemy;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.movable.IMovable;
 import game.model.entity.obstacle.IObstacle;
@@ -44,6 +46,9 @@ public class Game implements IGame {
     // Index n in this list corresponds to index n in activeAbilityActions.
     private final List<Long> activationTimes;
 
+    // Ability action event listeners
+    private final List<AbilityActionEventListener> listeners;
+
     // TODO: take level loader instead!
     public Game(List<ILevel> levels) {
         this.levels = levels;
@@ -56,6 +61,8 @@ public class Game implements IGame {
         this.activationTimes = new ArrayList<>();
 
         this.playerFacingPosition = new Point2D(currentLevel.getWidth()/2, currentLevel.getHeight()/2); // Default direciton
+
+        listeners = new ArrayList<>();
     }
 
     public Game() throws FileNotFoundException {
@@ -109,6 +116,13 @@ public class Game implements IGame {
     // corresponding activation time.
     private void activateAbility(IAbilityAction action, long now) {
         if(action == null) return;
+
+        // Notify listeners
+        AbilityActionEvent event = new AbilityActionEvent(IAbilityActionEvent.Type.ACTIVATED, action);
+        for(AbilityActionEventListener listener : listeners) {
+            listener.onAction(event);
+        }
+
         activeAbilityActions.add(action);
         currentAbilityTimes.add(0.0D);
         activationTimes.add(now);
@@ -116,6 +130,12 @@ public class Game implements IGame {
 
     // Deactivates (removes) an ability action at a particular index of the list.
     private void deactivateAbility(int index) {
+        // Notify listeners
+        AbilityActionEvent event = new AbilityActionEvent(IAbilityActionEvent.Type.FINISHED, activeAbilityActions.get(index));
+        for(AbilityActionEventListener listener : listeners) {
+            listener.onAction(event);
+        }
+
         activeAbilityActions.remove(index);
         currentAbilityTimes.remove(index);
         activationTimes.remove(index);
@@ -343,6 +363,11 @@ public class Game implements IGame {
 
     //TODO: handle collision
     private void handleCollision(IEntity<?> e1, IEntity<?> e2){
+    }
+
+    @Override
+    public void registerListener(AbilityActionEventListener listener) {
+        listeners.add(listener);
     }
 }
 
