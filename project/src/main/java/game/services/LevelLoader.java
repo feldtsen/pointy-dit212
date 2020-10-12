@@ -74,7 +74,7 @@ public class LevelLoader {
         for (int i = 0; i < obstacleArr.size(); i++) {
             double x = obstacleArr.get(i).getAsJsonObject().get("x").getAsDouble();
             double y = obstacleArr.get(i).getAsJsonObject().get("y").getAsDouble();
-            obstacles.add(new Wall(new Point2D(x,y),350,35));
+            obstacles.add(new Wall(new Point2D(x,y),35,35));
         }
         return obstacles;
     }
