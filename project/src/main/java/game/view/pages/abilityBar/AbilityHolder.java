@@ -1,10 +1,7 @@
 package game.view.pages.abilityBar;
 
 import game.model.ability.IAbility;
-import game.model.shape2d.Rectangle;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
