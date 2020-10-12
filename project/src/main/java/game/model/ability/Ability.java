@@ -38,7 +38,6 @@ public abstract class Ability implements IAbility{
         long currentTime = System.nanoTime();
         // Check if the time passed exceeds that of cool down
         if (currentTime - lastUsed >= cooldown){
-            System.out.println("inside");
             lastUsed = currentTime;
             // If true, create an ability action and return
             return createAction(user, target);
