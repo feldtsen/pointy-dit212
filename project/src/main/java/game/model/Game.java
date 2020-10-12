@@ -98,7 +98,7 @@ public class Game implements IGame {
 
         player = level.getPlayer();
 
-        player.addAbility(new Dash(GameLoop.SECOND * 2)); // First ability activated on shift
+        player.addAbility(new Dash((GameLoop.SECOND * 2), 3000)); // First ability activated on shift
         player.addAbility(new Shockwave(GameLoop.SECOND * 2, 300, 100000, 0.1)); // Second ability activated on E
         player.addAbility(new Reflect(GameLoop.SECOND / 2, Math.PI/2, 200, 0.5, 0.1, 1000)); // Third ability activated on click
 

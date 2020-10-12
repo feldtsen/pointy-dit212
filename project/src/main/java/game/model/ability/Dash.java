@@ -4,7 +4,6 @@ import game.model.ability.action.AbilityAction;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
 import game.model.entity.movable.LivingEntity;
-import game.model.entity.player.IPlayer;
 import game.model.level.ILevel;
 
 import game.util.Utils;
@@ -12,13 +11,17 @@ import javafx.geometry.Point2D;
 
 public class Dash extends Ability {
 
+
+    private final double length;
     public static class DashAction extends AbilityAction {
         private Point2D dir = null;
         private final LivingEntity<?> user;
+        private final double length;
 
-        public DashAction(IEntity<?> user) {
-            super(user, 0.05);
+        public DashAction(IEntity<?> user, double length) {
+            super(user, 0.1);
             this.user = (LivingEntity<?>)user;
+            this.length = length;
         }
 
         @Override
@@ -27,7 +30,11 @@ public class Dash extends Ability {
             if (dir == null) {
                 user.setIsInvulnerable(true);
                 user.setMaxSpeed(user.getMaxSpeed()*5);
-                dir = user.getVelocity().multiply(user.getMaxSpeed());
+                if(user.getVelocity().getX() == 0 && user.getVelocity().getY() == 0){
+                    dir = Utils.vectorFromHeading(user.getShape().getRotation(), length);
+                } else {
+                    dir = Utils.setMagnitude(user.getVelocity(), length);
+                }
                 user.setVelocity(dir);
             }
 
@@ -40,12 +47,13 @@ public class Dash extends Ability {
         }
     };
 
-    public Dash(long cooldown) {
+    public Dash(long cooldown, double length) {
         super(cooldown);
+        this.length = length;
     }
 
     @Override
     protected IAbilityAction createAction(IEntity<?> user, IEntity<?> target) {
-        return new DashAction(user);
+        return new DashAction(user, length);
     }
 }
