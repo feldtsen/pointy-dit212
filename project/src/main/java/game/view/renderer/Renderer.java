@@ -1,7 +1,9 @@
 package game.view.renderer;
 
+import game.controller.Action;
 import game.controller.event.AbilityActionEventListener;
 import game.controller.event.IAbilityActionEvent;
+import game.controller.gameLoop.GameLoop;
 import game.model.ability.Dash;
 import game.model.ability.Shockwave;
 import game.model.ability.action.IAbilityAction;
@@ -20,12 +22,23 @@ import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventListener {
-    public interface Effect {
-        void render(IAbilityAction action, double time);
+    public abstract static class Effect {
+        private final double effectDuration;
+
+        abstract void render(IAbilityAction action, double time);
+
+        public Effect(double effectDuration) {
+            this.effectDuration = effectDuration;
+        }
+
+        public double getEffectDuration() {
+            return effectDuration;
+        }
     }
 
     // A map linking a class of objects to a particular color. Used to render different entities with different
@@ -34,6 +47,12 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
 
     // A map linking an effect to an ability action
     private final HashMap<Class<? extends IAbilityAction>, Effect> abilityEffects = new HashMap<>();
+
+    // A list with all currently active abilities stored for rendering effects
+    private final List<IAbilityAction> abilityActions = new ArrayList<>();
+
+    // A list with all activation times of all active abilities
+    private final List<Long> activationTimes = new ArrayList<>();
 
     // The graphics object used to draw on screen.
     private final GraphicsContext graphicsContext;
@@ -44,28 +63,41 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         this.graphicsContext = graphicsContext;
 
         // Initialize different entity classes with different colors
-        colors.put(Player.class,          Color.rgb(255, 255, 255));
-        colors.put(Enemy.class,           Color.rgb(167, 173, 186, .96));
-        colors.put(Bullet.class,          Color.rgb(96, 106, 116));
-        colors.put(Missile.class,         Color.rgb(153, 163, 156));
+        colors.put(Player.class, Color.rgb(255, 255, 255));
+        colors.put(Enemy.class, Color.rgb(167, 173, 186, .96));
+        colors.put(Bullet.class, Color.rgb(96, 106, 116));
+        colors.put(Missile.class, Color.rgb(153, 163, 156));
         colors.put(GraphicsContext.class, Color.rgb(52, 61, 70));
 
         abilityEffects.put(Dash.DashAction.class, createDashEffect());
         abilityEffects.put(Shockwave.ShockwaveAction.class, createShockwaveEffect());
+
     }
 
     private Effect createDashEffect() {
-        return (action, time) -> {
-           //TODO
+        return new Effect(0) {
+            @Override
+            void render(IAbilityAction action, double time) {
+
+            }
         };
+
+        //TODO
     }
 
+
     private Effect createShockwaveEffect() {
-        double radius = 100; //TODO how to get radius?
-        return (action, time) -> {
-            Point2D position = action.getUser().getPosition();
-            ICircle circle = new Circle(radius * time);
-            RendererUtils.drawRing(graphicsContext, colors.get(action.getUser().getClass()), circle, position);
+        double radius = 1000; //TODO how to get radius?
+
+
+        return new Effect(0.2) {
+            @Override
+            void render(IAbilityAction action, double time) {
+
+                Point2D position = action.getUser().getPosition();
+                ICircle circle = new Circle(radius * time);
+                RendererUtils.drawRing(graphicsContext, colors.get(action.getUser().getClass()), circle, position);
+            }
         };
     }
 
@@ -109,21 +141,29 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         }
     }
 
-    public void drawAbilities(List<IAbilityAction> actions, List<Double> times) {
-        for(int i = 0; i < actions.size(); i++) {
-            IAbilityAction action = actions.get(i);
-            double time = times.get(i);
-
+    public void drawAbilities() {
+        for(int i = abilityActions.size() - 1; i >= 0; i--) {
+            IAbilityAction action = abilityActions.get(i);
+            double time = (double)(System.nanoTime() - activationTimes.get(i)) / GameLoop.SECOND;
             Effect effect = abilityEffects.get(action.getClass());
-            if(effect != null) {
-                effect.render(action, time);
+            if(effect == null) continue;
+
+            if(time > effect.getEffectDuration()){
+                abilityActions.remove(i);
+                activationTimes.remove(i);
+                System.out.println("removed");
+                continue;
             }
+            effect.render(action, time);
         }
     }
 
     @Override
     public void onAction(IAbilityActionEvent event) {
-        //TODO implement
+        if (event.getType() == IAbilityActionEvent.Type.ACTIVATED && abilityEffects.containsKey(event.getAction().getClass())){
+            abilityActions.add(event.getAction());
+            activationTimes.add(System.nanoTime());
+        }
     }
 
 
