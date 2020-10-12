@@ -43,7 +43,7 @@ public class GameWindowController {
                 // Render the current level
                 renderer.drawEntities(game.getCurrentLevel());
                 // Render ability effects
-                renderer.drawAbilities(game.getActiveAbilityActions(), game.getActiveAbilityTimes());
+                renderer.drawAbilities();
 
                 // Updated the UI with relevant information (like cooldown time and game score)
                updateUI();
@@ -71,7 +71,6 @@ public class GameWindowController {
     }
 
     private void updateUI() {
-        window.removeGameTitle();
 
         // Update score panel
         window.getScorePanel().updateScore(game.getCurrentLevel().getPlayer(), game.getScore());
@@ -111,8 +110,12 @@ public class GameWindowController {
     }
 
     private void gameSetup() {
-        game = new Game();
 
+        renderer.clearAbilities();
+        game = new Game();
+        // Make sure view listens for ability action events
+        game.registerListener(renderer);
+        
 
         // Initialize the keyboard input handler.
         keyboardInputController = new KeyboardInputController(window);

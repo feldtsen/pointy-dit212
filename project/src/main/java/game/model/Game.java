@@ -1,12 +1,14 @@
 package game.model;
 
 import game.controller.GameWindowController;
+import game.controller.event.AbilityActionEvent;
+import game.controller.event.AbilityActionEventListener;
+import game.controller.event.IAbilityActionEvent;
 import game.model.ability.Dash;
 import game.model.ability.Reflect;
 import game.model.ability.Shockwave;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
-import game.model.entity.enemy.Enemy;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.movable.IMovable;
 import game.model.entity.obstacle.IObstacle;
@@ -47,18 +49,19 @@ public class Game implements IGame {
     // Index n in this list corresponds to index n in activeAbilityActions.
     private final List<Long> activationTimes;
 
-    public Game()  {
+
+    public Game() {
+
+        //TODO:
         List<String> id = new ArrayList<>();
         id.add("1");
         id.add("2");
         this.levelID = id.iterator();
         try {
             this.currentLevel = LevelLoader.load(levelID.next());
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         this.score = 0;
         this.gameOver = false;
 
@@ -66,14 +69,20 @@ public class Game implements IGame {
         this.currentAbilityTimes = new ArrayList<>();
         this.activationTimes = new ArrayList<>();
 
-        this.playerFacingPosition = new Point2D(currentLevel.getWidth()/2, currentLevel.getHeight()/2);
 
+        this.playerFacingPosition = new Point2D(currentLevel.getWidth() / 2, currentLevel.getHeight() / 2);
+
+        this.playerFacingPosition = new Point2D(currentLevel.getWidth() / 2, currentLevel.getHeight() / 2); // Default direciton
+
+        listeners = new ArrayList<>();
     }
 
-    // TODO: take level loader instead!
-    public Game(List<ILevel> levels) {
-        this();
-    }
+
+
+
+    // Ability action event listeners
+    private final List<AbilityActionEventListener> listeners;
+    
 
 
     public void nextLevel() {
@@ -90,39 +99,13 @@ public class Game implements IGame {
     // TODO: dummy levels is a temporary method used for testing. Replace with levels loaded from level loader
 
     public static List<ILevel> dummyLevels() throws FileNotFoundException {
-        // Create player with shockwave ability
-        IPlayer player = EntityFactory.basicPlayer(400, 250);
-        player.setFriction(3);
-        //player.addAbility(new Dash(GameLoop.SECOND * 2));
-
-        /*
-        // Create basic enemy
-        List<IEnemy> enemies = new ArrayList<>();
-        Enemy e1 = EntityFactory.basicEnemy(800, 250, player, 2);
-        e1.setFriction(2);
-        enemies.add(e1);
-
-        // Create bullet enemy
-        Enemy e2 = EntityFactory.bulletEnemy(800, 500, player, 6);
-        e2.setFriction(10);
-        enemies.add(e2);
-
-        // Create missile enemy
-        Enemy e3 = EntityFactory.missileEnemy(800, 150, player, 1);
-        e3.setFriction(30);
-        enemies.add(e3);
-        */
-
-        // Create empty lists for projectiles and obstacles
-        List<IProjectile<?>> projectiles = new ArrayList<>();
-        List<IObstacle> obstacles = new ArrayList<>();
 
         // Build level(s)
         ILevel level = LevelLoader.load("testLevel");
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
 
-        player = level.getPlayer();
+        IPlayer player = level.getPlayer();
 
         player.addAbility(new Dash((GameLoop.SECOND * 2), 3000)); // First ability activated on shift
         player.addAbility(new Shockwave(GameLoop.SECOND * 2, 300, 100000, 0.1)); // Second ability activated on E
@@ -136,6 +119,13 @@ public class Game implements IGame {
     // corresponding activation time.
     private void activateAbility(IAbilityAction action, long now) {
         if(action == null) return;
+
+        // Notify listeners
+        AbilityActionEvent event = new AbilityActionEvent(IAbilityActionEvent.Type.ACTIVATED, action);
+        for(AbilityActionEventListener listener : listeners) {
+            listener.onAction(event);
+        }
+
         activeAbilityActions.add(action);
         currentAbilityTimes.add(0.0D);
         activationTimes.add(now);
@@ -143,6 +133,12 @@ public class Game implements IGame {
 
     // Deactivates (removes) an ability action at a particular index of the list.
     private void deactivateAbility(int index) {
+        // Notify listeners
+        AbilityActionEvent event = new AbilityActionEvent(IAbilityActionEvent.Type.FINISHED, activeAbilityActions.get(index));
+        for(AbilityActionEventListener listener : listeners) {
+            listener.onAction(event);
+        }
+
         activeAbilityActions.remove(index);
         currentAbilityTimes.remove(index);
         activationTimes.remove(index);
@@ -370,6 +366,11 @@ public class Game implements IGame {
 
     //TODO: handle collision
     private void handleCollision(IEntity<?> e1, IEntity<?> e2){
+    }
+
+    @Override
+    public void registerListener(AbilityActionEventListener listener) {
+        listeners.add(listener);
     }
 }
 

@@ -8,5 +8,6 @@ import java.util.List;
 // A view for rendering a single level
 public interface IRenderer {
     void drawEntities(ILevel level);
-    void drawAbilities(List<IAbilityAction> actions, List<Double> times);
+    void drawAbilities();
+    void clearAbilities();
 }

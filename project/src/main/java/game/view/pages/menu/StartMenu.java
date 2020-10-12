@@ -29,7 +29,6 @@ public class StartMenu extends HBox {
         exitButton.setOnMouseClicked( e -> gameWindowController.handleMenuExitButton());
 
 
-
         // Set css classes for styling
         this.getStyleClass().add("startMenu");
         startButton.getStyleClass().add(MENU_BUTTON_CLASS);
@@ -46,6 +45,5 @@ public class StartMenu extends HBox {
         );
 
     }
-
 
 }
