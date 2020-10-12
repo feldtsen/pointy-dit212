@@ -29,6 +29,7 @@ public class Dash extends Ability {
 
             if (dir == null) {
                 user.setIsInvulnerable(true);
+                user.setMaxSpeed(user.getMaxSpeed()*5);
                 if(user.getVelocity().getX() == 0 && user.getVelocity().getY() == 0){
                     dir = Utils.vectorFromHeading(user.getShape().getRotation(), length);
                 } else {
@@ -41,6 +42,7 @@ public class Dash extends Ability {
 
         @Override
         public void onFinished(ILevel level) {
+            user.setMaxSpeed(user.getMaxSpeed() / 5);
             user.setIsInvulnerable(false);
         }
     };
