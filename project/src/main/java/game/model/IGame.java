@@ -1,5 +1,6 @@
 package game.model;
 
+import game.controller.event.AbilityActionEventHandler;
 import game.model.ability.action.IAbilityAction;
 import game.model.level.ILevel;
 import javafx.geometry.Point2D;
@@ -8,7 +9,7 @@ import java.util.List;
 
 // Interface for class running the game itself.
 // Does not include the gameLoop, which should be handled by a controller.
-public interface IGame extends IUpdatable {
+public interface IGame extends AbilityActionEventHandler, IUpdatable {
     // Activate player ability
     boolean activatePlayerAbility(int index);
 
@@ -27,6 +28,8 @@ public interface IGame extends IUpdatable {
 
     // This method returns true on player death.
     boolean isGameOver();
+    
+    void nextLevel();
 
     ILevel getCurrentLevel();
     List<ILevel> getLevels();

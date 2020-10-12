@@ -1,19 +1,19 @@
 package game.view.pages.abilityBar;
 
 import game.model.ability.IAbility;
-import game.model.shape2d.Rectangle;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class AbilityHolder extends VBox {
     private final Label cooldownTimer = new Label();
     private final javafx.scene.shape.Rectangle progress = new javafx.scene.shape.Rectangle(0, 10, Color.WHITE);
+    Label abilityLabel = new Label();
+
+    String abilityName;
 
     public AbilityHolder (String abilityName) {
-        Label abilityLabel = new Label(abilityName);
+        this.abilityName = abilityName;
 
         this.getChildren().setAll(
                 abilityLabel,
@@ -23,8 +23,8 @@ public class AbilityHolder extends VBox {
     }
 
     public void setCooldown(IAbility ability) {
+        if(abilityLabel.getText().equals("")) abilityLabel.setText(abilityName);
         String rounded = String.format("%.1f", ability.getCooldownCountdown());
-        double relativeProgressProgression = 0;
         progress.setWidth(ability.getCooldownCountdownPercentage());
         cooldownTimer.setText(rounded);
     }

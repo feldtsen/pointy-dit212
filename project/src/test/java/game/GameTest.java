@@ -36,13 +36,8 @@ public class GameTest {
 
     @Before
     public void init()  {
-        try {
-            game = new Game();
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
+        game = new Game();
+   
     }
 
     @Test
@@ -83,7 +78,7 @@ public class GameTest {
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
 
-        Game game = new Game(levels);
+        Game game = new Game();
 
         game.update(1.0/60, 1);
 
@@ -102,7 +97,7 @@ public class GameTest {
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
 
-        Game game = new Game(levels);
+        Game game = new Game();
 
         game.update(1.0/60, 1);
 
@@ -122,7 +117,7 @@ public class GameTest {
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
 
-        Game game = new Game(levels);
+        Game game = new Game();
 
         game.update(1.0/60, 1);
 
@@ -176,7 +171,7 @@ public class GameTest {
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
 
-        Game game = new Game(levels);
+        Game game = new Game();
         game.update(1, 1);
 
         assertEquals(1, game.getActiveAbilityActions().size());
@@ -229,7 +224,7 @@ public class GameTest {
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
 
-        Game game = new Game(levels);
+        Game game = new Game();
         game.update(1.0/60, 1);
 
         assertEquals(1, game.getActiveAbilityActions().size());
@@ -252,7 +247,7 @@ public class GameTest {
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
 
-        Game game = new Game(levels);
+        Game game = new Game();
 
         Point2D mousePosition = new Point2D(310, 515);
         game.setPlayerFacingPosition(mousePosition);
@@ -274,7 +269,7 @@ public class GameTest {
         List<ILevel> levels = new ArrayList<>();
         levels.add(level);
 
-        Game game = new Game(levels);
+        Game game = new Game();
 
         Point2D mousePosition = new Point2D(600, 400);
 
