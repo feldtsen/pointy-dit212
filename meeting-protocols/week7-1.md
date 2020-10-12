@@ -34,11 +34,12 @@ Participants: Everyone
 
 ## Outcomes and assignments (5 min)
 - Joachim and Simon will update SDD, UML and RAD
-- Anton and Joachim will work on ability effects
+- Anton, Joachim, and Mattias Oom will work on ability effects
 - Erik will work on nextlevel functionality
 - Joachim will work with obstacle rendering
 - Anton and Joachim work on obstacle collision handling
 - Simon will try out Stand4j
+- Mattias Oom will work on test class for dash
 - Everyone will work with pull requests
 
 ## Wrap up
