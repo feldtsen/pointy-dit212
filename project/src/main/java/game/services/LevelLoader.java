@@ -23,15 +23,12 @@ public class LevelLoader {
     public static Level load(String levelID) throws FileNotFoundException {
         levelJSON = new JsonParser().parse(new FileReader("src/main/resources/game/levels/" + levelID + ".json")).getAsJsonObject();
 
-        double width = loadWidth();
-        double height = loadHeight();
-
         List<IObstacle> obstacles = loadObstacles();
         IPlayer player = loadPlayer();
         List<IEnemy> enemies = loadEnemies(player);
         List<IProjectile<?>> projectiles = loadProjectiles();
 
-        return new Level(enemies, projectiles, obstacles, player, width, height);
+        return new Level(enemies, projectiles, obstacles, player, 1200, 675);
     }
 
 
@@ -77,14 +74,6 @@ public class LevelLoader {
         double x = levelJSON.getAsJsonObject("Player").get("x").getAsDouble();
         double y = levelJSON.getAsJsonObject("Player").get("y").getAsDouble();
         return EntityFactory.basicPlayer(x,y);
-    }
-
-    private static double loadWidth() {
-        return levelJSON.getAsJsonObject("Size").get("width").getAsDouble();
-    }
-
-    private static double loadHeight() {
-        return levelJSON.getAsJsonObject("Size").get("height").getAsDouble();
     }
 
 

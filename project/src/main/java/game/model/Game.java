@@ -1,5 +1,6 @@
 package game.model;
 
+import game.controller.GameWindowController;
 import game.model.ability.Dash;
 import game.model.ability.Reflect;
 import game.model.ability.Shockwave;
@@ -21,13 +22,15 @@ import javafx.geometry.Point2D;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Game implements IGame {
     private int score; // Player score
     private boolean gameOver;
 
-    private final List<ILevel> levels;
+    private List<ILevel> levels = null;
+    private final Iterator<String> levelID;
     private ILevel currentLevel;
 
     // This value represents the position the player is "looking towards".
@@ -44,10 +47,18 @@ public class Game implements IGame {
     // Index n in this list corresponds to index n in activeAbilityActions.
     private final List<Long> activationTimes;
 
-    // TODO: take level loader instead!
-    public Game(List<ILevel> levels) {
-        this.levels = levels;
-        this.currentLevel = levels.get(0);
+    public Game()  {
+        List<String> id = new ArrayList<>();
+        id.add("1");
+        id.add("2");
+        this.levelID = id.iterator();
+        try {
+            this.currentLevel = LevelLoader.load(levelID.next());
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         this.score = 0;
         this.gameOver = false;
 
@@ -55,14 +66,29 @@ public class Game implements IGame {
         this.currentAbilityTimes = new ArrayList<>();
         this.activationTimes = new ArrayList<>();
 
-        this.playerFacingPosition = new Point2D(currentLevel.getWidth()/2, currentLevel.getHeight()/2); // Default direciton
+        this.playerFacingPosition = new Point2D(currentLevel.getWidth()/2, currentLevel.getHeight()/2);
+
     }
 
-    public Game() throws FileNotFoundException {
-        this(dummyLevels());
+    // TODO: take level loader instead!
+    public Game(List<ILevel> levels) {
+        this();
+    }
+
+
+    public void nextLevel() {
+        try {
+            while(levelID.hasNext()) {
+                setLevel(LevelLoader.load(levelID.next()));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     // TODO: dummy levels is a temporary method used for testing. Replace with levels loaded from level loader
+
     public static List<ILevel> dummyLevels() throws FileNotFoundException {
         // Create player with shockwave ability
         IPlayer player = EntityFactory.basicPlayer(400, 250);
@@ -104,6 +130,7 @@ public class Game implements IGame {
 
         return levels;
     }
+
 
     // Activate ability adds an ability to the active ability actions list, together with the
     // corresponding activation time.
@@ -244,6 +271,7 @@ public class Game implements IGame {
                 deactivateAbility(i);
             }
         }
+
     }
 
     @Override
@@ -308,7 +336,6 @@ public class Game implements IGame {
 
     @Override
     public boolean setLevel(ILevel level) {
-        if(!levels.contains(level)) return false;
         this.currentLevel = level;
         return true;
     }

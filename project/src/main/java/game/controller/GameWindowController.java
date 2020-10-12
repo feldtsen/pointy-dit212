@@ -58,6 +58,9 @@ public class GameWindowController {
                 // Reinitialize game on player death
                 // TODO: handle player death properly
                 if(game.isGameOver()) gameSetup();
+                
+                if (game.getCurrentLevel().getEnemies().isEmpty()) game.nextLevel();
+                
 
             }
         };
@@ -108,11 +111,7 @@ public class GameWindowController {
     }
 
     private void gameSetup() {
-        try {
-            game = new Game();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        game = new Game();
 
 
         // Initialize the keyboard input handler.

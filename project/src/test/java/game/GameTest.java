@@ -36,13 +36,8 @@ public class GameTest {
 
     @Before
     public void init()  {
-        try {
-            game = new Game();
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
+        game = new Game();
+   
     }
 
     @Test
