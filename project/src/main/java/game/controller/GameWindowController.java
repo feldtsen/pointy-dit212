@@ -107,6 +107,7 @@ public class GameWindowController {
     }
 
     private void gameSetup() {
+        renderer.clearAbilities();
         try {
             game = new Game();
             // Make sure view listens for ability action events

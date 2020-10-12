@@ -9,4 +9,5 @@ import java.util.List;
 public interface IRenderer {
     void drawEntities(ILevel level);
     void drawAbilities();
+    void clearAbilities();
 }

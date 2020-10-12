@@ -114,17 +114,6 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         setRotation(level.getPlayer().getVelocity());
         entity.getShape().acceptShapeVisitor(this);
 
-        /*
-        Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), level.getPlayer().getShape().getRadius() - 5);
-        RendererUtils.drawLine(graphicsContext,
-                colors.get(Enemy.class),
-                level.getPlayer().getPosition(),
-                level.getPlayer().getPosition().add(direction),
-                7);
-                w
-         */
-
-
         // Render all projectiles
         for(IProjectile<?> projectile : level.getProjectiles()) {
             entity = projectile;
@@ -151,7 +140,6 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
             if(time > effect.getEffectDuration()){
                 abilityActions.remove(i);
                 activationTimes.remove(i);
-                System.out.println("removed");
                 continue;
             }
             effect.render(action, time);
@@ -166,6 +154,11 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         }
     }
 
+    @Override
+    public void clearAbilities() {
+        abilityActions.clear();
+        activationTimes.clear();
+    }
 
     @Override
     public void visit(ICircle circle) {
