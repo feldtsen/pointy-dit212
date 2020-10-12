@@ -1,8 +1,7 @@
 module org.openjfx {
     requires javafx.controls;
-    requires javafx.fxml;
+    requires javafx.media;
     requires gson;
 
-    opens game.controller to javafx.fxml;
     exports game;
 }

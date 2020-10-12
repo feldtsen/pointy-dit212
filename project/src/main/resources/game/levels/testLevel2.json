@@ -2,7 +2,7 @@
   "Obstacles": [],
   "Enemies": [
     {
-      "type": "basic",
+      "type": "bullet",
       "x": "800",
       "y": "300",
       "target": "player",
