@@ -1,6 +1,7 @@
 package game;
 
 import game.controller.GameWindowController;
+import game.model.audio.AudioHandler;
 import game.view.pages.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -42,6 +43,10 @@ public class App extends Application {
 
         // Display the stage (window)
         primaryStage.show();
+
+
+        AudioHandler audioHandler = new AudioHandler();
+        audioHandler.play();
     }
 
     // Launch the application
