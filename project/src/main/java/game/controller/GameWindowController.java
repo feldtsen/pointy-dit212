@@ -58,6 +58,9 @@ public class GameWindowController {
                 // Reinitialize game on player death
                 // TODO: handle player death properly
                 if(game.isGameOver()) gameSetup();
+                
+                if (game.getCurrentLevel().getEnemies().isEmpty()) game.nextLevel();
+                
 
             }
         };
@@ -107,15 +110,12 @@ public class GameWindowController {
     }
 
     private void gameSetup() {
-        renderer.clearAbilities();
-        try {
-            game = new Game();
-            // Make sure view listens for ability action events
-            game.registerListener(renderer);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
+        renderer.clearAbilities();
+        game = new Game();
+        // Make sure view listens for ability action events
+        game.registerListener(renderer);
+        
 
         // Initialize the keyboard input handler.
         keyboardInputController = new KeyboardInputController(window);
