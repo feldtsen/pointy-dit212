@@ -50,9 +50,8 @@ public class DashTest {
         abilityAction.apply(level,0);
         abilityAction.onFinished(level);
     }
-
     @Test
-    public void testDashWhileMoving(){
+    public void testDashWhileMovingX(){
 
         player.setVelocity(new Point2D(100,0));
         Point2D newVelocity = Utils.setMagnitude(player.getVelocity(), length);
@@ -66,5 +65,46 @@ public class DashTest {
 
     }
 
+    @Test
+    public void testDashWhileMovingY(){
+
+        player.setVelocity(new Point2D(0,100));
+        Point2D newVelocity = Utils.setMagnitude(player.getVelocity(), length);
+        double oldMaxSpeed = player.getMaxSpeed();
+
+        dash();
+
+        assertEquals(newVelocity.getX(), player.getVelocity().getX(),0.0);
+        assertEquals(newVelocity.getY(), player.getVelocity().getY(),0.0);
+        assertEquals(oldMaxSpeed, player.getMaxSpeed(),0.0);
+
+    }
+    @Test
+    public void testDashWhileNotMoving(){
+
+        Point2D newVelocity = Utils.vectorFromHeading(player.getShape().getRotation(), length);
+        double oldMaxSpeed = player.getMaxSpeed();
+
+        dash();
+
+        assertEquals(newVelocity.getX(), player.getVelocity().getX(),0.0);
+        assertEquals(newVelocity.getY(), player.getVelocity().getY(),0.0);
+        assertEquals(oldMaxSpeed, player.getMaxSpeed(),0.0);
+
+    }
+
+    @Test
+    public void testDashTwice(){
+
+        Point2D newVelocity = Utils.vectorFromHeading(player.getShape().getRotation(), length);
+        double oldMaxSpeed = player.getMaxSpeed();
+        IAbilityAction abilityAction = player.activateAbility(0);
+        abilityAction.apply(level,0);
+        abilityAction.apply(level,0);
+        abilityAction.onFinished(level);
+        assertEquals(newVelocity.getX(), player.getVelocity().getX(),0.0);
+        assertEquals(newVelocity.getY(), player.getVelocity().getY(),0.0);
+        assertEquals(oldMaxSpeed, player.getMaxSpeed(),0.0);
+    }
 
 }
