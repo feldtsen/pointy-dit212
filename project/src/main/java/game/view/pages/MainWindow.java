@@ -9,6 +9,7 @@ import game.view.pages.menu.StartMenu;
 import game.view.pages.score.ScorePanel;
 import javafx.animation.FadeTransition;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
@@ -19,6 +20,7 @@ public class MainWindow extends StackPane {
     StartMenu startMenu;
     ScorePanel scorePanel;
     AbilityBar abilityBar;
+    Label gameTitle;
 
     public MainWindow(GameWindowController gameWindowController) {
         gameCanvas = new GameCanvas();
@@ -26,12 +28,14 @@ public class MainWindow extends StackPane {
         scorePanel = new ScorePanel();
         abilityBar = new AbilityBar();
 
+        gameTitle = new Label("GAME");
 
         // Add a stylesheet
         this.getStylesheets().add(ViewResourceLoader.stylesheet);
 
         // Add class for styling
         this.getStyleClass().add(MAIN_WINDOW_CSS);
+        gameTitle.getStyleClass().add("gameTitle");
 
         // Animations
         ViewResourceLoader.fadeIn().setNode(startMenu);
@@ -41,13 +45,15 @@ public class MainWindow extends StackPane {
                 gameCanvas,
                 abilityBar,
                 scorePanel,
-                startMenu
+                startMenu,
+                gameTitle
 
         );
 
         // Align based on window container
         setAlignment(scorePanel, Pos.TOP_RIGHT);
         setAlignment(abilityBar, Pos.BOTTOM_CENTER);
+        setAlignment(gameTitle, Pos.TOP_CENTER);
 
         // Align inside their respective container
         startMenu.setAlignment(Pos.BOTTOM_CENTER);
@@ -84,6 +90,9 @@ public class MainWindow extends StackPane {
         startMenu.setMouseTransparent(false);
     }
 
+    public void removeGameTitle () {
+        gameTitle.setText("");
+    }
 
 
 }

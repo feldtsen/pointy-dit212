@@ -68,6 +68,8 @@ public class GameWindowController {
     }
 
     private void updateUI() {
+        window.removeGameTitle();
+
         // Update score panel
         window.getScorePanel().updateScore(game.getCurrentLevel().getPlayer(), game.getScore());
 

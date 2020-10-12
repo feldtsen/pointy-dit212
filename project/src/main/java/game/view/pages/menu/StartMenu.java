@@ -8,6 +8,7 @@ import game.view.pages.menu.buttons.ScoreButton;
 import game.view.pages.menu.buttons.StartButton;
 import javafx.animation.FadeTransition;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
@@ -19,6 +20,7 @@ public class StartMenu extends HBox {
         LevelButton levelButton = new LevelButton("LEVEL");
         ScoreButton scoreButton = new ScoreButton("SCORE");
         ExitButton exitButton   = new ExitButton("EXIT");
+
 
         // Connect button to an event
         startButton.setOnMouseClicked(e -> gameWindowController.handleMenuStartButton());
