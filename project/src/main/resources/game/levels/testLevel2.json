@@ -3,28 +3,14 @@
   "Enemies": [
     {
       "type": "basic",
-      "x": "10",
-      "y": "3",
+      "x": "800",
+      "y": "300",
       "target": "player",
       "difficulty" : "5"
-    },
-    {
-      "type": "bullet",
-      "x": "10",
-      "y": "5",
-      "target": "player",
-      "difficulty" : "3"
-    },
-    {
-      "type": "missile",
-      "x": "10",
-      "y": "7",
-      "target": "player",
-      "difficulty" : "3"
     }
   ],
   "Player": {
-    "x": "4",
-    "y": "4"
+    "x": "400",
+    "y": "400"
   }
 }

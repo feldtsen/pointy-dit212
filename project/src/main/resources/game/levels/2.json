@@ -1,0 +1,27 @@
+{
+  "Size": {
+    "width": "1200",
+    "height": "675"
+  },
+  "Obstacles": [],
+  "Enemies": [
+    {
+      "type": "bullet",
+      "x": "1150",
+      "y": "50",
+      "target": "player",
+      "difficulty" : "2"
+    },
+    {
+      "type": "bullet",
+      "x": "950",
+      "y": "250",
+      "target": "player",
+      "difficulty" : "2"
+    }
+  ],
+  "Player": {
+    "x": "50",
+    "y": "337"
+  }
+}

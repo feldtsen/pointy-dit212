@@ -34,9 +34,6 @@ public class GameWindowController {
         // Initialize the game and map all the keys to their corresponding actions.
         gameSetup();
 
-        // Make sure view listens for ability action events
-        game.registerListener(renderer);
-
         // Create a game loop. The update method will be called every frame.
         // Game loop is initialized with a improbably high desired fps value, to ensure the
         // game is run at max fps possible.
@@ -46,7 +43,7 @@ public class GameWindowController {
                 // Render the current level
                 renderer.drawEntities(game.getCurrentLevel());
                 // Render ability effects
-                renderer.drawAbilities(game.getActiveAbilityActions(), game.getActiveAbilityTimes());
+                renderer.drawAbilities();
 
                 // Updated the UI with relevant information (like cooldown time and game score)
                updateUI();
@@ -61,6 +58,9 @@ public class GameWindowController {
                 // Reinitialize game on player death
                 // TODO: handle player death properly
                 if(game.isGameOver()) gameSetup();
+                
+                if (game.getCurrentLevel().getEnemies().isEmpty()) game.nextLevel();
+                
 
             }
         };
@@ -110,12 +110,12 @@ public class GameWindowController {
     }
 
     private void gameSetup() {
-        try {
-            game = new Game();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
+        renderer.clearAbilities();
+        game = new Game();
+        // Make sure view listens for ability action events
+        game.registerListener(renderer);
+        
 
         // Initialize the keyboard input handler.
         keyboardInputController = new KeyboardInputController(window);

@@ -1,14 +1,14 @@
 package game.services;
 
 import game.controller.gameLoop.GameLoop;
-import game.model.ability.ShootBullet;
-import game.model.ability.ShootMissile;
+import game.model.ability.*;
 import game.model.behavior.ability.SingleAbilityBehavior;
 import game.model.behavior.movement.FleeingBehaviour;
 import game.model.behavior.movement.IMovementBehaviour;
 import game.model.behavior.movement.SeekingBehaviour;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
+import game.model.entity.player.IPlayer;
 import game.model.entity.player.Player;
 import javafx.geometry.Point2D;
 
@@ -47,6 +47,9 @@ public class EntityFactory {
     public static Player basicPlayer(double x, double y) {
         Player player = new Player(new Point2D(x, y), 20, 2500, 1000,0);
         player.setFriction(FRICTION);
+        player.addAbility(new Dash((GameLoop.SECOND * 2), 3000)); // First ability activated on shift
+        player.addAbility(new Shockwave(GameLoop.SECOND * 2, 300, 100000, 0.1)); // Second ability activated on E
+        player.addAbility(new Reflect(GameLoop.SECOND / 2, Math.PI/2, 200, 0.5, 0.1, 1000)); // Third ability activated on click
         return player;
     }
 
