@@ -70,7 +70,7 @@ public class LevelLoader {
 
     private static List<IObstacle> loadObstacles() {
         List<IObstacle> obstacles = new ArrayList<>();
-        JsonArray obstacleArr = levelJSON.getAsJsonArray("Enemies");
+        JsonArray obstacleArr = levelJSON.getAsJsonArray("Obstacles");
         for (int i = 0; i < obstacleArr.size(); i++) {
             double x = obstacleArr.get(i).getAsJsonObject().get("x").getAsDouble();
             double y = obstacleArr.get(i).getAsJsonObject().get("y").getAsDouble();
