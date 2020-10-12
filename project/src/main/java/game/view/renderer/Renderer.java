@@ -1,5 +1,7 @@
 package game.view.renderer;
 
+import game.controller.event.AbilityActionEventListener;
+import game.controller.event.IAbilityActionEvent;
 import game.model.ability.Dash;
 import game.model.ability.Shockwave;
 import game.model.ability.action.IAbilityAction;
@@ -21,7 +23,7 @@ import javafx.scene.paint.Color;
 import java.util.HashMap;
 import java.util.List;
 
-public class Renderer implements IRenderer, IShapeVisitor {
+public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventListener {
     public interface Effect {
         void render(IAbilityAction action, double time);
     }
@@ -118,6 +120,12 @@ public class Renderer implements IRenderer, IShapeVisitor {
             }
         }
     }
+
+    @Override
+    public void onAction(IAbilityActionEvent event) {
+        //TODO implement
+    }
+
 
     @Override
     public void visit(ICircle circle) {
