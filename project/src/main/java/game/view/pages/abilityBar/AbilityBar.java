@@ -21,7 +21,11 @@ public class AbilityBar extends HBox {
       reflect.setAlignment(Pos.CENTER);
       shockwave.setAlignment(Pos.CENTER);
 
+
       this.getStyleClass().add("abilityBar");
+      dash.getStyleClass().add("ability");
+      reflect.getStyleClass().add("ability");
+      shockwave.getStyleClass().add("ability");
 
       this.getChildren().setAll(
               dash,
@@ -32,13 +36,13 @@ public class AbilityBar extends HBox {
 
     public void updateAbilities(List<IAbility> abilities) {
         // 0 is dash
-        dash.setCooldown(abilities.get(0).getCooldownCountdown());
+        dash.setCooldown(abilities.get(0));
 
         // 1 is shockwave
-        shockwave.setCooldown(abilities.get(1).getCooldownCountdown());
+        shockwave.setCooldown(abilities.get(1));
 
         // 2 is reflect
-        reflect.setCooldown(abilities.get(2).getCooldownCountdown());
+        reflect.setCooldown(abilities.get(2));
     }
 
 

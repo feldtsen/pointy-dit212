@@ -16,5 +16,6 @@ public interface IAbility {
     long getCooldown();
 
     double getCooldownCountdown();
+    double getCooldownCountdownPercentage();
 
 }

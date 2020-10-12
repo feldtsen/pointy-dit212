@@ -26,6 +26,11 @@ public abstract class Ability implements IAbility{
         return cooldown;
     }
 
+    // Returns the time until the ability can be used again in percentage until ready
+    public double getCooldownCountdownPercentage() {
+        return 100 - ((getCooldownCountdown() / ((double)cooldown/1000000000)) * 100);
+    }
+
     // Returns the time until the ability can be used again in seconds
     @Override
     public double getCooldownCountdown() {
