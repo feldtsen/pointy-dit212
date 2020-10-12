@@ -26,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class Game implements IGame {
     private int score; // Player score
@@ -57,11 +58,7 @@ public class Game implements IGame {
         id.add("1");
         id.add("2");
         this.levelID = id.iterator();
-        try {
-            this.currentLevel = LevelLoader.load(levelID.next());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        nextLevel();
 
         this.score = 0;
         this.gameOver = false;
@@ -84,12 +81,12 @@ public class Game implements IGame {
 
     public void nextLevel() {
         try {
-            while(levelID.hasNext()) {
-                setLevel(LevelLoader.load(levelID.next()));
-            }
-        } catch (FileNotFoundException e) {
+            if (levelID.hasNext()) setLevel(LevelLoader.load(levelID.next()));
+        }
+        catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
 
     }
 

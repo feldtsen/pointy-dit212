@@ -1,5 +1,10 @@
 {
-  "Obstacles": [],
+  "Obstacles": [
+    {
+      "x": "600",
+      "y": "333"
+    }
+  ],
   "Enemies": [
     {
       "type": "bullet",
