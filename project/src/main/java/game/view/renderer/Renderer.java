@@ -10,6 +10,7 @@ import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
 import game.model.entity.enemy.IEnemy;
+import game.model.entity.obstacle.IObstacle;
 import game.model.entity.player.Player;
 import game.model.entity.projectile.Bullet;
 import game.model.entity.projectile.IProjectile;
@@ -127,6 +128,13 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
 
             setRotation(enemy.getVelocity());
             enemy.getShape().acceptShapeVisitor(this);
+        }
+
+        for (IObstacle obstacle : level.getObstacles()) {
+            entity = obstacle;
+
+            // TODO: add rotation
+            entity.getShape().acceptShapeVisitor(this);
         }
     }
 
