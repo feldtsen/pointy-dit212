@@ -6,9 +6,12 @@ import com.google.gson.JsonParser;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.obstacle.IObstacle;
+import game.model.entity.obstacle.Wall;
 import game.model.entity.player.IPlayer;
 import game.model.entity.projectile.IProjectile;
 import game.model.level.Level;
+import javafx.geometry.Point2D;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -66,8 +69,14 @@ public class LevelLoader {
     }
 
     private static List<IObstacle> loadObstacles() {
-        //TODO: Implement obstacles
-        return new ArrayList<>();
+        List<IObstacle> obstacles = new ArrayList<>();
+        JsonArray obstacleArr = levelJSON.getAsJsonArray("Obstacles");
+        for (int i = 0; i < obstacleArr.size(); i++) {
+            double x = obstacleArr.get(i).getAsJsonObject().get("x").getAsDouble();
+            double y = obstacleArr.get(i).getAsJsonObject().get("y").getAsDouble();
+            obstacles.add(new Wall(new Point2D(x,y),20,20));
+        }
+        return obstacles;
     }
 
     private static IPlayer loadPlayer() {
