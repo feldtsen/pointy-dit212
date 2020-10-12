@@ -26,7 +26,7 @@ public class ReflectTest {
     ILevel level;
 
     @Before
-    public void init() {
+    public void before() {
         // Create ability reflect
 
         List<IProjectile<?>> projectiles = new ArrayList<>();

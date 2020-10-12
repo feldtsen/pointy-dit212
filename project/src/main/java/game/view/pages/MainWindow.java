@@ -2,52 +2,63 @@ package game.view.pages;
 
 import game.controller.GameWindowController;
 import game.view.ViewResourceLoader;
+import game.view.pages.abilityBar.AbilityBar;
+import game.view.pages.abilityBar.AbilityHolder;
 import game.view.pages.canvas.GameCanvas;
 import game.view.pages.menu.StartMenu;
 import game.view.pages.score.ScorePanel;
 import javafx.animation.FadeTransition;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 public class MainWindow extends StackPane {
     private static final String MAIN_WINDOW_CSS = "mainWindow";
-    FadeTransition startMenuFade = new FadeTransition(new Duration(200));
 
     GameCanvas gameCanvas;
     StartMenu startMenu;
     ScorePanel scorePanel;
+    AbilityBar abilityBar;
+    Label gameTitle;
 
     public MainWindow(GameWindowController gameWindowController) {
         gameCanvas = new GameCanvas();
         startMenu  = new StartMenu(gameWindowController);
         scorePanel = new ScorePanel();
+        abilityBar = new AbilityBar();
 
-        // Align the component
-        startMenu.setAlignment(Pos.BOTTOM_CENTER);
+        gameTitle = new Label("GAME");
 
         // Add a stylesheet
         this.getStylesheets().add(ViewResourceLoader.stylesheet);
 
         // Add class for styling
         this.getStyleClass().add(MAIN_WINDOW_CSS);
+        gameTitle.getStyleClass().add("gameTitle");
 
         // Animations
-        startMenuFade.setNode(startMenu);
+        ViewResourceLoader.fadeIn().setNode(startMenu);
 
         // Add what you want to display
         this.getChildren().setAll(
-               gameCanvas,
-               startMenu,
-               scorePanel
+                gameCanvas,
+                abilityBar,
+                scorePanel,
+                startMenu,
+                gameTitle
+
         );
 
-        // Align scorePanel to top right corner
-        this.setAlignment(scorePanel, Pos.TOP_RIGHT);
+        // Align based on window container
+        setAlignment(scorePanel, Pos.TOP_RIGHT);
+        setAlignment(abilityBar, Pos.BOTTOM_CENTER);
+        setAlignment(gameTitle, Pos.TOP_CENTER);
 
-        // Add some margin to the right of score panel
-        this.setMargin(scorePanel, new Insets(0, 8, 0, 0));
+        // Align inside their respective container
+        startMenu.setAlignment(Pos.BOTTOM_CENTER);
+        abilityBar.setAlignment(Pos.CENTER);
+
 
         // Bind the size of different components to the window size, making the components responsive
         // (relative to its parent)
@@ -63,20 +74,25 @@ public class MainWindow extends StackPane {
 
     public ScorePanel getScorePanel () {return scorePanel;}
 
-    public void hideMenu() {
-        startMenuFade.setFromValue(1);
-        startMenuFade.setToValue(0);
-        startMenuFade.playFromStart();
+    public AbilityBar getAbilityBar () {
+        return abilityBar;
+    }
+
+    public void menuFadeIn() {
+        ViewResourceLoader.fadeIn().setNode(startMenu);
         // Making all children of start menu transparent to mouse events
         startMenu.setMouseTransparent(true);
     }
 
-    public void showMenu() {
-        startMenuFade.setFromValue(0);
-        startMenuFade.setToValue(1);
-        startMenuFade.playFromStart();
+    public void menuFadeOut() {
+        ViewResourceLoader.fadeOut().setNode(startMenu);
         // Making all children of start menu visible to mouse events
         startMenu.setMouseTransparent(false);
     }
+
+    public void removeGameTitle () {
+        gameTitle.setText("");
+    }
+
 
 }

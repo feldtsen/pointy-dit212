@@ -6,13 +6,14 @@ import game.model.entity.movable.MovableEntity;
 import game.model.entity.projectile.Missile;
 import game.model.entity.projectile.Projectile;
 import game.model.shape2d.Circle;
+import game.services.EntityFactory;
 import javafx.geometry.Point2D;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class MissileTest {
     private MovableEntity<?> target;
-    private Projectile<?> missile;
+    private Missile missile;
 
     private void init() {
         target = new MovableEntity<Circle>(new Point2D(10, 0), 3, 3,
@@ -41,5 +42,15 @@ public class MissileTest {
 
     // After moving target straight upwards, the velocity of the missile should be adjusted.
     assertTrue(missile.getVelocity().getY() > 0);
+    }
+
+    @Test
+    public void testChangingTarget() {
+        init();
+        MovableEntity<?> newTarget = EntityFactory.basicPlayer(10, 10);
+
+        missile.setTarget(newTarget);
+
+        assertTrue(missile.getTarget() == newTarget);
     }
 }

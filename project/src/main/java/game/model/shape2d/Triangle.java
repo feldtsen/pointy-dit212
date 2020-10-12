@@ -36,12 +36,6 @@ public class Triangle implements ITriangle {
     }
 
     @Override
-    public void resize(double scaleRatio) {
-        width = originWidth * scaleRatio;
-        height = originHeight * scaleRatio;
-    }
-
-    @Override
     public double getRotation() {
         return rotation;
     }

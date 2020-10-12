@@ -42,11 +42,11 @@ public class Renderer implements IRenderer, IShapeVisitor {
         this.graphicsContext = graphicsContext;
 
         // Initialize different entity classes with different colors
-        colors.put(Player.class,          Color.rgb(150, 150, 150));
-        colors.put(Enemy.class,           Color.rgb(80, 100, 80));
-        colors.put(Bullet.class,          Color.rgb(90, 90, 200));
-        colors.put(Missile.class,         Color.rgb(200, 90, 90));
-        colors.put(GraphicsContext.class, Color.rgb(30,  30,  30 ));
+        colors.put(Player.class,          Color.rgb(255, 255, 255));
+        colors.put(Enemy.class,           Color.rgb(167, 173, 186, .96));
+        colors.put(Bullet.class,          Color.rgb(96, 106, 116));
+        colors.put(Missile.class,         Color.rgb(153, 163, 156));
+        colors.put(GraphicsContext.class, Color.rgb(52, 61, 70));
 
         abilityEffects.put(Dash.DashAction.class, createDashEffect());
         abilityEffects.put(Shockwave.ShockwaveAction.class, createShockwaveEffect());
@@ -63,7 +63,7 @@ public class Renderer implements IRenderer, IShapeVisitor {
         return (action, time) -> {
             Point2D position = action.getUser().getPosition();
             ICircle circle = new Circle(radius * time);
-            RendererUtils.drawRing(graphicsContext, Color.rgb(150, 120, 140), circle, position);
+            RendererUtils.drawRing(graphicsContext, colors.get(action.getUser().getClass()), circle, position);
         };
     }
 
@@ -76,19 +76,25 @@ public class Renderer implements IRenderer, IShapeVisitor {
         RendererUtils.setBackgroundColor(graphicsContext, colors.get(graphicsContext.getClass()));
 
         // Render player
-        RendererUtils.drawCircle(graphicsContext, colors.get(level.getPlayer().getClass()), level.getPlayer().getShape(), level.getPlayer().getPosition());
+        entity = level.getPlayer();
+        setRotation(level.getPlayer().getVelocity());
+        entity.getShape().acceptShapeVisitor(this);
 
+        /*
         Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), level.getPlayer().getShape().getRadius() - 5);
         RendererUtils.drawLine(graphicsContext,
-                colors.get(level.getPlayer().getClass()),
+                colors.get(Enemy.class),
                 level.getPlayer().getPosition(),
                 level.getPlayer().getPosition().add(direction),
                 7);
+                w
+         */
+
 
         // Render all projectiles
         for(IProjectile<?> projectile : level.getProjectiles()) {
             entity = projectile;
-            projectile.getShape().setRotation(Utils.heading(projectile.getVelocity()));
+            setRotation(projectile.getVelocity());
             projectile.getShape().acceptShapeVisitor(this);
         }
 
@@ -96,8 +102,7 @@ public class Renderer implements IRenderer, IShapeVisitor {
         for (IEnemy enemy : level.getEnemies()) {
             entity = enemy;
 
-            double radians = Utils.heading(enemy.getVelocity());
-            enemy.getShape().setRotation(radians);
+            setRotation(enemy.getVelocity());
             enemy.getShape().acceptShapeVisitor(this);
         }
     }
@@ -116,7 +121,11 @@ public class Renderer implements IRenderer, IShapeVisitor {
 
     @Override
     public void visit(ICircle circle) {
-        RendererUtils.drawCircle(graphicsContext, colors.get(entity.getClass()), circle, entity.getPosition());
+        RendererUtils.drawCircle(graphicsContext,
+                colors.get(entity.getClass()),
+                circle,
+                entity.getPosition()
+        );
     }
 
     @Override
@@ -126,7 +135,11 @@ public class Renderer implements IRenderer, IShapeVisitor {
 
     @Override
     public void visit(ITriangle triangle) {
-        ICircle circle = new Circle(triangle.getWidth());
         RendererUtils.drawTriangle(graphicsContext, colors.get(entity.getClass()), triangle, entity.getPosition());
     }
+
+    private void setRotation(Point2D velocity) {
+       entity.getShape().setRotation(Utils.heading(velocity));
+    }
+
 }

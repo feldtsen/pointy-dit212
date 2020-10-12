@@ -1,0 +1,31 @@
+{
+  "Obstacles": [
+    {
+      "type": "wall",
+      "x": "8",
+      "y": "4",
+      "width": "1",
+      "height" : "1"
+    }
+  ],
+  "Enemies": [
+    {
+      "type": "basic",
+      "x": "10",
+      "y": "3",
+      "target": "player",
+      "difficulty" : "2"
+    },
+    {
+      "type": "bullet",
+      "x": "10",
+      "y": "5",
+      "target": "player",
+      "difficulty" : "1"
+    }
+  ],
+  "Player": {
+    "x": "4",
+    "y": "4"
+  }
+}

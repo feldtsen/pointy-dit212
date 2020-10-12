@@ -12,12 +12,18 @@ Pointy is a topdown 2D game. The player is a simple geometrical shape which navi
 
 The map contains different neutral elements, such as walls, spikes and traps, which can both be dangerous for the player, or cleverly used to aid the player in their mission.
 
-The goal of the player is to defeat all the elements, reach the map exit, or perform a specific task. The game contains multiple levels, and by defeating one level, the player can progress to the next.
+The goal of the player is to defeat all the enemies, reach the map exit, or perform a specific task. The game contains multiple levels, and by defeating one level, the player can progress to the next.
 
 ### 1.1. Definitions, acronyms, abbreviations
 
 - 2D - Two dimensional
 - Topdown game - A game that is viewed from above.
+- Projectile - Object fired by some entity towards some other entity. Can cause harm to the player or enemies.
+- Obstacle - Neutral object placed on the level. Some obstacles may hinder the movement of the player, enemies, and projectiles in the game, while others may cause harm towards the player or the enemies.  
+- Ability - Can be used by the player or enemies to impact the flow of the game in some way. This can, for example, be by adding a projectile to the game, or by directly impacting the surrounding entities in some way.
+- Player - Entity controlled by the user of the Game. 
+- Enemies - Opponents of the player. Will use their abilities to try to defeat the player. 
+	   
 
 ## 2. System architecture
 The general architecture of the application is rather simple. No external servers or databases is used -- the game is all run locally on the machine of the user. 
@@ -44,24 +50,24 @@ As of now, the MVC implementation is not typical. The controller (in this case, 
 Here follows a set of diagrams over all our packages. We have decided to leave the fields containing lists of objects in the package diagrams, since the package diagrams otherwise cannot show the relationship between packages. However, we have left out these fields in the design model. Instead, these fields are represented by multiplicities. 
 
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/controller.png" width=100%>
-<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/gameloop.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/gameloop.png" width=50%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/model.png" width=100%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/ability.png" width=100%>
-<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/action.png" width=100%>
-<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/behavior.png" width=100%>
-<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/behavior-ability.png" width=100%>
-<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/movement.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/action.png" width=45%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/behavior.png" width=80%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/behavior-ability.png" width=40%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/movement.png" width=95%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/entitiy.png" width=100%>
-<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/enemy.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/enemy.png" width=50%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/movable.png" width=100%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/obstacle.png" width=100%>
-<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/player.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/player.png" width=45%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/projectile.png" width=100%>
-<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/level.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/level.png" width=50%>
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/shape2d.png" width=100%>
-<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/services.png" width=100%>
-<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/util.png" width=100%>
-<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/view.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/services.png" width=70%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/util.png" width=55%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/view.png" width=90%>
 
 **Design model:**
 
@@ -84,7 +90,6 @@ The `Ability` in the domain model creates 0..* projectiles. In the design model,
 ### 3.2 Implemented design patterns
 
 * MVC (Model View Controller) for separating game logic, user input and graphical interface.
-* the singleton pattern, for the keyboard input controller.
 * the factory (method) pattern, for simplifying the creation of game entities such as players and enemies
 * the command pattern, which is used for executing actions when a key is pressed.
 * the composite pattern, allowing players and enemies to have different abilities and behaviors. The construction of these entities is simplified using the factory pattern.
@@ -103,8 +108,4 @@ The application is tested using unit tests with the framework JUnit. These tests
 
 ## 6. References
 - JavaFX - https://openjfx.io/
-- Maven - https://maven.apache.org/
-- Lucidchart - https://www.lucidchart.com/
 - JUnit - https://junit.org/
-- Git - https://git-scm.com/
-- Trello - https://www.trello.com/

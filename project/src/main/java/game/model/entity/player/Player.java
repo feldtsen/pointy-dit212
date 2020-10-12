@@ -57,6 +57,11 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
         return true;
     }
 
+    @Override
+    public List<IAbility> getAbilities() {
+        return abilities;
+    }
+
     private void moveDirection(Point2D direction) {
         // Adds a force in the direction of movement. The vector is multiplied to reach the
         // length of max force, which will be the movement acceleration of the player.

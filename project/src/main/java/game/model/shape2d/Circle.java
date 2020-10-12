@@ -91,11 +91,6 @@ public class Circle implements ICircle {
     }
 
     @Override
-    public void resize(double scaleRatio) {
-        this.radius = originRadius * scaleRatio;
-    }
-
-    @Override
     public void acceptShapeVisitor(IShapeVisitor visitor) {
         visitor.visit(this);
     }

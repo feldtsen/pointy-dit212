@@ -6,6 +6,8 @@ import game.model.ability.IAbility;
 import game.model.ability.action.IAbilityAction;
 import game.model.shape2d.ICircle;
 
+import java.util.List;
+
 // Interface defining the actions and abilities of the player.
 public interface IPlayer extends ILiving, IMovable<ICircle> {
     // Activates an ability at a particular index. A player might have multiple abilities.
@@ -19,4 +21,6 @@ public interface IPlayer extends ILiving, IMovable<ICircle> {
 
     // Adds an ability to the player list of abilities
     boolean addAbility(IAbility ability);
+
+    List<IAbility> getAbilities();
 }

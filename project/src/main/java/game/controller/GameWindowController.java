@@ -4,9 +4,6 @@ import game.model.Game;
 import game.controller.gameLoop.GameLoop;
 import game.controller.gameLoop.IGameLoop;
 import game.model.IGame;
-import game.model.entity.enemy.IEnemy;
-import game.model.entity.player.IPlayer;
-import game.model.level.ILevel;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
@@ -25,21 +22,14 @@ public class GameWindowController {
     private KeyboardInputController keyboardInputController;
     private MouseInputController mouseInputController;
 
-    private IScorePanel scorePanel;
 
     public GameWindowController() {
         // Init. view component
         window = new MainWindow(this);
 
-        // Listen for window resize
-        window.widthProperty().addListener(e -> this.resize());
-
         GameCanvas gameCanvas = window.getGameCanvas();
         // Create a new renderer using the graphics context supplied by the canvas.
         renderer = new Renderer(gameCanvas.getGraphicsContext2D());
-
-        // Set scorePanel to instance created by window.
-        scorePanel = window.getScorePanel();
 
         // Initialize the game and map all the keys to their corresponding actions.
         gameSetup();
@@ -50,16 +40,14 @@ public class GameWindowController {
         gameLoop = new GameLoop(1000) {
             @Override
             public void update(double delta) {
-                // TODO: do it elsewhere?
-                resize();
-
                 // Render the current level
                 renderer.drawEntities(game.getCurrentLevel());
                 // Render ability effects
                 renderer.drawAbilities(game.getActiveAbilityActions(), game.getActiveAbilityTimes());
 
-                // Update score panel
-                scorePanel.updateScore(game.getCurrentLevel().getPlayer(), game.getScore());
+                // Updated the UI with relevant information (like cooldown time and game score)
+               updateUI();
+
 
                 // Apply all registered keyboard actions
                 keyboardInputController.applyRegisteredActions();
@@ -79,21 +67,15 @@ public class GameWindowController {
 
     }
 
-    private void resize() {
-        //TODO what todo here
-        ILevel currentLevel = game.getCurrentLevel();
-        IPlayer player = currentLevel.getPlayer();
-        double scalingRatio = window.getWidth() / 1000;
+    private void updateUI() {
+        window.removeGameTitle();
 
-        currentLevel.setWidth(window.getWidth());
-        currentLevel.setHeight(window.getHeight());
+        // Update score panel
+        window.getScorePanel().updateScore(game.getCurrentLevel().getPlayer(), game.getScore());
 
+        // Update cooldown timers
+        window.getAbilityBar().updateAbilities(game.getCurrentLevel().getPlayer().getAbilities());
 
-        player.getShape().resize(scalingRatio);
-
-        for (IEnemy enemy : currentLevel.getEnemies()) {
-            enemy.getShape().resize(scalingRatio);
-        }
 
     }
 
@@ -109,12 +91,12 @@ public class GameWindowController {
 
     public void handleMenuStartButton() {
         gameLoop.setPaused(false);
-        window.hideMenu();
+        window.menuFadeIn();
     }
 
     private void pauseGame() {
         gameLoop.setPaused(true);
-        window.showMenu();
+        window.menuFadeOut();
     }
 
     public MainWindow getWindow() {

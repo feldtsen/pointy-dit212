@@ -1,5 +1,11 @@
+@font-face {
+    -fx-font-family: 'Orbitron';
+    src: url('Orbitron-VariableFont_wght.ttf');
+}
+
 .mainWindow {
-    -fx-background-color: rgb(30, 30, 30);
+    -fx-background-color: rgb(52, 61, 70);
+    -fx-font-family: Orbitron;
 }
 .activeMainWindow {
     -fx-opacity: .9;
@@ -17,21 +23,54 @@
     -fx-font-size:         2.4em;
 }
 .button:hover {
-   -fx-background-color: rgba(40, 40, 40, 0.7);
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-background-color: rgb(52, 61, 70);
 }
 
 .startMenu {
     -fx-padding: 1em;
     -fx-spacing: 1em;
-    -fx-background-color: rgba(20, 20, 20, 0.9);
+    -fx-background-color: rgba(52, 61, 70, .9);
 }
 
 .menuButton {
-    -fx-background-color: rgba(60, 60, 60, 0.5);
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-text-fill: rgb(52, 61, 70);
     -fx-pref-height: 7em;
 }
 
-#scorePanel {
-    -fx-font: 32px Tahoma;
-    -fx-fill: BBBBBB;
+.scorePanel {
+    -fx-max-height: 5em;
+    -fx-padding: .5em 0 0 0;
+}
+
+.scoreLabel {
+    -fx-font-size: 1em;
+    -fx-background-color: white;
+    -fx-text-fill: rgb(52, 61, 70);
+}
+
+.score {
+    -fx-text-fill: white!important;
+    -fx-font-size: 3em;
+}
+
+.abilityBar {
+    -fx-max-height: 4em;
+    -fx-spacing: 1em;
+
+}
+
+.abilityBar > * > .label {
+    -fx-text-fill: white;
+}
+
+.ability {
+    -fx-min-width: 100;
+}
+
+.gameTitle {
+    -fx-padding: 10em 0 0 0;
+    -fx-text-fill: white!important;
+    -fx-font-size: 7em;
 }

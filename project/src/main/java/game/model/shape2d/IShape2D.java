@@ -34,6 +34,4 @@ public interface IShape2D extends IVisitableShape {
     double getWidth();
     double getHeight();
 
-    // Scale shapes to the aspect ratio of the screen
-    void resize(double scaleRatio);
 }

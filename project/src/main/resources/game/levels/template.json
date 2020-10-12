@@ -1,0 +1,24 @@
+{
+  "Player": {
+    "x": "",
+    "y": ""
+  },
+  "Enemies": [
+    {
+      "type": "",
+      "x": "",
+      "y": "",
+      "target": "",
+      "difficulty" : ""
+    }
+  ],
+  "Obstacles": [
+    {
+      "type": "",
+      "x": "",
+      "y": "",
+      "width": "",
+      "height" : ""
+    }
+  ]
+}
