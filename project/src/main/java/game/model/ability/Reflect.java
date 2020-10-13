@@ -41,7 +41,10 @@ public class Reflect extends Ability {
 
                 // Check if the angle between the facing direction of the user and the projectile is too large
                 double relativeAngle = Utils.limitAngle(user.getShape().getRotation() - Utils.heading(vector));
-                if(Math.abs(relativeAngle) > angle / 2) continue;
+
+                if(!(relativeAngle < angle / 2 || relativeAngle > Math.PI * 2 - angle / 2)) continue;
+
+                //if(relativeAngle > angle / 2 && Math.PI * 2 - relativeAngle < Math.PI * 2 - angle/2) continue;
 
                 // Calculate unit vector pointing from user to projectile
                 Point2D n = vector.normalize();

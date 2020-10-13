@@ -46,7 +46,7 @@ public class ReflectTest {
     }
 
     @Test
-    public void projectileInRangeZeroControl() {
+    public void testProjectileInRangeZeroControl() {
 
         double control = 0;
         testSetup(control, new Point2D(515,500));
@@ -68,7 +68,7 @@ public class ReflectTest {
     }
 
     @Test
-    public void projectileInRangeSomeControl() {
+    public void testProjectileInRangeSomeControl() {
         double control = 0.5;
         testSetup(control, new Point2D(515,500));
 
@@ -89,7 +89,7 @@ public class ReflectTest {
     }
 
     @Test
-    public void projectileInRangeFullControl() {
+    public void testProjectileInRangeFullControl() {
         double control = 1.0;
         testSetup(control, new Point2D(515,500));
 
@@ -109,7 +109,7 @@ public class ReflectTest {
         assertEquals(newVelocity.getY(), projectile.getVelocity().getY(), 0.0);
     }
     @Test
-    public void maximumReflectRange() {
+    public void testMaximumReflectRange() {
 
         double control = 0;
         testSetup(control, new Point2D(600,500));
@@ -129,8 +129,26 @@ public class ReflectTest {
         assertEquals(newVelocity.getX(), projectile.getVelocity().getX(),0.0);
         assertEquals(newVelocity.getY(), projectile.getVelocity().getY(), 0.0);
     }
+
     @Test
-    public void reflectOutofRange() {
+    public void testReflectRightEdge(){
+        double control = 0;
+        Point2D playerPosition = player.getPosition();
+        double rotation = player.getShape().getRotation();
+        double projectileRotation = rotation + Math.PI/4.1;
+        testSetup(control, playerPosition.add(Utils.vectorFromHeading(projectileRotation, 2)));
+
+        Point2D bulletPosition = projectile.getPosition();
+        Point2D vector = bulletPosition.subtract(playerPosition);
+        reflect();
+
+        Point2D newVelocity = newProjectileVelocity(vector, control);
+
+        assertEquals(newVelocity.getX(), projectile.getVelocity().getX(),0.00000000001);
+        assertEquals(newVelocity.getY(), projectile.getVelocity().getY(), 0.00000000001);
+    }
+    @Test
+    public void testReflectOutofRange() {
 
         double control = 0;
         testSetup(control, new Point2D(601,500));
@@ -152,7 +170,7 @@ public class ReflectTest {
         assertEquals(vy, projectile.getVelocity().getY(), 0.0);
     }
     @Test
-    public void projectileInRangeNotInAngle() {
+    public void testProjectileInRangeNotInAngle() {
 
         double control = 0;
         testSetup(control, new Point2D(450,500));
@@ -171,7 +189,7 @@ public class ReflectTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void controlLessThanZero() {
+    public void testControlLessThanZero() {
 
         double control = -1;
         testSetup(control, new Point2D(50,50));
@@ -184,7 +202,7 @@ public class ReflectTest {
         assertEquals(vy, projectile.getVelocity().getY(), 0.0);
     }
     @Test(expected = IllegalArgumentException.class)
-    public void controlGreaterThanOne() {
+    public void testControlGreaterThanOne() {
 
         double control = 2;
         testSetup(control, new Point2D(50,50));
