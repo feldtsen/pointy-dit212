@@ -24,7 +24,7 @@ public class AudioHandler {
     public void play() {
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.setVolume(.2);
-        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.play();
     }
 
 
