@@ -57,6 +57,7 @@ public class Game implements IGame {
         List<String> id = new ArrayList<>();
         id.add("1");
         id.add("2");
+        id.add("3");
         this.levelID = id.iterator();
         nextLevel();
 
