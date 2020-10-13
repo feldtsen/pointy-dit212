@@ -46,7 +46,7 @@ public class GameWindowController {
                 renderer.drawAbilities();
 
                 // Updated the UI with relevant information (like cooldown time and game score)
-               updateUI();
+                updateUI();
 
 
                 // Apply all registered keyboard actions
@@ -55,9 +55,8 @@ public class GameWindowController {
                 // Update the game model with a global time step of 1 (normal speed)
                 game.update(delta, 1);
 
-                // Reinitialize game on player death
-                // TODO: handle player death properly
-                if(game.isGameOver()) gameSetup();
+                // Displays game over message
+                if(game.isGameOver()) handleGameOver();
                 
                 if (game.getCurrentLevel().getEnemies().isEmpty()) game.nextLevel();
                 
@@ -73,7 +72,7 @@ public class GameWindowController {
     private void updateUI() {
 
         // Update score panel
-        window.getScorePanel().updateScore(game.getCurrentLevel().getPlayer(), game.getScore());
+        window.getScorePanel().updateScore(game.getScore());
 
         // Update cooldown timers
         window.getAbilityBar().updateAbilities(game.getCurrentLevel().getPlayer().getAbilities());
@@ -81,6 +80,46 @@ public class GameWindowController {
 
     }
 
+    // Clears entities from canvas and displays a game over message.
+    private void handleGameOver() {
+        // Clear all entities from screen.
+        renderer.clearCanvas();
+
+        // Show game over message.
+        window.showGameOver();
+
+        // Registers methods to new keys. Pressing P starts a new game, pressing ESC displays starting menu.
+        keyboardInputController.registerAction(KeyCode.P, this::restart);
+        keyboardInputController.registerAction(KeyCode.ESCAPE, this::showMenu);
+    }
+
+    // Hide game over message and starts a new game
+    private void restart() {
+        window.hideGameOver();
+
+        // Makes ability bar and score panel visible.
+        window.showUI();
+
+        // Setup new game
+        gameSetup();
+    }
+
+    // Hides game over message and displays the starting menu.
+    private void showMenu() {
+        pauseGame();
+
+        // Removes all entities from canvas.
+        renderer.clearCanvas();
+
+        // Removes game over message.
+        window.hideGameOver();
+
+        // Show menu.
+        window.menuFadeOut();
+
+        // Setup new game.
+        gameSetup();
+    }
 
     public void handleMenuLevelButton() {
         System.out.println("Level button clicked");
@@ -94,6 +133,8 @@ public class GameWindowController {
     public void handleMenuStartButton() {
         gameLoop.setPaused(false);
         window.menuFadeIn();
+        window.getAbilityBar().setVisible(true);
+        window.getScorePanel().setVisible(true);
     }
 
     private void pauseGame() {
@@ -115,7 +156,6 @@ public class GameWindowController {
         game = new Game();
         // Make sure view listens for ability action events
         game.registerListener(renderer);
-        
 
         // Initialize the keyboard input handler.
         keyboardInputController = new KeyboardInputController(window);
