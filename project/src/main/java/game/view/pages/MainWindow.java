@@ -15,7 +15,7 @@ import javafx.util.Duration;
 
 public class MainWindow extends StackPane {
     private static final String MAIN_WINDOW_CSS = "mainWindow";
-    private static final String GAME_TITLE = "  J E R K   E V E R T  ";
+    private static final String GAME_TITLE = "J E R K  E V E R T";
 
     public final static FadeTransition fadeTransitionGameMenu = new FadeTransition(new Duration(200));
     public final static FadeTransition fadeTransitionGameTitle = new FadeTransition(new Duration(200));

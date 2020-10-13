@@ -13,7 +13,7 @@ public class App extends Application {
     private final static double WIDTH_TO_HEIGHT_RATIO = .5625; // 16:9 (reversed)
     private final static double INITIAL_WIDTH = Screen.getPrimary().getBounds().getWidth() * .7;
     private final static double INITIAL_HEIGHT = INITIAL_WIDTH * WIDTH_TO_HEIGHT_RATIO;
-    private final static double MIN_SIZE = 800;
+    private final static double MIN_SIZE = 900;
 
     @Override
     public void start(Stage primaryStage) {
