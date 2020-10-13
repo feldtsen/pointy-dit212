@@ -16,7 +16,7 @@ public class MovingWall extends MovableEntity<Rectangle> implements IObstacle {
 
     //Obstacle initiated at the midpoint between starting and end positions.
     public MovingWall(Point2D startPosition, Point2D endPosition, double maxSpeed, double maxForce, double width, double height) {
-        super(startPosition.midpoint(endPosition), Utils.limit(endPosition.subtract(startPosition), maxSpeed), maxSpeed, maxForce, new Rectangle(width, height,0));
+        super(startPosition, Utils.limit(endPosition.subtract(startPosition), maxSpeed), maxSpeed, maxForce, new Rectangle(width, height,0));
         this.startPosition = startPosition;
         this.endPosition = endPosition;
 
@@ -25,12 +25,21 @@ public class MovingWall extends MovableEntity<Rectangle> implements IObstacle {
     //Changes direction of travel when reaching either starting position or end position.
     @Override
     public void update(double delta, double timeStep) {
-        //TODO: Fix so that obstacle can start at either extreme position without changing direction of velocity
-        if (startPosition.subtract(getPosition()).getX() >= 0 || endPosition.subtract(getPosition()).getX() <= 0) {
-            setVelocity(new Point2D(getVelocity().getX() * -1, getVelocity().getY()));
+        // Reaching starting position x, left side of screen
+        if (startPosition.subtract(getPosition()).getX() > 0)  {
+            setVelocity(new Point2D(Math.abs(getVelocity().getX() * -1), getVelocity().getY()));
         }
-        if (startPosition.subtract(getPosition()).getY() >= 0 || endPosition.subtract(getPosition()).getY() <= 0) {
-            setVelocity(new Point2D(getVelocity().getX(), getVelocity().getY() * -1));
+        // Reaching endosition x, right side of screen
+        else if (endPosition.subtract(getPosition()).getX() < 0) {
+            setVelocity(new Point2D(-Math.abs(getVelocity().getX() * -1), getVelocity().getY()));
+        }
+        // Reaching starting position y,top of screen,
+        if (startPosition.subtract(getPosition()).getY() > 0) {
+            setVelocity(new Point2D(getVelocity().getX(), Math.abs(getVelocity().getY() * -1)));
+        }
+        // Reaching endosition y, bottom of screen
+        else if (endPosition.subtract(getPosition()).getY() < 0) {
+            setVelocity(new Point2D(getVelocity().getX(), -Math.abs(getVelocity().getY() * -1)));
         }
         super.update(delta, timeStep);
     }
