@@ -60,6 +60,7 @@ public class GameWindowController {
                 if(game.isGameOver()) gameSetup();
                 
                 if (game.getCurrentLevel().getEnemies().isEmpty()) game.nextLevel();
+
                 
 
             }
@@ -137,6 +138,8 @@ public class GameWindowController {
         mouseInputController.registerActionOnMove(     () -> game.setPlayerFacingPosition(mouseInputController.getMousePosition()));
 
     }
+
+
 
 
 }

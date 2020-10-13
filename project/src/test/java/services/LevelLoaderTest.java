@@ -20,7 +20,7 @@ public class LevelLoaderTest {
     
     @Before
     public void init() throws FileNotFoundException {
-        level = LevelLoader.load("test");
+        level = LevelLoader.load("LevelLoaderTest");
     }
 
     @Test

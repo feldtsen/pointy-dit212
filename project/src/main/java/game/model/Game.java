@@ -190,6 +190,11 @@ public class Game implements IGame {
             activateAbility(enemy.applyAbility(), now);
         }
 
+        // Uppdate all obstacles
+        for(IObstacle obstacle: currentLevel.getObstacles()) {
+            obstacle.update(delta, timeStep);
+        }
+
         // Apply active abilities
         for(int i = 0; i < activeAbilityActions.size(); i++) {
             IAbilityAction abilityAction = activeAbilityActions.get(i);
