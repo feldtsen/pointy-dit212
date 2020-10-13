@@ -103,13 +103,23 @@ public class MainWindow extends StackPane {
         startMenu.setMouseTransparent(false);
     }
 
+    // Display game over message and hide other UI-elements
     public void showGameOver() {
         gameOverPanel.setVisible(true);
+        scorePanel.setVisible(false);
+        abilityBar.setVisible(false);
+
     }
 
+    // Remove game over message
     public void hideGameOver() {
         gameOverPanel.setVisible(false);
     }
 
 
+    // Makes abilityBar and scorePanel visible
+    public void showUI() {
+        abilityBar.setVisible(true);
+        scorePanel.setVisible(true);
+    }
 }

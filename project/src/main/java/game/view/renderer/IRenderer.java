@@ -10,4 +10,5 @@ public interface IRenderer {
     void drawEntities(ILevel level);
     void drawAbilities();
     void clearAbilities();
+    void clearCanvas();
 }
