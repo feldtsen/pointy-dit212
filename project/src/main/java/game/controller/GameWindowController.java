@@ -170,8 +170,6 @@ public class GameWindowController {
         mouseInputController = new MouseInputController(window);
 
         // Give key codes registered by the game pane a given action
-        registerPlayerControls();
-
         keyboardInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
 
         keyboardInputController.registerAction(KeyCode.SHIFT, () -> game.activatePlayerAbility(0));
@@ -181,6 +179,7 @@ public class GameWindowController {
         mouseInputController.registerActionOnLeftClick(() -> game.activatePlayerAbility(2));
         mouseInputController.registerActionOnMove(     () -> game.setPlayerFacingPosition(mouseInputController.getMousePosition()));
 
+        registerPlayerControls();
     }
 
     // Registers WASD keys to corresponding methods of the current Player object.
