@@ -114,6 +114,18 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         entity = level.getPlayer();
         setRotation(level.getPlayer().getVelocity());
         entity.getShape().acceptShapeVisitor(this);
+        RendererUtils.drawArch(graphicsContext, Color.RED, level.getPlayer().getShape(), level.getPlayer().getPosition());
+
+        /*
+        // TODO: temporary testing code, to show facing direction of player
+        Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), 100);
+        RendererUtils.drawLine(graphicsContext,
+                colors.get(level.getPlayer().getClass()),
+                level.getPlayer().getPosition(),
+                level.getPlayer().getPosition().add(direction),
+                7);
+
+         */
 
         // Render all projectiles
         for(IProjectile<?> projectile : level.getProjectiles()) {

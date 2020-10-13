@@ -5,6 +5,7 @@ import game.util.Utils;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
 public class RendererUtils {
     // Given a graphics context, it will clear that graphics context
@@ -27,6 +28,28 @@ public class RendererUtils {
                 graphicsContext.getCanvas().getHeight()
         );
 
+    }
+
+    // Draw arch
+    public static void drawArch(GraphicsContext graphicsContext, Color color, ICircle circle, Point2D position) {
+        double scaledRadiusW = scaleRespectToWidth(graphicsContext, circle.getRadius());
+        double scaledRadiusH = scaleRespectToHeight(graphicsContext, circle.getRadius());
+
+        double scaledXPosition   = scaleRespectToWidth(graphicsContext, position.getX());
+        double scaledYPosition   = scaleRespectToHeight(graphicsContext, position.getY());
+
+        SaveAndTranslate(graphicsContext, scaledRadiusW, scaledRadiusH, circle.getRotation(), scaledXPosition, scaledYPosition);
+
+        graphicsContext.setFill(color);
+       graphicsContext.fillArc(
+               scaledXPosition - scaledRadiusW,
+               scaledYPosition - scaledRadiusH,
+               2 * scaledRadiusW,
+               2 * scaledRadiusH,
+               0,
+               180,
+               ArcType.ROUND);
+        graphicsContext.restore();
     }
 
 
@@ -81,8 +104,6 @@ public class RendererUtils {
 
     private static final double[] xs = new double[3];
     private static final double[] ys = new double[3];
-
-
     public static void drawTriangle(GraphicsContext graphicsContext, Color color, ITriangle shape, Point2D position) {
         double scaledShapeWidth  = scaleRespectToWidth(graphicsContext, shape.getWidth());
         double scaledShapeHeight = scaleRespectToHeight(graphicsContext, shape.getHeight());
@@ -134,7 +155,7 @@ public class RendererUtils {
         graphicsContext.rotate(Utils.radianToDegrees(shapeRotation) - 90);
 
         // Translate to where you want it
-        graphicsContext.translate(-xPosition - shapeWidth/2, -yPosition - shapeHeight/2);
+        graphicsContext.translate(-xPosition, -yPosition);
     }
 
     public static double scaleRespectToWidth (GraphicsContext graphicsContext, double oldValue) {
