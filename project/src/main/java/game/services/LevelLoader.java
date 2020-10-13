@@ -49,7 +49,7 @@ public class LevelLoader {
         return enemies;
     }
 
-    private static IEnemy selectEnemy(double x, double y, IEntity target, int difficulty, String type) {
+    public static IEnemy selectEnemy(double x, double y, IEntity target, int difficulty, String type) {
         IEnemy enemy = null;
         if (type.equals("basic")) {
             enemy = EntityFactory.basicEnemy(x, y,target, difficulty);
@@ -74,7 +74,7 @@ public class LevelLoader {
         for (int i = 0; i < obstacleArr.size(); i++) {
             double x = obstacleArr.get(i).getAsJsonObject().get("x").getAsDouble();
             double y = obstacleArr.get(i).getAsJsonObject().get("y").getAsDouble();
-            obstacles.add(new Wall(new Point2D(x,y),35,35));
+            obstacles.add(new Wall(new Point2D(x,y),100,100));
         }
         return obstacles;
     }
