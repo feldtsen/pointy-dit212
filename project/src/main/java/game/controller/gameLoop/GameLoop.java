@@ -3,57 +3,64 @@ package game.controller.gameLoop;
 import javafx.animation.AnimationTimer;
 
 public abstract class GameLoop implements IGameLoop {
-    public final static long SECOND = 1_000_000_000;
+    public final static long SECOND = 1_000_000_000; // A second in nanoseconds
 
-    /* Fields used for managing the game loop. */
-    private final long nanosPerFrame;   /* The number of nano seconds per frame at desired FPS */
-    private long lastNanoTime;          /* Last sampled nano time. Used to calculate delta. */
-    private boolean isRunning;          /* True if timer is running. */
-    private final AnimationTimer timer; /* Timer used for handling game loop. */
-    private boolean paused = true;
+    // Fields used for managing the game loop.
+    private final long nanosPerFrame;   // The number of nano seconds per frame at desired FPS
+    private long lastNanoTime;          // Last sampled nano time. Used to calculate delta.
+    private boolean isRunning;          // True if timer is running.
+    private final AnimationTimer timer; // Timer used for handling game loop.
+    private boolean paused = true;      // True if the loop is paused
 
-    /* Fields for calculating FPS */
-    private long lastSecond;
-    private int framesThisSecond;
-    private int currentFPS;
+    // Fields for calculating FPS
+    private long lastSecond;      // Nanos when FPS was calculated last
+    private int framesThisSecond; // How many frames that have passed this second
+    private int currentFPS;       // The currently calculated FPS
 
     public GameLoop() {
-        /* Improbably high FPS, ensures animation timer can set FPS itself */
+        // Improbably high FPS, ensures animation timer can set FPS itself
         this(1000);
     }
 
     public GameLoop(int desiredFPS) {
-        /* The number of nano seconds which will elapse each frame at desired FPS. */
+        // The number of nano seconds which will elapse each frame at desired FPS.
         this.nanosPerFrame = SECOND / desiredFPS;
 
         timer = new AnimationTimer() {
             /* Handled is called every iteration. Now is the current system nano time. */
             public void handle(long now) {
+                // The amount of nano seconds which have passed since the previous frame
                 long elapsedNanos = now - lastNanoTime;
-                /* Only update if elapsed nanos has exceeded nanos a frame. This ensures the frame rate is limited
-                 * to desiredFPS. The FPS might be lower, however.
-                 */
-                if (elapsedNanos > nanosPerFrame) {
-                    /* Calculate delta: change in nanoseconds divided by 10^9 (1 second in nanosecond) */
-                    double delta = (double)elapsedNanos / SECOND;
 
+                // Only update if elapsed nanos has exceeded nanos a frame. This ensures the frame rate is limited
+                // to desiredFPS. The FPS might be lower, however.
+                if (elapsedNanos > nanosPerFrame) {
+                    // Calculate delta: change in nanoseconds divided by 10^9 (1 second in nanosecond)
+                    double delta = (double) elapsedNanos / SECOND;
+
+                    // If the game is not paused, update
                     if (!paused) update(delta);
 
+                    // Set the last nano time to the current time. Will be used to calculate elapsedNanos next frame
                     lastNanoTime = now;
+                    // Update the number of frames which have passed this second
                     framesThisSecond++;
                 }
 
-                /* Calculate current fps */
+                // Calculate current fps if a second or more has passed
                 if(now - lastSecond >= SECOND) {
+                    // Set the last second value to now
                     lastSecond = now;
+                    // Set current FPS to how many frames have passed this second
                     currentFPS = framesThisSecond;
+                    // Reset frames this second
                     framesThisSecond = 0;
                 }
             }
         };
     }
 
-    /* Delta signifies the change in time since last update. */
+    // Delta signifies the change in time since last update.
     @Override
     public abstract void update(double delta);
 
