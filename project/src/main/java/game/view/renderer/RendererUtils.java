@@ -113,14 +113,14 @@ public class RendererUtils {
 
         SaveAndTranslate(graphicsContext, scaledShapeWidth, scaledShapeHeight, shape.getRotation(), scaledXPosition, scaledYPosition);
 
-        xs[0] = scaledXPosition;
-        xs[1] = scaledXPosition + scaledShapeWidth;
-        xs[2] = scaledXPosition + scaledShapeWidth / 2;
+        xs[0] = scaledXPosition - (scaledShapeWidth/2);
+        xs[1] = scaledXPosition + scaledShapeWidth - (scaledShapeWidth/2);
+        xs[2] = scaledXPosition + (scaledShapeWidth / 2) - scaledShapeWidth/2;
 
 
-        ys[0] = scaledYPosition;
-        ys[1] = scaledYPosition;
-        ys[2] = scaledYPosition + scaledShapeHeight;
+        ys[0] = scaledYPosition - (scaledShapeHeight/2);
+        ys[1] = scaledYPosition - (scaledShapeHeight/2);
+        ys[2] = scaledYPosition + scaledShapeHeight - (scaledShapeHeight/2);
 
         graphicsContext.setFill(color);
         graphicsContext.fillPolygon(xs, ys, xs.length);

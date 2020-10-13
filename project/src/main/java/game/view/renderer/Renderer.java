@@ -113,10 +113,12 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         // Render player
         entity = level.getPlayer();
         setRotation(level.getPlayer().getVelocity());
-        RendererUtils.drawRectangle(graphicsContext, Color.DARKSLATEBLUE, new Rectangle(entity.getShape().getWidth(), entity.getShape().getHeight(), 0), level.getPlayer().getPosition());
+        RendererUtils.drawRectangle(graphicsContext, Color.DARKSLATEBLUE, new Rectangle(entity.getShape().getWidth(), entity.getShape().getHeight(), entity.getShape().getRotation()), level.getPlayer().getPosition());
         entity.getShape().acceptShapeVisitor(this);
         RendererUtils.drawArch(graphicsContext, Color.RED, level.getPlayer().getShape(), level.getPlayer().getPosition());
+        RendererUtils.drawTriangle(graphicsContext, Color.PINK, new Triangle(entity.getShape().getWidth(), entity.getShape().getHeight(), entity.getShape().getRotation()), level.getPlayer().getPosition());
 
+        /*
         // TODO: temporary testing code, to show facing direction of player
         Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), 50);
         RendererUtils.drawLine(graphicsContext,
@@ -124,6 +126,8 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
                 level.getPlayer().getPosition(),
                 level.getPlayer().getPosition().add(direction),
                 7);
+
+         */
 
 
         // Render all projectiles
