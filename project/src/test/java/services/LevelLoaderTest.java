@@ -8,9 +8,10 @@ import java.io.FileNotFoundException;
 
 public class LevelLoaderTest {
 
-    @Test
+    /*@Test
     public void testLevelLoader() throws FileNotFoundException {
         Level level = LevelLoader.load("testLevel");
+
 
         //TODO: Make proper test
 
@@ -20,6 +21,6 @@ public class LevelLoaderTest {
         System.out.println(level.getObstacles());
         System.out.println(level.getPlayer());
         System.out.println(level.getProjectiles());
-    }
+    }*/
 
 }
