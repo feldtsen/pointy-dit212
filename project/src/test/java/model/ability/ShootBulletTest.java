@@ -85,5 +85,6 @@ public class ShootBulletTest {
     private void shoot() {
         IAbilityAction abilityAction = user.applyAbility();
         abilityAction.apply(level, 0);
+        abilityAction.onFinished(level);
     }
 }

@@ -42,6 +42,7 @@ public class ReflectTest {
     private void reflect() {
         IAbilityAction abilityAction = player.activateAbility(0);
         abilityAction.apply(level, 0);
+        abilityAction.onFinished(level);
     }
 
     @Test

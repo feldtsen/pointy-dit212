@@ -73,6 +73,7 @@ public class ShockwaveTest {
     private void shockwave(){
         IAbilityAction abilityAction = player.activateAbility(0);
         abilityAction.apply(level, 0);
+        abilityAction.onFinished(level);
     }
 
     private Point2D newEnemyAcceleration(Point2D vector){
