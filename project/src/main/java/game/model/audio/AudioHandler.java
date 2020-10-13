@@ -23,7 +23,8 @@ public class AudioHandler {
 
     public void play() {
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.setVolume(.2);
+        mediaPlayer.play();
     }
 
 
