@@ -87,7 +87,7 @@ public class Game implements IGame {
 
     private List<String> getLevelID(int nrOfLevels) {
         List<String> id = new ArrayList<>();
-        for (int i = 1; i < nrOfLevels; i++) {
+        for (int i = 1; i <= nrOfLevels; i++) {
             id.add(Integer.toString(i));
         }
         return id;
