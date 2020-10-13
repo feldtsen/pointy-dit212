@@ -73,7 +73,7 @@ public class GameWindowController {
     private void updateUI() {
 
         // Update score panel
-        window.getScorePanel().updateScore(game.getCurrentLevel().getPlayer(), game.getScore());
+        window.getScorePanel().updateScore(game.getScore());
 
         // Update cooldown timers
         window.getAbilityBar().updateAbilities(game.getCurrentLevel().getPlayer().getAbilities());
