@@ -100,6 +100,7 @@ The `Ability` in the domain model creates 0..* projectiles. In the design model,
 * the composite pattern, allowing players and enemies to have different abilities and behaviors. The construction of these entities is simplified using the factory pattern.
 * the template method pattern, by letting Ability implement a method that is dependent on an abstract method implemented by subclasses.
 * the visitor pattern, shapes accepts a visitor to do specific action for different shapes
+* the observer pattern, the view listens for ability action events sent by the game. This is used to indicate when to draw certain effects to the screen.
 
 ## 4. Persistent data management
 
