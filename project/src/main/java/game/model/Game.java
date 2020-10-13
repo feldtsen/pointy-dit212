@@ -54,11 +54,7 @@ public class Game implements IGame {
     public Game() {
 
         //TODO: Fix proper function
-        List<String> id = new ArrayList<>();
-        id.add("1");
-        id.add("2");
-        id.add("3");
-        this.levelID = id.iterator();
+        this.levelID = getLevelID(3).iterator();
         nextLevel();
 
         this.score = 0;
@@ -87,8 +83,14 @@ public class Game implements IGame {
         catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
 
-
+    private List<String> getLevelID(int nrOfLevels) {
+        List<String> id = new ArrayList<>();
+        for (int i = 1; i < nrOfLevels; i++) {
+            id.add(Integer.toString(i));
+        }
+        return id;
     }
 
     // Activate ability adds an ability to the active ability actions list, together with the
