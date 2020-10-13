@@ -201,19 +201,12 @@ public class GameTest {
 
     @Test
     public void testPlayerFacingMouse() {
-        Player player = EntityFactory.basicPlayer(600, 400);
-
-        ILevel level = new Level(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), player, 1200, 800);
-        List<ILevel> levels = new ArrayList<>();
-        levels.add(level);
-
-        Game game = new Game();
 
         Point2D mousePosition = new Point2D(310, 515);
         game.setPlayerFacingPosition(mousePosition);
 
         game.update(1.0, 1.0);
-
+        IPlayer player = game.getCurrentLevel().getPlayer();
         Point2D expected = mousePosition.subtract(player.getPosition()).normalize();
         Point2D actual = Utils.vectorFromHeading(player.getShape().getRotation(), 1.0);
 
@@ -223,16 +216,10 @@ public class GameTest {
 
     @Test
     public void testPlayerFacingMouseOnPlayerPosition() {
-        Player player = EntityFactory.basicPlayer(600, 400);
 
-        ILevel level = new Level(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), player, 1200, 800);
-        List<ILevel> levels = new ArrayList<>();
-        levels.add(level);
+        Point2D mousePosition = new Point2D(500, 500);
 
-        Game game = new Game();
-
-        Point2D mousePosition = new Point2D(600, 400);
-
+        IPlayer player = game.getCurrentLevel().getPlayer();
         double previousFacingDirection = player.getShape().getRotation();
         game.setPlayerFacingPosition(mousePosition);
 
