@@ -5,6 +5,7 @@ import game.view.ViewResourceLoader;
 import game.view.pages.abilityBar.AbilityBar;
 import game.view.pages.abilityBar.AbilityHolder;
 import game.view.pages.canvas.GameCanvas;
+import game.view.pages.gameOver.GameOverPanel;
 import game.view.pages.menu.StartMenu;
 import game.view.pages.score.ScorePanel;
 import javafx.animation.FadeTransition;
@@ -15,7 +16,7 @@ import javafx.util.Duration;
 
 public class MainWindow extends StackPane {
     private static final String MAIN_WINDOW_CSS = "mainWindow";
-    private static final String GAME_TITLE = "  J E R K   E V E R T  ";
+    private static final String GAME_TITLE = "J E R K  E V E R T";
 
     public final static FadeTransition fadeTransitionGameMenu = new FadeTransition(new Duration(200));
     public final static FadeTransition fadeTransitionGameTitle = new FadeTransition(new Duration(200));
@@ -25,12 +26,14 @@ public class MainWindow extends StackPane {
     ScorePanel scorePanel;
     AbilityBar abilityBar;
     Label gameTitle;
+    GameOverPanel gameOverPanel;
 
     public MainWindow(GameWindowController gameWindowController) {
         gameCanvas = new GameCanvas();
         startMenu  = new StartMenu(gameWindowController);
         scorePanel = new ScorePanel();
         abilityBar = new AbilityBar();
+        gameOverPanel = new GameOverPanel();
 
         gameTitle = new Label(GAME_TITLE);
 
@@ -51,7 +54,8 @@ public class MainWindow extends StackPane {
                 abilityBar,
                 scorePanel,
                 startMenu,
-                gameTitle
+                gameTitle,
+                gameOverPanel
 
         );
 
@@ -59,10 +63,12 @@ public class MainWindow extends StackPane {
         setAlignment(scorePanel, Pos.TOP_RIGHT);
         setAlignment(abilityBar, Pos.BOTTOM_CENTER);
         setAlignment(gameTitle, Pos.TOP_CENTER);
+        setAlignment(gameOverPanel, Pos.CENTER);
 
         // Align inside their respective container
         startMenu.setAlignment(Pos.BOTTOM_CENTER);
         abilityBar.setAlignment(Pos.CENTER);
+        gameOverPanel.setAlignment(Pos.CENTER);
 
 
         // Bind the size of different components to the window size, making the components responsive
@@ -97,5 +103,23 @@ public class MainWindow extends StackPane {
         startMenu.setMouseTransparent(false);
     }
 
+    // Display game over message and hide other UI-elements
+    public void showGameOver() {
+        gameOverPanel.setVisible(true);
+        scorePanel.setVisible(false);
+        abilityBar.setVisible(false);
 
+    }
+
+    // Remove game over message
+    public void hideGameOver() {
+        gameOverPanel.setVisible(false);
+    }
+
+
+    // Makes abilityBar and scorePanel visible
+    public void showUI() {
+        abilityBar.setVisible(true);
+        scorePanel.setVisible(true);
+    }
 }

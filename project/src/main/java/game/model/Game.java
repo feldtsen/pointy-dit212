@@ -54,10 +54,7 @@ public class Game implements IGame {
     public Game() {
 
         //TODO: Fix proper function
-        List<String> id = new ArrayList<>();
-        id.add("1");
-        id.add("2");
-        this.levelID = id.iterator();
+        this.levelID = getLevelID(3).iterator();
         nextLevel();
 
         this.score = 0;
@@ -86,8 +83,14 @@ public class Game implements IGame {
         catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
 
-
+    private List<String> getLevelID(int nrOfLevels) {
+        List<String> id = new ArrayList<>();
+        for (int i = 1; i <= nrOfLevels; i++) {
+            id.add(Integer.toString(i));
+        }
+        return id;
     }
 
     // Activate ability adds an ability to the active ability actions list, together with the
@@ -188,6 +191,11 @@ public class Game implements IGame {
 
             // Activate enemy abilities
             activateAbility(enemy.applyAbility(), now);
+        }
+
+        // Uppdate all obstacles
+        for(IObstacle obstacle: currentLevel.getObstacles()) {
+            obstacle.update(delta, timeStep);
         }
 
         // Apply active abilities
@@ -354,6 +362,7 @@ public class Game implements IGame {
     //TODO: handle collision
     private void handleCollision(IEntity<?> e1, IEntity<?> e2){
     }
+    
 
     @Override
     public void registerListener(AbilityActionEventListener listener) {

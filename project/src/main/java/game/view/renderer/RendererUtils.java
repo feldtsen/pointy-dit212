@@ -2,12 +2,26 @@ package game.view.renderer;
 
 import game.model.shape2d.*;
 import game.util.Utils;
+import game.view.ViewResourceLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
 public class RendererUtils {
-    // Method for clearing the screen
+    private static class Quartet {
+        public double x;
+        public double y;
+        public double w;
+        public double h;
+        public Quartet(double x, double y, double w, double h) {
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+        }
+    }
+    // Given a graphics context, it will clear that graphics context
     public static void clear(GraphicsContext graphicsContext) {
         graphicsContext.clearRect(
                 0,
@@ -17,7 +31,7 @@ public class RendererUtils {
         );
     }
 
-    // Method for setting a background color
+    // Given a graphics context and a color, color that graphics context with the given color
     public static void setBackgroundColor(GraphicsContext graphicsContext, Color color) {
         graphicsContext.setFill(color);
         graphicsContext.fillRect(
@@ -29,81 +43,93 @@ public class RendererUtils {
 
     }
 
+    // Draw arch
+    public static void drawArch(GraphicsContext graphicsContext, Color color, ICircle shape, Point2D position) {
+        Quartet scaled = scaleDrawData(graphicsContext, position.getX(), position.getY(), shape.getRadius(), shape.getRadius());
+
+        // Saves  attributes, such as paint data and transform data
+        graphicsContext.save();
+
+        translate(graphicsContext, shape.getRotation(), scaled.x, scaled.y);
+
+       graphicsContext.setFill(color);
+       graphicsContext.fillArc(
+               scaled.x - scaled.w,
+               scaled.y - scaled.h,
+               2 * scaled.w,
+               2 * scaled.h,
+               0,
+               180,
+               ArcType.ROUND);
+        graphicsContext.restore();
+    }
+
 
     // Draws a circle to the screen
-    public static void drawCircle(GraphicsContext graphicsContext, Color color,  ICircle circle, Point2D position) {
-        double scaledRadiusW = scaleRespectToWidth(graphicsContext, circle.getRadius());
-        double scaledRadiusH = scaleRespectToHeight(graphicsContext, circle.getRadius());
-
-        double scaledXPosition   = scaleRespectToWidth(graphicsContext, position.getX());
-        double scaledYPosition   = scaleRespectToHeight(graphicsContext, position.getY());
+    public static void drawCircle(GraphicsContext graphicsContext, Color color,  ICircle shape, Point2D position) {
+        Quartet scaled = scaleDrawData(graphicsContext, position.getX(), position.getY(), shape.getRadius(), shape.getRadius());
 
         graphicsContext.setFill(color);
         graphicsContext.fillOval(
-                scaledXPosition - scaledRadiusW,
-                scaledYPosition - scaledRadiusH,
-                2 * scaledRadiusW,
-                2 * scaledRadiusH
+                scaled.x - scaled.w,
+                scaled.y - scaled.h,
+                2 * scaled.w,
+                2 * scaled.h
         );
     }
     // Draws a ring to the screen
-    public static void drawRing(GraphicsContext graphicsContext, Color color, ICircle circle, Point2D position) {
-        double scaledRadiusW = scaleRespectToWidth(graphicsContext, circle.getRadius());
-        double scaledRadiusH = scaleRespectToHeight(graphicsContext, circle.getRadius());
-
-        double scaledXPosition = scaleRespectToWidth(graphicsContext, position.getX());
-        double scaledYPosition = scaleRespectToWidth(graphicsContext, position.getY());
+    public static void drawRing(GraphicsContext graphicsContext, Color color, ICircle shape, Point2D position) {
+        Quartet scaled = scaleDrawData(graphicsContext, position.getX(), position.getY(), shape.getRadius(), shape.getRadius());
 
         graphicsContext.setStroke(color);
         graphicsContext.strokeOval(
-                scaledXPosition - scaledRadiusW,
-                scaledYPosition - scaledRadiusH,
-                2 * scaledRadiusW,
-                2 * scaledRadiusH
+                scaled.x - scaled.w,
+                scaled.y - scaled.h,
+                2 * scaled.w,
+                2 * scaled.h
         );
     }
 
     // Draws a rectangle to the screen
     public static void drawRectangle(GraphicsContext graphicsContext, Color color, IRectangle shape, Point2D position) {
-        double scaledShapeWidth  = scaleRespectToWidth(graphicsContext, shape.getWidth());
-        double scaledShapeHeight = scaleRespectToHeight(graphicsContext, shape.getHeight());
+        Quartet scaled = scaleDrawData(graphicsContext, position.getX(), position.getY(), shape.getWidth(), shape.getHeight());
+        // Saves  attributes, such as paint data and transform data
+        graphicsContext.save();
 
-        double scaledXPosition   = scaleRespectToWidth(graphicsContext, position.getX());
-        double scaledYPosition   = scaleRespectToHeight(graphicsContext, position.getY());
-
-        SaveAndTranslate(graphicsContext, scaledShapeWidth, scaledShapeHeight, shape.getRotation(), scaledXPosition, scaledYPosition);
+        translate(graphicsContext, shape.getRotation(), scaled.x, scaled.y);
 
         graphicsContext.setFill(color);
-        graphicsContext.fillRect(scaledXPosition, scaledYPosition, scaledShapeWidth, scaledShapeHeight);
+        graphicsContext.fillRect(
+                scaled.x - (scaled.w/2),
+                scaled.y - (scaled.h/2),
+                scaled.w,
+                scaled.h
+        );
 
         graphicsContext.restore();
     }
 
     private static final double[] xs = new double[3];
     private static final double[] ys = new double[3];
-
-
     public static void drawTriangle(GraphicsContext graphicsContext, Color color, ITriangle shape, Point2D position) {
-        double scaledShapeWidth  = scaleRespectToWidth(graphicsContext, shape.getWidth());
-        double scaledShapeHeight = scaleRespectToHeight(graphicsContext, shape.getHeight());
+        Quartet scaled = scaleDrawData(graphicsContext, position.getX(), position.getY(), shape.getWidth(), shape.getHeight());
 
-        double scaledXPosition   = scaleRespectToWidth(graphicsContext, position.getX());
-        double scaledYPosition   = scaleRespectToHeight(graphicsContext, position.getY());
+        // Saves  attributes, such as paint data and transform data
+        graphicsContext.save();
 
-        SaveAndTranslate(graphicsContext, scaledShapeWidth, scaledShapeHeight, shape.getRotation(), scaledXPosition, scaledYPosition);
+        translate(graphicsContext, shape.getRotation(), scaled.x, scaled.y);
 
-        xs[0] = scaledXPosition;
-        xs[1] = scaledXPosition + scaledShapeWidth;
-        xs[2] = scaledXPosition + scaledShapeWidth / 2;
+        xs[0] = scaled.x - scaled.w /2;
+        xs[1] = scaled.x + scaled.w /2;
+        xs[2] = scaled.x;
 
 
-        ys[0] = scaledYPosition;
-        ys[1] = scaledYPosition;
-        ys[2] = scaledYPosition + scaledShapeHeight;
+        ys[0] = scaled.y - scaled.h /2;
+        ys[1] = scaled.y - scaled.h /2;
+        ys[2] = scaled.y + scaled.h /2;
 
         graphicsContext.setFill(color);
         graphicsContext.fillPolygon(xs, ys, xs.length);
-
 
         graphicsContext.restore();
     }
@@ -123,9 +149,7 @@ public class RendererUtils {
         graphicsContext.strokeLine(scaledStartX, scaledStartY, scaledStopX, scaledStopY);
     }
 
-    private static void SaveAndTranslate(GraphicsContext graphicsContext, double shapeWidth, double shapeHeight, double shapeRotation, double xPosition, double yPosition) {
-        // Saves  attributes, such as paint data and transform data
-        graphicsContext.save();
+    private static void translate(GraphicsContext graphicsContext, double shapeRotation, double xPosition, double yPosition) {
 
         // Translates the shape to a position
         graphicsContext.translate(xPosition, yPosition);
@@ -134,14 +158,25 @@ public class RendererUtils {
         graphicsContext.rotate(Utils.radianToDegrees(shapeRotation) - 90);
 
         // Translate to where you want it
-        graphicsContext.translate(-xPosition - shapeWidth/2, -yPosition - shapeHeight/2);
+        graphicsContext.translate(-xPosition, -yPosition);
     }
 
+    public static Quartet scaleDrawData(GraphicsContext graphicsContext, double x, double y, double w, double h) {
+        return new Quartet(
+                scaleRespectToWidth(graphicsContext, x),
+                scaleRespectToHeight(graphicsContext, y),
+                scaleRespectToWidth(graphicsContext, w),
+                scaleRespectToHeight(graphicsContext, h)
+        );
+    }
+
+    // Given the graphics context and the value you want to update, returns the value scaled to the current width
+    // relative to the initial width
     public static double scaleRespectToWidth (GraphicsContext graphicsContext, double oldValue) {
-        return Utils.map(oldValue, 0, 1200, 0, graphicsContext.getCanvas().getWidth());
+        return Utils.map(oldValue, 0, ViewResourceLoader.INITIAL_WIDTH, 0, graphicsContext.getCanvas().getWidth());
     }
     public static double scaleRespectToHeight (GraphicsContext graphicsContext, double oldValue) {
-        return Utils.map(oldValue, 0, 1200*.5625, 0, graphicsContext.getCanvas().getHeight());
+        return Utils.map(oldValue, 0, ViewResourceLoader.INITIAL_HEIGHT, 0, graphicsContext.getCanvas().getHeight());
     }
 
 

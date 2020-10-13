@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.obstacle.IObstacle;
+import game.model.entity.obstacle.MovingWall;
 import game.model.entity.obstacle.Wall;
 import game.model.entity.player.IPlayer;
 import game.model.entity.projectile.IProjectile;
@@ -34,6 +35,11 @@ public class LevelLoader {
         return new Level(enemies, projectiles, obstacles, player, 1200, 675);
     }
 
+    private static IPlayer loadPlayer() {
+        double x = levelJSON.getAsJsonObject("Player").get("x").getAsDouble();
+        double y = levelJSON.getAsJsonObject("Player").get("y").getAsDouble();
+        return EntityFactory.basicPlayer(x,y);
+    }
 
     //TODO: Fix target to be dynamic as well as implement other variables
     private static List<IEnemy> loadEnemies(IPlayer player) {
@@ -49,7 +55,26 @@ public class LevelLoader {
         return enemies;
     }
 
-    private static IEnemy selectEnemy(double x, double y, IEntity target, int difficulty, String type) {
+
+    private static List<IObstacle> loadObstacles() {
+        List<IObstacle> obstacles = new ArrayList<>();
+        JsonArray obstacleArr = levelJSON.getAsJsonArray("Obstacles");
+        for (int i = 0; i < obstacleArr.size(); i++) {
+            String type = obstacleArr.get(i).getAsJsonObject().get("type").getAsString();
+            double x = obstacleArr.get(i).getAsJsonObject().get("x").getAsDouble();
+            double y = obstacleArr.get(i).getAsJsonObject().get("y").getAsDouble();
+            obstacles.add(selectObstacle(x,y,type));
+        }
+        return obstacles;
+    }
+
+    //Returns an empty list since no projectiles are loaded at the start of a level.
+    private static List<IProjectile<?>> loadProjectiles() {
+        return new ArrayList<>();
+    }
+
+
+    public static IEnemy selectEnemy(double x, double y, IEntity target, int difficulty, String type) {
         IEnemy enemy = null;
         if (type.equals("basic")) {
             enemy = EntityFactory.basicEnemy(x, y,target, difficulty);
@@ -63,26 +88,16 @@ public class LevelLoader {
         return enemy;
     }
 
-    //Returns an empty list since no projectiles are loaded at the start of a level.
-    private static List<IProjectile<?>> loadProjectiles() {
-        return new ArrayList<>();
-    }
-
-    private static List<IObstacle> loadObstacles() {
-        List<IObstacle> obstacles = new ArrayList<>();
-        JsonArray obstacleArr = levelJSON.getAsJsonArray("Obstacles");
-        for (int i = 0; i < obstacleArr.size(); i++) {
-            double x = obstacleArr.get(i).getAsJsonObject().get("x").getAsDouble();
-            double y = obstacleArr.get(i).getAsJsonObject().get("y").getAsDouble();
-            obstacles.add(new Wall(new Point2D(x,y),35,35));
+    //TODO: Change to use factory
+    public static IObstacle selectObstacle(double x, double y, String type) {
+        IObstacle obstacle = null;
+        if (type.equals("wall")) {
+            obstacle = new Wall(new Point2D(x,y), 100, 100);
         }
-        return obstacles;
-    }
-
-    private static IPlayer loadPlayer() {
-        double x = levelJSON.getAsJsonObject("Player").get("x").getAsDouble();
-        double y = levelJSON.getAsJsonObject("Player").get("y").getAsDouble();
-        return EntityFactory.basicPlayer(x,y);
+        else if (type.equals("moving")) {
+            obstacle = new MovingWall(new Point2D(x,y), new Point2D(3*x, 2*y),400,200,100,100);
+        }
+        return obstacle;
     }
 
 
