@@ -30,9 +30,8 @@ public class ScorePanel extends VBox implements IScorePanel {
 
     @Override
     // Update the score panel with the current score.
-    public void updateScore(IPlayer player, int score) {
+    public void updateScore(int score) {
         if(scoreLabel.getText().equals("")) scoreLabel.setText(" SCORE ");
         this.score.setText(score+"");
-        // TODO: Check if player is underneath text. If true, change opacity.
     }
 }

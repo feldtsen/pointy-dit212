@@ -184,6 +184,11 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
     }
 
     @Override
+    public void clearCanvas() {
+        RendererUtils.clear(graphicsContext);
+    }
+
+    @Override
     public void visit(ICircle circle) {
         RendererUtils.drawCircle(graphicsContext,
                 colors.get(entity.getClass()),

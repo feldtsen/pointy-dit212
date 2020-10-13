@@ -76,3 +76,13 @@
     -fx-text-fill: white!important;
     -fx-font-size: 4em;
 }
+
+.gameOverLabel {
+    -fx-text-fill: white!important;
+    -fx-font-size: 3em;
+}
+
+.gameOverInstructions {
+    -fx-text-fill: white!important;
+    -fx-font-size: 1em;
+}
