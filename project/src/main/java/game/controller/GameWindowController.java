@@ -57,8 +57,14 @@ public class GameWindowController {
 
                 // Displays game over message
                 if(game.isGameOver()) handleGameOver();
-                
-                if (game.getCurrentLevel().getEnemies().isEmpty()) game.nextLevel();
+
+                // Checks if all enemies have been defeated
+                if (game.getCurrentLevel().getEnemies().isEmpty())  {
+                    game.nextLevel();
+
+                    // Register movement keys to new player object
+                    registerPlayerControls();
+                }
 
                 
 
@@ -164,10 +170,8 @@ public class GameWindowController {
         mouseInputController = new MouseInputController(window);
 
         // Give key codes registered by the game pane a given action
-        keyboardInputController.registerAction(KeyCode.W, game.getCurrentLevel().getPlayer()::moveUp);
-        keyboardInputController.registerAction(KeyCode.A, game.getCurrentLevel().getPlayer()::moveLeft);
-        keyboardInputController.registerAction(KeyCode.S, game.getCurrentLevel().getPlayer()::moveDown);
-        keyboardInputController.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
+        registerPlayerControls();
+
         keyboardInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
 
         keyboardInputController.registerAction(KeyCode.SHIFT, () -> game.activatePlayerAbility(0));
@@ -179,7 +183,13 @@ public class GameWindowController {
 
     }
 
-
+    // Registers WASD keys to corresponding methods of the current Player object.
+    private void registerPlayerControls() {
+        keyboardInputController.registerAction(KeyCode.W, game.getCurrentLevel().getPlayer()::moveUp);
+        keyboardInputController.registerAction(KeyCode.A, game.getCurrentLevel().getPlayer()::moveLeft);
+        keyboardInputController.registerAction(KeyCode.S, game.getCurrentLevel().getPlayer()::moveDown);
+        keyboardInputController.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
+    }
 
 
 }
