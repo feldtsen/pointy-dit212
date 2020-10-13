@@ -7,7 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class RendererUtils {
-    // Method for clearing the screen
+    // Given a graphics context, it will clear that graphics context
     public static void clear(GraphicsContext graphicsContext) {
         graphicsContext.clearRect(
                 0,
@@ -17,7 +17,7 @@ public class RendererUtils {
         );
     }
 
-    // Method for setting a background color
+    // Given a graphics context and a color, color that graphics context with the given color
     public static void setBackgroundColor(GraphicsContext graphicsContext, Color color) {
         graphicsContext.setFill(color);
         graphicsContext.fillRect(

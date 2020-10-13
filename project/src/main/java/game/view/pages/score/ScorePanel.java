@@ -26,7 +26,6 @@ public class ScorePanel extends VBox implements IScorePanel {
                 score
         );
 
-
     }
 
     @Override
