@@ -8,6 +8,7 @@ import game.model.ability.action.IAbilityAction;
 import game.model.entity.Entity;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.player.IPlayer;
+import game.model.entity.player.Player;
 import game.model.level.ILevel;
 import game.model.level.Level;
 import game.services.EntityFactory;
@@ -26,13 +27,15 @@ public class DashTest {
     IPlayer player;
     IEnemy enemy;
 
-    double length = 200;
+    double length = 3000;
 
 
     // TODO: Maybe change implementation of dash before creating more tests
     @Before
     public void before(){
-        player = EntityFactory.basicPlayer(500, 500);
+
+        player = new Player(new Point2D(500, 500), 20, 2500, 1000,0);
+
         enemy = EntityFactory.basicEnemy(550,500,player , 5);
         IAbility dash = new Dash(10,length);
         player.addAbility(dash);

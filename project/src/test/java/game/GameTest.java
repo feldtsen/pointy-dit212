@@ -1,15 +1,20 @@
 package game;
 
+import game.controller.gameLoop.GameLoop;
 import game.model.Game;
 import game.model.ability.Ability;
 import game.model.ability.IAbility;
 import game.model.ability.action.IAbilityAction;
 import game.model.behavior.ability.AbilityBehaviour;
+import game.model.behavior.ability.SingleAbilityBehavior;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.movable.MovableEntity;
+import game.model.entity.obstacle.IObstacle;
+import game.model.entity.player.IPlayer;
 import game.model.entity.player.Player;
+import game.model.entity.projectile.IProjectile;
 import game.model.level.ILevel;
 import game.model.level.Level;
 import game.model.shape2d.Circle;
@@ -35,8 +40,17 @@ public class GameTest {
     }
 
     @Before
-    public void init()  {
+    public void before()  {
+        IPlayer player = new Player(new Point2D(500, 500), 20, 2500, 1000,0);
+        IEnemy enemy = EntityFactory.basicEnemy(500,500,player,5);
+        List<IEnemy> enemies = new ArrayList<>(List.of(enemy));
+
+        List<IProjectile<?>> projectiles = new ArrayList<>();
+        List<IObstacle> obstacles = new ArrayList<>();
+        ILevel level = new Level(enemies,projectiles,obstacles, player,1200,675);
+
         game = new Game();
+        game.setLevel(level);
    
     }
 
@@ -68,70 +82,34 @@ public class GameTest {
 
     @Test
     public void testUpdatePlayerLessStrength(){
-        Player player = EntityFactory.basicPlayer(500, 500);
-
-        List<IEnemy> enemies= new ArrayList<>();
-        Enemy e1 = EntityFactory.basicEnemy(500,500, player,5);
-        enemies.add(e1);
-
-        ILevel level = new Level(enemies, new ArrayList<>(), new ArrayList<>(), player, 1200, 800);
-        List<ILevel> levels = new ArrayList<>();
-        levels.add(level);
-
-        Game game = new Game();
 
         game.update(1.0/60, 1);
 
-        assertEquals(0, player.getHitPoints() );
+        assertEquals(0, game.getCurrentLevel().getPlayer().getHitPoints() );
 
     }
     @Test
     public void testUpdatePlayerSameStrength(){
-        Player player = EntityFactory.basicPlayer(500, 500);
 
-        List<IEnemy> enemies= new ArrayList<>();
-        Enemy e1 = EntityFactory.basicEnemy(500,500, player,0);
-        enemies.add(e1);
-
-        ILevel level = new Level(enemies, new ArrayList<>(), new ArrayList<>(), player, 1200, 800);
-        List<ILevel> levels = new ArrayList<>();
-        levels.add(level);
-
-        Game game = new Game();
-
+        game.getCurrentLevel().getPlayer().setStrength(5);
         game.update(1.0/60, 1);
 
-        assertEquals(1, player.getHitPoints() );
+        assertEquals(1, game.getCurrentLevel().getPlayer().getHitPoints());
 
     }
 
     @Test
     public void testUpdatePlayerMoreStrength(){
-        Player player = EntityFactory.basicPlayer(500, 500);
-
-        List<IEnemy> enemies= new ArrayList<>();
-        Enemy e1 = EntityFactory.basicEnemy(500,500, player,-2);
-        enemies.add(e1);
-
-        ILevel level = new Level(enemies, new ArrayList<>(), new ArrayList<>(), player, 1200, 800);
-        List<ILevel> levels = new ArrayList<>();
-        levels.add(level);
-
-        Game game = new Game();
-
+        game.getCurrentLevel().getPlayer().setStrength(10);
         game.update(1.0/60, 1);
 
-        assertEquals(1, player.getHitPoints() );
+        assertEquals(1, game.getCurrentLevel().getPlayer().getHitPoints() );
 
     }
 
 
     @Test
     public void testAbilityAddedToAbilityActionList() {
-        Player player = EntityFactory.basicPlayer(500, 500);
-
-        List<IEnemy> enemies= new ArrayList<>();
-        Enemy e1 = EntityFactory.basicEnemy(500,500, player,-2);
 
         List<IAbility> abilities = new ArrayList<>();
         abilities.add(new Ability(1) {
@@ -158,20 +136,15 @@ public class GameTest {
                 };
             }
         });
-
-        e1.setAbilityBehaviour(new AbilityBehaviour(abilities) {
+        IEnemy enemy = game.getCurrentLevel().getEnemies().get(0);
+        enemy.setAbilityBehaviour(new AbilityBehaviour(abilities) {
             @Override
             public IAbilityAction apply(IEntity<?> user, IEntity<?> target) {
                 return abilities.get(0).use(user, target);
             }
         });
-        enemies.add(e1);
 
-        ILevel level = new Level(enemies, new ArrayList<>(), new ArrayList<>(), player, 1200, 800);
-        List<ILevel> levels = new ArrayList<>();
-        levels.add(level);
 
-        Game game = new Game();
         game.update(1, 1);
 
         assertEquals(1, game.getActiveAbilityActions().size());
@@ -180,14 +153,9 @@ public class GameTest {
 
     @Test
     public void testAbilityRemovedFromAbilityActionList() {
-        Player player = EntityFactory.basicPlayer(500, 500);
-
-        List<IEnemy> enemies= new ArrayList<>();
-        Enemy e1 = EntityFactory.basicEnemy(500,500, player,-2);
         double duration = 0.5;
 
-        List<IAbility> abilities = new ArrayList<>();
-        abilities.add(new Ability(1) {
+        Ability ability = new Ability(GameLoop.SECOND * 2) {
             @Override
             public IAbilityAction createAction(IEntity<?> user, IEntity<?> target) {
                 return new IAbilityAction() {
@@ -210,31 +178,23 @@ public class GameTest {
                     }
                 };
             }
-        });
+        };
 
-        e1.setAbilityBehaviour(new AbilityBehaviour(abilities) {
-            @Override
-            public IAbilityAction apply(IEntity<?> user, IEntity<?> target) {
-                return abilities.get(0).use(user, target);
-            }
-        });
-        enemies.add(e1);
+        IEnemy enemy = game.getCurrentLevel().getEnemies().get(0);
+        enemy.setPosition(new Point2D(200,200));
+        enemy.setAbilityBehaviour(new SingleAbilityBehavior(ability));
 
-        ILevel level = new Level(enemies, new ArrayList<>(), new ArrayList<>(), player, 1200, 800);
-        List<ILevel> levels = new ArrayList<>();
-        levels.add(level);
-
-        Game game = new Game();
         game.update(1.0/60, 1);
 
         assertEquals(1, game.getActiveAbilityActions().size());
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(700);
         } catch (InterruptedException e) {
             fail();
         }
-        game.update(1.0, 1);
+
+        game.update(1.0/60, 1);
 
         assertEquals(0, game.getActiveAbilityActions().size());
     }

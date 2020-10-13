@@ -5,6 +5,7 @@ import game.model.ability.Shockwave;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.player.IPlayer;
+import game.model.entity.player.Player;
 import game.model.level.ILevel;
 import game.model.level.Level;
 import game.services.EntityFactory;
@@ -28,9 +29,9 @@ public class ShockwaveTest {
 
     @Before
     public void before (){
-        player = EntityFactory.basicPlayer(500, 700);
+        player = new Player(new Point2D(500, 500), 20, 2500, 1000,0);
 
-        enemy = EntityFactory.basicEnemy(500,650, player, 10);
+        enemy = EntityFactory.basicEnemy(500,550, player, 10);
 
         List<IEnemy> enemies = new ArrayList<>(List.of(enemy));
 
@@ -58,7 +59,7 @@ public class ShockwaveTest {
     public void EnemyOutOfRange (){
         force = 1500;
         testSetup(radius, force);
-        enemy.setPosition(new Point2D(500,599));
+        enemy.setPosition(new Point2D(500,601));
         // Create vector pointing from user to target entity
         Point2D vector = enemy.getPosition().subtract(player.getPosition());
         double expectedAccelerationX = enemy.getAcceleration().getX();

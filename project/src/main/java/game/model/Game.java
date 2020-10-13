@@ -136,7 +136,7 @@ public class Game implements IGame {
         player.update(delta, timeStep);
         containToBounds(player); // Ensures the player cannot leave the map
 
-        // Sett the facing direction of the player
+        // Set the facing direction of the player
         Point2D direction = playerFacingPosition.subtract(player.getPosition());
         double angle = Utils.heading(direction);
         player.getShape().setRotation(angle);
