@@ -38,7 +38,7 @@ public class RendererUtils {
         double scaledXPosition   = scaleRespectToWidth(graphicsContext, position.getX());
         double scaledYPosition   = scaleRespectToHeight(graphicsContext, position.getY());
 
-        SaveAndTranslate(graphicsContext, scaledRadiusW, scaledRadiusH, circle.getRotation(), scaledXPosition, scaledYPosition);
+        SaveAndTranslate(graphicsContext, circle.getRotation(), scaledXPosition, scaledYPosition);
 
         graphicsContext.setFill(color);
        graphicsContext.fillArc(
@@ -94,7 +94,7 @@ public class RendererUtils {
         double scaledXPosition   = scaleRespectToWidth(graphicsContext, position.getX());
         double scaledYPosition   = scaleRespectToHeight(graphicsContext, position.getY());
 
-        SaveAndTranslate(graphicsContext, scaledShapeWidth, scaledShapeHeight, shape.getRotation(), scaledXPosition, scaledYPosition);
+        SaveAndTranslate(graphicsContext, shape.getRotation(), scaledXPosition, scaledYPosition);
 
         graphicsContext.setFill(color);
         graphicsContext.fillRect(scaledXPosition - (scaledShapeWidth/2), scaledYPosition - (scaledShapeHeight/2), scaledShapeWidth, scaledShapeHeight);
@@ -111,7 +111,7 @@ public class RendererUtils {
         double scaledXPosition   = scaleRespectToWidth(graphicsContext, position.getX());
         double scaledYPosition   = scaleRespectToHeight(graphicsContext, position.getY());
 
-        SaveAndTranslate(graphicsContext, scaledShapeWidth, scaledShapeHeight, shape.getRotation(), scaledXPosition, scaledYPosition);
+        SaveAndTranslate(graphicsContext, shape.getRotation(), scaledXPosition, scaledYPosition);
 
         xs[0] = scaledXPosition - scaledShapeWidth/2;
         xs[1] = scaledXPosition + scaledShapeWidth/2;
@@ -144,7 +144,7 @@ public class RendererUtils {
         graphicsContext.strokeLine(scaledStartX, scaledStartY, scaledStopX, scaledStopY);
     }
 
-    private static void SaveAndTranslate(GraphicsContext graphicsContext, double shapeWidth, double shapeHeight, double shapeRotation, double xPosition, double yPosition) {
+    private static void SaveAndTranslate(GraphicsContext graphicsContext, double shapeRotation, double xPosition, double yPosition) {
         // Saves  attributes, such as paint data and transform data
         graphicsContext.save();
 
