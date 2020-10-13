@@ -40,7 +40,7 @@ public class RendererUtils {
 
         SaveAndTranslate(graphicsContext, scaledRadiusW, scaledRadiusH, circle.getRotation(), scaledXPosition, scaledYPosition);
 
-        graphicsContext.setFill(color);
+       graphicsContext.setFill(color);
        graphicsContext.fillArc(
                scaledXPosition - scaledRadiusW,
                scaledYPosition - scaledRadiusH,
