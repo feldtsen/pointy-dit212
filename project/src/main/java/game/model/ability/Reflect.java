@@ -8,16 +8,18 @@ import game.model.level.ILevel;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 
+// Ability for reflecting projectiles
 public class Reflect extends Ability {
     private final double angle;    // Max/min angle of affected projectiles, relative to user
     private final double radius;   // Distance or reach
-    private final double control;    // How strongly reflected projectiles are affected
+    private final double control;  // How strongly reflected projectiles are affected
     private final double duration; // How long the ability is active
-    private final int strength; // The strenght of the reflected projectiles
+    private final int strength;    // The strength of the reflected projectiles
 
+    // Action to be returned when reflect ability is applied
     public static class ReflectAction extends AbilityAction {
-        private final double radius;
         private final double angle;
+        private final double radius;
         private final double control;
         private final int strength;
 
@@ -39,12 +41,13 @@ public class Reflect extends Ability {
                 // Check if the projectile is outside the reach of radius
                 if(Math.pow(vector.getX(), 2) + Math.pow(vector.getY(), 2) > radius * radius) continue;
 
-                // Check if the angle between the facing direction of the user and the projectile is too large
+                // Calculate the difference in the angle representing the facing direction of the user and the angle
+                // pointing to the projectile, from the user
                 double relativeAngle = Utils.limitAngle(user.getShape().getRotation() - Utils.heading(vector));
 
+                // If the relative angle is less than half of the reflection angle, or greater than
+                // the negative of half of the reflection angle (mod two PI), keep going
                 if(!(relativeAngle < angle / 2 || relativeAngle > Math.PI * 2 - angle / 2)) continue;
-
-                //if(relativeAngle > angle / 2 && Math.PI * 2 - relativeAngle < Math.PI * 2 - angle/2) continue;
 
                 // Calculate unit vector pointing from user to projectile
                 Point2D n = vector.normalize();
@@ -65,8 +68,6 @@ public class Reflect extends Ability {
         @Override
         public void onFinished(ILevel level) {
         }
-
-
     }
 
     public Reflect(long cooldown, double angle, double radius, double control, double duration, int strength) {

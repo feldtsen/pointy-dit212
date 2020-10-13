@@ -11,6 +11,7 @@ import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+// Ability for pushing any nearby enemy away
 public class Shockwave extends Ability{
     // Radius of ability, entities outside radius will not be affected
     private final double radius;
@@ -62,8 +63,6 @@ public class Shockwave extends Ability{
         @Override
         public void onFinished(ILevel level) {
         }
-
-
     }
 
     public Shockwave(long cooldown, double radius, double force, double duration) {

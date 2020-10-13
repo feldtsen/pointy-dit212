@@ -13,21 +13,27 @@ import javafx.scene.input.KeyCode;
 
 import java.io.FileNotFoundException;
 
+// Top level controller which initializes the model and the view and
+// starts the game.
 public class GameWindowController {
+    private final IGameLoop gameLoop;
     private IGame game;               // Model
     private final Renderer  renderer; // view
     private final MainWindow window;  // view
-    private final IGameLoop gameLoop;
 
+    // Handles keyboard input from the user
     private KeyboardInputController keyboardInputController;
+
+    // Handles mouse input from the user
     private MouseInputController mouseInputController;
 
-
     public GameWindowController() {
-        // Init. view component
+        // Initializes main window view component
         window = new MainWindow(this);
 
+        // Fetches the canvas which will be used to render the game
         GameCanvas gameCanvas = window.getGameCanvas();
+
         // Create a new renderer using the graphics context supplied by the canvas.
         renderer = new Renderer(gameCanvas.getGraphicsContext2D());
 
@@ -46,8 +52,7 @@ public class GameWindowController {
                 renderer.drawAbilities();
 
                 // Updated the UI with relevant information (like cooldown time and game score)
-               updateUI();
-
+                updateUI();
 
                 // Apply all registered keyboard actions
                 keyboardInputController.applyRegisteredActions();
@@ -58,44 +63,42 @@ public class GameWindowController {
                 // Reinitialize game on player death
                 // TODO: handle player death properly
                 if(game.isGameOver()) gameSetup();
-                
-                if (game.getCurrentLevel().getEnemies().isEmpty()) game.nextLevel();
-                
 
+                // If all enemies are dead, progress to the next level
+                // TODO: should be performed by game itself!?!?!?
+                if (game.getCurrentLevel().getEnemies().isEmpty()) game.nextLevel();
             }
         };
 
         // Start the game loop. At this point, the game is running.
         gameLoop.start();
-
     }
 
     private void updateUI() {
-
         // Update score panel
         window.getScorePanel().updateScore(game.getCurrentLevel().getPlayer(), game.getScore());
 
         // Update cooldown timers
         window.getAbilityBar().updateAbilities(game.getCurrentLevel().getPlayer().getAbilities());
-
-
     }
 
-
+    //TODO: implement
     public void handleMenuLevelButton() {
         System.out.println("Level button clicked");
     }
 
-    //TODO: to implement
+    //TODO: implement
     public void handleMenuScoreButton() {
         System.out.println("Score button clicked ");
     }
 
+    // Button action for starting the game
     public void handleMenuStartButton() {
         gameLoop.setPaused(false);
         window.menuFadeIn();
     }
 
+    // Action for pausing the game
     private void pauseGame() {
         gameLoop.setPaused(true);
         window.menuFadeOut();
@@ -110,33 +113,40 @@ public class GameWindowController {
     }
 
     private void gameSetup() {
-
+        // Clears all the currently active abilities. This ensures abilities are not continued to be drawn after
+        // a restart.
         renderer.clearAbilities();
+
+        // Create game
         game = new Game();
+
         // Make sure view listens for ability action events
+        // This ensures the view knows when to draw certain effects, and gives the view itself the ability
+        // to control for how long an effect will be seen on screen.
         game.registerListener(renderer);
-        
 
         // Initialize the keyboard input handler.
         keyboardInputController = new KeyboardInputController(window);
         // Initialize the mouse input handler
         mouseInputController = new MouseInputController(window);
 
-        // Give key codes registered by the game pane a given action
+        // Bind key for pausing the game
+        keyboardInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
+
+        // Bind keys to player movement
         keyboardInputController.registerAction(KeyCode.W, game.getCurrentLevel().getPlayer()::moveUp);
         keyboardInputController.registerAction(KeyCode.A, game.getCurrentLevel().getPlayer()::moveLeft);
         keyboardInputController.registerAction(KeyCode.S, game.getCurrentLevel().getPlayer()::moveDown);
         keyboardInputController.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
-        keyboardInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
 
+        // Bind keys for player abilities
         keyboardInputController.registerAction(KeyCode.SHIFT, () -> game.activatePlayerAbility(0));
         keyboardInputController.registerAction(KeyCode.E, () -> game.activatePlayerAbility(1));
 
-        // Register for mouse events
+        // Bind mouse click to player ability
         mouseInputController.registerActionOnLeftClick(() -> game.activatePlayerAbility(2));
+
+        // Bind mouse movement to updating the player facing position
         mouseInputController.registerActionOnMove(     () -> game.setPlayerFacingPosition(mouseInputController.getMousePosition()));
-
     }
-
-
 }

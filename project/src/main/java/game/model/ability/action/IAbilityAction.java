@@ -10,7 +10,8 @@ public interface IAbilityAction {
     // The apply method will apply all changes, possibly adjusted depending on how much time has passed since activation.
     void apply(ILevel level, double timePassed);
 
-    // This method is called when the IAbilityAction is done, for cleanup
+    // This method is called when the IAbilityAction is done, for cleanup.
+    // Many abilities will not require this method.
     void onFinished(ILevel level);
 
     // Returns the user of the action
