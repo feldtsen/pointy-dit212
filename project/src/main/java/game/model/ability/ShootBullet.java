@@ -8,7 +8,6 @@ import javafx.geometry.Point2D;
 
 
 // Ability for shooting bullets
-
 public class ShootBullet extends Shoot {
     private final double bulletRadius;
     private final double maxForce;
