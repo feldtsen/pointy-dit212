@@ -354,6 +354,7 @@ public class Game implements IGame {
     //TODO: handle collision
     private void handleCollision(IEntity<?> e1, IEntity<?> e2){
     }
+    
 
     @Override
     public void registerListener(AbilityActionEventListener listener) {
