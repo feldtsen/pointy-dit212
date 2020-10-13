@@ -97,7 +97,7 @@ public class RendererUtils {
         SaveAndTranslate(graphicsContext, scaledShapeWidth, scaledShapeHeight, shape.getRotation(), scaledXPosition, scaledYPosition);
 
         graphicsContext.setFill(color);
-        graphicsContext.fillRect(scaledXPosition, scaledYPosition, scaledShapeWidth, scaledShapeHeight);
+        graphicsContext.fillRect(scaledXPosition - (scaledShapeWidth/2), scaledYPosition - (scaledShapeHeight/2), scaledShapeWidth, scaledShapeHeight);
 
         graphicsContext.restore();
     }
