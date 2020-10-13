@@ -8,9 +8,9 @@
 
 ## 1. Introduction
 
-Pointy is a topdown 2D game. The player is a simple geometrical shape which navigates a hostile, equally geometrical, world. In this world, the player is attacked by various enemies which shoot different kinds of projectiles at the player. The player itself has no weapon, but instead a set of abilities which (with some creativity) can be used to defeat the enemies. A few of these abilities are "reflection" (reflecting enemy projectiles), "shockwave" (pushing enemies away), "time manipulation" (slowing down time around the player) and "dash" (making the player invulnerable and very fast for a short period of time).
+Pointy is a topdown 2D game. The player is a simple geometrical shape that navigates a hostile, equally geometrical, world. In this world, the player is attacked by various enemies that shoot different kinds of projectiles at the player. The player itself has no weapon, but instead a set of abilities which (with some creativity) can be used to defeat the enemies. A few of these abilities are "reflection" (reflecting enemy projectiles), "shockwave" (pushing enemies away), "time manipulation" (slowing down time around the player), and "dash" (making the player invulnerable and very fast for a short period).
 
-The map contains different neutral elements, such as walls, spikes and traps, which can both be dangerous for the player, or cleverly used to aid the player in their mission.
+The map contains different neutral elements, such as walls, spikes, and traps, which can both be dangerous for the player, or cleverly used to aid the player in their mission.
 
 The goal of the player is to defeat all the enemies, reach the map exit, or perform a specific task. The game contains multiple levels, and by defeating one level, the player can progress to the next.
 
@@ -26,15 +26,15 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
 	   
 
 ## 2. System architecture
-The general architecture of the application is rather simple. No external servers or databases is used -- the game is all run locally on the machine of the user. 
+The general architecture of the application is rather simple. No external servers or databases used -- the game is all run locally on the machine of the user. 
 
-OpenJFX is used for the graphical end of the game, reading keyboard input, and handling sound. OpenJFX also manages the runnable application itself, which means a javaFX `Application` class is created to launch the game.
+OpenJFX is used for the graphical end of the game, reading keyboard input, and handling sound. OpenJFX also manages the runnable application itself, which means a JavaFX `Application` class is created to launch the game.
 
 Persistent data storage is all handled locally by an external JSON-parser. More can be read below (4. Persistent Data Storage). 
 
-When the application is started, the JavaFX Application loads a game window controller using an FXML loader. This game window controller then creates a new `Game` object, a game loop, and launches the game. At this point, all stored levels, user progress, and score, is read from disk, enabling the player to keep playing from where they last left of.
+When the application starts, the JavaFX Application loads a game window controller and initializes the `MainWindow` (the container for all graphical elements). This game window controller then creates a new `Game` object, a game loop, and launches the game. At this point, all stored levels, user progress, and the score is read from disk, enabling the player to keep playing from where they last left off.
 
-The player is prompted by a menu which controls the level settings, the starting and stopping of the game itself, and displaying score and other progress indicators. When the player starts the game, it will run until they stop it themselves, or until the game is finished.
+The player is prompted by a menu that controls the level settings, the starting and stopping of the game itself, and displaying the score and other progress indicators. When the player starts the game, it will run until they stop it themselves, or until the game is finished.
 
 When the player exits the application, all progress is stored locally. The same process is reapplied when the game is opened anew.
 
@@ -45,9 +45,9 @@ The controller package interacts with the view by letting `GameWindowController`
 
 Both the `Model` and `View` packages make use of the functions implemented in the util package to affect vectors.
 
-As of now, the MVC implementation is not typical. The controller (in this case, the `GameWindowController`) has access to both the view and the model. However, there's no clear relationship between the view and the model themselves. Instead, the controller passes part of the model as a attribute to the draw method in the view (Renderer class). For the moment, we see no reason to have the view use polling or another design pattern to query the model for data, since all the required data in our case easily can be passed by the `GameWindowController`. 
+As of now, the MVC implementation is not typical. The controller (in this case, the `GameWindowController`) has access to both the view and the model. However, there's no clear relationship between the view and the model themselves. Instead, the controller passes part of the model as an attribute to the draw method in the view (Renderer class). For the moment, we see no reason to have the view use polling or another design pattern to query the model for data since all the required data in our case easily can be passed by the `GameWindowController`. 
 
-Being that the view doesn't interact with the model in any way, we believe that we have managed to achieve a version of MVC that is better than the typical one, since we reach a higher level of decoupling than we otherwise would have.  
+Being that the view doesn't interact with the model in any way, we believe that we have managed to achieve a version of MVC that is better than the typical one since we reach a higher level of decoupling than we otherwise would have.  
 
 Here follows a set of diagrams over all our packages. We have decided to leave the fields containing lists of objects in the package diagrams, since the package diagrams otherwise cannot show the relationship between packages. However, we have left out these fields in the design model. Instead, these fields are represented by multiplicities. 
 
@@ -88,29 +88,29 @@ In the domain model, The `Game` class is said to run the `Level` which contains 
 
 The domain model shows `Enemy` to have two behaviours. In the design model, this is the case since `Enemy` has a reference to an `IAbilityBehaviour` and an `IMovementBehaviour`. These will dictate what actions are carried out by the enemy.
 
-Both the `Player` and `Behaviour` in the domain model have references to `Ability`. In the design model, `Player` has  a reference to one to three `IAbilties`. These abilities will be used by the player during the gameplay to affect the environment/state of the player in some way. The multiplicity of behaviours relation to `Ability` is 0..* in the domain model. In the design model, some behaviours will have no knowledge of abilities (movementBehaviours), while some will be able to hold many (abilityBehaviours). 
+Both the `Player` and `Behaviour` in the domain model have references to `Ability`. In the design model, `Player` has a reference to one to three `IAbilties`. These abilities will be used by the player during the gameplay to affect the environment/state of the player in some way. The multiplicity of behaviours related to `Ability` is 0..* in the domain model. In the design model, some behaviours will have no knowledge of abilities (movementBehaviours), while some will be able to hold many (abilityBehaviours). 
 
 The `Ability` in the domain model creates 0..* projectiles. In the design model, some concrete ability classes have references to projectiles. These abilities are supposed to create projectiles and add them to the level. Other abilities have no knowledge of projectiles at all.
 
 ### 3.2 Implemented design patterns
 
-* MVC (Model View Controller) for separating game logic, user input and graphical interface.
-* the factory (method) pattern, for simplifying the creation of game entities such as players and enemies
-* the command pattern, which is used for executing actions when a key is pressed.
-* the composite pattern, allowing players and enemies to have different abilities and behaviors. The construction of these entities is simplified using the factory pattern.
-* the template method pattern, by letting Ability implement a method that is dependent on an abstract method implemented by subclasses.
-* the visitor pattern, shapes accepts a visitor to do specific action for different shapes
+* MVC (Model View Controller) for separating game logic, user input, and graphical interface.
+* Factory (method) pattern for simplifying the creation of game entities such as players and enemies
+* Command pattern, which is used for executing actions when a key is pressed.
+* Composite pattern, allowing players and enemies to have different abilities and behaviours. The construction of these entities is simplified using the factory pattern.
+* Template method pattern, letting Ability implement a method that is dependent on an abstract method implemented by subclasses.
+* Visitor pattern, shapes accept a visitor to do specific action for different shapes
 
 ## 4. Persistent data management
 
-The application currently makes use of JSON to handle level data. The level files contain JSON objects pertaining to information of the level and its entities, i.e. their type (player, enemy, obstacle), variants (e.g. type of enemy) as well as instance variables not handled by the factory. Levels are loaded through the static class `LevelLoader` which parses the JSON file corresponding to a certain level ID, creates an object of type `Level` and returns this object to be used by the `Game` class. Each level is contained within a separate file and is only loaded when needed to save memory resources. The parsing is done using the GSON library. 
+The application currently makes use of JSON to handle level data. The level files contain JSON objects pertaining to the information of the level and its entities, i.e. their type (player, enemy, obstacle), variants (e.g. type of enemy) as well as instance variables not handled by the factory. Levels are loaded through the static class `LevelLoader` which parses the JSON file corresponding to a certain level ID, creates an object of type `Level`, and returns this object to be used by the `Game` class. Each level is contained within a separate file and is only loaded when needed to save memory resources. The parsing is done using the GSON library. 
 
-Future possible functionality includes storing and parsing level data as ascii to enable easier level development, saving player progress made up to that point, as well as keeping top scores.  
+Future possible functionality includes storing and parsing level data as ASCII to enable easier level development, saving player progress made up to that point, as well as keeping top scores.  
 
 
 ## 5. Quality
 
-The application is tested using unit tests with the framework JUnit. These tests can be found under: project/src/main/test.
+The application is tested using unit tests with the framework JUnit. These tests can be found under project/src/main/test.
 
 ## 6. References
 - JavaFX - https://openjfx.io/
