@@ -6,6 +6,7 @@ package game.model.entity;
 public interface IStrength {
     int getStrength();
     void setStrength(int strength);
+    // Checks if an entity is stronger than another entity
     default boolean isStrongerThan(IStrength other) {
         return this.getStrength() > other.getStrength();
     }

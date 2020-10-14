@@ -9,6 +9,7 @@ import javafx.geometry.Point2D;
 //Strength marks damage done and is implemented through interface IStrength.
 //However, spikes cannot be killed by entities with higher strength as is normally the case.
 public class Spikes extends Entity<Rectangle> implements IObstacle, IStrength {
+    // The strength of the spikes. This is the amount of damage they will do to an living entity
     private int strength;
 
     public Spikes(Point2D position, double width, double height, int strength) {

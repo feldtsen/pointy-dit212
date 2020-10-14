@@ -8,7 +8,9 @@ import javafx.geometry.Point2D;
 
 // Missiles are a homing projectile which steers towards its target.
 public class Missile extends Projectile<ITriangle> {
+    // The target of the missile
     private IEntity<?> target;
+    // The movement behavior of the missile. Typically some kind of seeking behavior
     private final IMovementBehaviour movementBehaviour;
 
     // The responsiveness of the missile to the movement of the target is dictated by the size of maxForce. The more
@@ -22,9 +24,12 @@ public class Missile extends Projectile<ITriangle> {
     }
 
 
+    // Sets the target of the missile
     public boolean setTarget(IEntity<?> target){
+        // Return false if the target is the missile itself.
+        if(target.equals(this)) return false;
         this.target = target;
-        return true;    //TODO: Temporary, Change when invalid targets exist
+        return true;
     }
 
     public IEntity<?> getTarget(){
@@ -33,6 +38,7 @@ public class Missile extends Projectile<ITriangle> {
 
     @Override
     public void update(double delta, double timeStep) {
+        // Apply the movement behavior
         movementBehaviour.apply(this, target);
         super.update(delta, timeStep);
     }

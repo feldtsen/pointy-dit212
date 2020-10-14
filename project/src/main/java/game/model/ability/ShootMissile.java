@@ -8,13 +8,14 @@ import javafx.geometry.Point2D;
 
 // Ability for shooting missiles
 public class ShootMissile extends Shoot {
-    private final double width;
-    private final double height;
-    private final double maxForce;
-    private final double maxSpeed;
-    private final double minSpeed;
-    private final int strength;
-    private final IMovementBehaviour movementBehaviour;
+    private final double width;     // Width of missile
+    private final double height;    // Height of missile
+    private final double maxForce;  // Max force (responsiveness) of missile
+    private final double maxSpeed;  // Max speed of missile
+    private final double minSpeed;  // Minimum speed of missile. This ensures the missile never completely stops, which creates
+                                    // a more realistic behavior.
+    private final int strength;     // The strength of the missile
+    private final IMovementBehaviour movementBehaviour; // The movement behavior of the missile. Usually a seeking behavior.
 
     public ShootMissile(long cooldown, double width, double height, double maxForce, double maxSpeed, double minSpeed, int strength,
                         IMovementBehaviour movementBehaviour) {

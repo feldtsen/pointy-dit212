@@ -4,6 +4,7 @@ import game.view.IVisitableShape;
 import javafx.geometry.Point2D;
 import java.util.List;
 
+// Interface for defining simple shapes
 public interface IShape2D extends IVisitableShape {
     /* Returns a list of normalized vectors (axes) to be used when checking for collisions.
        Args: position1 - The position of the shape calling the method.
@@ -33,5 +34,4 @@ public interface IShape2D extends IVisitableShape {
     // The (max) width and height of the shape
     double getWidth();
     double getHeight();
-
 }

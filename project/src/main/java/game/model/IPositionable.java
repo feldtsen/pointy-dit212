@@ -2,7 +2,7 @@ package game.model;
 
 import javafx.geometry.Point2D;
 
+// Interface implemented by any object in the game which has an position.
 public interface IPositionable {
-    // Interface implemented by any object in the game which has an position.
     Point2D getPosition();
 }

@@ -20,5 +20,8 @@ public interface IEnemy extends ILiving, IMovable<ICircle> {
     // Target may be null, if the enemy has no particular target.
     boolean setTarget(IEntity<?> target);
 
+    // Applies an ability. Is usually called every frame, however, since abilities
+    // have cooldown and should return null if the cooldown is active, this method will often
+    // return null
     IAbilityAction applyAbility();
 }

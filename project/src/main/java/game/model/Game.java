@@ -1,12 +1,8 @@
 package game.model;
 
-import game.controller.GameWindowController;
 import game.controller.event.AbilityActionEvent;
 import game.controller.event.AbilityActionEventListener;
 import game.controller.event.IAbilityActionEvent;
-import game.model.ability.Dash;
-import game.model.ability.Reflect;
-import game.model.ability.Shockwave;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.IEnemy;
@@ -17,7 +13,6 @@ import game.model.entity.projectile.IProjectile;
 import game.controller.gameLoop.GameLoop;
 import game.model.level.ILevel;
 import game.model.shape2d.ICircle;
-import game.services.EntityFactory;
 import game.services.LevelLoader;
 import game.util.Utils;
 import javafx.geometry.Point2D;
@@ -26,14 +21,21 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.NoSuchElementException;
 
+// Implementation of game interface.
+// This is the core of the model, binding all the model parts together.
 public class Game implements IGame {
     private int score; // Player score
+
+    // True if the player has lost the game
     private boolean gameOver;
 
-    private List<ILevel> levels = null;
+    private List<ILevel> levels = null; //TODO: remove?
+
+    // An iterator over the existing levels
     private final Iterator<String> levelID;
+
+    // The current, active level
     private ILevel currentLevel;
 
     // This value represents the position the player is "looking towards".
@@ -50,11 +52,13 @@ public class Game implements IGame {
     // Index n in this list corresponds to index n in activeAbilityActions.
     private final List<Long> activationTimes;
 
+    // Ability action event listeners
+    private final List<AbilityActionEventListener> listeners;
 
     public Game() {
-
         //TODO: Fix proper function
-        this.levelID = getLevelID(3).iterator();
+        this.levelID = getLevelIDs(3).iterator();
+        // Load the next level (first)
         nextLevel();
 
         this.score = 0;
@@ -64,28 +68,25 @@ public class Game implements IGame {
         this.currentAbilityTimes = new ArrayList<>();
         this.activationTimes = new ArrayList<>();
 
-
-        this.playerFacingPosition = new Point2D(currentLevel.getWidth() / 2, currentLevel.getHeight() / 2);
-
-        this.playerFacingPosition = new Point2D(currentLevel.getWidth() / 2, currentLevel.getHeight() / 2); // Default direciton
-
+        this.playerFacingPosition = new Point2D(currentLevel.getWidth() / 2, currentLevel.getHeight() / 2); // Default direction
         listeners = new ArrayList<>();
     }
 
-
-    // Ability action event listeners
-    private final List<AbilityActionEventListener> listeners;
-
+    // Loads the next level
     public void nextLevel() {
         try {
+            // If there is another level, load it
             if (levelID.hasNext()) setLevel(LevelLoader.load(levelID.next()));
+            //TODO: what happens when there's no next level?
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private List<String> getLevelID(int nrOfLevels) {
+    // Returns the IDs of the next level
+    // TODO: move to level loader or service class?
+    private List<String> getLevelIDs(int nrOfLevels) {
         List<String> id = new ArrayList<>();
         for (int i = 1; i <= nrOfLevels; i++) {
             id.add(Integer.toString(i));
@@ -104,8 +105,11 @@ public class Game implements IGame {
             listener.onAction(event);
         }
 
+        // Activate ability
         activeAbilityActions.add(action);
+        // Set time to since started to 0
         currentAbilityTimes.add(0.0D);
+        // Set nano time to now
         activationTimes.add(now);
     }
 
@@ -142,6 +146,7 @@ public class Game implements IGame {
         // Set the facing direction of the player
         Point2D direction = playerFacingPosition.subtract(player.getPosition());
         double angle = Utils.heading(direction);
+        // Rotate the player to point towards the player facing position
         player.getShape().setRotation(angle);
 
         // Check for collisions between player and projectiles. Adjust players hit points if collision occurs.
@@ -172,8 +177,10 @@ public class Game implements IGame {
                     }
                 }
             }
+            // Iterate over all obstacles and check for collision with projectiles
             for (IObstacle obstacle: getCurrentLevel().getObstacles()) {
                 if (projectile.checkCollision(obstacle)) {
+                    // set destroyed on collision
                     projectile.setDestroyed();
                 }
             }
@@ -190,10 +197,11 @@ public class Game implements IGame {
             containToBounds(enemy); // Ensure enemies cannot leave map.
 
             // Activate enemy abilities
+            // If cooldown is active, no ability action will be returned, and this method call will do nothing
             activateAbility(enemy.applyAbility(), now);
         }
 
-        // Uppdate all obstacles
+        // Update all obstacles
         for(IObstacle obstacle: currentLevel.getObstacles()) {
             obstacle.update(delta, timeStep);
         }
@@ -236,13 +244,12 @@ public class Game implements IGame {
                     e1.setHitPoints(0);
                 }
             }
+            // Check enemy-obstacle colllision
             for (IObstacle obstacle: getCurrentLevel().getObstacles()){
                 if (e1.checkCollision(obstacle)) {
                     handleCollision(e1,obstacle);
                 }
-
             }
-            
 
             // Check if enemy is dead
             if(!e1.isAlive()) {
@@ -262,9 +269,10 @@ public class Game implements IGame {
                 deactivateAbility(i);
             }
         }
-
     }
 
+    // Activates the player ability. This method is called from outside the game,
+    // usually by a controller triggered by user input.
     @Override
     public boolean activatePlayerAbility(int index) {
         IAbilityAction action = currentLevel.getPlayer().activateAbility(index);
@@ -275,6 +283,8 @@ public class Game implements IGame {
         return false;
     }
 
+    // Updates the player facing position. This is usually triggered outside of game, probably by a mouse
+    // input controller.
     @Override
     public void setPlayerFacingPosition(Point2D playerFacingPosition) {
         this.playerFacingPosition = playerFacingPosition;
@@ -325,6 +335,7 @@ public class Game implements IGame {
         entity.setVelocity(v);
     }
 
+    // sets the current level
     @Override
     public boolean setLevel(ILevel level) {
         this.currentLevel = level;
@@ -362,8 +373,8 @@ public class Game implements IGame {
     //TODO: handle collision
     private void handleCollision(IEntity<?> e1, IEntity<?> e2){
     }
-    
 
+    // Registers listeners for ability action events
     @Override
     public void registerListener(AbilityActionEventListener listener) {
         listeners.add(listener);

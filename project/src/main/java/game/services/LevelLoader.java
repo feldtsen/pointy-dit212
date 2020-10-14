@@ -20,7 +20,6 @@ import java.util.List;
 
 //Class for loading levels using GSON JSON parser.
 public class LevelLoader {
-
     private static JsonObject levelJSON;
 
     //Constructor takes the level ID in form of a string and parses the level data into a JSON object.

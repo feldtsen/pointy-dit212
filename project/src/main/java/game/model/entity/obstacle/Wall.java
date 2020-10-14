@@ -6,6 +6,7 @@ import javafx.geometry.Point2D;
 //Basic obstacle which entities can collide with and use for cover.
 public class Wall extends Entity<Rectangle> implements IObstacle{
 
+    // A wall is always a rectangle
     public Wall(Point2D position, double width, double height) {
         super(position, new Rectangle(width, height,0));
     }

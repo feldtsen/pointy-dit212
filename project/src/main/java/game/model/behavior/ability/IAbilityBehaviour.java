@@ -14,5 +14,6 @@ public interface IAbilityBehaviour extends IBehaviour {
     // an ability behavior has no particular target.
     IAbilityAction apply(IEntity<?> user, IEntity<?> target);
 
+    // Returns the list of abilities in this ability behavior
     List<IAbility> getAbilities();
 }
