@@ -61,19 +61,8 @@ public class Rectangle implements IRectangle {
     public double[] projection(Point2D axis, Point2D position) {
         List<Point2D> cornerPoints = getPoints(position);
 
-        double min = axis.dotProduct(cornerPoints.get(0));
-        double max = min;
-
-        for (int i = 1; i < cornerPoints.size(); i++) {
-            double projection = axis.dotProduct(cornerPoints.get(i));
-            if (projection < min) {
-                min = projection;
-            }
-            else if (projection >  max) {
-                max = projection;
-            }
-        }
-        return new double[]{min, max};
+        // Project the corner points onto the given axis and return the min and max values.
+        return Shapes.project(axis, cornerPoints);
     }
 
     @Override

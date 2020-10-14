@@ -65,23 +65,10 @@ public class Triangle implements ITriangle {
     // Takes the position of the triangle and a vector, and returns an array containing the minimum and maximum
     // projection of the triangles corners onto the given vector.
     public double[] projection(Point2D axis, Point2D position) {
-
         List<Point2D> corners = getPoints(position);
 
-        double min = axis.dotProduct(corners.get(0));
-        double max = min;
-        for (int i = 1; i < corners.size(); i++) {
-            double projection = axis.dotProduct(corners.get(i));
-
-            if (projection < min) {
-                min = projection;
-            }
-            else if (projection > max) {
-                max = projection;
-            }
-        }
-
-        return new double[]{min, max};
+        // Projects the corners onto the axis and returns the min and max values.
+        return Shapes.project(axis, corners);
     }
 
     @Override

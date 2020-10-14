@@ -60,4 +60,30 @@ public class Shapes {
         return (!(r2Projection[1] < r1Projection[0] || r1Projection[1] < r2Projection[0]));
     }
 
+    // Projects a given list of points onto the given vector. Returns the min- and max projections as an array of doubles.
+    public static double[] project(Point2D axis, List<Point2D> points) {
+
+        // Project first point onto the axis to get a starting value for max and min.
+        double min = axis.dotProduct(points.get(0));
+        double max = min;
+
+        // Loop over points to find smallest and largest projections.
+        for (int i = 1; i < points.size(); i++) {
+
+            // Project current onto the given axis.
+            double projection = axis.dotProduct(points.get(i));
+
+            if (projection < min) {
+                min = projection;
+            }
+
+            else if (projection > max) {
+                max = projection;
+            }
+        }
+
+        // Return double array where first element is min and second is max.
+        return new double[]{min, max};
+    }
+
 }
