@@ -42,9 +42,12 @@ public class Triangle implements ITriangle {
     @Override
     // Returns a list of normalized vectors orthogonal to the sides of the triangle
     public List<Point2D> getAxes(Point2D position1, IShape2D shape2, Point2D position2) {
+        // Get points of this shape.
         List<Point2D> points = getPoints(position1);
+
         List<Point2D> axes = new ArrayList<>();
 
+        // Loop over all points and create vectors between each.
         for (int i = 0; i < points.size(); i++) {
             // Get vector between two corners.
             Point2D vector = points.get(i).subtract(points.get((i + 1) % points.size()));
@@ -61,7 +64,6 @@ public class Triangle implements ITriangle {
     @Override
     // Takes the position of the triangle and a vector, and returns an array containing the minimum and maximum
     // projection of the triangles corners onto the given vector.
-    //TODO: duplicate code with Rectangle. Probably better to move this to Shapes.
     public double[] projection(Point2D axis, Point2D position) {
 
         List<Point2D> corners = getPoints(position);

@@ -6,6 +6,7 @@ import java.util.List;
 
 // Interface for defining simple shapes
 public interface IShape2D extends IVisitableShape {
+
     /* Returns a list of normalized vectors (axes) to be used when checking for collisions.
        Args: position1 - The position of the shape calling the method.
              shape2    - The other shape.
