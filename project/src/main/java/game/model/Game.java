@@ -27,8 +27,11 @@ import java.util.List;
 public class Game implements IGame {
     private int score; // Player score
 
-    // True if the player has lost the game
+    // True if the player has lost the game.
     private boolean gameOver;
+
+    // True if game is completed.
+    private boolean gameWin;
 
     private List<ILevel> levels = null; //TODO: remove?
 
@@ -56,13 +59,14 @@ public class Game implements IGame {
     private final List<AbilityActionEventListener> listeners;
 
     public Game() {
-        //TODO: Fix proper function
-        this.levelID = getLevelIDs(3).iterator();
+
+        this.levelID = LevelLoader.getLevelIDs(3).iterator();
         // Load the next level (first)
         nextLevel();
 
         this.score = 0;
         this.gameOver = false;
+        this.gameWin = false;
 
         this.activeAbilityActions = new ArrayList<>();
         this.currentAbilityTimes = new ArrayList<>();
@@ -76,23 +80,18 @@ public class Game implements IGame {
     public void nextLevel() {
         try {
             // If there is another level, load it
-            if (levelID.hasNext()) setLevel(LevelLoader.load(levelID.next()));
-            //TODO: what happens when there's no next level?
+            if (levelID.hasNext()) {
+                setLevel(LevelLoader.load(levelID.next()));
+            }
+            else {
+                gameWin = true;
+            }
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    // Returns the IDs of the next level
-    // TODO: move to level loader or service class?
-    private List<String> getLevelIDs(int nrOfLevels) {
-        List<String> id = new ArrayList<>();
-        for (int i = 1; i <= nrOfLevels; i++) {
-            id.add(Integer.toString(i));
-        }
-        return id;
-    }
 
     // Activate ability adds an ability to the active ability actions list, together with the
     // corresponding activation time.
@@ -368,6 +367,11 @@ public class Game implements IGame {
     @Override
     public boolean isGameOver() {
         return gameOver;
+    }
+
+    @Override
+    public boolean isGameWin() {
+        return gameWin;
     }
 
     //TODO: handle collision

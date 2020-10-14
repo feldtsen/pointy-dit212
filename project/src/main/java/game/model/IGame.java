@@ -28,6 +28,9 @@ public interface IGame extends AbilityActionEventHandler, IUpdatable {
 
     // This method returns true on player death.
     boolean isGameOver();
+
+    // Returns true when game is completed.
+    boolean isGameWin();
     
     void nextLevel();
 

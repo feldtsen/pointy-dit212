@@ -60,6 +60,8 @@ public class GameWindowController {
                 // Update the game model with a global time step of 1 (normal speed)
                 game.update(delta, 1);
 
+                if(game.isGameWin()) showMenu();
+
                 // Displays game over message
                 if(game.isGameOver()) handleGameOver();
 

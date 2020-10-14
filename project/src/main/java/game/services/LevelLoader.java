@@ -34,6 +34,15 @@ public class LevelLoader {
         return new Level(enemies, projectiles, obstacles, player, 1200, 675);
     }
 
+    // Returns the IDs of the next level
+    public static List<String> getLevelIDs(int nrOfLevels) {
+        List<String> id = new ArrayList<>();
+        for (int i = 1; i <= nrOfLevels; i++) {
+            id.add(Integer.toString(i));
+        }
+        return id;
+    }
+
     private static IPlayer loadPlayer() {
         double x = levelJSON.getAsJsonObject("Player").get("x").getAsDouble();
         double y = levelJSON.getAsJsonObject("Player").get("y").getAsDouble();
