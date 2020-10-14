@@ -72,11 +72,12 @@ public class Rectangle implements IRectangle {
 
         double x = position.getX();
         double y = position.getY();
-        cornerPoints.add(new Point2D(x - width/2, y + height/2));
-        cornerPoints.add(new Point2D(x - width/2, y - height/2));
-        cornerPoints.add(new Point2D(x + width/2, y - height/2));
-        cornerPoints.add(new Point2D(x + width/2, y + height/2));
+        cornerPoints.add(new Point2D(x - width/2, y + height/2)); // Top left corner.
+        cornerPoints.add(new Point2D(x - width/2, y - height/2)); // Bottom left corner.
+        cornerPoints.add(new Point2D(x + width/2, y - height/2)); // Bottom right corner.
+        cornerPoints.add(new Point2D(x + width/2, y + height/2)); // Top right corner.
 
+        // Rotate corners around the center according to the current rotation of the shape.
         Shapes.rotatePoints(cornerPoints, position, rotation);
         return cornerPoints;
     }
