@@ -4,6 +4,7 @@ import game.model.behavior.IBehaviour;
 import game.model.entity.IEntity;
 import game.model.entity.movable.IMovable;
 
+// A behavior class for defining different kinds of movement. Used by enemies and certain projectiles.
 public interface IMovementBehaviour extends IBehaviour {
 
     // Applies the behaviour of one entity to another entity.

@@ -10,6 +10,7 @@ import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+// Basic player implementation
 public class Player extends LivingEntity<ICircle> implements IPlayer {
     // Unit vectors in all four directions. These are used as helper vectors
     // for defining different movement actions.
@@ -25,6 +26,7 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
         this.abilities = new ArrayList<>();
     }
 
+    // Activates an ability at a certain index. If there's no ability at the index, null is returned
     @Override
     public IAbilityAction activateAbility(int index) {
         if(index >= abilities.size()) return null;
@@ -57,14 +59,14 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
         return true;
     }
 
-    @Override
-    public List<IAbility> getAbilities() {
-        return abilities;
-    }
-
     private void moveDirection(Point2D direction) {
         // Adds a force in the direction of movement. The vector is multiplied to reach the
         // length of max force, which will be the movement acceleration of the player.
        addForce(direction.multiply(getMaxForce()));
+    }
+
+    @Override
+    public List<IAbility> getAbilities() {
+        return abilities;
     }
 }

@@ -9,10 +9,10 @@ import javafx.geometry.Point2D;
 
 // Ability for shooting bullets
 public class ShootBullet extends Shoot {
-    private final double bulletRadius;
-    private final double maxForce;
-    private final double maxSpeed;
-    private final int strength;
+    private final double bulletRadius; // The radius of the bullet
+    private final double maxForce;     // The max force of the bullet
+    private final double maxSpeed;     // The max speed of the bullet
+    private final int strength;        // The strength of the bullet
 
     public ShootBullet(long cooldown, double bulletRadius, double maxForce, double maxSpeed, int strength) {
         super(cooldown);
@@ -28,7 +28,7 @@ public class ShootBullet extends Shoot {
         Point2D bulletVelocity = target.getPosition().subtract(user.getPosition());
         bulletVelocity = Utils.setMagnitude(bulletVelocity, maxSpeed);
 
-        // Create new bullet.
+        // Create and return new bullet at the position of the user
         return new Bullet(user.getPosition(), bulletRadius, maxForce, maxSpeed, strength, bulletVelocity);
     }
 }

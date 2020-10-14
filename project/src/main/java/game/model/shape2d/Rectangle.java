@@ -6,18 +6,19 @@ import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+// Rectangle implementation
 public class Rectangle implements IRectangle {
-    private double width;
-    private double height;
-    private final double originWidth;
-    private final double originHeight;
+    // Width of the rectangle
+    private final double width;
+    // Height of the rectangle
+    private final double height;
+
+    // The rotation of the rectangle
     private double rotation;
 
     public Rectangle(double width, double height, double rotation) {
         this.height = height;
         this.width = width;
-        originWidth = width;
-        originHeight = height;
         this.rotation = rotation;
     }
 
@@ -98,6 +99,7 @@ public class Rectangle implements IRectangle {
         return Math.sqrt(Math.pow(height/2, 2) + Math.pow(width/2, 2));
     }
 
+    // Implementation of visitor pattern.
     @Override
     public void acceptShapeVisitor(IShapeVisitor visitor) {
         visitor.visit(this);

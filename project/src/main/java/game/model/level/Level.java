@@ -10,7 +10,6 @@ import java.util.List;
 //Holds all relevant data about a level.
 //Used by "Game" class
 public class Level implements ILevel {
-
     private final List<IEnemy> enemies;
     private final List<IProjectile<?>> projectiles;
     private final List<IObstacle> obstacles;
@@ -69,17 +68,17 @@ public class Level implements ILevel {
     }
 
     @Override
-    public void removeEnemy(IEnemy e) {
-        enemies.remove(e);
+    public void removeEnemy(IEnemy enemy) {
+        enemies.remove(enemy);
     }
 
     @Override
-    public void removeObstacle(IObstacle o) {
-        obstacles.remove(o);
+    public void removeObstacle(IObstacle obstacle) {
+        obstacles.remove(obstacle);
     }
 
     @Override
-    public void removeProjectile(IProjectile<?> p) {
-        projectiles.remove(p);
+    public void removeProjectile(IProjectile<?> projectile) {
+        projectiles.remove(projectile);
     }
 }

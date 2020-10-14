@@ -72,6 +72,7 @@ public class Reflect extends Ability {
 
     public Reflect(long cooldown, double angle, double radius, double control, double duration, int strength) {
         super(cooldown);
+        // Throw exception if control is less than 0 or greater than 1
         if(control < 0 || control > 1) throw new IllegalArgumentException();
         this.angle = angle;
         this.radius = radius;

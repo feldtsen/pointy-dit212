@@ -5,17 +5,19 @@ import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+// Simple circle shape
 public class Circle implements ICircle {
-    private double radius;
-    private final double originRadius;
+    // Radius of the circle
+    private final double radius;
+
+    // The rotation of a circle shape is irrelevant, but since all shapes are defined to have a rotation,
+    // circles will have one too.
     private double rotation;
 
     public Circle(double radius){
         this.radius = radius;
-        originRadius = radius;
         this.rotation = 0;
     }
-
 
     @Override
     public double getRadius() {

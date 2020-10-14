@@ -11,6 +11,7 @@ import javafx.geometry.Point2D;
 //Speed vector is calulated from the distance between the two positions' x and y coordinates.
 //Velocity is normalized to maxSpeed using Util limit.
 public class MovingWall extends MovableEntity<Rectangle> implements IObstacle {
+    // The start position of the moving wall. The moving wall will then move towards the end position, and back again
     private final Point2D startPosition;
     private final Point2D endPosition;
 
@@ -19,7 +20,6 @@ public class MovingWall extends MovableEntity<Rectangle> implements IObstacle {
         super(startPosition, Utils.limit(endPosition.subtract(startPosition), maxSpeed), maxSpeed, maxForce, new Rectangle(width, height,0));
         this.startPosition = startPosition;
         this.endPosition = endPosition;
-
     }
 
     //Changes direction of travel when reaching either starting position or end position.
@@ -29,7 +29,7 @@ public class MovingWall extends MovableEntity<Rectangle> implements IObstacle {
         if (startPosition.subtract(getPosition()).getX() > 0)  {
             setVelocity(new Point2D(Math.abs(getVelocity().getX() * -1), getVelocity().getY()));
         }
-        // Reaching endosition x, right side of screen
+        // Reaching end position x, right side of screen
         else if (endPosition.subtract(getPosition()).getX() < 0) {
             setVelocity(new Point2D(-Math.abs(getVelocity().getX() * -1), getVelocity().getY()));
         }
@@ -37,10 +37,11 @@ public class MovingWall extends MovableEntity<Rectangle> implements IObstacle {
         if (startPosition.subtract(getPosition()).getY() > 0) {
             setVelocity(new Point2D(getVelocity().getX(), Math.abs(getVelocity().getY() * -1)));
         }
-        // Reaching endosition y, bottom of screen
+        // Reaching end position y, bottom of screen
         else if (endPosition.subtract(getPosition()).getY() < 0) {
             setVelocity(new Point2D(getVelocity().getX(), -Math.abs(getVelocity().getY() * -1)));
         }
+        // Update
         super.update(delta, timeStep);
     }
 }

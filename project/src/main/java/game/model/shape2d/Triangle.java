@@ -7,23 +7,17 @@ import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+// Triangle implementation
 public class Triangle implements ITriangle {
     private double width;
     private double height;
-    private final double originWidth;
-    private final double originHeight;
-
-
     private double rotation;
 
     public Triangle(double width, double height, double rotation) {
         this.rotation = rotation;
         this.width = width;
         this.height = height;
-        originWidth = width;
-        originHeight = height;
     }
-
 
     @Override
     public double getWidth() {
@@ -114,6 +108,7 @@ public class Triangle implements ITriangle {
         return Math.max(dist1, dist2); // Return max of distances.
     }
 
+    // Implementation of visitor pattern
     @Override
     public void acceptShapeVisitor(IShapeVisitor visitor) {
         visitor.visit(this);

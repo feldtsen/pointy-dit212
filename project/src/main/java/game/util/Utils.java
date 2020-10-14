@@ -2,6 +2,7 @@ package game.util;
 
 import javafx.geometry.Point2D;
 
+// Util class for doing vector operations, and more (wow)
 public class Utils {
     /* Private constructor to ensure class cannot be instantiated */
     private Utils() {

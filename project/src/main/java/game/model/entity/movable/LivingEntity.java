@@ -7,11 +7,12 @@ import javafx.geometry.Point2D;
 //Class from which all living entities inherits.
 //Has hit points which upon reaching zero will cause the death of the entity.
 public abstract class LivingEntity<T extends IShape2D> extends MovableEntity<T> implements ILiving {
-
+    // The number of hit points for this living entity
     private int hitPoints;
+    // True if the entity is invulnerable. If an entity is invulnerable, it cannot be killed by another entity
     private boolean isInvulnerable;
+    // The strength (or damage) of the entity.
     private int strength;
-
 
     public LivingEntity(Point2D position, double maxForce, double maxSpeed, int hitPoints, T shape, int strength) {
         super(position, maxForce, maxSpeed, shape);
@@ -49,7 +50,7 @@ public abstract class LivingEntity<T extends IShape2D> extends MovableEntity<T> 
     }
 
     @Override
-    public void setIsInvulnerable(boolean invulnerable) {
-        isInvulnerable = invulnerable;
+    public void setIsInvulnerable(boolean isInvulnerable) {
+        this.isInvulnerable = isInvulnerable;
     }
 }
