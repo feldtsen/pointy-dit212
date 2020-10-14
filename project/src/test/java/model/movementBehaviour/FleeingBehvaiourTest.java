@@ -56,15 +56,19 @@ public class FleeingBehvaiourTest {
     // If the enemy is neither too far away nor to close, it should be moving sideways.
     public void testStrafe() {
 
-        // Places the enemy at a distance from the player where it should strafe.
-        setup(400, 0);
+        // Uses loop so that both branches of randDirection get covered.
+        for (int i = 0; i < 10; i++) {
 
-        // Vector pointing from enemy to target.
-        Point2D difVector = player.getPosition().subtract(enemy.getPosition());
+            // Places the enemy at a distance from the player where it should strafe.
+            setup(400, 0);
 
-        enemy.update(0.1, 1);
+            // Vector pointing from enemy to target.
+            Point2D difVector = player.getPosition().subtract(enemy.getPosition());
 
-        // The enemy is strafing if its velocity vector is orthogonal to the original vector from the enemy to the player.
-        assertTrue(difVector.dotProduct(enemy.getVelocity()) == 0);
+            enemy.update(0.1, 1);
+
+            // The enemy is strafing if its velocity vector is orthogonal to the original vector from the enemy to the player.
+            assertTrue(difVector.dotProduct(enemy.getVelocity()) == 0);
+        }
     }
 }
