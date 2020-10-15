@@ -16,6 +16,7 @@ import game.model.shape2d.ICircle;
 import game.services.LevelLoader;
 import game.util.Utils;
 import javafx.geometry.Point2D;
+import javafx.scene.effect.Light;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -203,6 +204,9 @@ public class Game implements IGame {
         // Update all obstacles and check for collision with player.
         for(IObstacle obstacle: currentLevel.getObstacles()) {
             obstacle.update(delta, timeStep);
+
+            // minimum translation vector - the shortest distance the player can be moved for the collision to no
+            // longer occur.
             Point2D mtv = player.checkCollision(obstacle);
             if (mtv != null) {
                 player.move(mtv);
@@ -229,8 +233,14 @@ public class Game implements IGame {
             // self collision checking.
             for (int j = i + 1; j < currentLevel.getEnemies().size(); j++){
                 IEnemy e2 = currentLevel.getEnemies().get(j);
-                if (e1.checkCollision(e2) != null) {
-                    handleCollision(e1,e2);
+
+                // minimum translation vector.
+                Point2D mtv = e1.checkCollision(e2);
+                if (mtv != null) {
+
+                    // Apply half of the mtv on one enemy and half on the other in the opposite direction.
+                    e1.move(Utils.setMagnitude(mtv, mtv.magnitude() / 2));
+                    e2.move(Utils.setMagnitude(mtv, mtv.magnitude() / 2 * (-1)));
                 }
             }
 
@@ -252,7 +262,6 @@ public class Game implements IGame {
                 Point2D mtv = e1.checkCollision(obstacle);
                 if (mtv != null) {
                     e1.move(mtv);
-                    //handleCollision(e1,obstacle);
                 }
             }
 
