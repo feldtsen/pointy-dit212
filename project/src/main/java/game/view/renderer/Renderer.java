@@ -88,11 +88,11 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
 
     private Effect createReflectEffect(){
      return new Effect(0.2) {
-         double radius = 200;
+         double radius = 1000;
          @Override
          void render(IAbilityAction action, double time) {
              Point2D position = action.getUser().getPosition();
-             ICircle circle = new Circle(radius);
+             ICircle circle = new Circle(radius * time);
              circle.setRotation(action.getUser().getShape().getRotation() + (3 * Math.PI)/4);
              RendererUtils.drawArc(graphicsContext, colors.get(action.getUser().getClass()), circle, position, Math.PI/2);
          }

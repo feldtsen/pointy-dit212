@@ -60,6 +60,7 @@ public class GameWindowController {
                 // Update the game model with a global time step of 1 (normal speed)
                 game.update(delta, 1);
 
+
                 if(game.isGameWin()) showMenu();
 
                 // Displays game over message
@@ -72,6 +73,10 @@ public class GameWindowController {
                     // Register movement keys to new player object
                     registerPlayerControls();
                 }
+
+                game.getCurrentLevel().getPlayer().setFacingDirection(mouseInputController.getMousePosition());
+
+
 
                 // If all enemies are dead, progress to the next level
                 // TODO: should be performed by game itself!?!?!?
@@ -208,6 +213,6 @@ public class GameWindowController {
         // Bind mouse movement to updating the player facing position
 //        mouseInputController.registerActionOnMove(     () -> game.setPlayerFacingPosition(mouseInputController.getMousePosition()));
 
-        mouseInputController.registerActionOnMove(     () -> game.getCurrentLevel().getPlayer().setFacingDirection(mouseInputController.getMousePosition()));
+        mouseInputController.registerActionOnMove(() -> game.getCurrentLevel().getPlayer().setFacingDirection(mouseInputController.getMousePosition()));
     }
 }

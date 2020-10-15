@@ -80,6 +80,7 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
 
     @Override
     public void setFacingDirection(Point2D dir) {
+        if (dir == null) return;
         this.facingDirection = dir.subtract(getPosition());
     }
 }
