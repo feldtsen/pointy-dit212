@@ -15,7 +15,7 @@ public class SpikeTest {
         Spikes spikes = new Spikes(new Point2D(0,0),10,10,11);
         Player player = EntityFactory.basicPlayer(0,0);
 
-        if (player.checkCollision(spikes)) {
+        if (player.checkCollision(spikes) != null) {
             player.setHitPoints(player.getHitPoints() - spikes.getStrength());
         }
         assert(player.getHitPoints() == -10);
