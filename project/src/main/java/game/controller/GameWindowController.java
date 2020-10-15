@@ -206,6 +206,8 @@ public class GameWindowController {
         mouseInputController.registerActionOnLeftClick(() -> game.activatePlayerAbility(2));
 
         // Bind mouse movement to updating the player facing position
-        mouseInputController.registerActionOnMove(     () -> game.setPlayerFacingPosition(mouseInputController.getMousePosition()));
+//        mouseInputController.registerActionOnMove(     () -> game.setPlayerFacingPosition(mouseInputController.getMousePosition()));
+
+        mouseInputController.registerActionOnMove(     () -> game.getCurrentLevel().getPlayer().setFacingDirection(mouseInputController.getMousePosition()));
     }
 }

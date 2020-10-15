@@ -5,6 +5,7 @@ import game.model.entity.movable.IMovable;
 import game.model.ability.IAbility;
 import game.model.ability.action.IAbilityAction;
 import game.model.shape2d.ICircle;
+import javafx.geometry.Point2D;
 
 import java.util.List;
 
@@ -23,4 +24,8 @@ public interface IPlayer extends ILiving, IMovable<ICircle> {
     boolean addAbility(IAbility ability);
 
     List<IAbility> getAbilities();
+
+    Point2D getFacingDirection();
+
+    void setFacingDirection(Point2D dir);
 }

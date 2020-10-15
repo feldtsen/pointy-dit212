@@ -42,7 +42,7 @@ public class Game implements IGame {
     private ILevel currentLevel;
 
     // This value represents the position the player is "looking towards".
-    private Point2D playerFacingPosition;
+    //private Point2D playerFacingPosition;
 
     // This list is continuously updated with the active ability actions.
     // An action is removed when it's duration has run out.
@@ -72,7 +72,7 @@ public class Game implements IGame {
         this.currentAbilityTimes = new ArrayList<>();
         this.activationTimes = new ArrayList<>();
 
-        this.playerFacingPosition = new Point2D(currentLevel.getWidth() / 2, currentLevel.getHeight() / 2); // Default direction
+        //this.playerFacingPosition = new Point2D(currentLevel.getWidth() / 2, currentLevel.getHeight() / 2); // Default direction
         listeners = new ArrayList<>();
     }
 
@@ -143,7 +143,7 @@ public class Game implements IGame {
         containToBounds(player); // Ensures the player cannot leave the map
 
         // Set the facing direction of the player
-        Point2D direction = playerFacingPosition.subtract(player.getPosition());
+        Point2D direction = player.getFacingDirection();
         double angle = Utils.heading(direction);
         // Rotate the player to point towards the player facing position
         player.getShape().setRotation(angle);
@@ -284,10 +284,10 @@ public class Game implements IGame {
 
     // Updates the player facing position. This is usually triggered outside of game, probably by a mouse
     // input controller.
-    @Override
+   /* @Override
     public void setPlayerFacingPosition(Point2D playerFacingPosition) {
         this.playerFacingPosition = playerFacingPosition;
-    }
+    }*/
 
     // TODO: handle player death
     private void gameOver() {

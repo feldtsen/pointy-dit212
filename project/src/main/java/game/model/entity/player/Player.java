@@ -21,9 +21,12 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
 
     private final List<IAbility> abilities;
 
+    private Point2D facingDirection;
+
     public Player(Point2D position, double radius, double responsiveness, double maxSpeed, int strength) {
         super(position, responsiveness, maxSpeed, 1, new Circle(radius), strength);
         this.abilities = new ArrayList<>();
+        this.facingDirection = new Point2D(0,0);
     }
 
     // Activates an ability at a certain index. If there's no ability at the index, null is returned
@@ -68,5 +71,15 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
     @Override
     public List<IAbility> getAbilities() {
         return abilities;
+    }
+
+    @Override
+    public Point2D getFacingDirection() {
+        return facingDirection;
+    }
+
+    @Override
+    public void setFacingDirection(Point2D dir) {
+        this.facingDirection = dir.subtract(getPosition());
     }
 }
