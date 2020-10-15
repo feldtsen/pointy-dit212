@@ -112,7 +112,7 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
 
         // Render player
         entity = level.getPlayer();
-        setRotation(level.getPlayer().getVelocity());
+        setRotation(level.getPlayer().getFacingDirection());
         RendererUtils.drawRectangle(graphicsContext, Color.DARKSLATEBLUE, new Rectangle(entity.getShape().getWidth(), entity.getShape().getHeight(), entity.getShape().getRotation()), level.getPlayer().getPosition());
         entity.getShape().acceptShapeVisitor(this);
         RendererUtils.drawArch(graphicsContext, Color.RED, level.getPlayer().getShape(), level.getPlayer().getPosition());
