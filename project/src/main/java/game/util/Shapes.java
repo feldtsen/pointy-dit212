@@ -29,17 +29,16 @@ public class Shapes {
         // The magnitude of the minimum translation vector.
         double minOverlap = Double.MAX_VALUE;
 
-
         // Loop through axes and look for overlap.
         for (Point2D axis : axes) {
             double[] projection1 = shape1.projection(axis, position1);
             double[] projection2 = shape2.projection(axis, position2);
 
             // Get the overlap of the shapes on the current axis.
-            double overlap = overlap(projection1, projection2);
+            double overlap = getOverlap(projection1, projection2);
 
             // If, for some axis, the shapes do not overlap, return null since a collision cannot have occurred.
-            if (overlap == 0) {
+            if (overlap == -1) {
                 return null;
             }
 
@@ -48,17 +47,17 @@ public class Shapes {
                 mtv = axis;
             }
         }
-        // If overlap is found for every axis, a collision has occurred.
+        // If this point is reached, a collision has occurred.
 
         // Vector pointing from center of shape2 to center of shape1
         Point2D difVector = position1.subtract(position2);
 
-        // If mtv is pointing in the wrong direction.
+        // Check if mtv is pointing in wrong direction.
         if (mtv.dotProduct(difVector) < 0) {
             mtv = mtv.multiply(-1);
         }
 
-        // Return a vector with the minimum distance and direction that a shape has to move to undo the collision.
+        // give mtv the correct magnitude and return.
         return Utils.setMagnitude(mtv, minOverlap);
     }
 
@@ -72,37 +71,6 @@ public class Shapes {
         for (int i = 0; i < points.size(); i++) {
             points.set(i, rotate.transform(points.get(i)));
         }
-    }
-
-    /*
-    // Takes two double[] where each array holds the min and max magnitude of a shapes projected points on
-    // a line. Element 0 is the min value. Element 1 is the max value. Returns true if the projections overlap.
-    private static boolean overlap(double[] r1Projection, double[] r2Projection) { //TODO: REMOVE
-        if (r1Projection.length != 2 || r2Projection.length != 2) {
-            throw new IllegalArgumentException();
-        }
-
-        // Check if max projection magnitude of rectangle 1 is smaller than min projection value of rectangle 2,
-        // and vice versa. I.e. if there is a gap between the rectangles. Returns true if there is an overlap,
-        // else false.
-        return (!(r2Projection[1] < r1Projection[0] || r1Projection[1] < r2Projection[0]));
-    }
-     */
-
-    private static double overlap(double[] s1Projection, double[] s2Projection) {
-        if (s1Projection.length != 2 || s2Projection.length != 2) {
-            throw new IllegalArgumentException();
-        }
-
-        // True if there is no overlap.
-        if (s2Projection[1] < s1Projection[0] || s1Projection[1] < s2Projection[0]) return 0;
-
-        // If shape2s max projection is greater than shape1s min.
-        if (s2Projection[1] > s1Projection[0]) return s2Projection[1] - s1Projection[0];
-
-        // If shape1s max projection is greater than shape2s min.
-        else return s1Projection[1] - s2Projection[0];
-
     }
 
     // Projects a given list of points onto the given vector. Returns the min- and max projections as an array of doubles.
@@ -131,4 +99,20 @@ public class Shapes {
         return new double[]{min, max};
     }
 
+    // Returns the overlap of two shapes projections. If there is no overlap, -1 is returned.
+    private static double getOverlap(double[] s1Projection, double[] s2Projection) {
+        if (s1Projection.length != 2 || s2Projection.length != 2) {
+            throw new IllegalArgumentException();
+        }
+
+        // True if there is no overlap.
+        if (s2Projection[1] < s1Projection[0] || s1Projection[1] < s2Projection[0]) return -1;
+
+        // True if there is overlap and shape2 has the rightmost point.
+        if (s2Projection[1] > s1Projection[1]) return s1Projection[1] - s2Projection[0];
+
+            // If shape1s max projection is greater than shape2s min.
+        else return s2Projection[1] - s1Projection[0];
+
+    }
 }
