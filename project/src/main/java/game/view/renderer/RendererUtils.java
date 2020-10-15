@@ -44,7 +44,7 @@ public class RendererUtils {
     }
 
     // Draw arch
-    public static void drawArch(GraphicsContext graphicsContext, Color color, ICircle shape, Point2D position) {
+    public static void drawArc(GraphicsContext graphicsContext, Color color, ICircle shape, Point2D position, double angle) {
         Quartet scaled = scaleDrawData(graphicsContext, position.getX(), position.getY(), shape.getRadius(), shape.getRadius());
 
         // Saves  attributes, such as paint data and transform data
@@ -52,14 +52,14 @@ public class RendererUtils {
 
         translate(graphicsContext, shape.getRotation(), scaled.x, scaled.y);
 
-       graphicsContext.setFill(color);
-       graphicsContext.fillArc(
+       graphicsContext.setStroke(color);
+       graphicsContext.strokeArc(
                scaled.x - scaled.w,
                scaled.y - scaled.h,
                2 * scaled.w,
                2 * scaled.h,
                0,
-               180,
+               Utils.radianToDegrees(angle),
                ArcType.ROUND);
         graphicsContext.restore();
     }
