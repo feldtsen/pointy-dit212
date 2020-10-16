@@ -10,11 +10,20 @@ import javafx.geometry.Point2D;
 
 // Ability for reflecting projectiles
 public class Reflect extends Ability {
-    private final double angle;    // Max/min angle of affected projectiles, relative to user
-    private final double radius;   // Distance or reach
-    private final double control;  // How strongly reflected projectiles are affected
-    private final double duration; // How long the ability is active
-    private final int strength;    // The strength of the reflected projectiles
+    // Max/min angle of affected projectiles, relative to user
+    private final double angle;
+
+    // Distance or reach
+    private final double radius;
+
+    // How strongly reflected projectiles are affected
+    private final double control;
+
+    // How long the ability is active
+    private final double duration;
+
+    // The strength of the reflected projectiles
+    private final int strength;
 
     // Action to be returned when reflect ability is applied
     public static class ReflectAction extends AbilityAction {
@@ -61,12 +70,16 @@ public class Reflect extends Ability {
                 Point2D velocity = Utils.setMagnitude(velocityDirection, projectile.getVelocity().magnitude());
                 projectile.setVelocity(velocity);
 
+                // Update projectile strength. Projectiles are typically made to be stronger
+                // on reflect. This makes sure they can hurt other entities than the player, which
+                // typically possesses the reflect ability.
                 projectile.setStrength(this.strength);
             }
         }
 
         @Override
         public void onFinished(ILevel level) {
+            // Do nothing
         }
     }
 
