@@ -18,11 +18,11 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-//Class for loading levels using GSON JSON parser.
+// Class for loading levels using GSON JSON parser.
 public class LevelLoader {
     private static JsonObject levelJSON;
 
-    //Constructor takes the level ID in form of a string and parses the level data into a JSON object.
+    // Constructor takes the level ID in form of a string and parses the level data into a JSON object.
     public static Level load(String levelID) throws FileNotFoundException {
         levelJSON = new JsonParser().parse(new FileReader("src/main/resources/game/levels/" + levelID + ".json")).getAsJsonObject();
 
