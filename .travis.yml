@@ -1,6 +1,8 @@
 language: java
+sudo: false
 jdk:
   - openjdk14
 
 script: 
+    - mvn clean verify
     - project/src/test/java
