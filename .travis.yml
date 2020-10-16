@@ -2,8 +2,5 @@ language: java
 jdk:
   - openjdk14
 
-before_script: 
-    - composer install --no-interaction 
-
 script: 
     - project/src/test/java
