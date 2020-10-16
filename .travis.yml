@@ -1,8 +1,9 @@
 language: java
 jdk:
-  - oraclejdk11
-  - openjdk10
-  - openjdk11
-  - openjdk12
-  - openjdk13
   - openjdk14
+
+before_script: 
+    - composer install --no-interaction 
+
+script: 
+    - project/src/test/java
