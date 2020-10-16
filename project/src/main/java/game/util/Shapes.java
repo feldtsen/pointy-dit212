@@ -10,34 +10,60 @@ public class Shapes {
 
     private Shapes(){}
 
-    // Detects collisions between shapes using the separating axis theorem.
-    public static boolean testCollision(IShape2D shape1, Point2D position1, IShape2D shape2, Point2D position2) {
-        // Check if collision is possible. If not, return false.
+    // Detects collisions between shapes using the separating axis theorem. If a collision has occurred, the
+    // minimum translation vector will be returned (pointing from shape2 to shape1). If no collision has occurred,
+    // returns null.
+    public static Point2D testCollision(IShape2D shape1, Point2D position1, IShape2D shape2, Point2D position2) {
+        // Check if collision is possible. If not, return null.
         if (shape1.largestInnerDistance() + shape2.largestInnerDistance() < position1.distance(position2)) {
-            return false;
+            return null;
         }
 
         // Find axes to project shapes onto.
         List<Point2D> axes = shape1.getAxes(position1, shape2, position2);
         axes.addAll(shape2.getAxes(position2, shape1, position1));
 
+        // The direction of the minimum translation vector.
+        Point2D minimumTranslationVector = new Point2D(0, 0);
+
+        // The magnitude of the minimum translation vector.
+        double minOverlap = Double.MAX_VALUE;
+
         // Loop through axes and look for overlap.
         for (Point2D axis : axes) {
             double[] projection1 = shape1.projection(axis, position1);
             double[] projection2 = shape2.projection(axis, position2);
 
-            // If, for some axis, the shapes do not overlap, return false since there cannot be a collision.
-            if (!overlap(projection1, projection2)) {
-                return false;
+            // Get the overlap of the shapes on the current axis.
+            double overlap = getOverlap(projection1, projection2);
+
+            // If, for some axis, the shapes do not overlap, return null since a collision cannot have occurred.
+            if (overlap == -1) {
+                return null;
+            }
+
+            if (overlap < minOverlap) {
+                minOverlap = overlap;
+                minimumTranslationVector = axis;
             }
         }
-        // If overlap is found for every axis, a collision has occurred.
-        return true;
+        // If this point is reached, a collision has occurred.
+
+        // Vector pointing from center of shape2 to center of shape1
+        Point2D difVector = position1.subtract(position2);
+
+        // Check if mtv is pointing in wrong direction.
+        if (minimumTranslationVector.dotProduct(difVector) < 0) {
+            minimumTranslationVector = minimumTranslationVector.multiply(-1);
+        }
+
+        // give the translation vector the correct magnitude and return.
+        return Utils.setMagnitude(minimumTranslationVector, minOverlap);
     }
 
     // Rotates every point in the given list of points around the pivot by the specified amount in radians.
     public static void rotatePoints(List<Point2D> points, Point2D pivot, double rad) {
-        Rotate rotate = new Rotate(); //TODO: Rotate is a part of javaFX. Is this allowed in model?
+        Rotate rotate = new Rotate();
         rotate.setPivotX(pivot.getX());
         rotate.setPivotY(pivot.getY());
         rotate.setAngle(Math.toDegrees(rad));
@@ -45,19 +71,6 @@ public class Shapes {
         for (int i = 0; i < points.size(); i++) {
             points.set(i, rotate.transform(points.get(i)));
         }
-    }
-
-    // Takes two double[] where each array holds the min and max magnitude of a shapes projected points on
-    // a line. Element 0 is the min value. Element 1 is the max value. Returns true if the projections overlap.
-    private static boolean overlap(double[] r1Projection, double[] r2Projection) {
-        if (r1Projection.length != 2 || r2Projection.length != 2) {
-            throw new IllegalArgumentException();
-        }
-
-        // Check if max projection magnitude of rectangle 1 is smaller than min projection value of rectangle 2,
-        // and vice versa. I.e. if there is a gap between the rectangles. Returns true if there is an overlap,
-        // else false.
-        return (!(r2Projection[1] < r1Projection[0] || r1Projection[1] < r2Projection[0]));
     }
 
     // Projects a given list of points onto the given vector. Returns the min- and max projections as an array of doubles.
@@ -86,4 +99,19 @@ public class Shapes {
         return new double[]{min, max};
     }
 
+    // Returns the overlap of two shapes projections. If there is no overlap, -1 is returned.
+    private static double getOverlap(double[] shape1Projection, double[] shape2Projection) {
+        if (shape1Projection.length != 2 || shape2Projection.length != 2) {
+            throw new IllegalArgumentException();
+        }
+
+        // True if there is no overlap.
+        if (shape2Projection[1] < shape1Projection[0] || shape1Projection[1] < shape2Projection[0]) return -1;
+
+        // True if there is overlap and shape2 has the rightmost point.
+        if (shape2Projection[1] > shape1Projection[1]) return shape1Projection[1] - shape2Projection[0];
+
+        // If there is overlap and shape1 has the rightmost point.
+        else return shape2Projection[1] - shape1Projection[0];
+    }
 }

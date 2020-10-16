@@ -152,7 +152,7 @@ public class Game implements IGame {
             projectile.update(delta, timeStep);
 
             // Check collision with player, and reduce player hit points if collision.
-            if (player.checkCollision(projectile) && !player.isInvulnerable()) {
+            if (player.checkCollision(projectile) != null && !player.isInvulnerable()) {
                 player.setHitPoints(player.getHitPoints() - projectile.getStrength());
 
                 // Destroy projectile on hit
@@ -162,7 +162,7 @@ public class Game implements IGame {
             // Iterate over all the enemies
             for(IEnemy enemy : getCurrentLevel().getEnemies()) {
                 // Check collision with projectiles
-                if(projectile.checkCollision(enemy)) {
+                if(projectile.checkCollision(enemy) != null) {
                     // If the strength of the projectiles is grater than that of the enemies
                     if (projectile.getStrength() > enemy.getStrength()) {
                         // If the enemy dies the score is updated
@@ -176,7 +176,7 @@ public class Game implements IGame {
 
             // Iterate over all obstacles and check for collision with projectiles
             for (IObstacle obstacle: getCurrentLevel().getObstacles()) {
-                if (projectile.checkCollision(obstacle)) {
+                if (projectile.checkCollision(obstacle) != null) {
                     // set destroyed on collision
                     projectile.setDestroyed();
                 }
@@ -198,9 +198,15 @@ public class Game implements IGame {
             activateAbility(enemy.applyAbility(), now);
         }
 
-        // Update all obstacles
+        // Update all obstacles and check for collision with player.
         for(IObstacle obstacle: currentLevel.getObstacles()) {
             obstacle.update(delta, timeStep);
+
+            // Check if collision has occurred and get minimum translation vector.
+            Point2D minimumTranslationVector = player.checkCollision(obstacle);
+            if (minimumTranslationVector != null) {
+                player.move(minimumTranslationVector);
+            }
         }
 
         // Apply active abilities
@@ -223,13 +229,19 @@ public class Game implements IGame {
             // self collision checking.
             for (int j = i + 1; j < currentLevel.getEnemies().size(); j++){
                 IEnemy e2 = currentLevel.getEnemies().get(j);
-                if (e1.checkCollision(e2)) {
-                    handleCollision(e1,e2);
+
+                // check if collision has occurred and get minimum translation vector.
+                Point2D minimumTranslationVector = e1.checkCollision(e2);
+                if (minimumTranslationVector != null) {
+
+                    // Apply half of the translation vector on one enemy and half on the other in the opposite direction.
+                    e1.move(Utils.setMagnitude(minimumTranslationVector, minimumTranslationVector.magnitude() / 2));
+                    e2.move(Utils.setMagnitude(minimumTranslationVector, minimumTranslationVector.magnitude() / 2 * (-1)));
                 }
             }
 
             // Check player-enemy collision
-            if (player.checkCollision(e1)){
+            if (player.checkCollision(e1) != null){
 
                 // If enemy is stronger than player, player dies
                 if (player.getStrength() < e1.getStrength() && !player.isInvulnerable()){
@@ -243,8 +255,9 @@ public class Game implements IGame {
             }
             // Check enemy-obstacle colllision
             for (IObstacle obstacle: getCurrentLevel().getObstacles()){
-                if (e1.checkCollision(obstacle)) {
-                    handleCollision(e1,obstacle);
+                Point2D mtv = e1.checkCollision(obstacle);
+                if (mtv != null) {
+                    e1.move(mtv);
                 }
             }
 
