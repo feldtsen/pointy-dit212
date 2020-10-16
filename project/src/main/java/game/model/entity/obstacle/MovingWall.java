@@ -8,7 +8,7 @@ import javafx.geometry.Point2D;
 
 //An obstacle which moves in a fixed trajectory around the level.
 //The obstacle will move from the starting position to the end position, switching directions thereafter.
-//Speed vector is calulated from the distance between the two positions' x and y coordinates.
+//Speed vector is calculated from the distance between the two positions' x and y coordinates.
 //Velocity is normalized to maxSpeed using Util limit.
 public class MovingWall extends MovableEntity<Rectangle> implements IObstacle {
     // The start position of the moving wall. The moving wall will then move towards the end position, and back again
@@ -17,7 +17,13 @@ public class MovingWall extends MovableEntity<Rectangle> implements IObstacle {
 
     //Obstacle initiated at the midpoint between starting and end positions.
     public MovingWall(Point2D startPosition, Point2D endPosition, double maxSpeed, double maxForce, double width, double height) {
-        super(startPosition, Utils.limit(endPosition.subtract(startPosition), maxSpeed), maxSpeed, maxForce, new Rectangle(width, height,0));
+        super(startPosition,
+              // Calculate initial velocity
+              Utils.limit(endPosition.subtract(startPosition), maxSpeed),
+              maxSpeed,
+              maxForce,
+              new Rectangle(width, height,0));
+
         this.startPosition = startPosition;
         this.endPosition = endPosition;
     }

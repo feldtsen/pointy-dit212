@@ -37,7 +37,7 @@ public class DashTest {
         player = new Player(new Point2D(500, 500), 20, 2500, 1000,0);
 
         enemy = EntityFactory.basicEnemy(550,500,player , 5);
-        IAbility dash = new Dash(10,length);
+        IAbility dash = new Dash(10, length, 5);
         player.addAbility(dash);
 
         //Vector between player and enemy, used to make the player face the enemy

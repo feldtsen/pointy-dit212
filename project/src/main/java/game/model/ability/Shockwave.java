@@ -15,9 +15,11 @@ import java.util.List;
 public class Shockwave extends Ability{
     // Radius of ability, entities outside radius will not be affected
     private final double radius;
+
     // The strength of the force which will be applied on affected entities
     private final double force;
 
+    // The time during which the ability action should be active
     private final double duration;
 
     public static class ShockwaveAction extends AbilityAction {
@@ -38,10 +40,10 @@ public class Shockwave extends Ability{
 
             // Iterate over list to check which entities are to be affected
             for(IMovable<?> target : entities){
-                // Do not affect user of ability
+                // Do not affect user of the ability
                 if (user == target) continue;
 
-                // Create vector pointing from user to target entity
+                // Create vector pointing from user to the target entity
                 Point2D v = target.getPosition().subtract(user.getPosition());
 
                 // Check if the target entity is within radius
@@ -62,6 +64,7 @@ public class Shockwave extends Ability{
 
         @Override
         public void onFinished(ILevel level) {
+            // Do nothing
         }
     }
 

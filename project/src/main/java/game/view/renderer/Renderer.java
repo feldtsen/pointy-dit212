@@ -1,10 +1,10 @@
 package game.view.renderer;
 
-import game.controller.Action;
 import game.controller.event.AbilityActionEventListener;
 import game.controller.event.IAbilityActionEvent;
 import game.controller.gameLoop.GameLoop;
 import game.model.ability.Dash;
+import game.model.ability.Reflect;
 import game.model.ability.Shockwave;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
@@ -72,7 +72,7 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
 
         abilityEffects.put(Dash.DashAction.class, createDashEffect());
         abilityEffects.put(Shockwave.ShockwaveAction.class, createShockwaveEffect());
-
+        abilityEffects.put(Reflect.ReflectAction.class, createReflectEffect());
     }
 
     private Effect createDashEffect() {
@@ -86,6 +86,19 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         //TODO
     }
 
+    private Effect createReflectEffect(){
+     return new Effect(0.2) {
+         double radius = 1000;
+         @Override
+         void render(IAbilityAction action, double time) {
+             Point2D position = action.getUser().getPosition();
+             ICircle circle = new Circle(radius * time);
+             circle.setRotation(action.getUser().getShape().getRotation() + (3 * Math.PI)/4);
+             RendererUtils.drawArc(graphicsContext, colors.get(action.getUser().getClass()), circle, position, Math.PI/2);
+         }
+     };
+    }
+
 
     private Effect createShockwaveEffect() {
         double radius = 1000; //TODO how to get radius?
@@ -94,6 +107,7 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         return new Effect(0.2) {
             @Override
             void render(IAbilityAction action, double time) {
+
 
                 Point2D position = action.getUser().getPosition();
                 ICircle circle = new Circle(radius * time);
@@ -112,10 +126,9 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
 
         // Render player
         entity = level.getPlayer();
-        setRotation(level.getPlayer().getVelocity());
+        setRotation(level.getPlayer().getFacingDirection());
         RendererUtils.drawRectangle(graphicsContext, Color.DARKSLATEBLUE, new Rectangle(entity.getShape().getWidth(), entity.getShape().getHeight(), entity.getShape().getRotation()), level.getPlayer().getPosition());
         entity.getShape().acceptShapeVisitor(this);
-        RendererUtils.drawArch(graphicsContext, Color.RED, level.getPlayer().getShape(), level.getPlayer().getPosition());
         RendererUtils.drawTriangle(graphicsContext, Color.PINK, new Triangle(entity.getShape().getWidth(), entity.getShape().getHeight(), entity.getShape().getRotation()), level.getPlayer().getPosition());
 
         /*

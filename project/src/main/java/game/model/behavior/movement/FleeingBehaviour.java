@@ -6,21 +6,27 @@ import javafx.geometry.Point2D;
 
 import java.util.Random;
 
+// A behavior for defining entities which moves away from its target if the target comes too close
 public class FleeingBehaviour implements IMovementBehaviour {
-    private double closestDistance;    // The closest distance that the subject wants to be from the object.
-    private double furthestDistance;   // The furthest distance that the subject wants to be from the object.
-    private Point2D sidewaysDirection; // The sideways direction the subject will move from the object.
+    // The closest distance that the subject wants to be from the object.
+    private final double closestDistance;
 
-    private Random rand = new Random(); // For generating a new direction in randDirection
+    // The furthest distance that the subject wants to be from the object.
+    private final double furthestDistance;
 
+    // The sideways direction the subject will move from the object.
+    private Point2D sidewaysDirection;
+
+    // For generating a new direction in randDirection
+    private final Random random = new Random();
 
     public FleeingBehaviour(double closestDistance, double furthestDistance) {
         this.closestDistance = closestDistance;
         this.furthestDistance = furthestDistance;
     }
 
-    @Override
     // Applies a force onto the subject. The direction will depend on the distance from the object.
+    @Override
     public boolean apply(IMovable<?> subject, IEntity<?> object) {
 
         // vector pointing from object to subject.
@@ -32,17 +38,15 @@ public class FleeingBehaviour implements IMovementBehaviour {
 
             // Add force away from object.
             subject.addForce(posDifference);
-        }
-        else if (posDifference.magnitude() > furthestDistance) {
+        } else if (posDifference.magnitude() > furthestDistance) {
             sidewaysDirection = null;
 
             // Add force towards object.
             subject.addForce(posDifference.multiply(-1));
-        }
-        else {
+        } else {
             if (sidewaysDirection == null) {
                 // Set sideways direction if it hasn't already been set.
-                sidewaysDirection = randDirection(posDifference);
+                sidewaysDirection = randomDirection(posDifference);
             }
 
             // Move in sideways direction.
@@ -52,11 +56,10 @@ public class FleeingBehaviour implements IMovementBehaviour {
     }
 
     // Returns a vector pointing in the clockwise- or counter clockwise direction from the given facing direction.
-    private Point2D randDirection(Point2D facing) {
-        if (rand.nextInt(2) == 1) {
+    private Point2D randomDirection(Point2D facing) {
+        if (random.nextInt(2) == 1) {
             return new Point2D(facing.getY(), -facing.getX());
-        }
-        else {
+        } else {
             return new Point2D(-facing.getY(), facing.getX());
         }
     }

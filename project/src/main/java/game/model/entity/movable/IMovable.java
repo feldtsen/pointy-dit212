@@ -14,6 +14,7 @@ public interface IMovable<T extends IShape2D> extends IUpdatable, IEntity<T> {
     // force should be limited to the value of maxForce.
     void addForce(Point2D force);
 
+    // basic setters
     void setPosition(Point2D position);
     void setVelocity(Point2D velocity);
     void setAcceleration(Point2D acceleration);
@@ -23,6 +24,7 @@ public interface IMovable<T extends IShape2D> extends IUpdatable, IEntity<T> {
     // Friction is applied to the velocity. The friction should depend on the velocity itself.
     void setFriction(double friction);
 
+    // basic getters
     Point2D getVelocity();
     Point2D getAcceleration();
     double getMaxSpeed();
