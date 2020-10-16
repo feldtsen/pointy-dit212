@@ -8,6 +8,7 @@ import game.model.shape2d.IShape2D;
 public interface IEntity<T extends IShape2D> extends IPositionable {
     // Checks collision with another entity
     <V extends IShape2D> boolean checkCollision(IEntity<V> entity);
+
     // Returns the shape of the entity
     T getShape();
 }

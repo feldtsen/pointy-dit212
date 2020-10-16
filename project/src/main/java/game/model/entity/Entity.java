@@ -8,6 +8,7 @@ import javafx.geometry.Point2D;
 public abstract class Entity<T extends IShape2D> implements IEntity<T> {
     // The position of the entity
     protected Point2D position;
+
     // The shape of the entity
     private final T shape;
 
