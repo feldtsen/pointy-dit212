@@ -5,8 +5,10 @@ import game.model.level.ILevel;
 
 // Abstract helper implementation of ability actions.
 public abstract class AbilityAction implements IAbilityAction {
+    // The user of the ability action
     protected final IEntity<?> user;
-    private final double duration; // The duration (in seconds) when the ability is active
+    // The duration (in seconds) when the ability is active
+    private final double duration;
 
     public AbilityAction(IEntity<?> user, double duration) {
         this.user = user;

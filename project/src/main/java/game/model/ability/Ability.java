@@ -1,12 +1,14 @@
 package game.model.ability;
 
+import game.controller.gameLoop.GameLoop;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
 
 // Abstract helper implementation of IAbility, which simplifies creating new abilities.
 // This is possible since all abilities will share the same cool down functionality.
 public abstract class Ability implements IAbility{
-    private final long cooldown; // The time it takes (in nanoseconds) before the ability can be activated again
+    // The time it takes (in nanoseconds) before the ability can be activated again
+    private final long cooldown;
 
     // Stores the time when the ability was last used. This value is used to check if the ability is ready to
     // be used again.
@@ -28,14 +30,14 @@ public abstract class Ability implements IAbility{
 
     // Returns the time until the ability can be used again in percentage until ready
     public double getCooldownCountdownPercentage() {
-        return 100 - ((getCooldownCountdown() / ((double)cooldown/1000000000)) * 100);
+        return 100 - ((getCooldownCountdown() / ((double)cooldown/ GameLoop.SECOND)) * 100);
     }
 
     // Returns the time until the ability can be used again in seconds
     @Override
     public double getCooldownCountdown() {
         // Since System.nanoTime() - lastUsed can surpass cooldown, we limit the retrieval to be min 0
-        return Math.max((double)(cooldown - (System.nanoTime() - lastUsed))/1000000000, 0);
+        return Math.max((double)(cooldown - (System.nanoTime() - lastUsed))/GameLoop.SECOND, 0);
     }
 
     // Applies the ability by returning an ability action, or null if the ability cannot be applied yet (due to cooldown).
