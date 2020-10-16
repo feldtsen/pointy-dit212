@@ -16,7 +16,6 @@ import game.model.shape2d.ICircle;
 import game.services.LevelLoader;
 import game.util.Utils;
 import javafx.geometry.Point2D;
-import javafx.scene.effect.Light;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -205,11 +204,10 @@ public class Game implements IGame {
         for(IObstacle obstacle: currentLevel.getObstacles()) {
             obstacle.update(delta, timeStep);
 
-            // minimum translation vector - the shortest distance the player can be moved for the collision to no
-            // longer occur.
-            Point2D mtv = player.checkCollision(obstacle);
-            if (mtv != null) {
-                player.move(mtv);
+            // Check if collision has occurred and get minimum translation vector.
+            Point2D minimumTranslationVector = player.checkCollision(obstacle);
+            if (minimumTranslationVector != null) {
+                player.move(minimumTranslationVector);
             }
         }
 
@@ -234,13 +232,13 @@ public class Game implements IGame {
             for (int j = i + 1; j < currentLevel.getEnemies().size(); j++){
                 IEnemy e2 = currentLevel.getEnemies().get(j);
 
-                // minimum translation vector.
-                Point2D mtv = e1.checkCollision(e2);
-                if (mtv != null) {
+                // check if collision has occurred and get minimum translation vector.
+                Point2D minimumTranslationVector = e1.checkCollision(e2);
+                if (minimumTranslationVector != null) {
 
-                    // Apply half of the mtv on one enemy and half on the other in the opposite direction.
-                    e1.move(Utils.setMagnitude(mtv, mtv.magnitude() / 2));
-                    e2.move(Utils.setMagnitude(mtv, mtv.magnitude() / 2 * (-1)));
+                    // Apply half of the translation vector on one enemy and half on the other in the opposite direction.
+                    e1.move(Utils.setMagnitude(minimumTranslationVector, minimumTranslationVector.magnitude() / 2));
+                    e2.move(Utils.setMagnitude(minimumTranslationVector, minimumTranslationVector.magnitude() / 2 * (-1)));
                 }
             }
 
