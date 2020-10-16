@@ -7,11 +7,8 @@ import game.model.IGame;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
-import game.view.pages.score.IScorePanel;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
-
-import java.io.FileNotFoundException;
 
 // Top level controller which initializes the model and the view and starts the game.
 public class GameWindowController {
@@ -82,7 +79,7 @@ public class GameWindowController {
                 }
 
                 // Set facing direction of player
-                game.getCurrentLevel().getPlayer().setFacingDirection(mouseInputController.getMousePosition());
+                game.getCurrentLevel().getPlayer().setFacingTowards(mouseInputController.getMousePosition());
 
                 // If all enemies are dead, progress to the next level
                 if (game.getCurrentLevel().getEnemies().isEmpty()) game.nextLevel();
@@ -216,6 +213,6 @@ public class GameWindowController {
         mouseInputController.registerActionOnLeftClick(() -> game.activatePlayerAbility(2));
 
         // Bind mouse movement to updating the player facing position
-        mouseInputController.registerActionOnMove(() -> game.getCurrentLevel().getPlayer().setFacingDirection(mouseInputController.getMousePosition()));
+        mouseInputController.registerActionOnMove(() -> game.getCurrentLevel().getPlayer().setFacingTowards(mouseInputController.getMousePosition()));
     }
 }

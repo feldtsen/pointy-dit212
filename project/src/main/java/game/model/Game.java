@@ -33,8 +33,6 @@ public class Game implements IGame {
     // True if game is completed.
     private boolean gameWin;
 
-    private List<ILevel> levels = null; //TODO: remove?
-
     // An iterator over the existing levels
     private final Iterator<String> levelID;
 
@@ -61,6 +59,7 @@ public class Game implements IGame {
     public Game() {
 
         this.levelID = LevelLoader.getLevelIDs(3).iterator();
+
         // Load the next level (first)
         nextLevel();
 
@@ -72,7 +71,6 @@ public class Game implements IGame {
         this.currentAbilityTimes = new ArrayList<>();
         this.activationTimes = new ArrayList<>();
 
-        //this.playerFacingPosition = new Point2D(currentLevel.getWidth() / 2, currentLevel.getHeight() / 2); // Default direction
         listeners = new ArrayList<>();
     }
 
@@ -82,12 +80,10 @@ public class Game implements IGame {
             // If there is another level, load it
             if (levelID.hasNext()) {
                 setLevel(LevelLoader.load(levelID.next()));
-            }
-            else {
+            } else {
                 gameWin = true;
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -96,9 +92,11 @@ public class Game implements IGame {
     // Activate ability adds an ability to the active ability actions list, together with the
     // corresponding activation time.
     private void activateAbility(IAbilityAction action, long now) {
+        // Do nothing if action is null. Abilities often return null instead of an ability action when the
+        // cooldown of an ability is active
         if(action == null) return;
 
-        // Notify listeners
+        // Notify listeners for ability action events
         AbilityActionEvent event = new AbilityActionEvent(IAbilityActionEvent.Type.ACTIVATED, action);
         for(AbilityActionEventListener listener : listeners) {
             listener.onAction(event);
@@ -106,20 +104,23 @@ public class Game implements IGame {
 
         // Activate ability
         activeAbilityActions.add(action);
+
         // Set time to since started to 0
         currentAbilityTimes.add(0.0D);
-        // Set nano time to now
+
+        // Set nano time to the current time
         activationTimes.add(now);
     }
 
     // Deactivates (removes) an ability action at a particular index of the list.
     private void deactivateAbility(int index) {
-        // Notify listeners
+        // Notify listeners for ability action events
         AbilityActionEvent event = new AbilityActionEvent(IAbilityActionEvent.Type.FINISHED, activeAbilityActions.get(index));
         for(AbilityActionEventListener listener : listeners) {
             listener.onAction(event);
         }
 
+        // remove all data associated with this ability action
         activeAbilityActions.remove(index);
         currentAbilityTimes.remove(index);
         activationTimes.remove(index);
@@ -142,23 +143,19 @@ public class Game implements IGame {
         player.update(delta, timeStep);
         containToBounds(player); // Ensures the player cannot leave the map
 
-        // Set the facing direction of the player
-        Point2D direction = player.getFacingDirection();
-        double angle = Utils.heading(direction);
-        // Rotate the player to point towards the player facing position
-        player.getShape().setRotation(angle);
-
         // Check for collisions between player and projectiles. Adjust players hit points if collision occurs.
         // Iterates backwards to enable removing projectiles from the list at the same time as looping.
         for (int i = currentLevel.getProjectiles().size() - 1; i >= 0; i--) {
             IProjectile<?> projectile = currentLevel.getProjectiles().get(i);
+
             // Update projectile
             projectile.update(delta, timeStep);
 
             // Check collision with player, and reduce player hit points if collision.
             if (player.checkCollision(projectile) && !player.isInvulnerable()) {
                 player.setHitPoints(player.getHitPoints() - projectile.getStrength());
-                // set destroyed on hit
+
+                // Destroy projectile on hit
                 projectile.setDestroyed();
             }
 
@@ -176,6 +173,7 @@ public class Game implements IGame {
                     }
                 }
             }
+
             // Iterate over all obstacles and check for collision with projectiles
             for (IObstacle obstacle: getCurrentLevel().getObstacles()) {
                 if (projectile.checkCollision(obstacle)) {
@@ -282,14 +280,6 @@ public class Game implements IGame {
         return false;
     }
 
-    // Updates the player facing position. This is usually triggered outside of game, probably by a mouse
-    // input controller.
-   /* @Override
-    public void setPlayerFacingPosition(Point2D playerFacingPosition) {
-        this.playerFacingPosition = playerFacingPosition;
-    }*/
-
-    // TODO: handle player death
     private void gameOver() {
         this.gameOver = true;
     }
@@ -334,7 +324,7 @@ public class Game implements IGame {
         entity.setVelocity(v);
     }
 
-    // sets the current level
+    // Sets the current level
     @Override
     public boolean setLevel(ILevel level) {
         this.currentLevel = level;
@@ -344,11 +334,6 @@ public class Game implements IGame {
     @Override
     public ILevel getCurrentLevel() {
         return currentLevel;
-    }
-
-    @Override
-    public List<ILevel> getLevels() {
-        return levels;
     }
 
     @Override

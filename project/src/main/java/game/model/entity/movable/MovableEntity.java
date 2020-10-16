@@ -35,7 +35,7 @@ public abstract class MovableEntity<T extends IShape2D> extends Entity<T> implem
 
         this.velocity = velocity;
 
-        // On init, the entity has no acceleration
+        // On initialization the entity has no acceleration
         this.acceleration = new Point2D(0, 0);
 
         this.maxForce = maxForce;
