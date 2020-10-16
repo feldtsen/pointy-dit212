@@ -4,5 +4,5 @@ jdk:
   - openjdk14
 
 script: 
-    - mvn clean verify
+    - mvn clean verify -f ./project/
     - project/src/test/java
