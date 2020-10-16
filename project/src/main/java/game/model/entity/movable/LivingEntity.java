@@ -9,8 +9,10 @@ import javafx.geometry.Point2D;
 public abstract class LivingEntity<T extends IShape2D> extends MovableEntity<T> implements ILiving {
     // The number of hit points for this living entity
     private int hitPoints;
+
     // True if the entity is invulnerable. If an entity is invulnerable, it cannot be killed by another entity
     private boolean isInvulnerable;
+
     // The strength (or damage) of the entity.
     private int strength;
 

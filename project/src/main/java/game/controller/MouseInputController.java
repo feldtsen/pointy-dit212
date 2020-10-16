@@ -45,7 +45,7 @@ public class MouseInputController {
         });
     }
 
-
+    // Register actions on different mouse actions
     public void registerActionOnMove(Action action) {
         onMove.add(action);
     }
@@ -56,6 +56,7 @@ public class MouseInputController {
         onRightClick.add(action);
     }
 
+    // Returns the current position of the mouse, relative to the application window
     public Point2D getMousePosition() {
         return mousePosition;
     }

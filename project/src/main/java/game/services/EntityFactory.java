@@ -47,7 +47,7 @@ public class EntityFactory {
     public static Player basicPlayer(double x, double y) {
         Player player = new Player(new Point2D(x, y), 20, 2500, 1000,0);
         player.setFriction(FRICTION);
-        player.addAbility(new Dash((GameLoop.SECOND * 2), 3000)); // First ability activated on shift
+        player.addAbility(new Dash((GameLoop.SECOND * 2), 3000, 5)); // First ability activated on shift
         player.addAbility(new Shockwave(GameLoop.SECOND * 2, 300, 100000, 0.1)); // Second ability activated on E
         player.addAbility(new Reflect(GameLoop.SECOND / 2, Math.PI/2, 200, 0.5, 0.1, 1000)); // Third ability activated on click
         return player;

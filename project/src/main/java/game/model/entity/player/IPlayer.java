@@ -5,6 +5,7 @@ import game.model.entity.movable.IMovable;
 import game.model.ability.IAbility;
 import game.model.ability.action.IAbilityAction;
 import game.model.shape2d.ICircle;
+import javafx.geometry.Point2D;
 
 import java.util.List;
 
@@ -20,7 +21,13 @@ public interface IPlayer extends ILiving, IMovable<ICircle> {
     void moveRight();
 
     // Adds an ability to the player list of abilities
-    boolean addAbility(IAbility ability);
+    void addAbility(IAbility ability);
 
     List<IAbility> getAbilities();
+
+    // Returns the direction which the player is facing
+    Point2D getFacingDirection();
+
+    // sets the position which the player is facing. This is usually defined using the mouse position
+    void setFacingTowards(Point2D position);
 }

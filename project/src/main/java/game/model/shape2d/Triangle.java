@@ -9,8 +9,13 @@ import java.util.List;
 
 // Triangle implementation
 public class Triangle implements ITriangle {
-    private double width;
-    private double height;
+    // The width of the triangle
+    private final double width;
+
+    // The height of the triangle
+    private final double height;
+
+    // The rotation of the triangle
     private double rotation;
 
     public Triangle(double width, double height, double rotation) {
@@ -92,9 +97,14 @@ public class Triangle implements ITriangle {
     @Override
     // Returns the distance from the center point to the corner that is furthest away.
     public double largestInnerDistance() {
-        double dist1 = Math.sqrt(Math.pow(width/2, 2) + Math.pow(height/2, 2)); //Distance from center to one of bottom left and right.
-        double dist2 = height/2; // Distance from center to top corner.
-        return Math.max(dist1, dist2); // Return max of distances.
+        //Distance from center to one of bottom left and right.
+        double distance1 = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
+
+        // Distance from center to top corner.
+        double distance2 = height / 2;
+
+        // Return max of distances.
+        return Math.max(distance1, distance2);
     }
 
     // Implementation of visitor pattern

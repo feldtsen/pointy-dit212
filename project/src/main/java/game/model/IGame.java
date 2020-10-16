@@ -14,7 +14,7 @@ public interface IGame extends AbilityActionEventHandler, IUpdatable {
     boolean activatePlayerAbility(int index);
 
     // Set player facing direction
-    void setPlayerFacingPosition(Point2D playerFacingPosition);
+    //void setPlayerFacingPosition(Point2D playerFacingPosition);
 
     // This method returns the abilities (in the form of ability actions) which is currently active.
     List<IAbilityAction> getActiveAbilityActions();
@@ -35,5 +35,4 @@ public interface IGame extends AbilityActionEventHandler, IUpdatable {
     void nextLevel();
 
     ILevel getCurrentLevel();
-    List<ILevel> getLevels();
 }
