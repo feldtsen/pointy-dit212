@@ -1,6 +1,8 @@
 package model.shape;
 
 import game.model.entity.Entity;
+import game.model.entity.obstacle.Wall;
+import game.model.entity.player.Player;
 import game.model.shape2d.Circle;
 import game.model.shape2d.IShape2D;
 import game.model.shape2d.Rectangle;
@@ -11,20 +13,34 @@ import javafx.geometry.Point2D;
 import org.junit.Test;
 
 import java.awt.*;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 public class ShapesTest {
 
     @Test
-    public void testMinimumTranslationVector() {
-        Rectangle rect = new Rectangle(2, 2, 0);
-        Point2D rectPoint = new Point2D(0, 0);
+    // Tests that after applying the vector returned by testCollision, the collision no longer occurs.
+    public void testCollisionHandling() {
+        Wall wall = new Wall(new Point2D(0, 0), 100, 100);
+        Random rand = new Random();
 
-        Circle circle = new Circle(1);
-        Point2D circPoint = new Point2D(1.5, 0);
+        for (int i = 0; i < 100; i++) {
+            // X- and y-coordinates will be between -150 and 150.
+            int x = rand.nextInt(301) - 150;
+            int y = rand.nextInt(301) - 150;
+            Player player = EntityFactory.basicPlayer(x, y);
 
-        Point2D mtv = Shapes.testCollision(circle, circPoint, rect, rectPoint);
-        assertTrue(mtv.normalize().getY() == 0 && mtv.normalize().getX() == 1);
+            Point2D minimumTranslationVector = player.checkCollision(wall);
+
+            // Check if collision has occurred.
+            if (minimumTranslationVector != null) {
+                // If collision has occurred, move player according to translation vector.
+                player.move(minimumTranslationVector);
+            }
+
+            // After applying the mtv, the collision should no longer occur.
+            assertTrue(player.checkCollision(wall) == null);
+        }
     }
 
     @Test

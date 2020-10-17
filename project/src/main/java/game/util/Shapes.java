@@ -57,8 +57,10 @@ public class Shapes {
             minimumTranslationVector = minimumTranslationVector.multiply(-1);
         }
 
-        // give the translation vector the correct magnitude and return.
-        return Utils.setMagnitude(minimumTranslationVector, minOverlap);
+        // If the mtv is returned with minOverlap as magnitude, the new distance between the entities will be 0. Since
+        // we defined a collision to still occur if the distance between two entities are 0, we have to add a small
+        // value to minOverlap before giving it to the mtv.
+        return Utils.setMagnitude(minimumTranslationVector, minOverlap + .000000000001);
     }
 
     // Rotates every point in the given list of points around the pivot by the specified amount in radians.
