@@ -57,7 +57,6 @@ public class Game implements IGame {
     private final List<AbilityActionEventListener> listeners;
 
     public Game() {
-
         this.levelID = LevelLoader.getLevelIDs(3).iterator();
 
         // Load the next level (first)
@@ -88,17 +87,16 @@ public class Game implements IGame {
         }
     }
 
-
     // Activate ability adds an ability to the active ability actions list, together with the
     // corresponding activation time.
     private void activateAbility(IAbilityAction action, long now) {
         // Do nothing if action is null. Abilities often return null instead of an ability action when the
         // cooldown of an ability is active
-        if(action == null) return;
+        if (action == null) return;
 
         // Notify listeners for ability action events
         AbilityActionEvent event = new AbilityActionEvent(IAbilityActionEvent.Type.ACTIVATED, action);
-        for(AbilityActionEventListener listener : listeners) {
+        for (AbilityActionEventListener listener : listeners) {
             listener.onAction(event);
         }
 
@@ -116,7 +114,7 @@ public class Game implements IGame {
     private void deactivateAbility(int index) {
         // Notify listeners for ability action events
         AbilityActionEvent event = new AbilityActionEvent(IAbilityActionEvent.Type.FINISHED, activeAbilityActions.get(index));
-        for(AbilityActionEventListener listener : listeners) {
+        for (AbilityActionEventListener listener : listeners) {
             listener.onAction(event);
         }
 
@@ -126,22 +124,16 @@ public class Game implements IGame {
         activationTimes.remove(index);
     }
 
-    // Update is called every game loop iteration (frame). Update is the method responsible for
-    // handling all model updates.
-    @Override
-    public void update(double delta, double timeStep) {
-        // Nanos passed since last update
-        long now = System.nanoTime();
-
-        // Check for player death
-        if(!currentLevel.getPlayer().isAlive()) {
-            gameOver();
-        }
-
-        // Update player
+    // Updates player and makes sure it is contained within the map
+    private void updatePlayer(double delta, double timeStep) {
         IPlayer player = currentLevel.getPlayer();
         player.update(delta, timeStep);
         containToBounds(player); // Ensures the player cannot leave the map
+    }
+
+    // Updates all projectiles and checks for collisions with other entities
+    private void updateProjectiles(double delta, double timeStep) {
+        IPlayer player = currentLevel.getPlayer();
 
         // Check for collisions between player and projectiles. Adjust players hit points if collision occurs.
         // Iterates backwards to enable removing projectiles from the list at the same time as looping.
@@ -160,9 +152,9 @@ public class Game implements IGame {
             }
 
             // Iterate over all the enemies
-            for(IEnemy enemy : getCurrentLevel().getEnemies()) {
+            for (IEnemy enemy : getCurrentLevel().getEnemies()) {
                 // Check collision with projectiles
-                if(projectile.checkCollision(enemy) != null) {
+                if (projectile.checkCollision(enemy) != null) {
                     // If the strength of the projectiles is grater than that of the enemies
                     if (projectile.getStrength() > enemy.getStrength()) {
                         // If the enemy dies the score is updated
@@ -175,7 +167,7 @@ public class Game implements IGame {
             }
 
             // Iterate over all obstacles and check for collision with projectiles
-            for (IObstacle obstacle: getCurrentLevel().getObstacles()) {
+            for (IObstacle obstacle : getCurrentLevel().getObstacles()) {
                 if (projectile.checkCollision(obstacle) != null) {
                     // set destroyed on collision
                     projectile.setDestroyed();
@@ -183,12 +175,14 @@ public class Game implements IGame {
             }
 
             // Remove projectile from list if destroyed or out of bounds
-            if(projectile.isDestroyed() || isOutOfBounds(projectile)) {
+            if (projectile.isDestroyed() || isOutOfBounds(projectile)) {
                 currentLevel.getProjectiles().remove(i);
             }
         }
+    }
 
-        // Update all enemies
+    // Update enemies
+    private void updateEnemies(double delta, double timeStep, long now) {
         for (IEnemy enemy : currentLevel.getEnemies()) {
             enemy.update(delta, timeStep);
             containToBounds(enemy); // Ensure enemies cannot leave map.
@@ -197,9 +191,14 @@ public class Game implements IGame {
             // If cooldown is active, no ability action will be returned, and this method call will do nothing
             activateAbility(enemy.applyAbility(), now);
         }
+    }
+
+    // Update obstacles
+    private void updateObstacles(double delta, double timeStep) {
+        IPlayer player = currentLevel.getPlayer();
 
         // Update all obstacles and check for collision with player.
-        for(IObstacle obstacle: currentLevel.getObstacles()) {
+        for(IObstacle obstacle:currentLevel.getObstacles()) {
             obstacle.update(delta, timeStep);
 
             // Check if collision has occurred and get minimum translation vector.
@@ -208,8 +207,10 @@ public class Game implements IGame {
                 player.move(minimumTranslationVector);
             }
         }
+    }
 
-        // Apply active abilities
+    // Apply active abilities
+    private void applyAbilityActions(long now) {
         for(int i = 0; i < activeAbilityActions.size(); i++) {
             IAbilityAction abilityAction = activeAbilityActions.get(i);
             long activationTime = activationTimes.get(i);
@@ -221,7 +222,11 @@ public class Game implements IGame {
             // Feed the ability the time since activation. Some ability will depend on this value.
             abilityAction.apply(currentLevel, time);
         }
+    }
 
+    // Handle enemy-related collisions
+    private void handleEnemyCollisions() {
+        IPlayer player = currentLevel.getPlayer();
         // Check collision between players and enemies, and enemies and other enemies
         for (int i = 0; i < currentLevel.getEnemies().size(); i++) {
             IEnemy e1 = currentLevel.getEnemies().get(i);
@@ -255,9 +260,9 @@ public class Game implements IGame {
             }
             // Check enemy-obstacle colllision
             for (IObstacle obstacle: getCurrentLevel().getObstacles()){
-                Point2D mtv = e1.checkCollision(obstacle);
-                if (mtv != null) {
-                    e1.move(mtv);
+                Point2D minimumTranslationVector = e1.checkCollision(obstacle);
+                if (minimumTranslationVector != null) {
+                    e1.move(minimumTranslationVector);
                 }
             }
 
@@ -266,8 +271,10 @@ public class Game implements IGame {
                 currentLevel.removeEnemy(e1);
             }
         }
+    }
 
-        // Remove finished ability actions
+    // Removes finished ability actions
+    private void removeFinishedAbilityActions(long now) {
         // Iterate backwards to avoid problems with removing entries from list
         for(int i = activeAbilityActions.size() - 1;  i >= 0; i--) {
             IAbilityAction abilityAction = activeAbilityActions.get(i);
@@ -279,6 +286,41 @@ public class Game implements IGame {
                 deactivateAbility(i);
             }
         }
+    }
+
+
+    // Update is called every game loop iteration (frame). Update is the method responsible for
+    // handling all model updates.
+    @Override
+    public void update(double delta, double timeStep) {
+        // Nanos passed since last update
+        long now = System.nanoTime();
+
+        // Check for player death
+        if(!currentLevel.getPlayer().isAlive()) {
+            gameOver();
+        }
+
+        // Update player
+        updatePlayer(delta, timeStep);
+
+        // Update projectiles
+        updateProjectiles(delta, timeStep);
+
+        // Update all enemies
+        updateEnemies(delta, timeStep, now);
+
+        // Update obstacles
+        updateObstacles(delta, timeStep);
+
+        // Apply active abilities
+        applyAbilityActions(now);
+
+        // Handle enemy-enemy collisions, enemy-player collisions and enemy-obstacle collisions
+        handleEnemyCollisions();
+
+        // Remove finished ability actions
+        removeFinishedAbilityActions(now);
     }
 
     // Activates the player ability. This method is called from outside the game,
@@ -370,10 +412,6 @@ public class Game implements IGame {
     @Override
     public boolean isGameWin() {
         return gameWin;
-    }
-
-    //TODO: handle collision
-    private void handleCollision(IEntity<?> e1, IEntity<?> e2){
     }
 
     // Registers listeners for ability action events
