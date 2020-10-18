@@ -204,7 +204,7 @@ public class Game implements IGame {
             // Check if collision has occurred and get minimum translation vector.
             Point2D minimumTranslationVector = player.checkCollision(obstacle);
             if (minimumTranslationVector != null) {
-                player.move(minimumTranslationVector);
+                obstacle.handleCollision(minimumTranslationVector, player);
             }
         }
     }
@@ -262,7 +262,7 @@ public class Game implements IGame {
             for (IObstacle obstacle: getCurrentLevel().getObstacles()){
                 Point2D minimumTranslationVector = enemy1.checkCollision(obstacle);
                 if (minimumTranslationVector != null) {
-                    enemy1.move(minimumTranslationVector);
+                    obstacle.handleCollision(minimumTranslationVector, enemy1);
                 }
             }
 
