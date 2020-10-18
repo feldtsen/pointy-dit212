@@ -229,46 +229,46 @@ public class Game implements IGame {
         IPlayer player = currentLevel.getPlayer();
         // Check collision between players and enemies, and enemies and other enemies
         for (int i = 0; i < currentLevel.getEnemies().size(); i++) {
-            IEnemy e1 = currentLevel.getEnemies().get(i);
+            IEnemy enemy1 = currentLevel.getEnemies().get(i);
             // Loop from i + 1 to ensure collision is not checked twice for each entity pair, and to avoid checking
             // self collision checking.
             for (int j = i + 1; j < currentLevel.getEnemies().size(); j++){
-                IEnemy e2 = currentLevel.getEnemies().get(j);
+                IEnemy enemy2 = currentLevel.getEnemies().get(j);
 
                 // check if collision has occurred and get minimum translation vector.
-                Point2D minimumTranslationVector = e1.checkCollision(e2);
+                Point2D minimumTranslationVector = enemy1.checkCollision(enemy2);
                 if (minimumTranslationVector != null) {
 
                     // Apply half of the translation vector on one enemy and half on the other in the opposite direction.
-                    e1.move(Utils.setMagnitude(minimumTranslationVector, minimumTranslationVector.magnitude() / 2));
-                    e2.move(Utils.setMagnitude(minimumTranslationVector, minimumTranslationVector.magnitude() / 2 * (-1)));
+                    enemy1.move(Utils.setMagnitude(minimumTranslationVector, minimumTranslationVector.magnitude() / 2));
+                    enemy2.move(Utils.setMagnitude(minimumTranslationVector, minimumTranslationVector.magnitude() / 2 * (-1)));
                 }
             }
 
             // Check player-enemy collision
-            if (player.checkCollision(e1) != null){
+            if (player.checkCollision(enemy1) != null){
 
                 // If enemy is stronger than player, player dies
-                if (player.getStrength() < e1.getStrength() && !player.isInvulnerable()){
+                if (player.getStrength() < enemy1.getStrength() && !player.isInvulnerable()){
                     player.setHitPoints(0);
                 }
-                else if (player.getStrength() > e1.getStrength()) {
+                else if (player.getStrength() > enemy1.getStrength()) {
                     // Else, the enemy dies and the score is updated
-                    score += e1.getStrength();
-                    e1.setHitPoints(0);
+                    score += enemy1.getStrength();
+                    enemy1.setHitPoints(0);
                 }
             }
             // Check enemy-obstacle colllision
             for (IObstacle obstacle: getCurrentLevel().getObstacles()){
-                Point2D minimumTranslationVector = e1.checkCollision(obstacle);
+                Point2D minimumTranslationVector = enemy1.checkCollision(obstacle);
                 if (minimumTranslationVector != null) {
-                    obstacle.handleCollision(minimumTranslationVector, e1);
+                    obstacle.handleCollision(minimumTranslationVector, enemy1);
                 }
             }
 
             // Check if enemy is dead
-            if(!e1.isAlive()) {
-                currentLevel.removeEnemy(e1);
+            if(!enemy1.isAlive()) {
+                currentLevel.removeEnemy(enemy1);
             }
         }
     }
@@ -351,32 +351,32 @@ public class Game implements IGame {
         double height = currentLevel.getHeight();
 
         // Velocity is later set to 0 in the direction of collision.
-        Point2D v = entity.getVelocity();
+        Point2D velocity = entity.getVelocity();
 
-        Point2D p = entity.getPosition();
-        double r = entity.getShape().getRadius();
+        Point2D position = entity.getPosition();
+        double radius = entity.getShape().getRadius();
 
         // Collision with left wall
-        if(p.getX() - r < 0) {
-            p = new Point2D(r, p.getY());
-            v = new Point2D(0, v.getY());
+        if(position.getX() - radius < 0) {
+            position = new Point2D(radius, position.getY());
+            velocity = new Point2D(0, velocity.getY());
         // Collision with right wall
-        } else if(p.getX() + r >= width) {
-            p = new Point2D(width - r, p.getY());
-            v = new Point2D(0, v.getY());
+        } else if(position.getX() + radius >= width) {
+            position = new Point2D(width - radius, position.getY());
+            velocity = new Point2D(0, velocity.getY());
         }
         // Collision with top wall
-        if(p.getY() - r < 0) {
-            p = new Point2D(p.getX(), r);
-            v = new Point2D(v.getX(), 0);
+        if(position.getY() - radius < 0) {
+            position = new Point2D(position.getX(), radius);
+            velocity = new Point2D(velocity.getX(), 0);
         // Collision with bottom wall
-        } else if(p.getY() + r >= height) {
-            p = new Point2D(p.getX(), height - r);
-            v = new Point2D(v.getX(), 0);
+        } else if(position.getY() + radius >= height) {
+            position = new Point2D(position.getX(), height - radius);
+            velocity = new Point2D(velocity.getX(), 0);
         }
 
-        entity.setPosition(p);
-        entity.setVelocity(v);
+        entity.setPosition(position);
+        entity.setVelocity(velocity);
     }
 
     // Sets the current level
