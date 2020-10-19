@@ -10,10 +10,20 @@ import java.util.List;
 //Holds all relevant data about a level.
 //Used by "Game" class
 public class Level implements ILevel {
+    // All enemies in the level
     private final List<IEnemy> enemies;
+
+    // All projectiles spawned. This list typically starts out empty but is filled
+    // as enemies spawn projectiles during gameplay
     private final List<IProjectile<?>> projectiles;
+
+    // All obstacles
     private final List<IObstacle> obstacles;
+
+    // The player
     private final IPlayer player;
+
+    // Level dimensions
     private double width;
     private double height;
     private long startTime;

@@ -9,10 +9,17 @@ import javafx.geometry.Point2D;
 
 // Ability for shooting bullets
 public class ShootBullet extends Shoot {
-    private final double bulletRadius; // The radius of the bullet
-    private final double maxForce;     // The max force of the bullet
-    private final double maxSpeed;     // The max speed of the bullet
-    private final int strength;        // The strength of the bullet
+    // The radius of the bullet
+    private final double bulletRadius;
+
+    // The max force of the bullet
+    private final double maxForce;
+
+    // The max speed of the bullet
+    private final double maxSpeed;
+
+    // The strength of the bullet
+    private final int strength;
 
     public ShootBullet(long cooldown, double bulletRadius, double maxForce, double maxSpeed, int strength) {
         super(cooldown);

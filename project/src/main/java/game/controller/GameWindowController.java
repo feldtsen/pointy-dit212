@@ -7,19 +7,23 @@ import game.model.IGame;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
-import game.view.pages.score.IScorePanel;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 
-import java.io.FileNotFoundException;
-
-// Top level controller which initializes the model and the view and
-// starts the game.
+// Top level controller which initializes the model and the view and starts the game.
 public class GameWindowController {
+    // Game loop which is responsible for updating model
     private final IGameLoop gameLoop;
-    private IGame game;               // Model
-    private final Renderer  renderer; // view
-    private final MainWindow window;  // view
+
+    // Entire model. This is updated by the game loop and runs the entire game
+    private IGame game;
+
+    // Renderer class for drawing to a graphics context. The renderer draws the actual gameplay
+    // while other GUI elements, such as buttons and menus, are contained in the main window.
+    private final Renderer  renderer;
+
+    // Main window which creates a canvas with a graphics context, and handles menus and buttons
+    private final MainWindow window;
 
     // Handles keyboard input from the user
     private KeyboardInputController keyboardInputController;
@@ -60,7 +64,7 @@ public class GameWindowController {
                 // Update the game model with a global time step of 1 (normal speed)
                 game.update(delta, 1);
 
-
+                // Display the menu if the player wins the game
                 if(game.isGameWin()) showMenu();
 
                 // Displays game over message
@@ -74,12 +78,10 @@ public class GameWindowController {
                     registerPlayerControls();
                 }
 
-                game.getCurrentLevel().getPlayer().setFacingDirection(mouseInputController.getMousePosition());
-
-
+                // Set facing direction of player
+                game.getCurrentLevel().getPlayer().setFacingTowards(mouseInputController.getMousePosition());
 
                 // If all enemies are dead, progress to the next level
-                // TODO: should be performed by game itself!?!?!?
                 if (game.getCurrentLevel().getEnemies().isEmpty()) game.nextLevel();
             }
         };
@@ -88,6 +90,7 @@ public class GameWindowController {
         gameLoop.start();
     }
 
+    // Updates the UI elements visible during gameplay
     private void updateUI() {
         // Update score panel
         window.getScorePanel().updateScore(game.getScore());
@@ -104,7 +107,7 @@ public class GameWindowController {
         window.showGameOver();
 
         // Registers methods to new keys. Pressing P starts a new game, pressing ESC displays starting menu.
-        keyboardInputController.registerAction(KeyCode.P, this::restart);
+        keyboardInputController.registerAction(KeyCode.P,      this::restart);
         keyboardInputController.registerAction(KeyCode.ESCAPE, this::showMenu);
     }
 
@@ -136,11 +139,10 @@ public class GameWindowController {
         gameSetup();
     }
 
+    //TODO: implement
     public void handleMenuLevelButton() {
         System.out.println("Level button clicked");
     }
-
-    //TODO: implement
     public void handleMenuScoreButton() {
         System.out.println("Score button clicked ");
     }
@@ -184,7 +186,7 @@ public class GameWindowController {
         registerPlayerControls();
     }
 
-    // Registers WASD keys to corresponding methods of the current Player object.
+    // Register player controls, i.e map keyboard and mouse inputs to certain player actions
     private void registerPlayerControls() {
         // Initialize the keyboard input handler.
         keyboardInputController = new KeyboardInputController(window);
@@ -211,8 +213,6 @@ public class GameWindowController {
         mouseInputController.registerActionOnLeftClick(() -> game.activatePlayerAbility(2));
 
         // Bind mouse movement to updating the player facing position
-//        mouseInputController.registerActionOnMove(     () -> game.setPlayerFacingPosition(mouseInputController.getMousePosition()));
-
-        mouseInputController.registerActionOnMove(() -> game.getCurrentLevel().getPlayer().setFacingDirection(mouseInputController.getMousePosition()));
+        mouseInputController.registerActionOnMove(() -> game.getCurrentLevel().getPlayer().setFacingTowards(mouseInputController.getMousePosition()));
     }
 }

@@ -12,9 +12,13 @@ public interface IGameLoop {
     boolean isPaused();
     void setPaused(boolean paused);
 
-    // Start and stop starts and stops the internal timer
+    // Start and stop starts and stops the internal timer.
     void start();
     void stop();
 
+    // Update is called once each loop iteration.
+    // delta is a value representing the number of seconds which have passed since the previous iteration.
+    // This value should be used by all classes implementing the updatable interface, to ensure they run
+    // equally fast/slow independent of loop frame rate.
     void update(double delta);
 }

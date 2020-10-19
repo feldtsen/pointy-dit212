@@ -100,10 +100,10 @@ public class LevelLoader {
     public static IObstacle selectObstacle(double x, double y, String type) {
         IObstacle obstacle = null;
         if (type.equals("wall")) {
-            obstacle = new Wall(new Point2D(x,y), 100, 100);
+            obstacle = new Wall(new Point2D(x,y), 100, 200);
         }
         else if (type.equals("moving")) {
-            obstacle = new MovingWall(new Point2D(x,y), new Point2D(3*x, 2*y),400,200,100,100);
+            obstacle = new MovingWall(new Point2D(x,y), new Point2D(3*x, 2*y),400,200,200,100);
         }
         return obstacle;
     }

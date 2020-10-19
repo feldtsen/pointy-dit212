@@ -10,6 +10,7 @@ import java.util.List;
 public class Rectangle implements IRectangle {
     // Width of the rectangle
     private final double width;
+
     // Height of the rectangle
     private final double height;
 

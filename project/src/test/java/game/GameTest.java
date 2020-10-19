@@ -203,7 +203,7 @@ public class GameTest {
     public void testPlayerFacingMouse() {
 
         Point2D mousePosition = new Point2D(310, 515);
-        game.getCurrentLevel().getPlayer().setFacingDirection(mousePosition);
+        game.getCurrentLevel().getPlayer().setFacingTowards(mousePosition);
 
         game.update(1.0, 1.0);
         IPlayer player = game.getCurrentLevel().getPlayer();
@@ -221,7 +221,7 @@ public class GameTest {
 
         IPlayer player = game.getCurrentLevel().getPlayer();
         double previousFacingDirection = player.getShape().getRotation();
-        game.getCurrentLevel().getPlayer().setFacingDirection(mousePosition);
+        game.getCurrentLevel().getPlayer().setFacingTowards(mousePosition);
 
         game.update(1.0, 1.0);
 

@@ -10,6 +10,7 @@ import javafx.geometry.Point2D;
 public class Missile extends Projectile<ITriangle> {
     // The target of the missile
     private IEntity<?> target;
+
     // The movement behavior of the missile. Typically some kind of seeking behavior
     private final IMovementBehaviour movementBehaviour;
 
@@ -32,10 +33,12 @@ public class Missile extends Projectile<ITriangle> {
         return true;
     }
 
+    // Returns the target of the missile
     public IEntity<?> getTarget(){
         return target;
     }
 
+    // Updates the missile
     @Override
     public void update(double delta, double timeStep) {
         // Apply the movement behavior

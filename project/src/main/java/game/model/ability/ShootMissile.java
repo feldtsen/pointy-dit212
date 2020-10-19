@@ -8,17 +8,30 @@ import javafx.geometry.Point2D;
 
 // Ability for shooting missiles
 public class ShootMissile extends Shoot {
-    private final double width;     // Width of missile
-    private final double height;    // Height of missile
-    private final double maxForce;  // Max force (responsiveness) of missile
-    private final double maxSpeed;  // Max speed of missile
-    private final double minSpeed;  // Minimum speed of missile. This ensures the missile never completely stops, which creates
-                                    // a more realistic behavior.
-    private final int strength;     // The strength of the missile
-    private final IMovementBehaviour movementBehaviour; // The movement behavior of the missile. Usually a seeking behavior.
+    // Width of missile
+    private final double width;
 
-    public ShootMissile(long cooldown, double width, double height, double maxForce, double maxSpeed, double minSpeed, int strength,
-                        IMovementBehaviour movementBehaviour) {
+    // Height of missile
+    private final double height;
+
+    // Max force (responsiveness) of missile
+    private final double maxForce;
+
+    // Max speed of missile
+    private final double maxSpeed;
+
+    // Minimum speed of missile. This ensures the missile never completely stops, which creates
+    // a more realistic behavior.
+    private final double minSpeed;
+
+    // The strength of the missile
+    private final int strength;
+
+    // The movement behavior of the missile. Usually a seeking behavior.
+    private final IMovementBehaviour movementBehaviour;
+
+    public ShootMissile(long cooldown, double width, double height, double maxForce, double maxSpeed, double minSpeed,
+                        int strength, IMovementBehaviour movementBehaviour) {
         super(cooldown);
         this.width = width;
         this.height = height;
@@ -36,6 +49,6 @@ public class ShootMissile extends Shoot {
         Point2D missileVelocity = target.getPosition().subtract(user.getPosition());
 
         return new Missile(user.getPosition(), width, height, maxForce, minSpeed, maxSpeed, strength, missileVelocity,
-                target, movementBehaviour);
+                           target, movementBehaviour);
     }
 }

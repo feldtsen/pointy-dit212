@@ -34,13 +34,13 @@ public class EntityTest {
         Entity<IRectangle> rectangle3 = createEntityRectangle(new Point2D(0, -1.0001), 1, 1, 0);
 
 
-        assertFalse(testCircle.checkCollision(circle0));
-        assertFalse(testRectangle.checkCollision(circle1));
-        assertFalse(testRectangle.checkCollision(circle2));
-        assertFalse(testRectangle.checkCollision(rectangle0));
-        assertFalse(testRectangle.checkCollision(rectangle1));
-        assertFalse(testRectangle.checkCollision(rectangle2));
-        assertFalse(testRectangle.checkCollision(rectangle3));
+        assertFalse(testCircle.checkCollision(circle0) != null);
+        assertFalse(testRectangle.checkCollision(circle1) != null);
+        assertFalse(testRectangle.checkCollision(circle2) != null);
+        assertFalse(testRectangle.checkCollision(rectangle0) != null);
+        assertFalse(testRectangle.checkCollision(rectangle1) != null);
+        assertFalse(testRectangle.checkCollision(rectangle2) != null);
+        assertFalse(testRectangle.checkCollision(rectangle3) != null);
     }
 
     @Test
@@ -48,10 +48,10 @@ public class EntityTest {
         Entity<ICircle> circle0 = createEntityCircle(new Point2D(1.4, 0), 1);
         Entity<IRectangle> rectangle0 = createEntityRectangle(new Point2D(0.75, 0), 1, 1, 0);
 
-        assertTrue(testCircle.checkCollision(circle0));
-        assertTrue(testCircle.checkCollision(rectangle0));
-        assertTrue(testRectangle.checkCollision(circle0));
-        assertTrue(testRectangle.checkCollision(rectangle0));
+        assertTrue(testCircle.checkCollision(circle0) != null);
+        assertTrue(testCircle.checkCollision(rectangle0) != null);
+        assertTrue(testRectangle.checkCollision(circle0) != null);
+        assertTrue(testRectangle.checkCollision(rectangle0) != null);
     }
 
     @Test
@@ -62,9 +62,9 @@ public class EntityTest {
         Entity<IRectangle> rectangle0 = createEntityRectangle(new Point2D(1, 1), 1, 1, 0);
         Entity<IRectangle> rectangle1 = createEntityRectangle(new Point2D(-1, 0), 1, 1, 0);
 
-        assertTrue(testCircle.checkCollision(circle0));
-        assertTrue(testRectangle.checkCollision(circle1));
-        assertTrue(testRectangle.checkCollision(rectangle0));
-        assertTrue(testRectangle.checkCollision(rectangle1));
+        assertTrue(testCircle.checkCollision(circle0) != null);
+        assertTrue(testRectangle.checkCollision(circle1) != null);
+        assertTrue(testRectangle.checkCollision(rectangle0) != null);
+        assertTrue(testRectangle.checkCollision(rectangle1) != null);
     }
 }

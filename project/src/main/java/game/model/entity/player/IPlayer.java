@@ -21,11 +21,13 @@ public interface IPlayer extends ILiving, IMovable<ICircle> {
     void moveRight();
 
     // Adds an ability to the player list of abilities
-    boolean addAbility(IAbility ability);
+    void addAbility(IAbility ability);
 
     List<IAbility> getAbilities();
 
+    // Returns the direction which the player is facing
     Point2D getFacingDirection();
 
-    void setFacingDirection(Point2D dir);
+    // sets the position which the player is facing. This is usually defined using the mouse position
+    void setFacingTowards(Point2D position);
 }
