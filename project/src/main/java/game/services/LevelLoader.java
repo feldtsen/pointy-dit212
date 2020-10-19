@@ -7,49 +7,70 @@ package game.services;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import game.model.entity.Entity;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.obstacle.IObstacle;
-import game.model.entity.obstacle.MovingWall;
-import game.model.entity.obstacle.Wall;
 import game.model.entity.player.IPlayer;
 import game.model.entity.projectile.IProjectile;
+import game.model.level.ILevel;
 import game.model.level.Level;
-import javafx.geometry.Point2D;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
 // Class for loading levels using GSON JSON parser.
-public class LevelLoader {
-    private static JsonObject levelJSON;
+public class LevelLoader implements ILevelLoader {
+
+    private String path;
+    private JsonObject levelJSON;
+    private int levelNr;
+
+    private final double LEVEL_WIDTH = 1200;
+    private final double LEVEL_HEIGHT = 675;
 
     // Constructor takes the level ID in form of a string and parses the level data into a JSON object.
-    public static Level load(String levelID) throws FileNotFoundException {
-        levelJSON = new JsonParser().parse(new FileReader("src/main/resources/game/levels/" + levelID + ".json")).getAsJsonObject();
-
-        List<IObstacle> obstacles = loadObstacles();
-        IPlayer player = loadPlayer();
-        List<IEnemy> enemies = loadEnemies(player);
-        List<IProjectile<?>> projectiles = loadProjectiles();
-
-        return new Level(enemies, projectiles, obstacles, player, 1200, 675);
+    public LevelLoader(String path)  {
+        this.path = path;
+        this.levelNr = 1;
     }
 
-    // Returns the IDs of the next level
-    public static List<String> getLevelIDs(int nrOfLevels) {
-        List<String> id = new ArrayList<>();
-        for (int i = 1; i <= nrOfLevels; i++) {
-            id.add(Integer.toString(i));
+    @Override
+    public ILevel getLevel()  {
+        String filePath = path + Integer.toString(levelNr) + ".json";
+        try {
+            levelJSON = new JsonParser().parse(new FileReader(filePath)).getAsJsonObject();
+
+            // Loads the entities from the file
+            List<IObstacle> obstacles = loadObstacles();
+            IPlayer player = loadPlayer();
+            List<IEnemy> enemies = loadEnemies(player);
+            List<IProjectile<?>> projectiles = loadProjectiles();
+
+            return new Level(enemies, projectiles, obstacles, player, LEVEL_WIDTH, LEVEL_HEIGHT);
+        } catch (FileNotFoundException e) {
+            return null;
         }
-        return id;
+    }
+
+    @Override
+    public boolean hasNext() {
+        levelNr += 1;
+        if (getLevel() == null) {
+            return false;
+        }
+        levelNr -= 1;
+        return true;
+    }
+
+    @Override
+    public ILevel next() {
+        levelNr += 1;
+        return getLevel();
     }
 
     // Loads the player according to the parameters in level file.
-    private static IPlayer loadPlayer() {
+    private IPlayer loadPlayer() {
         double x = levelJSON.getAsJsonObject("Player").get("x").getAsDouble();
         double y = levelJSON.getAsJsonObject("Player").get("y").getAsDouble();
         return EntityFactory.basicPlayer(x,y);
@@ -58,7 +79,7 @@ public class LevelLoader {
     // Loads the enemies from the level file into the game.
     // Reads the different parameters and calls method selectEnemies.
     // Uses player as the target.
-    private static List<IEnemy> loadEnemies(IPlayer player) {
+    private List<IEnemy> loadEnemies(IPlayer player) {
         List<IEnemy> enemies = new ArrayList<>();
         JsonArray enemyArr = levelJSON.getAsJsonArray("Enemies");
         for (int i = 0; i < enemyArr.size(); i++) {
@@ -73,7 +94,7 @@ public class LevelLoader {
 
     // Loads the obstacles from the level file into the game.
     // Reads the different parameters and calls method selectObstacle
-    private static List<IObstacle> loadObstacles() {
+    private List<IObstacle> loadObstacles() {
         List<IObstacle> obstacles = new ArrayList<>();
         JsonArray obstacleArr = levelJSON.getAsJsonArray("Obstacles");
         for (int i = 0; i < obstacleArr.size(); i++) {
@@ -91,13 +112,13 @@ public class LevelLoader {
     }
 
     //Returns an empty list since no projectiles are loaded at the start of a level.
-    private static List<IProjectile<?>> loadProjectiles() {
+    private List<IProjectile<?>> loadProjectiles() {
         return new ArrayList<>();
     }
 
     // Returns the type of enemy according to "type" specified in level file.
     // Uses EntityFactory
-    public static IEnemy selectEnemy(double x, double y, IEntity target, int difficulty, String type) {
+    private IEnemy selectEnemy(double x, double y, IEntity target, int difficulty, String type) {
         IEnemy enemy = null;
         // Returns basic enemy without abilities
         if (type.equals("basic")) {
@@ -116,7 +137,7 @@ public class LevelLoader {
 
     // Returns the type of obstacle according to "type" specified in level file.
     // Uses EntityFactory
-    public static IObstacle selectObstacle(double x1, double y1, double x2, double y2, double width, double height, String type) {
+    private IObstacle selectObstacle(double x1, double y1, double x2, double y2, double width, double height, String type) {
         IObstacle obstacle = null;
         // Stationary obstacle
         if (type.equals("wall")) {
@@ -132,15 +153,6 @@ public class LevelLoader {
         }
         return obstacle;
     }
-
-
-
-
-
-
-
-
-
 
 
 }

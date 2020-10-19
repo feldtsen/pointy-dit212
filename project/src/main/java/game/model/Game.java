@@ -17,13 +17,12 @@ import game.model.entity.projectile.IProjectile;
 import game.controller.gameLoop.GameLoop;
 import game.model.level.ILevel;
 import game.model.shape2d.ICircle;
+import game.services.ILevelLoader;
 import game.services.LevelLoader;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 // Implementation of game interface.
@@ -38,7 +37,7 @@ public class Game implements IGame {
     private boolean gameWin;
 
     // An iterator over the existing levels
-    private final Iterator<String> levelID;
+    private ILevelLoader levelLoader;
 
     // The current, active level
     private ILevel currentLevel;
@@ -61,10 +60,9 @@ public class Game implements IGame {
     private final List<AbilityActionEventListener> listeners;
 
     public Game() {
-        this.levelID = LevelLoader.getLevelIDs(3).iterator();
 
-        // Load the next level (first)
-        nextLevel();
+        this.levelLoader = new LevelLoader("src/main/resources/game/levels/");
+        this.currentLevel = levelLoader.getLevel();
 
         this.score = 0;
         this.gameOver = false;
@@ -79,15 +77,11 @@ public class Game implements IGame {
 
     // Loads the next level
     public void nextLevel() {
-        try {
-            // If there is another level, load it
-            if (levelID.hasNext()) {
-                setLevel(LevelLoader.load(levelID.next()));
-            } else {
-                gameWin = true;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        if (levelLoader.hasNext()) {
+            setLevel(levelLoader.next());
+        }
+        else {
+            gameWin = true;
         }
     }
 
