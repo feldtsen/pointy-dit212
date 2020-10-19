@@ -1,0 +1,40 @@
+{
+  "Player": {
+    "x": "50",
+    "y": "300"
+  },
+  "Enemies": [
+    {
+      "type": "bullet",
+      "x": "1000",
+      "y": "100",
+      "target": "player",
+      "difficulty" : "3"
+    },
+    {
+      "type": "basic",
+      "x": "700",
+      "y": "100",
+      "target": "player",
+      "difficulty" : "5"
+    },
+    {
+      "type": "missile",
+      "x": "1000",
+      "y": "500",
+      "target": "player",
+      "difficulty" : "3"
+    }
+  ],
+  "Obstacles": [
+    {
+      "type": "moving",
+      "x1": "500",
+      "y1": "100",
+      "x2": "500",
+      "y2": "550",
+      "width": "100",
+      "height": "100"
+    }
+  ]
+}
