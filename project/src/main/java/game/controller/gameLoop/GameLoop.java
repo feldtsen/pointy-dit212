@@ -1,6 +1,9 @@
 package game.controller.gameLoop;
 
+import game.util.Timer;
 import javafx.animation.AnimationTimer;
+
+import java.util.concurrent.TimeUnit;
 
 // A game loop implementation. This code is abstracted away
 // to ensure the model code does not have to implement it. Model code could extend this class,
@@ -14,7 +17,7 @@ public abstract class GameLoop implements IGameLoop {
     private final long nanosPerFrame;   // The number of nano seconds per frame at desired FPS
     private long lastNanoTime;          // Last sampled nano time. Used to calculate delta.
     private boolean isRunning;          // True if timer is running.
-    private final AnimationTimer timer; // Timer used for handling game loop.
+    private final AnimationTimer animationTimer; // Timer used for handling game loop.
     private boolean paused = true;      // True if the loop is paused
 
     // Fields for calculating FPS
@@ -22,12 +25,16 @@ public abstract class GameLoop implements IGameLoop {
     private int framesThisSecond; // How many frames that have passed this second
     private int currentFPS;       // The currently calculated FPS
 
+    // Timer
+    private final Timer timer;
+
     public GameLoop(int desiredFPS) {
+        timer = new Timer();
+        setPaused(true);
         // The number of nanoseconds which will elapse each frame at desired FPS.
         this.nanosPerFrame = SECOND / desiredFPS;
-
         // The internal timer which will run the loop.
-        timer = new AnimationTimer() {
+        animationTimer = new AnimationTimer() {
             /* Handled is called every iteration. Now is the current system nano time. */
             public void handle(long now) {
                 // The amount of nanoseconds which have passed since the previous frame.
@@ -43,7 +50,10 @@ public abstract class GameLoop implements IGameLoop {
                     double delta = (double) elapsedNanos / SECOND;
 
                     // If the game is not paused, update
-                    if (!paused) update(delta);
+                    if (!paused) {
+                        update(delta);
+                        timer.setTime(delta);
+                    }
 
                     // Set the last nano time to the current time. Will be used to calculate elapsedNanos next frame
                     lastNanoTime = now;
@@ -84,14 +94,14 @@ public abstract class GameLoop implements IGameLoop {
     @Override
     public void start() {
         isRunning = true;
-        timer.start();
+        animationTimer.start();
     }
 
     // Stops the loop.
     @Override
     public void stop() {
         isRunning = false;
-        timer.stop();
+        animationTimer.stop();
     }
 
     @Override
@@ -102,5 +112,15 @@ public abstract class GameLoop implements IGameLoop {
     @Override
     public int getCurrentFPS() {
         return currentFPS;
+    }
+
+    @Override
+    public String getTime() {
+        return timer.getTime();
+    }
+
+    @Override
+    public void resetTimer () {
+        timer.resetTimer();
     }
 }

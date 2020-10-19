@@ -1,11 +1,17 @@
+/*
+Author: Mattias Oom, Joachim Ørfeldt Pedersen
+ */
 package game.model.level;
 
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.obstacle.IObstacle;
 import game.model.entity.player.IPlayer;
 import game.model.entity.projectile.IProjectile;
+import game.util.Timer;
 
 import java.util.List;
+
+
 
 //Holds all relevant data about a level.
 //Used by "Game" class
@@ -26,7 +32,7 @@ public class Level implements ILevel {
     // Level dimensions
     private double width;
     private double height;
-    private long startTime;
+
 
     public Level(List<IEnemy> enemies, List<IProjectile<?>> projectiles, List<IObstacle> obstacles, IPlayer player, double width, double height) {
         this.enemies = enemies;
@@ -93,8 +99,6 @@ public class Level implements ILevel {
         projectiles.remove(projectile);
     }
 
-    @Override
-    public void startTimer() {
-        this.startTime = System.nanoTime();
-    }
+
+
 }

@@ -30,8 +30,8 @@ public class ScorePanel extends VBox implements IScorePanel {
 
     @Override
     // Update the score panel with the current score.
-    public void updateScore(int score) {
-        if(scoreLabel.getText().equals("")) scoreLabel.setText(" SCORE ");
-        this.score.setText(score+"");
+    public void updateScore(String score) {
+        if(scoreLabel.getText().equals("")) scoreLabel.setText(" T I M E ");
+        this.score.setText(score);
     }
 }

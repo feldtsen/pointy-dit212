@@ -21,4 +21,10 @@ public interface IGameLoop {
     // This value should be used by all classes implementing the updatable interface, to ensure they run
     // equally fast/slow independent of loop frame rate.
     void update(double delta);
+
+    // The time the player has spent on the level
+    String getTime();
+
+    // Sets the timer back to 0
+    void resetTimer ();
 }

@@ -4,6 +4,7 @@ import game.model.Game;
 import game.controller.gameLoop.GameLoop;
 import game.controller.gameLoop.IGameLoop;
 import game.model.IGame;
+import game.util.Timer;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
@@ -30,6 +31,8 @@ public class GameWindowController {
 
     // Handles mouse input from the user
     private MouseInputController mouseInputController;
+
+
 
     public GameWindowController() {
         // Initializes main window view component
@@ -68,11 +71,15 @@ public class GameWindowController {
                 if(game.isGameWin()) showMenu();
 
                 // Displays game over message
-                if(game.isGameOver()) handleGameOver();
+                if(game.isGameOver())  {
+                    gameLoop.resetTimer();
+                    handleGameOver();
+                }
 
                 // Checks if all enemies have been defeated
                 if (game.getCurrentLevel().getEnemies().isEmpty())  {
                     game.nextLevel();
+                    gameLoop.resetTimer();
 
                     // Register movement keys to new player object
                     registerPlayerControls();
@@ -93,7 +100,7 @@ public class GameWindowController {
     // Updates the UI elements visible during gameplay
     private void updateUI() {
         // Update score panel
-        window.getScorePanel().updateScore(game.getScore());
+        window.getScorePanel().updateScore(gameLoop.getTime());
 
         // Update cooldown timers
         window.getAbilityBar().updateAbilities(game.getCurrentLevel().getPlayer().getAbilities());

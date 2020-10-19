@@ -34,6 +34,4 @@ public interface ILevel {
     void setWidth(double width);
     void setHeight(double height);
 
-    // sets the time of when the level was started.
-    void setStartTime();
 }
