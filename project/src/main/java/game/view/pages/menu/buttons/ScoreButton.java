@@ -1,3 +1,7 @@
+/*
+ * Joachim Pedersen
+ */
+
 package game.view.pages.menu.buttons;
 
 

@@ -1,3 +1,7 @@
+/*
+ * Authors: Simon Genne, Anton Hildingsson, Mattias Oom
+ */
+
 package game.model.ability;
 
 import game.model.entity.IEntity;

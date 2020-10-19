@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson 
+ */
+
 package game.controller.gameLoop;
 
 // A simple game loop implementation. The loop will call update

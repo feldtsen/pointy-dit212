@@ -1,3 +1,7 @@
+/*
+ * Authors: Joachim Pedersen, Mattias Oom, Anton Hildingsson
+ */
+
 package game;
 
 import game.controller.GameWindowController;

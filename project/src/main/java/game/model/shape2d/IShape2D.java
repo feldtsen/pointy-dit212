@@ -1,3 +1,7 @@
+/*
+ * Authors: Simon Genne, Mattias Oom, Joachim Pederson, Anton Hildingsson
+ */
+
 package game.model.shape2d;
 
 import game.view.IVisitableShape;

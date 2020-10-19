@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson 
+ */
+
 package game.controller;
 
 // Helper interface for defining an action to be performed on an event

@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Mattias Oom, Simon Genne, Erik Magnusson, Joachim Pedersen
+ */
+
 package game.model.entity.movable;
 
 import game.model.entity.Entity;

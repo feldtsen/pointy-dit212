@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson 
+ */
+
 package game.controller.gameLoop;
 
 import game.util.Timer;

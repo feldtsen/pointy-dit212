@@ -1,3 +1,7 @@
+/*
+ * Authors: Simon Genne, Anton Hildingsson, Erik Magnusson, Mattias Oom
+ */
+
 package game.model.entity.obstacle;
 import game.model.entity.Entity;
 import game.model.entity.movable.IMovable;

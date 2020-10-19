@@ -1,8 +1,13 @@
+/*
+ * Authors: Erik Magnusson, Anton Hildingsson, Mattias Oom, Joachim Pedersen
+ */
+
 package game.services;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import game.model.entity.Entity;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.obstacle.IObstacle;
@@ -43,13 +48,16 @@ public class LevelLoader {
         return id;
     }
 
+    // Loads the player according to the parameters in level file.
     private static IPlayer loadPlayer() {
         double x = levelJSON.getAsJsonObject("Player").get("x").getAsDouble();
         double y = levelJSON.getAsJsonObject("Player").get("y").getAsDouble();
         return EntityFactory.basicPlayer(x,y);
     }
 
-    //TODO: Fix target to be dynamic as well as implement other variables
+    // Loads the enemies from the level file into the game.
+    // Reads the different parameters and calls method selectEnemies.
+    // Uses player as the target.
     private static List<IEnemy> loadEnemies(IPlayer player) {
         List<IEnemy> enemies = new ArrayList<>();
         JsonArray enemyArr = levelJSON.getAsJsonArray("Enemies");
@@ -63,15 +71,21 @@ public class LevelLoader {
         return enemies;
     }
 
-
+    // Loads the obstacles from the level file into the game.
+    // Reads the different parameters and calls method selectObstacle
     private static List<IObstacle> loadObstacles() {
         List<IObstacle> obstacles = new ArrayList<>();
         JsonArray obstacleArr = levelJSON.getAsJsonArray("Obstacles");
         for (int i = 0; i < obstacleArr.size(); i++) {
             String type = obstacleArr.get(i).getAsJsonObject().get("type").getAsString();
-            double x = obstacleArr.get(i).getAsJsonObject().get("x").getAsDouble();
-            double y = obstacleArr.get(i).getAsJsonObject().get("y").getAsDouble();
-            obstacles.add(selectObstacle(x,y,type));
+            double x1 = obstacleArr.get(i).getAsJsonObject().get("x1").getAsDouble();
+            double y1 = obstacleArr.get(i).getAsJsonObject().get("y1").getAsDouble();
+            double x2 = obstacleArr.get(i).getAsJsonObject().get("x2").getAsDouble();
+            double y2 = obstacleArr.get(i).getAsJsonObject().get("y2").getAsDouble();
+            double height = obstacleArr.get(i).getAsJsonObject().get("height").getAsDouble();
+            double width = obstacleArr.get(i).getAsJsonObject().get("width").getAsDouble();
+
+            obstacles.add(selectObstacle(x1, y1, x2, y2, width, height, type));
         }
         return obstacles;
     }
@@ -81,29 +95,40 @@ public class LevelLoader {
         return new ArrayList<>();
     }
 
-
+    // Returns the type of enemy according to "type" specified in level file.
+    // Uses EntityFactory
     public static IEnemy selectEnemy(double x, double y, IEntity target, int difficulty, String type) {
         IEnemy enemy = null;
+        // Returns basic enemy without abilities
         if (type.equals("basic")) {
             enemy = EntityFactory.basicEnemy(x, y,target, difficulty);
         }
+        // Returns enemy which fires bullets
         else if (type.equals("bullet")) {
             enemy = EntityFactory.bulletEnemy(x, y, target, difficulty);
         }
+        // Returns enemy which fires homing missiles
         else if (type.equals("missile")) {
             enemy = EntityFactory.missileEnemy(x, y, target, difficulty);
         }
         return enemy;
     }
 
-    //TODO: Change to use factory
-    public static IObstacle selectObstacle(double x, double y, String type) {
+    // Returns the type of obstacle according to "type" specified in level file.
+    // Uses EntityFactory
+    public static IObstacle selectObstacle(double x1, double y1, double x2, double y2, double width, double height, String type) {
         IObstacle obstacle = null;
+        // Stationary obstacle
         if (type.equals("wall")) {
-            obstacle = new Wall(new Point2D(x,y), 100, 200);
+            obstacle = EntityFactory.wall(x1, y1, width, height);
         }
+        // Obstacle that moves across the level. Moves between points (x1,y1) and (x2,y2)
         else if (type.equals("moving")) {
-            obstacle = new MovingWall(new Point2D(x,y), new Point2D(3*x, 2*y),400,200,200,100);
+            obstacle = EntityFactory.movingWall(x1, y1, x2, y2, width, height);
+        }
+        // Spike obstacle which can kill other entities
+        else if (type.equals("spikes")) {
+            obstacle = EntityFactory.spikes(x1, x2);
         }
         return obstacle;
     }

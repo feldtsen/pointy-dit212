@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Joachim Pedersen
+ */
+
 package game.controller;
 
 import javafx.scene.Node;

@@ -1,3 +1,7 @@
+/*
+ * Authors: Simon Genne, Joachim Pedersen
+ */
+
 package game.view.pages.gameOver;
 
 import javafx.geometry.Pos;

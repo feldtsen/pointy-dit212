@@ -1,3 +1,7 @@
+/*
+ * Authors: Erik Magnusson, Anton Hildingsson, Mattias Oom, Joachim Pedersen
+ */
+
 package game.model.level;
 
 import game.model.entity.enemy.IEnemy;

@@ -1,3 +1,7 @@
+/*
+ * Authors: Simon Genne, Anton Hildingsson
+ */
+
 package game.util;
 
 import game.model.shape2d.IShape2D;

@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Mattias Oom
+ */
+
 package game.controller.event;
 
 // Any class implementing this interface should notify its listeners
