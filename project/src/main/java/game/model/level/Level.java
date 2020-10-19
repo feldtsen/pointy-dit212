@@ -16,6 +16,7 @@ public class Level implements ILevel {
     private final IPlayer player;
     private double width;
     private double height;
+    private long startTime;
 
     public Level(List<IEnemy> enemies, List<IProjectile<?>> projectiles, List<IObstacle> obstacles, IPlayer player, double width, double height) {
         this.enemies = enemies;
@@ -80,5 +81,10 @@ public class Level implements ILevel {
     @Override
     public void removeProjectile(IProjectile<?> projectile) {
         projectiles.remove(projectile);
+    }
+
+    @Override
+    public void startTimer() {
+        this.startTime = System.nanoTime();
     }
 }
