@@ -68,8 +68,6 @@ public class LevelLoaderTest {
 
     @Test
     public void testHasNext() {
-        assertTrue(levelLoader.hasNext());
-        levelLoader.next();
         assertFalse(levelLoader.hasNext());
     }
 
