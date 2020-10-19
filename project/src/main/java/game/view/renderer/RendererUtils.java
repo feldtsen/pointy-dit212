@@ -98,19 +98,7 @@ public class RendererUtils {
 
         translate(graphicsContext, shape.getRotation(), scaled.x, scaled.y);
 
-        System.out.println("Original rect data:");
-        System.out.println(position.getX());
-        System.out.println(position.getY());
-        System.out.println(shape.getWidth());
-        System.out.println(shape.getHeight());
-
-        System.out.println("Draw rect data:");
-        System.out.println("X " + (scaled.x - (scaled.w/2)));
-        System.out.println("Y " + (scaled.y - (scaled.h/2)));
-        System.out.println("W " + scaled.w);
-        System.out.println("H " + scaled.h);
-
-                graphicsContext.setFill(color);
+        graphicsContext.setFill(color);
         graphicsContext.fillRect(
                 scaled.x - (scaled.w/2),
                 scaled.y - (scaled.h/2),
