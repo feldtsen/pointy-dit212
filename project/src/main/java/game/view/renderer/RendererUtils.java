@@ -149,8 +149,14 @@ public class RendererUtils {
         graphicsContext.strokeLine(scaledStartX, scaledStartY, scaledStopX, scaledStopY);
     }
 
-    private static void translate(GraphicsContext graphicsContext, double shapeRotation, double xPosition, double yPosition) {
+    public static void setCorrectObstacleRotation(GraphicsContext graphicsContext, IShape2D shape, Point2D position) {
+        Quartet scaled = scaleDrawData(graphicsContext, position.getX(), position.getY(), shape.getWidth(), shape.getHeight());
+        graphicsContext.translate(scaled.x, scaled.y);
+        graphicsContext.rotate(Utils.radianToDegrees(shape.getRotation()) + 90);
+        graphicsContext.translate(-scaled.x, -scaled.y);
+    }
 
+    private static void translate(GraphicsContext graphicsContext, double shapeRotation, double xPosition, double yPosition) {
         // Translates the shape to a position
         graphicsContext.translate(xPosition, yPosition);
 
