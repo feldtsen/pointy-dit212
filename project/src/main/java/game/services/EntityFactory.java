@@ -127,7 +127,7 @@ public class EntityFactory {
     }
 
     public static IObstacle movingWall(double x1, double y1, double x2, double y2, double width, double height) {
-        return new MovingWall(new Point2D(x1,y1), new Point2D(x2, y2), MOVING_WALL_MAX_SPEED, MOVING_WALL_MAX_FORCE, width, height);
+        return new MovingWall(new Point2D(x1, y1), new Point2D(x2, y2), MOVING_WALL_MAX_SPEED, MOVING_WALL_MAX_FORCE, width, height);
     }
 
     public static IObstacle spikes(double x, double y) {

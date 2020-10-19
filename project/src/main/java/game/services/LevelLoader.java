@@ -3,6 +3,7 @@ package game.services;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import game.model.entity.Entity;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.obstacle.IObstacle;
@@ -69,9 +70,14 @@ public class LevelLoader {
         JsonArray obstacleArr = levelJSON.getAsJsonArray("Obstacles");
         for (int i = 0; i < obstacleArr.size(); i++) {
             String type = obstacleArr.get(i).getAsJsonObject().get("type").getAsString();
-            double x = obstacleArr.get(i).getAsJsonObject().get("x").getAsDouble();
-            double y = obstacleArr.get(i).getAsJsonObject().get("y").getAsDouble();
-            obstacles.add(selectObstacle(x,y,type));
+            double x1 = obstacleArr.get(i).getAsJsonObject().get("x1").getAsDouble();
+            double y1 = obstacleArr.get(i).getAsJsonObject().get("y1").getAsDouble();
+            double x2 = obstacleArr.get(i).getAsJsonObject().get("x2").getAsDouble();
+            double y2 = obstacleArr.get(i).getAsJsonObject().get("y2").getAsDouble();
+            double height = obstacleArr.get(i).getAsJsonObject().get("height").getAsDouble();
+            double width = obstacleArr.get(i).getAsJsonObject().get("width").getAsDouble();
+
+            obstacles.add(selectObstacle(x1, y1, x2, y2, width, height, type));
         }
         return obstacles;
     }
@@ -96,14 +102,17 @@ public class LevelLoader {
         return enemy;
     }
 
-    //TODO: Change to use factory
-    public static IObstacle selectObstacle(double x, double y, String type) {
+
+    public static IObstacle selectObstacle(double x1, double y1, double x2, double y2, double width, double height, String type) {
         IObstacle obstacle = null;
         if (type.equals("wall")) {
-            obstacle = new Wall(new Point2D(x,y), 100, 200);
+            obstacle = EntityFactory.wall(x1, y1, width, height);
         }
         else if (type.equals("moving")) {
-            obstacle = new MovingWall(new Point2D(x,y), new Point2D(3*x, 2*y),400,200,200,100);
+            obstacle = EntityFactory.movingWall(x1, y1, x2, y2, width, height);
+        }
+        else if (type.equals("spikes")) {
+            obstacle = EntityFactory.spikes(x1, x2);
         }
         return obstacle;
     }
