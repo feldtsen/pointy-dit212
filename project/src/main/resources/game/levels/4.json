@@ -12,5 +12,16 @@
       "difficulty" : "3"
     }
   ],
-  "Obstacles": []
+  "Obstacles": [
+    {
+      "type": "wall",
+      "x": "600",
+      "y": "100"
+    },
+    {
+      "type": "wall",
+      "x": "600",
+      "y": "560"
+    }
+  ]
 }
