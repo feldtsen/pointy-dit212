@@ -1,3 +1,7 @@
+/*
+ * Authors: Mattias Oom, Anton Hildingsson, Joachim Pedersen
+ */
+
 package game.model.entity.player;
 
 import game.model.entity.movable.ILiving;

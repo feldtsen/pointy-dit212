@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Simon Genne, Joachim Pedersen
+ */
+
 package game.model.ability;
 
 import game.model.behavior.movement.IMovementBehaviour;

@@ -1,3 +1,7 @@
+/*
+ * Authors: Erik Magnusson, Simon Genne, Mattias Oom, Anton Hildingsson
+ */
+
 package game.model.entity.obstacle;
 
 import game.model.IUpdatable;

@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Mattias Oom, Joachim Pedersen
+ */
+
 package game.model.shape2d;
 
 // Simple circle interface

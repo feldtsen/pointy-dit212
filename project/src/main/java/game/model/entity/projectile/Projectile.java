@@ -1,3 +1,7 @@
+/*
+ * Authors: Mattias Oom, Anton Hildingsson, Erik Mangusson, Simon Genne
+ */
+
 package game.model.entity.projectile;
 
 import game.model.entity.movable.MovableEntity;

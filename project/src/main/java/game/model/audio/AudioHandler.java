@@ -1,5 +1,8 @@
-package game.model.audio;
+/*
+ * Authors: Joachim Pedersen
+ */
 
+package game.model.audio;
 
 import game.App;
 import javafx.scene.media.Media;
