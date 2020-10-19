@@ -8,6 +8,9 @@ import game.model.behavior.movement.IMovementBehaviour;
 import game.model.behavior.movement.SeekingBehaviour;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
+import game.model.entity.obstacle.IObstacle;
+import game.model.entity.obstacle.MovingWall;
+import game.model.entity.obstacle.Wall;
 import game.model.entity.player.Player;
 import javafx.geometry.Point2D;
 
@@ -39,6 +42,9 @@ public class EntityFactory {
 
     // Dictates how much the difficulty changes the max speed of the missiles.
     private static final double MISSILE_MAX_SPEED_FACTOR = 25;
+
+    private static final double MOVING_WALL_MAX_FORCE = 200;
+    private static final double MOVING_WALL_MAX_SPEED = 400;
 
     private static final double FRICTION = 3;
 
@@ -114,5 +120,18 @@ public class EntityFactory {
         enemy.setFriction(FRICTION);
 
         return enemy;
+    }
+
+    public static IObstacle wall(double x, double y, double width, double height) {
+        return new Wall(new Point2D(x,y), width, height);
+    }
+
+    public static IObstacle movingWall(double x1, double y1, double x2, double y2, double width, double height) {
+        return new MovingWall(new Point2D(x1,y1), new Point2D(x2, y2), MOVING_WALL_MAX_SPEED, MOVING_WALL_MAX_FORCE, width, height);
+    }
+
+    public static IObstacle spikes(double x, double y) {
+        //TODO
+        return null;
     }
 }
