@@ -3,7 +3,7 @@ package services;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.obstacle.IObstacle;
 import game.model.level.ILevel;
-import game.model.level.Level;
+import game.services.ILevelLoader;
 import game.services.LevelLoader;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,12 +15,14 @@ import java.io.FileNotFoundException;
 // Test class for level loader.
 // Level data is found in src/main/resources/levels/test.json - make sure data corresponds to test values.
 public class LevelLoaderTest {
-    
+
+    ILevelLoader levelLoader;
     ILevel level;
     
     @Before
-    public void init() throws FileNotFoundException {
-        level = LevelLoader.load("LevelLoaderTest");
+    public void init() {
+        levelLoader = new LevelLoader("src/main/resources/game/testlevels/LevelLoaderTest/");
+        level = levelLoader.getLevel();
     }
 
     @Test
@@ -65,24 +67,15 @@ public class LevelLoaderTest {
     }
 
     @Test
-    public void selectEnemyTest() {
-        IEnemy e = LevelLoader.selectEnemy(0,0,null,1,"null");
-        try {
-            assertTrue(e.equals(null));
-        }
-        catch (NullPointerException n) {
-            assertTrue(true);
-        }
-
-        e = LevelLoader.selectEnemy(0,0,null,1,"basic");
-        assertFalse(e.equals(null));
-
-        e = LevelLoader.selectEnemy(0,0,null,1,"bullet");
-        assertFalse(e.equals(null));
-
-        e = LevelLoader.selectEnemy(0,0,null,1,"missile");
-        assertFalse(e.equals(null));
+    public void testHasNext() {
+        assertTrue(levelLoader.hasNext());
+        levelLoader.next();
+        assertFalse(levelLoader.hasNext());
     }
+
+
+
+
 
 
 
