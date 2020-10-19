@@ -1,3 +1,7 @@
+/*
+ * Authors: Joachim Pedersen
+ */
+
 package game.view.pages.menu.buttons;
 
 import javafx.scene.control.Button;

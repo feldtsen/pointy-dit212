@@ -1,3 +1,7 @@
+/*
+ * Authors: Joachim Pedersen
+ */
+
 package game.view.pages.abilityBar;
 
 import game.model.ability.IAbility;

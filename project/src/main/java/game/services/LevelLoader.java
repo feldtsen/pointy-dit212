@@ -1,3 +1,7 @@
+/*
+ * Authors: Erik Magnusson, Anton Hildingsson, Mattias Oom, Joachim Pedersen
+ */
+
 package game.services;
 
 import com.google.gson.JsonArray;

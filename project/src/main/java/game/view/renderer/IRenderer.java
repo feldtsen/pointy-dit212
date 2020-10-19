@@ -1,3 +1,7 @@
+/*
+ * Authors: Mattias Oom, Anton Hildingsson, Simon Genne, Joachim Pedersen
+ */
+
 package game.view.renderer;
 
 import game.model.ability.action.IAbilityAction;

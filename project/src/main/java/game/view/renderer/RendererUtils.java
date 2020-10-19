@@ -1,3 +1,6 @@
+/*
+ * Authors: Joachim Pedersen, Mattias Oom, Anton Hildingsson
+ */
 package game.view.renderer;
 
 import game.model.shape2d.*;
