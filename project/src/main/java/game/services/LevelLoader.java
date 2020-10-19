@@ -35,6 +35,7 @@ public class LevelLoader implements ILevelLoader {
         this.levelNr = 1;
     }
 
+    // Get the level coresponding to levelNr.
     @Override
     public ILevel getLevel()  {
         String filePath = path + Integer.toString(levelNr) + ".json";
@@ -52,17 +53,19 @@ public class LevelLoader implements ILevelLoader {
             return null;
         }
     }
-
+    // Checks to see if there are any more levels to load in the folder.
     @Override
     public boolean hasNext() {
         levelNr += 1;
         if (getLevel() == null) {
+            levelNr -= 1;
             return false;
         }
         levelNr -= 1;
         return true;
     }
 
+    // Returns next level in the specified folder. Expects levels to be numbered "1, 2, ..., n"
     @Override
     public ILevel next() {
         levelNr += 1;
