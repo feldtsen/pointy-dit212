@@ -37,4 +37,5 @@ public interface ILevel {
 
     void setWidth(double width);
     void setHeight(double height);
+
 }

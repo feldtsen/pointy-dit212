@@ -1,5 +1,5 @@
-/*
- * Authors: Erik Magnusson, Anton Hildingsson, Mattias Oom, Joachim Pedersen
+ /*
+ Authors: Erik Magnusson, Anton Hildingsson, Mattias Oom, Joachim Pedersen
  */
 
 package game.model.level;
@@ -8,8 +8,11 @@ import game.model.entity.enemy.IEnemy;
 import game.model.entity.obstacle.IObstacle;
 import game.model.entity.player.IPlayer;
 import game.model.entity.projectile.IProjectile;
+import game.util.Timer;
 
 import java.util.List;
+
+
 
 //Holds all relevant data about a level.
 //Used by "Game" class
@@ -30,6 +33,7 @@ public class Level implements ILevel {
     // Level dimensions
     private double width;
     private double height;
+
 
     public Level(List<IEnemy> enemies, List<IProjectile<?>> projectiles, List<IObstacle> obstacles, IPlayer player, double width, double height) {
         this.enemies = enemies;
@@ -95,4 +99,7 @@ public class Level implements ILevel {
     public void removeProjectile(IProjectile<?> projectile) {
         projectiles.remove(projectile);
     }
+
+
+
 }
