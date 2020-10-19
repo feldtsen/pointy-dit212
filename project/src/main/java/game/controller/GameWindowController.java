@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Joachim Pedersen, Simon Genne, Mattias Oom, Erik Magnusson
+ */
+
 package game.controller;
 
 import game.model.Game;
