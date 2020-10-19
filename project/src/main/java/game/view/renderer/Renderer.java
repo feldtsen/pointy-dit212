@@ -1,3 +1,7 @@
+/*
+ * Authors: Joachim Pedersen, Mattias Oom, Anton Hildingsson, Erik Magnusson, Simon Genne
+ */
+
 package game.view.renderer;
 
 import game.controller.event.AbilityActionEventListener;

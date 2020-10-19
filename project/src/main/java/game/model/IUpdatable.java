@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Simon Genne
+ */
+
 package game.model;
 
 // Interface used by any object which is intended to be updated each frame.

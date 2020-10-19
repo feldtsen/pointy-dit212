@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Mattias Oom
+ */
+
 package game.model.behavior.movement;
 
 import game.model.entity.IEntity;

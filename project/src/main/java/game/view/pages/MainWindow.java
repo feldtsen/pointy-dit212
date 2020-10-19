@@ -1,3 +1,7 @@
+/*
+ * Authors: Joachim Pedersen, Simon Genne, Erik Magnusson
+ */
+
 package game.view.pages;
 
 import game.controller.GameWindowController;

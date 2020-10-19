@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Mattias Oom, Joachim Pedersen, Erik Magnusson, Simon Genne
+ */
+
 package game.model.entity.player;
 
 import game.model.ability.IAbility;

@@ -1,3 +1,7 @@
+/*
+ * Authors: Mattias Oom, Erik Magnusson, Anton Hildingsson
+ */
+
 package game.model.entity.movable;
 
 import game.model.entity.IStrength;

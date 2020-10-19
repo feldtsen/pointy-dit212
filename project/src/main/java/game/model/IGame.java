@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Erik Magnusson, Mattias Oom, Joacchim Pedersen
+ */
+
 package game.model;
 
 import game.controller.event.AbilityActionEventHandler;

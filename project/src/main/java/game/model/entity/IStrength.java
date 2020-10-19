@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Erik Magnusson, Simon Genne
+ */
+
 package game.model.entity;
 
 // Entities with strength are able to kill other entities on touch.

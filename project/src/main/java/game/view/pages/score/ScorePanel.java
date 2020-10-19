@@ -1,3 +1,7 @@
+/*
+ * Authors: Simon Genne, Joachim Pedersen, Erik Magnusson
+ */
+
 package game.view.pages.score;
 
 import game.model.entity.player.IPlayer;

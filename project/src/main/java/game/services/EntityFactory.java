@@ -1,3 +1,7 @@
+/*
+ * Authors: Erik Magnusson, Simon Genne, Joachim Pedersen, Mattias Oom, Anton Hildingsson
+ */
+
 package game.services;
 
 import game.controller.gameLoop.GameLoop;

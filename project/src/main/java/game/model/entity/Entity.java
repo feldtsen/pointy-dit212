@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Mattias Oom, Simon Genne
+ */
+
 package game.model.entity;
 
 import game.model.shape2d.IShape2D;

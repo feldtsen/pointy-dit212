@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Joachim Pedersen, Mattias Oom, Simon Genne
+ */
+
 package game.model.ability;
 
 import game.controller.gameLoop.GameLoop;

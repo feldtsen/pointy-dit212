@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Mattias Oom
+ */
+
 package game.controller.event;
 
 // Interface for any class listening for ability action events

@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Mattias Oom 
+ */
+
 package game.controller.event;
 
 import game.model.ability.action.IAbilityAction;

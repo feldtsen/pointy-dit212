@@ -1,3 +1,7 @@
+/*
+ * Authors: Mattias Oom, Anton Hildingsson, Erik Magnusson, Simon Genne, Joachim Pedersen
+ */
+
 package game.model.entity.enemy;
 
 import game.model.ability.action.IAbilityAction;

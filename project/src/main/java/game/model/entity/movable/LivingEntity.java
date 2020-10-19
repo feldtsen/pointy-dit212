@@ -1,5 +1,8 @@
-package game.model.entity.movable;
+/*
+ * Authors: Mattias Oom, Erik Magnusson, Anton Hildingsson, Simon Genne, Joachim Pedersen
+ */
 
+package game.model.entity.movable;
 
 import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;

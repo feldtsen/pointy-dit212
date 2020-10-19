@@ -1,3 +1,7 @@
+/*
+ * Authors: Simon Genne, Mattias Oom, Anton Hildingsson, Joachim Pedersen, Erik Magnusson
+ */
+
 package game.model.entity.projectile;
 
 import game.model.behavior.movement.IMovementBehaviour;

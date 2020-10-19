@@ -1,3 +1,7 @@
+/*
+ * Authors: Mattias Oom, Anton Hildingsson, Simon Genne
+ */
+
 package game.model.behavior.ability;
 
 import game.model.ability.IAbility;

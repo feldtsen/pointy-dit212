@@ -1,3 +1,7 @@
+/*
+ * Authors: Joachim Pedersen
+ */
+
 package game.view.pages.canvas;
 
 import javafx.scene.canvas.Canvas;

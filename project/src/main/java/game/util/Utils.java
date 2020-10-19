@@ -1,3 +1,7 @@
+/*
+ * Authors: Anton Hildingsson, Simon Genne, Joachim Pedersen
+ */
+
 package game.util;
 
 import javafx.geometry.Point2D;

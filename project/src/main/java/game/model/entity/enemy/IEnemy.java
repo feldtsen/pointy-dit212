@@ -1,3 +1,7 @@
+/*
+ * Authors: Mattias Oom, Anton Hildingsson, Simon Genne
+ */
+
 package game.model.entity.enemy;
 
 import game.model.entity.movable.ILiving;
