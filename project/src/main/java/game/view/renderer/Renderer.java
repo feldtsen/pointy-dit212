@@ -64,15 +64,15 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         this.graphicsContext = graphicsContext;
 
         // Initialize different entity classes with different colors
-        colors.put(Player.class, Color.rgb(255, 255, 255));
-        colors.put(Enemy.class, Color.rgb(167, 173, 186, .96));
-        colors.put(Bullet.class, Color.rgb(96, 106, 116));
-        colors.put(Missile.class, Color.rgb(153, 163, 156));
+        colors.put(Player.class,          Color.rgb(255, 255, 255));
+        colors.put(Enemy.class,           Color.rgb(167, 173, 186, .96));
+        colors.put(Bullet.class,          Color.rgb(96, 106, 116));
+        colors.put(Missile.class,         Color.rgb(153, 163, 156));
         colors.put(GraphicsContext.class, Color.rgb(52, 61, 70));
 
-        abilityEffects.put(Dash.DashAction.class, createDashEffect());
+        abilityEffects.put(Dash.DashAction.class,           createDashEffect());
         abilityEffects.put(Shockwave.ShockwaveAction.class, createShockwaveEffect());
-        abilityEffects.put(Reflect.ReflectAction.class, createReflectEffect());
+        abilityEffects.put(Reflect.ReflectAction.class,     createReflectEffect());
     }
 
     private Effect createDashEffect() {
@@ -118,6 +118,7 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
 
     @Override
     public void drawEntities(ILevel level) {
+        graphicsContext.save();
         // Clear the screen
         RendererUtils.clear(graphicsContext);
 
@@ -159,11 +160,15 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         }
 
         for (IObstacle obstacle : level.getObstacles()) {
+            graphicsContext.save();
             entity = obstacle;
-
+            //RendererUtils.setCorrectObstacleRotation(graphicsContext, obstacle.getShape(), obstacle.getPosition());
+            RendererUtils.setCorrectObstacleRotation(graphicsContext, obstacle.getShape(), obstacle.getPosition());
             // TODO: add rotation
             entity.getShape().acceptShapeVisitor(this);
+            graphicsContext.restore();
         }
+        graphicsContext.restore();
     }
 
     public void drawAbilities() {

@@ -98,7 +98,19 @@ public class RendererUtils {
 
         translate(graphicsContext, shape.getRotation(), scaled.x, scaled.y);
 
-        graphicsContext.setFill(color);
+        System.out.println("Original rect data:");
+        System.out.println(position.getX());
+        System.out.println(position.getY());
+        System.out.println(shape.getWidth());
+        System.out.println(shape.getHeight());
+
+        System.out.println("Draw rect data:");
+        System.out.println("X " + (scaled.x - (scaled.w/2)));
+        System.out.println("Y " + (scaled.y - (scaled.h/2)));
+        System.out.println("W " + scaled.w);
+        System.out.println("H " + scaled.h);
+
+                graphicsContext.setFill(color);
         graphicsContext.fillRect(
                 scaled.x - (scaled.w/2),
                 scaled.y - (scaled.h/2),
@@ -149,8 +161,14 @@ public class RendererUtils {
         graphicsContext.strokeLine(scaledStartX, scaledStartY, scaledStopX, scaledStopY);
     }
 
-    private static void translate(GraphicsContext graphicsContext, double shapeRotation, double xPosition, double yPosition) {
+    public static void setCorrectObstacleRotation(GraphicsContext graphicsContext, IShape2D shape, Point2D position) {
+        Quartet scaled = scaleDrawData(graphicsContext, position.getX(), position.getY(), shape.getWidth(), shape.getHeight());
+        graphicsContext.translate(scaled.x, scaled.y);
+        graphicsContext.rotate(Utils.radianToDegrees(shape.getRotation()) + 90);
+        graphicsContext.translate(-scaled.x, -scaled.y);
+    }
 
+    private static void translate(GraphicsContext graphicsContext, double shapeRotation, double xPosition, double yPosition) {
         // Translates the shape to a position
         graphicsContext.translate(xPosition, yPosition);
 
