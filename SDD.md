@@ -110,7 +110,13 @@ Future possible functionality includes storing and parsing level data as ASCII t
 
 ## 5. Quality
 
-The application is tested using unit tests with the framework JUnit. These tests can be found under project/src/main/test. The game has also been thoroughly game tested by playing the different levels and manually testing the functionality described by the different user stories.
+The application is tested using unit tests with the framework JUnit. These tests can be found under project/src/main/test. 
+
+The project is also integrated with Travis (https://travis-ci.org/), to automatically run all tests when pushing or doing pull requests. This ensures no commits merged to master causes tests to fail. 
+
+Link to our travis for our project: https://travis-ci.com/github/feldtsen/pointy-dit212
+
+The game has also been thoroughly game tested by playing the different levels and manually testing the functionality described by the different user stories.
 
 ## 6. References
 - JavaFX - https://openjfx.io/
