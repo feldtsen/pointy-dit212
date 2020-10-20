@@ -39,17 +39,18 @@ public  class KeyboardInputController {
     }
 
 
+    // Register events that should get applied if a key is held down
     public void registerHeldAction(KeyCode code, Action action) {
         registerAction(code, action, heldActions);
 
     }
 
+    // Register events that should get applies if the key is pressed
     public void registerPressedAction(KeyCode code, Action action) {
         registerAction(code, action, pressedActions);
     }
 
-
-        // Registers an action to be performed on a key press.
+    // Registers an action to be performed on a key events.
     public void registerAction(KeyCode code, Action action, Map<KeyCode, List<Action>> actions) {
         List<Action> list;
 
@@ -66,7 +67,9 @@ public  class KeyboardInputController {
         list.add(action);
     }
 
+    // Adds key events that can run outside the game loop
     public void applyPressedRegisteredActions(KeyCode code) {
+        // Check if the the key pressed has a action tied to it and apply it if it does
         if (pressedActions.containsKey(code))
             pressedActions.get(code).get(0).apply();
 
