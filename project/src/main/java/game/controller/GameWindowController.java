@@ -82,7 +82,7 @@ public class GameWindowController {
 
                 // Displays game over message
                 if(game.isGameOver())  {
-                    gameLoop.resetTimer();
+                    game.resetTimer();
                     handleGameOver();
                 }
 
@@ -91,7 +91,7 @@ public class GameWindowController {
 
                     // TODO: set timer score to score table if it's a new high score
                     game.nextLevel();
-                    gameLoop.resetTimer();
+                    game.resetTimer();
 
                     // Register movement keys to new player object
                     registerPlayerControls();
@@ -109,7 +109,7 @@ public class GameWindowController {
     // Updates the UI elements visible during gameplay
     private void updateUI() {
         // Update score panel
-        window.getScorePanel().updateScore(gameLoop.getTime());
+        window.getScorePanel().updateScore(game.getTime());
 
         // Update cooldown timers
         window.getAbilityBar().updateAbilities(game.getCurrentLevel().getPlayer().getAbilities());

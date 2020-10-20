@@ -19,6 +19,7 @@ import game.model.level.ILevel;
 import game.model.shape2d.ICircle;
 import game.services.ILevelLoader;
 import game.services.LevelLoader;
+import game.util.Timer;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 
@@ -39,6 +40,9 @@ public class Game implements IGame {
 
     // The current, active level
     private ILevel currentLevel;
+
+    // Timer used for the score system
+    Timer timer;
 
     // This value represents the position the player is "looking towards".
     //private Point2D playerFacingPosition;
@@ -61,6 +65,8 @@ public class Game implements IGame {
 
         this.levelLoader = new LevelLoader("src/main/resources/game/levels/");
         this.currentLevel = levelLoader.getLevel();
+
+        this.timer = new Timer();
 
         this.gameOver = false;
         this.gameWin = false;
@@ -203,6 +209,10 @@ public class Game implements IGame {
         }
     }
 
+    public void updateTimer(double delta) {
+        timer.setTime(delta);
+    }
+
     // Apply active abilities
     private void applyAbilityActions(long now) {
         for(int i = 0; i < activeAbilityActions.size(); i++) {
@@ -306,6 +316,9 @@ public class Game implements IGame {
         // Update obstacles
         updateObstacles(delta, timeStep);
 
+        // Update timer
+        updateTimer(delta);
+
         // Apply active abilities
         applyAbilityActions(now);
 
@@ -393,7 +406,13 @@ public class Game implements IGame {
     public List<Double> getActiveAbilityTimes() { return currentAbilityTimes; }
 
     @Override
-    public int getScore() {
+    public String getTime() {
+        return timer.getTime();
+    }
+
+    @Override
+    public void resetTimer() {
+        timer.resetTimer();
     }
 
     @Override
