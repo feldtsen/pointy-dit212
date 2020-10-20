@@ -7,11 +7,11 @@
 **Date:** 2020-10-23
 
 # 1. Introduction
-Pointy is a topdown 2D game. The player is a simple geometrical shape which navigates a hostile, equally geometrical, world. In this world, the player is attacked by various enemies which shoot different kinds of projectiles at the player. The player itself has no weapon, but instead a set of abilities which (with some creativity) can be used to defeat the enemies. A few of these abilities are "reflection" (reflecting enemy projectiles), "shockwave" (pushing enemies away), "time manipulation" (slowing down time around the player) and "dash" (making the player invulnerable and very fast for a short period of time).
+Jerk Evert is a topdown 2D game. The player is a simple geometrical shape that navigates a hostile, equally geometrical, world. In this world, the player is attacked by various enemies that shoot different kinds of projectiles at the player. The player itself has no weapon, but instead a set of abilities which (with some creativity) can be used to defeat the enemies. A few of these abilities are "reflection" (reflecting enemy projectiles), "shockwave" (pushing enemies away) and "dash" (making the player invulnerable and very fast for a short period).
 
-The map contains different neutral elements, such as walls, spikes and traps, which can both be dangerous for the player, or cleverly used to aid the player in their mission.
+The map contains different neutral elements, such as walls and moving walls, which can trap the player, but also be used as cover.
 
-The goal of the player is to defeat all the enemies, reach the map exit, or perform a specific task. The game contains multiple levels, and by defeating one level, the player can progress to the next.
+The goal of the player is to defeat all enemies. The game contains multiple levels, and by defeating one level, the player can progress to the next.
 
 ## 1.1. Definitions, acronyms, and abbreviations
 - 2D - Two dimensional
