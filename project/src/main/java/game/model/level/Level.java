@@ -8,7 +8,6 @@ import game.model.entity.enemy.IEnemy;
 import game.model.entity.obstacle.IObstacle;
 import game.model.entity.player.IPlayer;
 import game.model.entity.projectile.IProjectile;
-import game.util.Timer;
 
 import java.util.List;
 

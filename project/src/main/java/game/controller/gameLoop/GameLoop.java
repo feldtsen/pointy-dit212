@@ -1,5 +1,5 @@
 /*
- * Authors: Anton Hildingsson 
+ * Authors: Anton Hildingsson, Mattias Oom, Joachim Pedersen
  */
 
 package game.controller.gameLoop;
@@ -29,11 +29,8 @@ public abstract class GameLoop implements IGameLoop {
     private int framesThisSecond; // How many frames that have passed this second
     private int currentFPS;       // The currently calculated FPS
 
-    // Timer
-    private final Timer timer;
 
     public GameLoop(int desiredFPS) {
-        timer = new Timer();
         setPaused(true);
         // The number of nanoseconds which will elapse each frame at desired FPS.
         this.nanosPerFrame = SECOND / desiredFPS;
@@ -56,7 +53,6 @@ public abstract class GameLoop implements IGameLoop {
                     // If the game is not paused, update
                     if (!paused) {
                         update(delta);
-                        timer.setTime(delta);
                     }
 
                     // Set the last nano time to the current time. Will be used to calculate elapsedNanos next frame
@@ -118,13 +114,4 @@ public abstract class GameLoop implements IGameLoop {
         return currentFPS;
     }
 
-    @Override
-    public String getTime() {
-        return timer.getTime();
-    }
-
-    @Override
-    public void resetTimer () {
-        timer.resetTimer();
-    }
 }

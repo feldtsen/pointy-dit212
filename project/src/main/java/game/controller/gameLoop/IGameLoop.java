@@ -1,5 +1,5 @@
 /*
- * Authors: Anton Hildingsson 
+ * Authors: Anton Hildingsson, Mattias Oom, Joachim Pedersen
  */
 
 package game.controller.gameLoop;
@@ -26,9 +26,4 @@ public interface IGameLoop {
     // equally fast/slow independent of loop frame rate.
     void update(double delta);
 
-    // The time the player has spent on the level
-    String getTime();
-
-    // Sets the timer back to 0
-    void resetTimer ();
 }

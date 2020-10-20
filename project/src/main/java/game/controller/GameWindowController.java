@@ -8,7 +8,7 @@ import game.model.Game;
 import game.controller.gameLoop.GameLoop;
 import game.controller.gameLoop.IGameLoop;
 import game.model.IGame;
-import game.util.Timer;
+import game.model.audio.AudioHandler;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
@@ -36,6 +36,8 @@ public class GameWindowController {
     // Handles mouse input from the user
     private MouseInputController mouseInputController;
 
+    // Handles audio related actions
+    private final AudioHandler audioHandler;
 
 
     public GameWindowController() {
@@ -50,6 +52,9 @@ public class GameWindowController {
 
         // Initialize the game and map all the keys to their corresponding actions.
         gameSetup();
+
+        // Initializes game audio and play the theme music
+        audioHandler = new AudioHandler();
 
         // Create a game loop. The update method will be called every frame.
         // Game loop is initialized with a improbably high desired fps value, to ensure the
@@ -68,6 +73,9 @@ public class GameWindowController {
                 // Apply all registered keyboard actions
                 keyboardInputController.applyRegisteredActions();
 
+                // Play sfx
+                audioHandler.playSfx();
+
                 // Update the game model with a global time step of 1 (normal speed)
                 game.update(delta, 1);
 
@@ -76,14 +84,16 @@ public class GameWindowController {
 
                 // Displays game over message
                 if(game.isGameOver())  {
-                    gameLoop.resetTimer();
+                    game.resetTimer();
                     handleGameOver();
                 }
 
                 // Checks if all enemies have been defeated
                 if (game.getCurrentLevel().getEnemies().isEmpty())  {
+
+                    // TODO: set timer score to score table if it's a new high score
                     game.nextLevel();
-                    gameLoop.resetTimer();
+                    game.resetTimer();
 
                     // Register movement keys to new player object
                     registerPlayerControls();
@@ -91,9 +101,6 @@ public class GameWindowController {
 
                 // Set facing direction of player
                 game.getCurrentLevel().getPlayer().setFacingTowards(mouseInputController.getMousePosition());
-
-                // If all enemies are dead, progress to the next level
-                if (game.getCurrentLevel().getEnemies().isEmpty()) game.nextLevel();
             }
         };
 
@@ -104,7 +111,7 @@ public class GameWindowController {
     // Updates the UI elements visible during gameplay
     private void updateUI() {
         // Update score panel
-        window.getScorePanel().updateScore(gameLoop.getTime());
+        window.getScorePanel().updateScore(game.getTime());
 
         // Update cooldown timers
         window.getAbilityBar().updateAbilities(game.getCurrentLevel().getPlayer().getAbilities());
@@ -217,11 +224,20 @@ public class GameWindowController {
         keyboardInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
 
         // Bind keys for player abilities
-        keyboardInputController.registerAction(KeyCode.SHIFT, () -> game.activatePlayerAbility(0));
-        keyboardInputController.registerAction(KeyCode.E, () -> game.activatePlayerAbility(1));
+        keyboardInputController.registerAction(KeyCode.SHIFT, () -> {
+            // If the ability successfully activates, play the corresponding sound
+            if(game.activatePlayerAbility(0)) audioHandler.registerSfx("dash");
+        });
+        keyboardInputController.registerAction(KeyCode.E,     () -> {
+            // If the ability successfully activates, play the corresponding sound
+            if (game.activatePlayerAbility(1)) audioHandler.registerSfx("shockwave");
+        });
 
         // Bind mouse click to player ability
-        mouseInputController.registerActionOnLeftClick(() -> game.activatePlayerAbility(2));
+        mouseInputController.registerActionOnLeftClick(() -> {
+            // If the ability successfully activates, play the corresponding sound
+            if (game.activatePlayerAbility(2)) audioHandler.registerSfx("reflect");
+        });
 
         // Bind mouse movement to updating the player facing position
         mouseInputController.registerActionOnMove(() -> game.getCurrentLevel().getPlayer().setFacingTowards(mouseInputController.getMousePosition()));

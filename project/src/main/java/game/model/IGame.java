@@ -23,19 +23,24 @@ public interface IGame extends AbilityActionEventHandler, IUpdatable {
     // This method returns the abilities (in the form of ability actions) which is currently active.
     List<IAbilityAction> getActiveAbilityActions();
 
-    // THis method returns the times for which an ability action has been active
+    // This method returns the times for which an ability action has been active
     List<Double> getActiveAbilityTimes();
 
     boolean setLevel(ILevel level);
 
-    int getScore();
+    // Retrieves the game time in String format (time used on the current level)
+    String getTime();
+
+    // Sets the time back to 0
+    void resetTimer();
 
     // This method returns true on player death.
     boolean isGameOver();
 
     // Returns true when game is completed.
     boolean isGameWin();
-    
+
+    // Loads the next level
     void nextLevel();
 
     ILevel getCurrentLevel();

@@ -46,9 +46,6 @@ public class App extends Application {
         // Display the stage (window)
         primaryStage.show();
 
-
-        AudioHandler audioHandler = new AudioHandler();
-        audioHandler.play();
     }
 
     // Launch the application

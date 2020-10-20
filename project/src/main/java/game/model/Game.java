@@ -19,6 +19,7 @@ import game.model.level.ILevel;
 import game.model.shape2d.ICircle;
 import game.services.ILevelLoader;
 import game.services.LevelLoader;
+import game.util.Timer;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 
@@ -28,8 +29,6 @@ import java.util.List;
 // Implementation of game interface.
 // This is the core of the model, binding all the model parts together.
 public class Game implements IGame {
-    private int score; // Player score
-
     // True if the player has lost the game.
     private boolean gameOver;
 
@@ -41,6 +40,9 @@ public class Game implements IGame {
 
     // The current, active level
     private ILevel currentLevel;
+
+    // Timer used for the score system
+    Timer timer;
 
     // This value represents the position the player is "looking towards".
     //private Point2D playerFacingPosition;
@@ -64,7 +66,8 @@ public class Game implements IGame {
         this.levelLoader = new LevelLoader("src/main/resources/game/levels/");
         this.currentLevel = levelLoader.getLevel();
 
-        this.score = 0;
+        this.timer = new Timer();
+
         this.gameOver = false;
         this.gameWin = false;
 
@@ -156,7 +159,6 @@ public class Game implements IGame {
                     // If the strength of the projectiles is grater than that of the enemies
                     if (projectile.getStrength() > enemy.getStrength()) {
                         // If the enemy dies the score is updated
-                        score += enemy.getStrength();
                         enemy.setHitPoints(0);
                         // Set destroyed on hit
                         projectile.setDestroyed();
@@ -207,6 +209,10 @@ public class Game implements IGame {
         }
     }
 
+    public void updateTimer(double delta) {
+        timer.setTime(delta);
+    }
+
     // Apply active abilities
     private void applyAbilityActions(long now) {
         for(int i = 0; i < activeAbilityActions.size(); i++) {
@@ -252,7 +258,6 @@ public class Game implements IGame {
                 }
                 else if (player.getStrength() > enemy1.getStrength()) {
                     // Else, the enemy dies and the score is updated
-                    score += enemy1.getStrength();
                     enemy1.setHitPoints(0);
                 }
             }
@@ -310,6 +315,9 @@ public class Game implements IGame {
 
         // Update obstacles
         updateObstacles(delta, timeStep);
+
+        // Update timer
+        updateTimer(delta);
 
         // Apply active abilities
         applyAbilityActions(now);
@@ -398,8 +406,13 @@ public class Game implements IGame {
     public List<Double> getActiveAbilityTimes() { return currentAbilityTimes; }
 
     @Override
-    public int getScore() {
-        return score;
+    public String getTime() {
+        return timer.getTime();
+    }
+
+    @Override
+    public void resetTimer() {
+        timer.resetTimer();
     }
 
     @Override
