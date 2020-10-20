@@ -1,5 +1,5 @@
 /*
- * Authors: Anton Hildingsson 
+ * Authors: Anton Hildingsson, Mattias Oom, Joachim Pedersen
  */
 
 package game.controller.gameLoop;
@@ -29,7 +29,7 @@ public abstract class GameLoop implements IGameLoop {
     private int framesThisSecond; // How many frames that have passed this second
     private int currentFPS;       // The currently calculated FPS
 
-    // Timer
+    // Timer for counting the score
     private final Timer timer;
 
     public GameLoop(int desiredFPS) {

@@ -1,5 +1,5 @@
 /*
- * Authors: Anton Hildingsson 
+ * Authors: Anton Hildingsson, Mattias Oom, Joachim Pedersen
  */
 
 package game.controller.gameLoop;

@@ -8,7 +8,7 @@ import game.model.Game;
 import game.controller.gameLoop.GameLoop;
 import game.controller.gameLoop.IGameLoop;
 import game.model.IGame;
-import game.util.Timer;
+import game.model.audio.AudioHandler;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
@@ -36,6 +36,8 @@ public class GameWindowController {
     // Handles mouse input from the user
     private MouseInputController mouseInputController;
 
+    // Handles audio related actions
+    private final AudioHandler audioHandler;
 
 
     public GameWindowController() {
@@ -50,6 +52,10 @@ public class GameWindowController {
 
         // Initialize the game and map all the keys to their corresponding actions.
         gameSetup();
+
+        // Initializes game audio and play the theme music
+        audioHandler = new AudioHandler();
+        audioHandler.play();
 
         // Create a game loop. The update method will be called every frame.
         // Game loop is initialized with a improbably high desired fps value, to ensure the
@@ -82,6 +88,8 @@ public class GameWindowController {
 
                 // Checks if all enemies have been defeated
                 if (game.getCurrentLevel().getEnemies().isEmpty())  {
+
+                    // TODO: set timer score to score table if it's a new high score
                     game.nextLevel();
                     gameLoop.resetTimer();
 
@@ -91,9 +99,6 @@ public class GameWindowController {
 
                 // Set facing direction of player
                 game.getCurrentLevel().getPlayer().setFacingTowards(mouseInputController.getMousePosition());
-
-                // If all enemies are dead, progress to the next level
-                if (game.getCurrentLevel().getEnemies().isEmpty()) game.nextLevel();
             }
         };
 
@@ -218,7 +223,7 @@ public class GameWindowController {
 
         // Bind keys for player abilities
         keyboardInputController.registerAction(KeyCode.SHIFT, () -> game.activatePlayerAbility(0));
-        keyboardInputController.registerAction(KeyCode.E, () -> game.activatePlayerAbility(1));
+        keyboardInputController.registerAction(KeyCode.E,     () -> game.activatePlayerAbility(1));
 
         // Bind mouse click to player ability
         mouseInputController.registerActionOnLeftClick(() -> game.activatePlayerAbility(2));
