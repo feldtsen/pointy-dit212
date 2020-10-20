@@ -11,9 +11,9 @@ import javafx.scene.media.MediaPlayer;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-public class AudioHandler {
+public class AudioHandler implements IAudioHandler{
     private MediaPlayer themePlayer;
-    private final ArrayList<MediaPlayer> sfxPlayers = new ArrayList<>();
+    private final ArrayList<MediaPlayer> soundEffectPlayers = new ArrayList<>();
 
     public AudioHandler(){
         try {
@@ -28,24 +28,31 @@ public class AudioHandler {
 
     }
 
-    public void playSfx () {
+    @Override
+    public void playSoundEffects() {
         // We don't want multiple media players floating around, so we dispose of those we don't need
-        for (MediaPlayer sfxPlayer : sfxPlayers) {
-            sfxPlayer.play();
+        for (MediaPlayer soundEffectPlayer : soundEffectPlayers) {
+            soundEffectPlayer.play();
             // To avoid a media player to remain active even when it is not playing,
             // we dispose of it when the media ends
-            sfxPlayer.setOnEndOfMedia(sfxPlayer::dispose);
+            soundEffectPlayer.setOnEndOfMedia(soundEffectPlayer::dispose);
         }
     }
 
-    public void registerSfx(String track) {
+    @Override
+    public void registerSoundEffect(String track) {
         try {
             Media sfx = new Media(App.class.getResource("audio/"+track+".mp3").toURI().toASCIIString());
             MediaPlayer sfxPlayer = new MediaPlayer(sfx);
-            sfxPlayers.add(sfxPlayer);
+            soundEffectPlayers.add(sfxPlayer);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void toggleMusic() {
+        themePlayer.setMute(!themePlayer.isMute());
     }
 
 
