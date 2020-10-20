@@ -71,7 +71,7 @@ public class GameWindowController {
                 updateUI();
 
                 // Apply all registered keyboard actions
-                keyboardInputController.applyRegisteredActions();
+                keyboardInputController.applyHeldRegisteredActions();
 
                 // Play sfx
                 audioHandler.playSfx();
@@ -80,7 +80,7 @@ public class GameWindowController {
                 game.update(delta, 1);
 
                 // Display the menu if the player wins the game
-                if(game.isGameWin()) showMenu();
+                if(game.isGameWin()) pauseAndReload();
 
                 // Displays game over message
                 if(game.isGameOver())  {
@@ -118,19 +118,23 @@ public class GameWindowController {
     }
 
     private void handleGameOver() {
+        gameLoop.setPaused(true);
+
         // Clear all entities from screen.
         renderer.clearCanvas();
 
         // Show game over message.
         window.showGameOver();
 
-        // Registers methods to new keys. Pressing P starts a new game, pressing ESC displays starting menu.
-        keyboardInputController.registerAction(KeyCode.P,      this::restart);
-        keyboardInputController.registerAction(KeyCode.ESCAPE, this::showMenu);
+        window.hideUI();
+
+
     }
 
     // Hide game over message and starts a new game
     private void restart() {
+        gameLoop.setPaused(false);
+
         window.hideGameOver();
 
         // Makes ability bar and score panel visible.
@@ -141,18 +145,10 @@ public class GameWindowController {
     }
 
     // Hides game over message and displays the starting menu.
-    private void showMenu() {
-        pauseGame();
-
-        // Removes all entities from canvas.
-        renderer.clearCanvas();
-
+    private void pauseAndReload() {
+        pause();
         // Removes game over message.
         window.hideGameOver();
-
-        // Show menu.
-        window.menuFadeOut();
-
         // Setup new game.
         gameSetup();
     }
@@ -166,17 +162,17 @@ public class GameWindowController {
     }
 
     // Button action for starting the game
-    public void handleMenuStartButton() {
+    public void unpause() {
         gameLoop.setPaused(false);
-        window.menuFadeIn();
-        window.getAbilityBar().setVisible(true);
-        window.getScorePanel().setVisible(true);
+        window.hideMenu();
+        window.showUI();
     }
 
     // Action for pausing the game
-    private void pauseGame() {
+    private void pause() {
         gameLoop.setPaused(true);
-        window.menuFadeOut();
+        window.showMenu();
+        window.hideUI();
     }
 
     public MainWindow getWindow() {
@@ -211,24 +207,29 @@ public class GameWindowController {
         // Initialize the mouse input handler
         mouseInputController = new MouseInputController(window);
 
-        // Bind key for pausing the game
-        keyboardInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
+        // Registers methods to new keys. Pressing P starts a new game, pressing ESC displays starting menu.
+        keyboardInputController.registerPressedAction(KeyCode.R,      ()->{
+            if(game.isGameOver()) restart();
+        });
+        keyboardInputController.registerPressedAction(KeyCode.ESCAPE, () -> {
+            if (game.isGameOver()) pauseAndReload();
+            else if (gameLoop.isPaused()) unpause();
+            else if (!gameLoop.isPaused()) pause();
+        });
 
         // Bind keys to player movement
-        keyboardInputController.registerAction(KeyCode.W, game.getCurrentLevel().getPlayer()::moveUp);
-        keyboardInputController.registerAction(KeyCode.A, game.getCurrentLevel().getPlayer()::moveLeft);
-        keyboardInputController.registerAction(KeyCode.S, game.getCurrentLevel().getPlayer()::moveDown);
-        keyboardInputController.registerAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
+        keyboardInputController.registerHeldAction(KeyCode.W, game.getCurrentLevel().getPlayer()::moveUp);
+        keyboardInputController.registerHeldAction(KeyCode.A, game.getCurrentLevel().getPlayer()::moveLeft);
+        keyboardInputController.registerHeldAction(KeyCode.S, game.getCurrentLevel().getPlayer()::moveDown);
+        keyboardInputController.registerHeldAction(KeyCode.D, game.getCurrentLevel().getPlayer()::moveRight);
 
-        // Give key codes registered by the game pane a given action
-        keyboardInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
 
         // Bind keys for player abilities
-        keyboardInputController.registerAction(KeyCode.SHIFT, () -> {
+        keyboardInputController.registerHeldAction(KeyCode.SHIFT, () -> {
             // If the ability successfully activates, play the corresponding sound
             if(game.activatePlayerAbility(0)) audioHandler.registerSfx("dash");
         });
-        keyboardInputController.registerAction(KeyCode.E,     () -> {
+        keyboardInputController.registerHeldAction(KeyCode.E,     () -> {
             // If the ability successfully activates, play the corresponding sound
             if (game.activatePlayerAbility(1)) audioHandler.registerSfx("shockwave");
         });

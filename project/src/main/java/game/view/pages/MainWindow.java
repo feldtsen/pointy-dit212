@@ -7,23 +7,18 @@ package game.view.pages;
 import game.controller.GameWindowController;
 import game.view.ViewResourceLoader;
 import game.view.pages.abilityBar.AbilityBar;
-import game.view.pages.abilityBar.AbilityHolder;
 import game.view.pages.canvas.GameCanvas;
 import game.view.pages.gameOver.GameOverPanel;
 import game.view.pages.menu.StartMenu;
 import game.view.pages.score.ScorePanel;
-import javafx.animation.FadeTransition;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import javafx.util.Duration;
 
 public class MainWindow extends StackPane {
     private static final String MAIN_WINDOW_CSS = "mainWindow";
     private static final String GAME_TITLE = "J E R K  E V E R T";
 
-    public final static FadeTransition fadeTransitionGameMenu = new FadeTransition(new Duration(200));
-    public final static FadeTransition fadeTransitionGameTitle = new FadeTransition(new Duration(200));
 
     GameCanvas gameCanvas;
     StartMenu startMenu;
@@ -48,9 +43,6 @@ public class MainWindow extends StackPane {
         this.getStyleClass().add(MAIN_WINDOW_CSS);
         gameTitle.getStyleClass().add("gameTitle");
 
-        // Animations
-        ViewResourceLoader.fadeIn(fadeTransitionGameMenu).setNode(startMenu);
-        ViewResourceLoader.fadeIn(fadeTransitionGameTitle).setNode(gameTitle);
 
         // Add what you want to display
         this.getChildren().setAll(
@@ -80,6 +72,8 @@ public class MainWindow extends StackPane {
         gameCanvas.widthProperty().bind(this.widthProperty());
         gameCanvas.heightProperty().bind(this.heightProperty());
 
+        // Enables key presses to get captured at every graphical layer
+        gameCanvas.setFocusTraversable(true);
 
     }
 
@@ -93,26 +87,20 @@ public class MainWindow extends StackPane {
         return abilityBar;
     }
 
-    public void menuFadeIn() {
-        ViewResourceLoader.fadeIn(fadeTransitionGameMenu).setNode(startMenu);
-        ViewResourceLoader.fadeIn(fadeTransitionGameTitle).setNode(gameTitle);
-        // Making all children of start menu transparent to mouse events
-        startMenu.setMouseTransparent(true);
+    public void showMenu() {
+        startMenu.setVisible(true);
+        gameTitle.setVisible(true);
     }
 
-    public void menuFadeOut() {
-        ViewResourceLoader.fadeOut(fadeTransitionGameMenu).setNode(startMenu);
-        ViewResourceLoader.fadeOut(fadeTransitionGameTitle).setNode(gameTitle);
-        // Making all children of start menu visible to mouse events
-        startMenu.setMouseTransparent(false);
+    public void hideMenu() {
+        startMenu.setVisible(false);
+        gameTitle.setVisible(false);
     }
 
     // Display game over message and hide other UI-elements
     public void showGameOver() {
+        startMenu.setVisible(false);
         gameOverPanel.setVisible(true);
-        scorePanel.setVisible(false);
-        abilityBar.setVisible(false);
-
     }
 
     // Remove game over message
@@ -120,10 +108,14 @@ public class MainWindow extends StackPane {
         gameOverPanel.setVisible(false);
     }
 
-
     // Makes abilityBar and scorePanel visible
     public void showUI() {
         abilityBar.setVisible(true);
         scorePanel.setVisible(true);
+    }
+
+    public void hideUI() {
+        abilityBar.setVisible(false);
+        scorePanel.setVisible(false);
     }
 }

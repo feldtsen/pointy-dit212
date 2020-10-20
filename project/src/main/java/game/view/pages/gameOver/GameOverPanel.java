@@ -18,7 +18,7 @@ public class GameOverPanel extends VBox {
 
     public GameOverPanel() {
         this.gameOverLabel = new Label("GAME OVER");
-        this.gameOverInstructions = new Label("Press P to play again, or ESC to open the menu.");
+        this.gameOverInstructions = new Label("Press R to play again, or ESC to open the menu.");
 
         gameOverLabel.getStyleClass().add(GAME_OVER_LABEL_CSS);
         gameOverInstructions.getStyleClass().add(GAME_OVER_INSTRUCTIONS_CSS);

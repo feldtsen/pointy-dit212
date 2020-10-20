@@ -6,7 +6,6 @@ package game.controller;
 
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentSkipListSet;
@@ -18,34 +17,44 @@ public  class KeyboardInputController {
     private final Set<KeyCode> pressedKeys;
     // Map of actions associated with each pressed key. If a key is pressed, its corresponding actions
     // will be applied on every call to "applyRegisteredActions".
-    private final Map<KeyCode, List<Action>> actions;
+    private final Map<KeyCode, List<Action>> heldActions;
+    private final Map<KeyCode, List<Action>> pressedActions;
 
     // Feeds the input handler a stack pane which is required for setting up key pressed and key released callbacks.
     public KeyboardInputController(Node node) {
         pressedKeys = new ConcurrentSkipListSet<>();
-        actions = new HashMap<>();
+        heldActions = new HashMap<>();
+        pressedActions = new HashMap<>();
 
         // The register and unregister methods will be called on key press and key release, respectively.
-        node.setOnKeyPressed(this::register);
-        node.setOnKeyReleased(this::unregister);
+        // Simply adds a keycode to the set of currently pressed keys.
+        node.setOnKeyPressed(e ->   {
+            pressedKeys.add(e.getCode());
+        });
+        // Removes a keycode from the set of currently pressed keys.
+        node.setOnKeyReleased(e -> {
+            pressedKeys.remove(e.getCode());
+            applyPressedRegisteredActions(e.getCode());
+        });
     }
 
-    // Simply adds a keycode to the set of currently pressed keys.
-    private void register(KeyEvent e) {
-        pressedKeys.add(e.getCode());
+
+    public void registerHeldAction(KeyCode code, Action action) {
+        registerAction(code, action, heldActions);
+
     }
 
-    // Removes a keycode from the set of currently pressed keys.
-    private void unregister(KeyEvent e){
-        pressedKeys.remove(e.getCode());
+    public void registerPressedAction(KeyCode code, Action action) {
+        registerAction(code, action, pressedActions);
     }
 
-    // Registers an action to be performed on a key press.
-    public void registerAction(KeyCode code, Action action) {
+
+        // Registers an action to be performed on a key press.
+    public void registerAction(KeyCode code, Action action, Map<KeyCode, List<Action>> actions) {
         List<Action> list;
 
         // Check if there is no list of actions added for the current keycode.
-        if(!actions.containsKey(code)) {
+        if(!heldActions.containsKey(code)) {
             // Create a new array list, and add it to the actions map.
             list = new ArrayList<>();
             actions.put(code, list);
@@ -57,11 +66,17 @@ public  class KeyboardInputController {
         list.add(action);
     }
 
+    public void applyPressedRegisteredActions(KeyCode code) {
+        if (pressedActions.containsKey(code))
+            pressedActions.get(code).get(0).apply();
+
+    }
+
     // Applies all actions associated with the currently pressed keys.
-    public void applyRegisteredActions() {
+    public void applyHeldRegisteredActions() {
         // Loop over all currently pressed keys.
         for(KeyCode c : pressedKeys) {
-            List<Action> l = actions.get(c);
+            List<Action> l = heldActions.get(c);
             // If the currently pressed key has no actions associated with it, continue.
             if(l == null) continue;
             // Iterate over all actions, and apply.
