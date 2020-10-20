@@ -2,9 +2,9 @@
 
 **Authors:** Anton Hildingsson, Erik Magnusson, Joachim Ørfeldt Pedersen, Mattias Oom, Simon Genne
 
-**Version:** 
+**Version:** 1.0
 
-**Date:** 
+**Date:** 2020-10-23
 
 # 1. Introduction
 Pointy is a topdown 2D game. The player is a simple geometrical shape which navigates a hostile, equally geometrical, world. In this world, the player is attacked by various enemies which shoot different kinds of projectiles at the player. The player itself has no weapon, but instead a set of abilities which (with some creativity) can be used to defeat the enemies. A few of these abilities are "reflection" (reflecting enemy projectiles), "shockwave" (pushing enemies away), "time manipulation" (slowing down time around the player) and "dash" (making the player invulnerable and very fast for a short period of time).
@@ -27,7 +27,7 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
 
 ## 2.1. User Stories
 
-**Story Identifier:** STK001
+**Story Identifier:** STK001 (FINISHED)
 
 **Story Name:** Basic Player
 
@@ -53,7 +53,7 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
     - Is there a visual indication of the players movement?
 
 ---
-**Story Identifier:** STK002
+**Story Identifier:** STK002 (FINISHED)
 
 **Story Name:** Basic enemy
 
@@ -78,7 +78,7 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
     - Is the enemy actions visible to the user?
 
 ---
-**Story Identifier:** STK003
+**Story Identifier:** STK003 (FINISHED)
 
 **Story Name:** Basic map
 
@@ -101,7 +101,7 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
     - The size and layout of the map is clearly visible to the user.
 
 ---
-**Story Identifier:** STK004
+**Story Identifier:** STK004 (FINISHED)
 
 **Story Name:** Ability reflect
 
@@ -125,7 +125,7 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
     Availability:
     - Is there a clear indiciation to when the ability is available?
 ---
-**Story Identifier:** STK005
+**Story Identifier:** STK005 (FINISHED)
 
 **Story Name:** Different levels
 
@@ -143,7 +143,7 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
     
     - Is there an increasing difficulty level as the game progresses?
 ---
-**Story Identifier:** STK006
+**Story Identifier:** STK006 (IN PROGRESS)
 
 **Story Name:** Level transition
 
@@ -166,7 +166,7 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
     - Is the transition interactive, for example, can I move to another part of the map to enter the next game section?
 
 ---
-**Story Identifier:** STK007
+**Story Identifier:** STK007 (FINISHED)
 
 **Story Name:** Start menu
 
@@ -193,7 +193,7 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
     - Is the menu intuitive and easy to use?
 
 ---
-**Story Identifier:** STK008
+**Story Identifier:** STK008 (FINISHED)
 
 **Story Name:** Ability dash
 
@@ -217,9 +217,9 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
     -  Is there a clear indiciation to when the ability is available?
 
 ---
-**Story Identifier:** STK009
+**Story Identifier:** STK009 (FINISHED)
 
-**Story Name:** Ability dash
+**Story Name:** Ability shockwave
 
 **Time estimate:** 4 days
 
@@ -243,7 +243,7 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
     - Can I easily figure out how my ability works?
     - Can I easily understand the range and limits of my ability?
 ---
-**Story Identifier:** STK010
+**Story Identifier:** STK010 (FINISHED)
 
 **Story Name:** Bullet enemy
 
@@ -269,7 +269,7 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
     Visibility:
     - Are the bullets visible to me?
 ---
-**Story Identifier:** STK011
+**Story Identifier:** STK011 (FINISHED)
 
 **Story Name:** Missile enemy
 
@@ -296,7 +296,7 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
     Visibility:
     - Are the missiles visible to me?
 ----
-**Story Identifier:** STK012
+**Story Identifier:** STK012 (FINISHED)
 
 **Story Name:** Obstacles
 
@@ -343,7 +343,7 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
     Visibility:
     - Can I see the spikes, to know how to navigate around them?
 ---
-**Story Identifier:** STK014
+**Story Identifier:** STK014 (IN PROGRESS)
 
 **Story Name:** Scoring system
 
@@ -364,7 +364,7 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
     - Does the difficulty of an action affect how many points that action is worth?
 
 ---
-**Story Identifier:** STK015
+**Story Identifier:** STK015 (FINISHED)
 
 **Story Name:** Music
 
@@ -378,11 +378,8 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
     
     - Can I hear music as I am playing the game?
 
-- **Non-functional:**
-    
-    - Does the music reflect the current stage of the game?
 ---
-**Story Identifier:** STK016
+**Story Identifier:** STK016 (IN PROGRESS)
 
 **Story Name:** Sound effects
 
@@ -415,26 +412,25 @@ The goal of the player is to defeat all the enemies, reach the map exit, or perf
 
 List all acceptance criteria; you should be able to test/confirm these.
 
-**Functional**
+- **Functional**
 
-    - Can I push a button and have the ability function reliably?
-    - Is everything around me slowed down when using the ability?
+* Can I push a button and have the ability function reliably?
+* Is everything around me slowed down when using the ability?
 
-**Non-functional**
+- **Non-functional**
 
     Gameplay
-    - Is there a clear benefit to using the ability?
+    * Is there a clear benefit to using the ability?
 
     Availability
-    - Can I see when my ability is available and when it's not?
-    - Can I easily figure out how my to access my ability?
+    * Can I see when my ability is available and when it's not?
+    * Can I easily figure out how my to access my ability?
 
     Usability
-    - Is my ability easily accessible?
-    - Can I easily figure out how my ability works? 
-    
+    * Is my ability easily accessible?
+    * Can I easily figure out how my ability works? 
 ---
-**Story Identifier:** STK018
+**Story Identifier:** STK018 (FINISHED)
 
 **Story Name:** Moving obstacles
 
@@ -444,20 +440,19 @@ List all acceptance criteria; you should be able to test/confirm these.
 
 **Confirmation**
 
-**Functional**
+- **Functional**
 
-    - Do obstacles move?
-    - Do obtacles stop entities only when they are in that exact position?
+* Do obstacles move?
+* Do obtacles stop entities only when they are in that exact position?
 
-**Non-functional**
+- **Non-functional**
 
     Gameplay
-    - Can I use the moving obstacles to my advantage?
+    * Can I use the moving obstacles to my advantage?
     
     Visibility
-    - Can I understand how the obstacle moves?
-
-       
+    * Can I understand how the obstacle moves?
+---
 ## 2.2. Definition of done
 For a user story to be considered to be done, the following criteria have to be fullfilled:
 
