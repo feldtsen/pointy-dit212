@@ -32,6 +32,9 @@ public class AudioHandler {
         // We don't want multiple media players floating around, so we dispose of those we don't need
         for (MediaPlayer sfxPlayer : sfxPlayers) {
             sfxPlayer.play();
+            // To avoid a media player to remain active even when it is not playing,
+            // we dispose of it when the media ends
+            sfxPlayer.setOnEndOfMedia(sfxPlayer::dispose);
         }
     }
 
