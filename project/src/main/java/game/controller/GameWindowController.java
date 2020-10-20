@@ -55,7 +55,6 @@ public class GameWindowController {
 
         // Initializes game audio and play the theme music
         audioHandler = new AudioHandler();
-        audioHandler.play();
 
         // Create a game loop. The update method will be called every frame.
         // Game loop is initialized with a improbably high desired fps value, to ensure the
@@ -73,6 +72,9 @@ public class GameWindowController {
 
                 // Apply all registered keyboard actions
                 keyboardInputController.applyRegisteredActions();
+
+                // Play sfx
+                audioHandler.playSfx();
 
                 // Update the game model with a global time step of 1 (normal speed)
                 game.update(delta, 1);
@@ -222,11 +224,20 @@ public class GameWindowController {
         keyboardInputController.registerAction(KeyCode.ESCAPE, this::pauseGame);
 
         // Bind keys for player abilities
-        keyboardInputController.registerAction(KeyCode.SHIFT, () -> game.activatePlayerAbility(0));
-        keyboardInputController.registerAction(KeyCode.E,     () -> game.activatePlayerAbility(1));
+        keyboardInputController.registerAction(KeyCode.SHIFT, () -> {
+            // If the ability successfully activates, play the corresponding sound
+            if(game.activatePlayerAbility(0)) audioHandler.registerSfx("dash");
+        });
+        keyboardInputController.registerAction(KeyCode.E,     () -> {
+            // If the ability successfully activates, play the corresponding sound
+            if (game.activatePlayerAbility(1)) audioHandler.registerSfx("shockwave");
+        });
 
         // Bind mouse click to player ability
-        mouseInputController.registerActionOnLeftClick(() -> game.activatePlayerAbility(2));
+        mouseInputController.registerActionOnLeftClick(() -> {
+            // If the ability successfully activates, play the corresponding sound
+            if (game.activatePlayerAbility(2)) audioHandler.registerSfx("reflect");
+        });
 
         // Bind mouse movement to updating the player facing position
         mouseInputController.registerActionOnMove(() -> game.getCurrentLevel().getPlayer().setFacingTowards(mouseInputController.getMousePosition()));

@@ -19,6 +19,7 @@ public class AbilityHolder extends VBox {
     public AbilityHolder (String abilityName) {
         this.abilityName = abilityName;
 
+        // Each ability gets a name, cooldown counter and a progress bar on the GUI
         this.getChildren().setAll(
                 abilityLabel,
                 cooldownTimer,
@@ -26,10 +27,14 @@ public class AbilityHolder extends VBox {
         );
     }
 
+    // Sets the data for the visual cooldown indicator
     public void setCooldown(IAbility ability) {
         if(abilityLabel.getText().equals("")) abilityLabel.setText(abilityName);
+
+        // Reformats the data retrieved to only show one decimal
         String rounded = String.format("%.1f", ability.getCooldownCountdown());
         progress.setWidth(ability.getCooldownCountdownPercentage());
+
         cooldownTimer.setText(rounded);
     }
 
