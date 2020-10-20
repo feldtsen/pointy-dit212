@@ -13,15 +13,14 @@ import java.util.ArrayList;
 
 public class AudioHandler {
     private MediaPlayer themePlayer;
-    private ArrayList<MediaPlayer> sfxPlayers;
+    private final ArrayList<MediaPlayer> sfxPlayers = new ArrayList<>();
 
     public AudioHandler(){
-        sfxPlayers = new ArrayList<>();
         try {
             Media mainTheme = new Media(App.class.getResource("audio/bg.mp3").toURI().toASCIIString());
             themePlayer = new MediaPlayer(mainTheme);
             themePlayer.setCycleCount(MediaPlayer.INDEFINITE);
-            themePlayer.setVolume(.08);
+            themePlayer.setVolume(.06);
             themePlayer.play();
         } catch (URISyntaxException e) {
             e.printStackTrace();
