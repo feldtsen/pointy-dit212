@@ -28,8 +28,6 @@ import java.util.List;
 // Implementation of game interface.
 // This is the core of the model, binding all the model parts together.
 public class Game implements IGame {
-    private int score; // Player score
-
     // True if the player has lost the game.
     private boolean gameOver;
 
@@ -64,7 +62,6 @@ public class Game implements IGame {
         this.levelLoader = new LevelLoader("src/main/resources/game/levels/");
         this.currentLevel = levelLoader.getLevel();
 
-        this.score = 0;
         this.gameOver = false;
         this.gameWin = false;
 
@@ -156,7 +153,6 @@ public class Game implements IGame {
                     // If the strength of the projectiles is grater than that of the enemies
                     if (projectile.getStrength() > enemy.getStrength()) {
                         // If the enemy dies the score is updated
-                        score += enemy.getStrength();
                         enemy.setHitPoints(0);
                         // Set destroyed on hit
                         projectile.setDestroyed();
@@ -252,7 +248,6 @@ public class Game implements IGame {
                 }
                 else if (player.getStrength() > enemy1.getStrength()) {
                     // Else, the enemy dies and the score is updated
-                    score += enemy1.getStrength();
                     enemy1.setHitPoints(0);
                 }
             }
@@ -399,7 +394,6 @@ public class Game implements IGame {
 
     @Override
     public int getScore() {
-        return score;
     }
 
     @Override
