@@ -88,6 +88,13 @@ public class Game implements IGame {
         }
     }
 
+    @Override
+    // Restarts the current level.
+    public void restartLevel() {
+        currentLevel = levelLoader.getLevel();
+        gameOver = false;
+    }
+
     // Activate ability adds an ability to the active ability actions list, together with the
     // corresponding activation time.
     private void activateAbility(IAbilityAction action, long now) {
