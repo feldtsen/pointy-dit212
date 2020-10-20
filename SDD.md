@@ -4,22 +4,22 @@
 
 **Version:** 1.0
 
-**Date:** 2/10/2020
+**Date:** 2020-10-23
 
 ## 1. Introduction
 
-Pointy is a topdown 2D game. The player is a simple geometrical shape that navigates a hostile, equally geometrical, world. In this world, the player is attacked by various enemies that shoot different kinds of projectiles at the player. The player itself has no weapon, but instead a set of abilities which (with some creativity) can be used to defeat the enemies. A few of these abilities are "reflection" (reflecting enemy projectiles), "shockwave" (pushing enemies away), "time manipulation" (slowing down time around the player), and "dash" (making the player invulnerable and very fast for a short period).
+Jerk Evert is a topdown 2D game. The player is a simple geometrical shape that navigates a hostile, equally geometrical, world. In this world, the player is attacked by various enemies that shoot different kinds of projectiles at the player. The player itself has no weapon, but instead a set of abilities which (with some creativity) can be used to defeat the enemies. A few of these abilities are "reflection" (reflecting enemy projectiles), "shockwave" (pushing enemies away) and "dash" (making the player invulnerable and very fast for a short period).
 
-The map contains different neutral elements, such as walls, spikes, and traps, which can both be dangerous for the player, or cleverly used to aid the player in their mission.
+The map contains different neutral elements, such as walls and moving walls, which can trap the player, but also be used as cover.
 
-The goal of the player is to defeat all the enemies, reach the map exit, or perform a specific task. The game contains multiple levels, and by defeating one level, the player can progress to the next.
+The goal of the player is to defeat all enemies. The game contains multiple levels, and by defeating one level, the player can progress to the next.
 
 ### 1.1. Definitions, acronyms, abbreviations
 
 - 2D - Two dimensional
 - Topdown game - A game that is viewed from above.
 - Projectile - Object fired by some entity towards some other entity. Can cause harm to the player or enemies.
-- Obstacle - Neutral object placed on the level. Some obstacles may hinder the movement of the player, enemies, and projectiles in the game, while others may cause harm towards the player or the enemies.  
+- Obstacle - Neutral object placed on the level. Some obstacles may hinder the movement of the player, enemies, and projectiles in the game.
 - Ability - Can be used by the player or enemies to impact the flow of the game in some way. This can, for example, be by adding a projectile to the game, or by directly impacting the surrounding entities in some way.
 - Player - Entity controlled by the user of the Game. 
 - Enemies - Opponents of the player. Will use their abilities to try to defeat the player. 
@@ -32,11 +32,9 @@ OpenJFX is used for the graphical end of the game, reading keyboard input, and h
 
 Persistent data storage is all handled locally by an external JSON-parser. More can be read below (4. Persistent Data Storage). 
 
-When the application starts, the JavaFX Application loads a game window controller and initializes the `MainWindow` (the container for all graphical elements). This game window controller then creates a new `Game` object, a game loop, and launches the game. At this point, all stored levels, user progress, and the score is read from disk, enabling the player to keep playing from where they last left off.
+When the application starts, the JavaFX Application loads a game window controller and initializes the `MainWindow` (the container for all graphical elements). This game window controller then creates a new `Game` object, a game loop, and launches the game. At this point, the first level is read from disk. When the player completes a level, the next level is read from disk in the same way.
 
 The player is prompted by a menu that controls the level settings, the starting and stopping of the game itself, and displaying the score and other progress indicators. When the player starts the game, it will run until they stop it themselves, or until the game is finished.
-
-When the player exits the application, all progress is stored locally. The same process is reapplied when the game is opened anew.
 
 ## 3. System Design
 <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/toplevel.png" width=100%>
@@ -45,9 +43,11 @@ The controller package interacts with the view by letting `GameWindowController`
 
 Both the `Model` and `View` packages make use of the functions implemented in the util package to affect vectors.
 
-As of now, the MVC implementation is not typical. The controller (in this case, the `GameWindowController`) has access to both the view and the model. However, there's no clear relationship between the view and the model themselves. Instead, the controller passes part of the model as an attribute to the draw method in the view (Renderer class). For the moment, we see no reason to have the view use polling or another design pattern to query the model for data since all the required data in our case easily can be passed by the `GameWindowController`. 
+As of now, the MVC implementation is not typical. The controller (in this case, the `GameWindowController`) has access to both the view and the model. The relationship between the view and the model is limited. Most rendering is done by letting the controller pass part of the model to the renderer as the argument in a method call. However, the `GameWindowController` also registers the renderer as a `AbilityActionEventListener` for `IAbilityActionEvents` which are sent by `Game` when any entity activates an ability. This is used by the renderer to know when and how to draw certain visual effects.
 
 Being that the view doesn't interact with the model in any way, we believe that we have managed to achieve a version of MVC that is better than the typical one since we reach a higher level of decoupling than we otherwise would have.  
+
+The `GameWindowController` also links `Game` with a `KeyboardInputController` which applies different actions depending on which keyboard keys are pressed, and a `MouseInputController` which does the same, but for mouse actions.
 
 Here follows a set of diagrams over all our packages. We have decided to leave the fields containing lists of objects in the package diagrams, since the package diagrams otherwise cannot show the relationship between packages. However, we have left out these fields in the design model. Instead, these fields are represented by multiplicities. 
 
@@ -62,7 +62,7 @@ Here follows a set of diagrams over all our packages. We have decided to leave t
 |<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/behavior-ability.png">                                                                       | <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/movement.png" >|
 |AbilityBehaviours control how an enemy uses its abilities.                                                                                                                                        | MovementBehaviours control the movement of an enemy.                                                                                                                                                                        |
 |<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/entitiy.png">                                                                                | <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/enemy.png">|
-|                                                                                                                                                                                                  | Enemies are the opponents of the player. Acts according to its behaviours. Different enemy types are achieved through different combinations of behaviours.                                                                                                                            |
+|Entities represent all active objects in the game, such as players, enemies, obstacles, projectiles, and so on.                                                                                   | Enemies are the opponents of the player. Acts according to its behaviours. Different enemy types are achieved through different combinations of behaviours.                                                                                                                            |
 |<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/movable.png">                                                                                | <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/obstacle.png">|
 |MovableEntity represents something that can move. Implements the movement functionality for all movable entities in the game.                                                                     | Neutral elements that can hinder the movement of other entities and/or cause damage to them. |
 |<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/player.png">                                                                                 | <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/projectile.png">|
@@ -110,8 +110,9 @@ Future possible functionality includes storing and parsing level data as ASCII t
 
 ## 5. Quality
 
-The application is tested using unit tests with the framework JUnit. These tests can be found under project/src/main/test.
+The application is tested using unit tests with the framework JUnit. These tests can be found under project/src/main/test. The game has also been thoroughly game tested by playing the different levels and manually testing the functionality described by the different user stories.
 
 ## 6. References
 - JavaFX - https://openjfx.io/
 - JUnit - https://junit.org/
+- Maven - https://maven.apache.org/
