@@ -9,6 +9,7 @@ import game.controller.gameLoop.GameLoop;
 import game.controller.gameLoop.IGameLoop;
 import game.model.IGame;
 import game.model.audio.AudioHandler;
+import game.model.audio.IAudioHandler;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
@@ -37,7 +38,7 @@ public class GameWindowController {
     private MouseInputController mouseInputController;
 
     // Handles audio related actions
-    private final AudioHandler audioHandler;
+    private final IAudioHandler audioHandler = new AudioHandler();
 
 
     public GameWindowController() {
@@ -52,9 +53,6 @@ public class GameWindowController {
 
         // Initialize the game and map all the keys to their corresponding actions.
         gameSetup();
-
-        // Initializes game audio and play the theme music
-        audioHandler = new AudioHandler();
 
         // Create a game loop. The update method will be called every frame.
         // Game loop is initialized with a improbably high desired fps value, to ensure the
@@ -74,7 +72,7 @@ public class GameWindowController {
                 keyboardInputController.applyHeldRegisteredActions();
 
                 // Play sfx
-                audioHandler.playSfx();
+                audioHandler.playSoundEffects();
 
                 // Update the game model with a global time step of 1 (normal speed)
                 game.update(delta, 1);
@@ -83,10 +81,7 @@ public class GameWindowController {
                 if(game.isGameWin()) pauseAndReload();
 
                 // Displays game over message
-                if(game.isGameOver())  {
-                    game.resetTimer();
-                    handleGameOver();
-                }
+                if(game.isGameOver()) handleGameOver();
 
                 // Checks if all enemies have been defeated
                 if (game.getCurrentLevel().getEnemies().isEmpty())  {
@@ -118,6 +113,10 @@ public class GameWindowController {
     }
 
     private void handleGameOver() {
+        // Reset the timer
+        game.resetTimer();
+
+        // Stop the game
         gameLoop.setPaused(true);
 
         // Clear all entities from screen.
@@ -217,6 +216,8 @@ public class GameWindowController {
             else if (!gameLoop.isPaused()) pause();
         });
 
+        keyboardInputController.registerPressedAction(KeyCode.M, audioHandler::toggleMusic);
+
         // Bind keys to player movement
         keyboardInputController.registerHeldAction(KeyCode.W, game.getCurrentLevel().getPlayer()::moveUp);
         keyboardInputController.registerHeldAction(KeyCode.A, game.getCurrentLevel().getPlayer()::moveLeft);
@@ -227,17 +228,17 @@ public class GameWindowController {
         // Bind keys for player abilities
         keyboardInputController.registerHeldAction(KeyCode.SHIFT, () -> {
             // If the ability successfully activates, play the corresponding sound
-            if(game.activatePlayerAbility(0)) audioHandler.registerSfx("dash");
+            if(game.activatePlayerAbility(0)) audioHandler.registerSoundEffect("dash");
         });
         keyboardInputController.registerHeldAction(KeyCode.E,     () -> {
             // If the ability successfully activates, play the corresponding sound
-            if (game.activatePlayerAbility(1)) audioHandler.registerSfx("shockwave");
+            if (game.activatePlayerAbility(1)) audioHandler.registerSoundEffect("shockwave");
         });
 
         // Bind mouse click to player ability
         mouseInputController.registerActionOnLeftClick(() -> {
             // If the ability successfully activates, play the corresponding sound
-            if (game.activatePlayerAbility(2)) audioHandler.registerSfx("reflect");
+            if (game.activatePlayerAbility(2)) audioHandler.registerSoundEffect("reflect");
         });
 
         // Bind mouse movement to updating the player facing position
