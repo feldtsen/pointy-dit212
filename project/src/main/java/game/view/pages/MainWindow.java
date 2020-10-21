@@ -33,13 +33,8 @@ public class MainWindow extends StackPane {
         scorePanel = new ScorePanel();
         abilityBar = new AbilityBar();
         gameTitle = new Label(GAME_TITLE);
-        gameStatePanel = new GameStatePanel("null","null");
+        gameStatePanel = new GameStatePanel();
 
-        setUpWindow();
-
-    }
-
-    private void setUpWindow() {
         // Add a stylesheet
         this.getStylesheets().add(ViewResourceLoader.stylesheet);
 
@@ -47,6 +42,11 @@ public class MainWindow extends StackPane {
         this.getStyleClass().add(MAIN_WINDOW_CSS);
         gameTitle.getStyleClass().add("gameTitle");
 
+        windowSetup();
+
+    }
+
+    private void windowSetup() {
 
         // Add what you want to display
         this.getChildren().setAll(
@@ -69,8 +69,6 @@ public class MainWindow extends StackPane {
         startMenu.setAlignment(Pos.BOTTOM_CENTER);
         abilityBar.setAlignment(Pos.CENTER);
         gameStatePanel.setAlignment(Pos.CENTER);
-
-
 
         // Bind the size of different components to the window size, making the components responsive
         // (relative to its parent)
@@ -104,7 +102,7 @@ public class MainWindow extends StackPane {
 
     public void setGameState(String gameStateMessage, String gameStateInstructions) {
         this.gameStatePanel = new GameStatePanel(gameStateMessage, gameStateInstructions);
-        setUpWindow();
+        windowSetup();
     }
 
     // Display game over message and hide other UI-elements

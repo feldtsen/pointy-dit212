@@ -7,7 +7,7 @@ package game.view.pages.gameState;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-// Panel shown at different states of the game like, winning, game over, level transition.
+// Panel shown at different states of the game, e.g. winning, game over, level transition.
 public class GameStatePanel extends VBox {
 
     public GameStatePanel(String gameStateMessage, String gameStateInstructions) {
@@ -27,6 +27,11 @@ public class GameStatePanel extends VBox {
         // Panel should not be clickable and should be hidden by default.
         this.setMouseTransparent(true);
         this.setVisible(false);
+    }
+
+    // Initiates empty panel
+    public GameStatePanel() {
+        this("","");
     }
 }
 

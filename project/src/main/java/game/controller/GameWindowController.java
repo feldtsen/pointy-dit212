@@ -67,7 +67,7 @@ public class GameWindowController {
             @Override
             public void update(double delta) {
                 // Render the current level
-                game.getCurrentLevel().getPlayer().setIsInvulnerable(true);
+                //game.getCurrentLevel().getPlayer().setIsInvulnerable(true);
                 renderer.drawEntities(game.getCurrentLevel());
                 // Render ability effects
                 renderer.drawAbilities();
@@ -84,17 +84,17 @@ public class GameWindowController {
                 // Update the game model with a global time step of 1 (normal speed)
                 game.update(delta, 1);
 
-                // Display the menu if the player wins the game
+                // Shows winning message
                 if(game.isGameWin()) handleGameState("YOU WIN", "You da man (or woman). Press ESC to return to menu.");
 
-                // Displays game over message
+                // Shows game over message
                 if(game.isGameOver()) handleGameState("GAME OVER", "Press R to play again or ESC to return to menu.");
 
                 // Checks if all enemies have been defeated
                 if (game.getCurrentLevel().getEnemies().isEmpty())  {
                     game.nextLevel();
                     if (!game.isGameWin()) {
-                        handleGameState("LEVEL COMPLETE", "\nTotal score: x\n\nPress P to continue.");
+                        handleGameState("LEVEL COMPLETE", "\nScore: x\n\nPress P to continue.");
 
                         // TODO: set timer score to score table if it's a new high score
 
