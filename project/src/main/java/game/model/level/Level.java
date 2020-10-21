@@ -33,8 +33,12 @@ public class Level implements ILevel {
     private double width;
     private double height;
 
+    // The current level
+    private final int levelNr;
 
-    public Level(List<IEnemy> enemies, List<IProjectile<?>> projectiles, List<IObstacle> obstacles, IPlayer player, double width, double height) {
+
+    public Level(int levelNr, List<IEnemy> enemies, List<IProjectile<?>> projectiles, List<IObstacle> obstacles, IPlayer player, double width, double height) {
+        this.levelNr = levelNr;
         this.enemies = enemies;
         this.projectiles = projectiles;
         this.obstacles = obstacles;
@@ -72,6 +76,11 @@ public class Level implements ILevel {
     @Override
     public double getHeight(){
         return this.height;
+    }
+
+    @Override
+    public int getLevelNr() {
+        return this.levelNr;
     }
 
     @Override

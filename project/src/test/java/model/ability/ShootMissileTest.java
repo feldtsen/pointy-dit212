@@ -26,7 +26,7 @@ public class ShootMissileTest {
         List<IEnemy> enemies = new ArrayList<>();
         enemies.add(user);
 
-        level = new Level(enemies, new ArrayList<>(), new ArrayList<>(), target, 100000, 100000);
+        level = new Level(0, enemies, new ArrayList<>(), new ArrayList<>(), target, 100000, 100000);
     }
 
     @Test

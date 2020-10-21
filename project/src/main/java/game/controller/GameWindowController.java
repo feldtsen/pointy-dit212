@@ -40,7 +40,7 @@ public class GameWindowController {
     private MouseInputController mouseInputController;
 
     // Handles audio related actions
-    //private final IAudioHandler audioHandler = new AudioHandler();
+    private final IAudioHandler audioHandler = new AudioHandler();
 
     // Handles highscore
     private final IHighscoreHandler highscoreHandler = new HighscoreHandler();
@@ -95,6 +95,7 @@ public class GameWindowController {
                 if (game.getCurrentLevel().getEnemies().isEmpty())  {
 
                     // TODO: set timer score to score table if it's a new high score
+                    checkHighscore(game.getTime());
                     game.nextLevel();
                     game.resetTimer();
                     // if (game.updateHighScore(Level l, Long time);
@@ -161,6 +162,14 @@ public class GameWindowController {
         gameSetup();
     }
 
+    // Checks if new highscore
+    private void checkHighscore (double time) {
+        String currentLevel = String.format("%d", game.getCurrentLevel().getLevelNr());
+           if (time > highscoreHandler.getHighscore(currentLevel)) {
+                highscoreHandler.setHighscore(currentLevel, time);
+           }
+    }
+
     //TODO: implement
     public void handleMenuLevelButton() {
         System.out.println("Level button clicked");
@@ -225,7 +234,7 @@ public class GameWindowController {
             else if (!gameLoop.isPaused()) pause();
         });
 
-        //keyboardInputController.registerPressedAction(KeyCode.M, audioHandler::toggleMusic);
+        keyboardInputController.registerPressedAction(KeyCode.M, audioHandler::toggleMusic);
 
         // Bind keys to player movement
         keyboardInputController.registerHeldAction(KeyCode.W, game.getCurrentLevel().getPlayer()::moveUp);
@@ -237,17 +246,17 @@ public class GameWindowController {
         // Bind keys for player abilities
         keyboardInputController.registerHeldAction(KeyCode.SHIFT, () -> {
             // If the ability successfully activates, play the corresponding sound
-            //if(game.activatePlayerAbility(0)) audioHandler.registerSoundEffect("dash");
+            if(game.activatePlayerAbility(0)) audioHandler.registerSoundEffect("dash");
         });
         keyboardInputController.registerHeldAction(KeyCode.E,     () -> {
             // If the ability successfully activates, play the corresponding sound
-            //if (game.activatePlayerAbility(1)) audioHandler.registerSoundEffect("shockwave");
+            if (game.activatePlayerAbility(1)) audioHandler.registerSoundEffect("shockwave");
         });
 
         // Bind mouse click to player ability
         mouseInputController.registerActionOnLeftClick(() -> {
             // If the ability successfully activates, play the corresponding sound
-            //if (game.activatePlayerAbility(2)) audioHandler.registerSoundEffect("reflect");
+            if (game.activatePlayerAbility(2)) audioHandler.registerSoundEffect("reflect");
         });
 
         // Bind mouse movement to updating the player facing position
