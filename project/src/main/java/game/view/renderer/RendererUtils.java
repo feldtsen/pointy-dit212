@@ -9,6 +9,7 @@ import game.view.ViewResourceLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.LinearGradient;
 import javafx.scene.shape.ArcType;
 
 public class RendererUtils {
@@ -47,7 +48,7 @@ public class RendererUtils {
     }
 
     // Draw arch
-    public static void drawArc(GraphicsContext graphicsContext, Color color, ICircle shape, Point2D position, double angle) {
+    public static void drawArc(GraphicsContext graphicsContext, LinearGradient color, ICircle shape, Point2D position, double angle) {
         Quartet scaled = scaleDrawData(graphicsContext, position.getX(), position.getY(), shape.getRadius(), shape.getRadius());
 
         // Saves  attributes, such as paint data and transform data
@@ -55,8 +56,8 @@ public class RendererUtils {
 
         translate(graphicsContext, shape.getRotation(), scaled.x, scaled.y);
 
-       graphicsContext.setStroke(color);
-       graphicsContext.strokeArc(
+       graphicsContext.setFill(color);
+       graphicsContext.fillArc(
                scaled.x - scaled.w,
                scaled.y - scaled.h,
                2 * scaled.w,

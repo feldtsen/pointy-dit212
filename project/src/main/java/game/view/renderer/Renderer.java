@@ -26,6 +26,9 @@ import game.view.IShapeVisitor;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -98,7 +101,17 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
              Point2D position = action.getUser().getPosition();
              ICircle circle = new Circle(radius * time);
              circle.setRotation(action.getUser().getShape().getRotation() + (3 * Math.PI)/4);
-             RendererUtils.drawArc(graphicsContext, colors.get(action.getUser().getClass()), circle, position, Math.PI/2);
+             Stop[] stops = new Stop[]{new Stop(0, Color.TRANSPARENT), new Stop(1, colors.get(action.getUser().getClass()))};
+             LinearGradient linearGradient = new LinearGradient(
+                     0,
+                     .1,
+                     .1,
+                     0,
+                     true,
+                     CycleMethod.NO_CYCLE,
+                     stops
+             );
+             RendererUtils.drawArc(graphicsContext, linearGradient, circle, position, Math.PI/2);
          }
      };
     }
