@@ -43,5 +43,8 @@ public interface IGame extends AbilityActionEventHandler, IUpdatable {
     // Loads the next level
     void nextLevel();
 
+    // Restarts the current level.
+    void restartLevel();
+
     ILevel getCurrentLevel();
 }

@@ -126,8 +126,6 @@ public class GameWindowController {
         window.showGameOver();
 
         window.hideUI();
-
-
     }
 
     // Hide game over message and starts a new game
@@ -140,7 +138,10 @@ public class GameWindowController {
         window.showUI();
 
         // Setup new game
-        gameSetup();
+        game.restartLevel();
+
+        // Register player controls to new player object.
+        registerPlayerControls();
     }
 
     // Hides game over message and displays the starting menu.
