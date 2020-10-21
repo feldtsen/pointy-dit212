@@ -36,7 +36,7 @@ public class ShockwaveTest {
         List<IEnemy> enemies = new ArrayList<>(List.of(enemy));
 
 
-        level = new Level(enemies,null,null, player, 1200, 800);
+        level = new Level(0, enemies,null,null, player, 1200, 800);
     }
 
     @Test

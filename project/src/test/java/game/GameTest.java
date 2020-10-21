@@ -47,7 +47,7 @@ public class GameTest {
 
         List<IProjectile<?>> projectiles = new ArrayList<>();
         List<IObstacle> obstacles = new ArrayList<>();
-        ILevel level = new Level(enemies,projectiles,obstacles, player,1200,675);
+        ILevel level = new Level(0, enemies,projectiles,obstacles, player,1200,675);
 
         game = new Game();
         game.setLevel(level);

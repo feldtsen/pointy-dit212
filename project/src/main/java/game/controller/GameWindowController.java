@@ -47,6 +47,8 @@ public class GameWindowController {
 
 
     public GameWindowController() {
+        highscoreHandler.writeToFile();
+
         // Initializes main window view component
         window = new MainWindow(this);
 
@@ -78,7 +80,7 @@ public class GameWindowController {
                 keyboardInputController.applyHeldRegisteredActions();
 
                 // Play sfx
-                audioHandler.playSoundEffects();
+                //audioHandler.playSoundEffects();
 
                 // Update the game model with a global time step of 1 (normal speed)
                 game.update(delta, 1);
@@ -93,6 +95,7 @@ public class GameWindowController {
                 if (game.getCurrentLevel().getEnemies().isEmpty())  {
 
                     // TODO: set timer score to score table if it's a new high score
+                    checkHighscore(game.getTime());
                     game.nextLevel();
                     game.resetTimer();
                     // if (game.updateHighScore(Level l, Long time);
@@ -157,6 +160,16 @@ public class GameWindowController {
         window.hideGameOver();
         // Setup new game.
         gameSetup();
+    }
+
+    // Checks if new highscore
+    private void checkHighscore (double time) {
+        String currentLevel = String.format("%d", game.getCurrentLevel().getLevelNr());
+
+        // If the time for completing the current level is lesser than the stored time, overwrite it
+        if (time < highscoreHandler.getHighscore(currentLevel)) {
+         highscoreHandler.setHighscore(currentLevel, time);
+        }
     }
 
     //TODO: implement

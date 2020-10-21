@@ -62,7 +62,7 @@ public class ShootBulletTest {
         user = new Enemy(new Point2D(0, 0), 1, 3, 3, 3,3,  abilityBehaviour, null, target);
 
         // Create new level with list for projectiles.
-        level = new Level(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), null, 100, 100);
+        level = new Level(0, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), null, 100, 100);
     }
 
     @Test
