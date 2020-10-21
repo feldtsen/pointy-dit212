@@ -19,6 +19,9 @@ public class HighscoreHandler implements IHighscoreHandler {
 
     @Override
     public double getHighscore(String level) {
+        if (!storedHighscores.containsKey(level)) {
+            setHighscore(level, 0);
+        }
         return storedHighscores.get(level);
     }
 
