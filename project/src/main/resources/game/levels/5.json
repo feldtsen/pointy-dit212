@@ -27,6 +27,7 @@
     }
   ],
   "Obstacles": [
+
     {
       "type": "moving",
       "x1": "500",

@@ -14,6 +14,7 @@ import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
 import game.model.entity.obstacle.IObstacle;
 import game.model.entity.obstacle.MovingWall;
+import game.model.entity.obstacle.Spikes;
 import game.model.entity.obstacle.Wall;
 import game.model.entity.player.Player;
 import javafx.geometry.Point2D;
@@ -137,8 +138,7 @@ public class EntityFactory {
     }
 
     // Creates an obstacle which can kill entities
-    public static IObstacle spikes(double x, double y) {
-        //TODO
-        return null;
+    public static IObstacle spikes(double x, double y, double width, double height) {
+        return new Spikes(new Point2D(x,y), width, height, 100);
     }
 }
