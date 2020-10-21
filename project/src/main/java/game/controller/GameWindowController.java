@@ -118,6 +118,8 @@ public class GameWindowController {
         window.getAbilityBar().updateAbilities(game.getCurrentLevel().getPlayer().getAbilities());
     }
 
+
+
     private void handleGameOver() {
         // Reset the timer
         game.resetTimer();
@@ -127,9 +129,10 @@ public class GameWindowController {
 
         // Clear all entities from screen.
         renderer.clearCanvas();
-
+        // Set message
+        window.setGameState( "GAME_OVER", "Press R to play again or ESC to return to the menu.");
         // Show game over message.
-        window.showGameOver();
+        window.showGameState();
 
         window.hideUI();
     }
@@ -138,7 +141,7 @@ public class GameWindowController {
     private void restart() {
         gameLoop.setPaused(false);
 
-        window.hideGameOver();
+        window.hideGameState();
 
         // Makes ability bar and score panel visible.
         window.showUI();
@@ -154,7 +157,7 @@ public class GameWindowController {
     private void pauseAndReload() {
         pause();
         // Removes game over message.
-        window.hideGameOver();
+        window.hideGameState();
         // Setup new game.
         gameSetup();
     }
