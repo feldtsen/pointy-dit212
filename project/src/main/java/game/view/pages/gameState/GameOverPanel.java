@@ -2,9 +2,8 @@
  * Authors: Simon Genne, Joachim Pedersen
  */
 
-package game.view.pages.gameOver;
+package game.view.pages.gameState;
 
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 

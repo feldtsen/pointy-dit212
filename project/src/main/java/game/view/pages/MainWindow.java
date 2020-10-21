@@ -8,7 +8,7 @@ import game.controller.GameWindowController;
 import game.view.ViewResourceLoader;
 import game.view.pages.abilityBar.AbilityBar;
 import game.view.pages.canvas.GameCanvas;
-import game.view.pages.gameOver.GameOverPanel;
+import game.view.pages.gameState.GameOverPanel;
 import game.view.pages.menu.StartMenu;
 import game.view.pages.score.ScorePanel;
 import javafx.geometry.Pos;
