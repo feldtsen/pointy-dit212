@@ -48,7 +48,7 @@ public class LevelLoader implements ILevelLoader {
             List<IEnemy> enemies = loadEnemies(player);
             List<IProjectile<?>> projectiles = loadProjectiles();
 
-            return new Level(enemies, projectiles, obstacles, player, LEVEL_WIDTH, LEVEL_HEIGHT);
+            return new Level(levelNr, enemies, projectiles, obstacles, player, LEVEL_WIDTH, LEVEL_HEIGHT);
         } catch (FileNotFoundException e) {
             return null;
         }

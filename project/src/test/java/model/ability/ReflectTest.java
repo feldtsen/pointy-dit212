@@ -35,7 +35,7 @@ public class ReflectTest {
         projectiles.add(projectile);
         player = new Player(new Point2D(500, 500), 1, 1, 3, 0);
 
-        level = new Level(new ArrayList<>(), projectiles, new ArrayList<>(), player, 1200, 800);
+        level = new Level(0, new ArrayList<>(), projectiles, new ArrayList<>(), player, 1200, 800);
 
     }
 

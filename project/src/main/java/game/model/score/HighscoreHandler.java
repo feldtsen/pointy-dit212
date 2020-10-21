@@ -1,14 +1,18 @@
+/*
+ * Authors: Joachim Ørfeldt Pedersen, Mattias Oom
+ */
+
 package game.model.score;
 
 import game.App;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class HighscoreHandler implements IHighscoreHandler {
+    private final static String PATH_TO_HIGHSCORE = App.class.getResource("").getPath() + "highscore.txt";
     private final HashMap<String, Double> storedHighscores;
 
     public HighscoreHandler() {
@@ -18,22 +22,52 @@ public class HighscoreHandler implements IHighscoreHandler {
     }
 
     @Override
-    public void storedHighscore(String level) {
-        System.out.println(storedHighscores.get(level));
+    public double getHighscore(String level) {
+        if (!storedHighscores.containsKey(level)) {
+            setHighscore(level, 0);
+        }
+        return storedHighscores.get(level);
     }
 
     @Override
-    public void writeToFile(String level, double time) {
+    public void setHighscore(String level, double score) {
+        if (storedHighscores.containsKey(level)) storedHighscores.replace(level, score);
+        else storedHighscores.put(level, score);
 
+        writeToFile();
     }
 
+    @Override
+    public void writeToFile() {
+        try {
+            PrintWriter printWriter = new PrintWriter(PATH_TO_HIGHSCORE);
+            printWriter.print("");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
+        try {
+            FileOutputStream fileOut = new FileOutputStream(PATH_TO_HIGHSCORE);
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOut));
+            for (Map.Entry<String, Double> entry : storedHighscores.entrySet()) {
+                String name = entry.getKey();
+                Double score = entry.getValue();
+                System.out.println(name);
+                bufferedWriter.write(name + " " + score);
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
     @Override
     public void readFromFile() {
-        String pathToHighscore = App.class.getResource("").getPath() + "highscore.txt";
-        File highscoreFile = new File(pathToHighscore);
-        Scanner highscoreScanner = null;
+        File highscoreFile = new File(PATH_TO_HIGHSCORE);
+        Scanner highscoreScanner;
         try {
             highscoreScanner = new Scanner(highscoreFile);
             highscoreScanner.useDelimiter(System.lineSeparator());
@@ -48,8 +82,8 @@ public class HighscoreHandler implements IHighscoreHandler {
                 storedHighscores.put(levelName, levelScore);
             }
 
+            highscoreScanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("failed to create a scanner");
             e.printStackTrace();
         }
 
@@ -60,11 +94,7 @@ public class HighscoreHandler implements IHighscoreHandler {
         try {
             String pathToHighscore = App.class.getResource("").getPath() + "highscore.txt";
             File highscoreFile = new File(pathToHighscore);
-            if (highscoreFile.createNewFile()) {
-                System.out.println("File created: " + highscoreFile.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
+            highscoreFile.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }

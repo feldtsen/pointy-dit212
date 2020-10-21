@@ -35,6 +35,9 @@ public interface ILevel {
     double getWidth();
     double getHeight();
 
+    // Retrieve the current level number
+    int getLevelNr();
+
     void setWidth(double width);
     void setHeight(double height);
 
