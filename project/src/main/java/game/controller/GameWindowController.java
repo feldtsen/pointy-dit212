@@ -69,7 +69,6 @@ public class GameWindowController {
             @Override
             public void update(double delta) {
                 // Render the current level
-                //game.getCurrentLevel().getPlayer().setIsInvulnerable(true);
                 renderer.drawEntities(game.getCurrentLevel());
                 // Render ability effects
                 renderer.drawAbilities();
