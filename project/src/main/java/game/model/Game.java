@@ -413,7 +413,7 @@ public class Game implements IGame {
     public List<Double> getActiveAbilityTimes() { return currentAbilityTimes; }
 
     @Override
-    public String getTime() {
+    public double getTime() {
         return timer.getTime();
     }
 

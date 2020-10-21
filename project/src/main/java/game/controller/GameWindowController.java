@@ -89,7 +89,7 @@ public class GameWindowController {
                     // TODO: set timer score to score table if it's a new high score
                     game.nextLevel();
                     game.resetTimer();
-
+                    // if (game.updateHighScore(Level l, Long time);
                     // Register movement keys to new player object
                     registerPlayerControls();
                 }

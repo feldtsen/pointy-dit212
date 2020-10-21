@@ -7,8 +7,8 @@ package game.util;
 public class Timer {
     private double time;
 
-    public String getTime(){
-        return String.format("%.1f", time);
+    public double getTime(){
+        return time;
     }
 
     public void setTime(double delta) {

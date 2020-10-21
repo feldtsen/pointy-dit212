@@ -34,8 +34,8 @@ public class ScorePanel extends VBox implements IScorePanel {
 
     @Override
     // Update the score panel with the current score in seconds.
-    public void updateScore(String score) {
+    public void updateScore(double score) {
         if(scoreLabel.getText().equals("")) scoreLabel.setText(" T I M E ");
-        this.score.setText(score);
+        this.score.setText(String.format("%.1f", score));
     }
 }

@@ -29,7 +29,7 @@ public interface IGame extends AbilityActionEventHandler, IUpdatable {
     boolean setLevel(ILevel level);
 
     // Retrieves the game time in String format (time used on the current level)
-    String getTime();
+    double getTime();
 
     // Sets the time back to 0
     void resetTimer();
