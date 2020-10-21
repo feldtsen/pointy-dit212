@@ -61,6 +61,7 @@ public class GameWindowController {
         // Initialize the game and map all the keys to their corresponding actions.
         gameSetup();
 
+        //Bugfix
 
         // Create a game loop. The update method will be called every frame.
         // Game loop is initialized with a improbably high desired fps value, to ensure the
@@ -69,6 +70,7 @@ public class GameWindowController {
             @Override
             public void update(double delta) {
                 // Render the current level
+
                 renderer.drawEntities(game.getCurrentLevel());
                 // Render ability effects
                 renderer.drawAbilities();
