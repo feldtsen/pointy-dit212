@@ -1,3 +1,7 @@
+/*
+ * Authors: Joachim Ørfeldt Pedersen, Mattias Oom
+ */
+
 package game.model.score;
 
 import game.App;
@@ -60,8 +64,6 @@ public class HighscoreHandler implements IHighscoreHandler {
 
     }
 
-
-
     @Override
     public void readFromFile() {
         File highscoreFile = new File(PATH_TO_HIGHSCORE);
@@ -82,7 +84,6 @@ public class HighscoreHandler implements IHighscoreHandler {
 
             highscoreScanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("failed to create a scanner");
             e.printStackTrace();
         }
 
@@ -93,11 +94,7 @@ public class HighscoreHandler implements IHighscoreHandler {
         try {
             String pathToHighscore = App.class.getResource("").getPath() + "highscore.txt";
             File highscoreFile = new File(pathToHighscore);
-            if (highscoreFile.createNewFile()) {
-                System.out.println("File created: " + highscoreFile.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
+            highscoreFile.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
