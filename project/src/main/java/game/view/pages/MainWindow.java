@@ -5,7 +5,6 @@
 package game.view.pages;
 
 import game.controller.GameWindowController;
-import game.model.Game;
 import game.view.ViewResourceLoader;
 import game.view.pages.abilityBar.AbilityBar;
 import game.view.pages.canvas.GameCanvas;
@@ -33,13 +32,10 @@ public class MainWindow extends StackPane {
         startMenu  = new StartMenu(gameWindowController);
         scorePanel = new ScorePanel();
         abilityBar = new AbilityBar();
-        gameStatePanel = new GameStatePanel("WELCOME TO " + GAME_TITLE,
-                "Your job is to kill all enemies while surviving. Jerk to evert danger. Press P to play.");
-
         gameTitle = new Label(GAME_TITLE);
+        gameStatePanel = new GameStatePanel("null","null");
 
         setUpWindow();
-
 
     }
 

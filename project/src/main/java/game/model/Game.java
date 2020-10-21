@@ -76,6 +76,7 @@ public class Game implements IGame {
         this.activationTimes = new ArrayList<>();
 
         listeners = new ArrayList<>();
+
     }
 
     // Loads the next level
