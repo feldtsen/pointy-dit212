@@ -94,7 +94,7 @@ public class GameWindowController {
                 if (game.getCurrentLevel().getEnemies().isEmpty())  {
                     game.nextLevel();
                     if (!game.isGameWin()) {
-                        handleGameState("LEVEL COMPLETE", "\nScore: x\n\nPress P to continue.");
+                        handleGameState("LEVEL COMPLETE", "\nScore: x\n\nPress R to continue.");
 
                         // TODO: set timer score to score table if it's a new high score
 
@@ -222,9 +222,6 @@ public class GameWindowController {
 
         // Registers methods to new keys. Pressing P starts a new game, pressing ESC displays starting menu.
         keyboardInputController.registerPressedAction(KeyCode.R,      ()->{
-            if(game.isGameOver()) restart();
-        });
-        keyboardInputController.registerPressedAction(KeyCode.P,      ()->{
             if(gameLoop.isPaused()) restart();
         });
         keyboardInputController.registerPressedAction(KeyCode.ESCAPE, () -> {
