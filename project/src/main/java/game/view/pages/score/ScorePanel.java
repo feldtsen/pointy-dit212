@@ -4,11 +4,9 @@
 
 package game.view.pages.score;
 
-import game.model.entity.player.IPlayer;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 // Used for displaying the players current score.
 public class ScorePanel extends VBox implements IScorePanel {
