@@ -10,6 +10,8 @@ import game.controller.gameLoop.IGameLoop;
 import game.model.IGame;
 import game.model.audio.AudioHandler;
 import game.model.audio.IAudioHandler;
+import game.model.score.IHighscoreHandler;
+import game.model.score.HighscoreHandler;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
@@ -40,6 +42,9 @@ public class GameWindowController {
     // Handles audio related actions
     private final IAudioHandler audioHandler = new AudioHandler();
 
+    // Handles highscore
+    private final IHighscoreHandler highscoreHandler = new HighscoreHandler();
+
 
     public GameWindowController() {
         // Initializes main window view component
@@ -53,6 +58,7 @@ public class GameWindowController {
 
         // Initialize the game and map all the keys to their corresponding actions.
         gameSetup();
+
 
         // Create a game loop. The update method will be called every frame.
         // Game loop is initialized with a improbably high desired fps value, to ensure the
