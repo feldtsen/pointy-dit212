@@ -17,5 +17,5 @@ public interface ILevelLoader extends Iterator<ILevel> {
     ILevel getLevel();
 
     // Get the selected level
-    ILevel getSelectedLevel(int levelNr);
+    ILevel getLevel(int levelNr);
 }

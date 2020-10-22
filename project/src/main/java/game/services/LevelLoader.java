@@ -75,7 +75,7 @@ public class LevelLoader implements ILevelLoader {
     }
 
     @Override
-    public ILevel getSelectedLevel(int levelNr) {
+    public ILevel getLevel(int levelNr) {
         this.levelNr = levelNr;
         return getLevel();
     }
