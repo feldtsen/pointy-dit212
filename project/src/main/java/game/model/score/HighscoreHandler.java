@@ -1,5 +1,9 @@
 /*
  * Authors: Joachim Ørfeldt Pedersen, Mattias Oom
+ *
+ * The highscore handler reads and stores highscores to a file.
+ * This enables the player to store their max score for each level
+ * played. 
  */
 
 package game.model.score;

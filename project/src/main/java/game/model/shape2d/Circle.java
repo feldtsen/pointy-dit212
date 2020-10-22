@@ -1,5 +1,7 @@
 /*
  * Authors: Simon Genne, Joachim Pedersen, Anton Hildingsson, Mattias Oom
+ *
+ * Simple circle shape. Used by most entities. 
  */
 
 package game.model.shape2d;
@@ -9,7 +11,6 @@ import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-// Simple circle shape
 public class Circle implements ICircle {
     // Radius of the circle
     private final double radius;

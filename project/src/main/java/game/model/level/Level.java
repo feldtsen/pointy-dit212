@@ -1,5 +1,8 @@
- /*
- Authors: Erik Magnusson, Anton Hildingsson, Mattias Oom, Joachim Pedersen
+/*
+ * Authors: Erik Magnusson, Anton Hildingsson, Mattias Oom, Joachim Pedersen
+ *
+ * Holds all relevant data about a level. Used by "Game" class, and is typically
+ * loaded from disk using a level loader. 
  */
 
 package game.model.level;
@@ -11,10 +14,6 @@ import game.model.entity.projectile.IProjectile;
 
 import java.util.List;
 
-
-
-//Holds all relevant data about a level.
-//Used by "Game" class
 public class Level implements ILevel {
     // All enemies in the level
     private final List<IEnemy> enemies;

@@ -1,5 +1,9 @@
 /*
  * Authors: Erik Magnusson, Anton Hildingsson, Mattias Oom, Joachim Pedersen
+ *
+ * This interface represents a single level of the game, and manages all entities.
+ * A level holds the player, the enemies, all projectiles and obstacles, and 
+ * supplies the game with a few methods for managing these entities.
  */
 
 package game.model.level;
@@ -11,7 +15,6 @@ import game.model.entity.projectile.IProjectile;
 
 import java.util.List;
 
-// This interface represents a single level of the game, and manages all entities.
 public interface ILevel {
     // The player of the level. Different for each level, however
     // player controls should always affect the different players the same (unless the players have different

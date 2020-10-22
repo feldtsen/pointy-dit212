@@ -1,5 +1,8 @@
 /*
  * Authors: Joachim Ørfeldt Pedersen, Mattias Oom
+ *
+ * Abstraction for methods used to write and read highscores to/from disk.
+ * This is used to save the player results.
  */
 
 package game.model.score;

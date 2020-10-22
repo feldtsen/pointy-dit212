@@ -1,5 +1,17 @@
 /*
  * Authors: Anton Hildingsson, Erik Magnusson, Mattias Oom, Joacchim Pedersen
+ *
+ * Interface for class running the game itself. Does not include the gameLoop, 
+ * which should be handled by a controller.
+ *
+ * The interface defines a set of functions which can be called from controllers
+ * to influence the game state and player actions. For example, the next level
+ * is not loaded instantly when the player finishes one, since the controller
+ * might want to perform an action inbetween. Instead, the controller has to call 
+ * nextLevel to load the next level. 
+ *
+ * The implementing class will be the root model class, and handles all gameplay.
+ * When t he update method is called, the game state should progress.
  */
 
 package game.model;
@@ -11,8 +23,6 @@ import javafx.geometry.Point2D;
 
 import java.util.List;
 
-// Interface for class running the game itself.
-// Does not include the gameLoop, which should be handled by a controller.
 public interface IGame extends AbilityActionEventHandler, IUpdatable {
     // Activate player ability
     boolean activatePlayerAbility(int index);
