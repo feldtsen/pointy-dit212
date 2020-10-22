@@ -105,7 +105,7 @@ The `Ability` in the domain model creates 0..* projectiles. In the design model,
 
 The application makes use of JSON to handle level data. The level files contain JSON objects pertaining to the information of the level and its entities, i.e. their type (player, enemy, obstacle), variants (e.g. type of enemy) as well as instance variables not handled by the factory. Levels are loaded through the class `LevelLoader` which parses the JSON file corresponding to a certain level ID, creates an object of type `Level`, and returns this object to be used by the `Game` class. Each level is contained within a separate file and is only loaded when needed to save memory resources. The parsing is done using the GSON library. 
 
-Top scores for each level are saved in a text file.   
+Top scores for each level are saved in a text file which is handled by class `HighscoreHandler`. 
 
 
 ## 5. Quality
