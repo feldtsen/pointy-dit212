@@ -505,20 +505,20 @@ Displayed when the game is launched.
 #### AbilityActionEvent
 Event which is sent when an ability action is activated or finished.
 
-### AbilityAcitonHandler
+#### AbilityAcitonHandler
 The event handler for ability action events.
 
-### AbilityActionEventListener
+#### AbilityActionEventListener
 Event listener for ability action events.
 
-### IAbilityActionEvent
+#### IAbilityActionEvent
 Simple abstraction for ability action events.
 
 ## gameLoop (package)
-### gameLoop
+#### gameLoop
 Calls an update method each loop iteration at a desired fps.
 
-### IGameLoop
+#### IGameLoop
 Simple abstraction for game loops.
 
 ## Action
@@ -534,6 +534,18 @@ Handles keyboard input from the user and ties different keyboard presses to a sp
 Handles mouse input from the user and ties different mouse actions to specific method calls.
 
 # model (package)
+#### Game
+Root model class. Implementation of IGame. Used to run the actual gameplay.
+
+#### IGame
+Interface the root model class. Defines functions that influence the gameplay, typically used by controllers.
+
+#### IPositionable
+Interface for any object with a position.
+
+#### IUpdatable
+Interface for any object which should be updated each frame. 
+
 ## ability (package)
 ### action (package)
 #### AbilityAction
@@ -542,36 +554,35 @@ Abstract implementation of ability action interface.
 #### IAbilityAction
 An abstraction for defining which actions should be performed on a level when an ability is applied.
 
-
-### Ability
+#### Ability
 Abstract implementation of the ability interface. This simplifies creating new abilities by implementing the cooldown functionality used by all abilities.
 
-### IAbility
+#### IAbility
 An ability is something that influences the game environment (level) in some way.
 
-### Dash
+#### Dash
 The ability for "dashing" forwards with a high speed in the direction in which the user is moving.
 
-### Reflect
+#### Reflect
 The ability used to reflect projectiles. Reflected projectiles can kill enemies.
 
-### Shockwave
+#### Shockwave
 The ability used to push all nearby entities (excluding projectiles and obstacles) away.
 
-### Shock
+#### Shock
 Abstract helper ability for shooting different kinds of projectiles.
 
-### ShootBullet
+#### ShootBullet
 The ability for shooting bullets.
 
-### ShootMissile
+#### ShootMissile
 The ability used to shoot missiles.
 
 ## Audio (package)
-### AudioHandler
+#### AudioHandler
 Class for handling music and sound effects.
 
-### IAudioHandler
+#### IAudioHandler
 An abstraction of an audio handler.
 
 ## behavior (package)
@@ -595,27 +606,37 @@ An abstraction for defining how a movable entity moves.
 #### SeekingBehavior
 Movement behavior for entities that move straight towards the target entity.
 
-### IBehavior
+#### IBehavior
 Conceptual marker interface. Marks anything considered to be an ability.
 
 ## entity (package)
-### Enemy
+#### Entity
+Abstract entity implementation that simplifies the creation of new entities.
+
+#### IEntity
+Abstraction for all entities in the game. An entity might be the player, an enemy, a projectile, or an obstacle.
+
+### IStrength
+Any object with a strength (damage/hit points). 
+
+### enemy (package)
+#### Enemy
 A hostile entity that typically targets the player.
 
-### IEnemy
+#### IEnemy
 An abstraction of a hostile entity on the map.
 
-## movable (package)
-### ILiving
+### movable (package)
+#### ILiving
 Abstraction for an entity that is "alive" and hence can be killed.
 
-### IMovable
+#### IMovable
 Abstraction for an object which can move using physics-based on acceleration, velocity, and position.
 
-### LivingEntity
+#### LivingEntity
 Abstract class for living entities that might be (temporarily or permanently) invulnerable. 
 
-### MovableEntity
+#### MovableEntity
 Abstract implementation of an IMovable entity. Lots of game physics is implemented here.
 
 ### obstacle (package)
@@ -651,96 +672,77 @@ A projectile that steers towards its target, typically the player.
 #### Projectile
 Abstract projectile implementation.
 
-### Entity
-Abstract entity implementation that simplifies the creation of new entities.
-
-### IEntity
-Abstraction for all entities in the game. An entity might be the player, an enemy, a projectile, or an obstacle.
-
-### IStrength
-Any object with a strength (damage/hit points). 
-
 ## level (package)
-### ILevel
+#### ILevel
 Abstraction for a class representing a single level/stage of the game.
 
-### Level
+#### Level
 Level implementation, used by the game.
 
 ## score (package)
-### HighscoreHandler
+#### HighscoreHandler
 Implementation of an IHighscoreHandler. Implements functionality for writing and reading scores to/from a file.
 
-### IHighscoreHandler
+#### IHighscoreHandler
 Writes and reads high scores to/from a file.
 
 ## shape2d (package)
-### Circle
+#### Circle
 Simple circle shape.
 
-### ICircle
+#### ICircle
 Circle abstraction.
 
-### IRectangle
+#### IRectangle
 Rectangle abstraction.
 
-### IShape2D
+#### IShape2D
 Interface for simple shapes. 
 
-### ITriangle
+#### ITriangle
 Triangle abstraction.
 
-### Rectangle
+#### Rectangle
 Rectangle shape.
 
-### Triangle
+#### Triangle
 Triangle shape.
 
-## Game
-Root model class. Implementation of IGame. Used to run the actual gameplay.
 
-## IGame
-Interface the root model class. Defines functions that influence the gameplay, typically used by controllers.
-
-## IPositionable
-Interface for any object with a position.
-
-## IUpdatable
-Interface for any object which should be updated each frame. 
 
 # Services
-## EntityFactory
+#### EntityFactory
 Responsible for creating Entities of different sorts using methods
 with only a few inputs.
 
-## LevelLoader
+#### LevelLoader
 Loads levels according to the information stored in JSON-files.
 Acts as an iterator of levels for the Game.
 
-## ILevelLoader
+#### ILevelLoader
 An interface used by LevelLoader. Implements Iterator to allow for
 iteration over ILevel objects when changing levels.
 
-# Utils
-## Shapes
+# Util
+#### Shapes
 Has methods for working with shapes. Implements the collision
 checking algorithm used by the rest of the game for detecting
 and handling collisions between entities.
 
-## Timer
+#### Timer
 Used for keeping track of how much time has been spent on a level.
 
-## Utils
+#### Utils
 Methods for manipulating vectors, and some additional helper methods.
 
 # view (package)
-## IShapeVisitor
+#### IShapeVisitor
 Interface for implementing visitor patterns for shapes.
 
-## IVisitableShape
+#### IVisitableShape
 Interface for implementing visitor patterns for shapes.
 
-## ViewResourceLoader
+#### ViewResourceLoader
 Loads view resources and define view-specific values.
 
 ## pages (package)
