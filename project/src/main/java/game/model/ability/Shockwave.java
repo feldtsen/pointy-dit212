@@ -1,5 +1,9 @@
 /*
  * Authors: Anton Hildingsson, Mattias Oom, Simon Genne, Joachim Pedersen
+ *
+ * Ability for pushing any nearby enemy away. Projectiles and obstacles
+ * are not affected by the shockwave. Entities are pushed in the direciton
+ * of the vector which points from the user, towards the affected entity.
  */
 
 package game.model.ability;
@@ -15,7 +19,6 @@ import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-// Ability for pushing any nearby enemy away
 public class Shockwave extends Ability{
     // Radius of ability, entities outside radius will not be affected
     private final double radius;

@@ -1,5 +1,15 @@
 /*
  * Authors: Anton Hildingsson, Joachim Pedersen
+ *
+ * Handles keyboard input from the user. Actions are registered using
+ * the different register methods, and these actions are called whenever a key event 
+ * occurs, or when the update method is called, depeneding on the type of action registered.
+ *
+ * Held actions are actions which are executed each time the applyHeldRegisteredActions method
+ * is called, if the correct key is pressed.
+ *
+ * Pressed actions are only executed on keypress
+ * 
  */
 
 package game.controller;
@@ -10,8 +20,6 @@ import javafx.scene.input.KeyCode;
 import java.util.*;
 import java.util.concurrent.ConcurrentSkipListSet;
 
-// This is a singleton class which handles keyboard input from the user.
-// The class needs to be instantiated with the init method before any other methods are called.
 public  class KeyboardInputController {
     // Set containing all the currently pressed keys.
     private final Set<KeyCode> pressedKeys;

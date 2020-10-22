@@ -1,5 +1,15 @@
 /*
  * Authors: Erik Magnusson, Anton Hildingsson, Mattias Oom
+ *
+ * An ability which causes the user to "dash" forward in the direction it 
+ * is moving (or facing, if the entity is not moving). This ability is used
+ * heavily during game play. 
+ *
+ * The ability causes the user of the ability to move very quickly in 
+ * the direction it is currently moving. 
+ *
+ * If the user is not moving, the dash direction will be in the facing
+ * direction of the user.
  */
 
 package game.model.ability;
@@ -13,7 +23,6 @@ import game.model.level.ILevel;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 
-// An ability which causes the user to "dash" forward in the direction it is moving (or facing, if the entity is not moving)
 public class Dash extends Ability {
     // The length of the dash. A bit arbitrary, since this depends on the duration
     private final double length;
