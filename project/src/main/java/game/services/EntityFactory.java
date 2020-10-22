@@ -1,5 +1,10 @@
 /*
  * Authors: Erik Magnusson, Simon Genne, Joachim Pedersen, Mattias Oom, Anton Hildingsson
+ *
+ * Responsible for creating Entities of different sorts using methods with only a few inputs.
+ * Methods take the coordinates of the entity to be created and other arguments for the characteristics
+ * of the entity. To allow for different enemies to be created, some of these methods take difficulties that will
+ * affect some behaviours of the created enemy.
  */
 
 package game.services;
