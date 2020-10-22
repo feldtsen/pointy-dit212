@@ -8,22 +8,19 @@ public class HighscorePanel extends VBox {
 
     public HighscorePanel () {
         this.getStyleClass().add("highscorePanel");
-        createScoreEntry(1, 20.221);
-        createScoreEntry(2, 2.221);
-        createScoreEntry(3, 20.3122);
 
         this.mouseTransparentProperty().setValue(true);
         this.setVisible(false);
     }
 
-    public void createScoreEntry (int levelNr, double time) {
+    public void createScoreEntry (String level, double time) {
         HBox entryContainer = new HBox();
 
-        Label level = new Label(String.format("%d: ", levelNr));
+        Label lvl = new Label(level + ": ");
         Label score = new Label(String.format("%.1f", time));
 
         entryContainer.getChildren().addAll(
-                level,
+                lvl,
                 score
         );
 
