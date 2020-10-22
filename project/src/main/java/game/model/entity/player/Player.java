@@ -101,14 +101,14 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
         if (mousePosition == null) return;
 
         // Scale the mouse position to respect the scaling of the window
-        Point2D newMousePosition = new Point2D(
+        Point2D scaledMousePosition = new Point2D(
                 Utils.map(mousePosition.getX(), 0, windowWidth, 0, ViewResourceLoader.INITIAL_WIDTH),
                 Utils.map(mousePosition.getY(), 0, windowHeight, 0, ViewResourceLoader.INITIAL_HEIGHT)
         );
 
 
         // Calculate the new facing direction.
-        this.facingDirection = newMousePosition.subtract(getPosition());
+        this.facingDirection = scaledMousePosition.subtract(getPosition());
 
         // Calculate angle which represents the facing direction in radians
         double angle = Utils.heading(facingDirection);
