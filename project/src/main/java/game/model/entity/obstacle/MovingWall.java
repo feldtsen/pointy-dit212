@@ -1,5 +1,10 @@
 /*
  * Authors: Erik Magnusson, Anton Hildingsson, Simon Genne
+ *
+ * An obstacle which moves in a fixed trajectory around the level.
+ * The obstacle will move from the starting position to the end position, switching directions thereafter.
+ * Speed vector is calculated from the distance between the two positions' x and y coordinates.
+ * Velocity is normalized to maxSpeed using Util limit.
  */
 
 package game.model.entity.obstacle;
@@ -11,10 +16,6 @@ import game.util.Utils;
 import javafx.geometry.Point2D;
 
 
-//An obstacle which moves in a fixed trajectory around the level.
-//The obstacle will move from the starting position to the end position, switching directions thereafter.
-//Speed vector is calculated from the distance between the two positions' x and y coordinates.
-//Velocity is normalized to maxSpeed using Util limit.
 public class MovingWall extends MovableEntity<Rectangle> implements IObstacle {
     // The start position of the moving wall. The moving wall will then move towards the end position, and back again
     private final Point2D startPosition;

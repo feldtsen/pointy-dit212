@@ -1,5 +1,9 @@
 /*
  * Authors: Anton Hildingsson, Joachim Pedersen, Simon Genne, Mattias Oom, Erik Magnusson
+ *
+ * Top level controller which initializes the model and the view and starts the game.
+ * The game window controller creates a model instance, a game loop, a renderer and a main window, as
+ * well as different input controllers, and ties all these components together.
  */
 
 package game.controller;
@@ -19,7 +23,6 @@ import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 
-// Top level controller which initializes the model and the view and starts the game.
 public class GameWindowController {
     // Game loop which is responsible for updating model
     private final IGameLoop gameLoop;
@@ -97,9 +100,9 @@ public class GameWindowController {
                     checkHighscore(game.getTime());
 
                     game.nextLevel();
-                    if (!game.isGameWin()) {
-                        handleGameState("LEVEL COMPLETE", "\nScore: " + game.getTime() + "\n\nPress R to continue.");
-                    }
+
+                    handleGameState("LEVEL COMPLETE", "\nScore: " + game.getTime() + "\n\nPress R to continue.");
+
                 }
 
                 // Set facing direction of player

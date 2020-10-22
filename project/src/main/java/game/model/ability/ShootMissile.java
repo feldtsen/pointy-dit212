@@ -1,5 +1,8 @@
 /*
  * Authors: Anton Hildingsson, Simon Genne, Joachim Pedersen
+ *
+ * Ability for shooting missiles. This ability is typically used by enemies,
+ * with the player as target.
  */
 
 package game.model.ability;
@@ -10,7 +13,6 @@ import game.model.entity.projectile.IProjectile;
 import game.model.entity.projectile.Missile;
 import javafx.geometry.Point2D;
 
-// Ability for shooting missiles
 public class ShootMissile extends Shoot {
     // Width of missile
     private final double width;

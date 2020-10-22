@@ -1,5 +1,12 @@
 /*
  * Authors: Anton Hildingsson, Joachim Pedersen 
+ *
+ * Handles mouse input from the user. Different actions can
+ * be registered to be executed on mouse move, left click or right click.
+ *
+ * The mouse position value is contiuously updated when the mouse
+ * position changes.
+ *
  */
 
 package game.controller;
@@ -10,8 +17,6 @@ import javafx.scene.Node;
 import java.util.ArrayList;
 import java.util.List;
 
-// Singleton class for handling mouse events.
-// This class needs to be instantiated by calling init before calling any other methods.
 public class MouseInputController {
     private Point2D mousePosition;
 

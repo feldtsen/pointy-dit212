@@ -1,5 +1,8 @@
 /*
  * Authors: Simon Genne, Mattias Oom, Anton Hildingsson, Joachim Pedersen, Erik Magnusson
+ *
+ * Missiles are a homing projectile which steers towards its target. The projectiles
+ * use a movement behavior which should cause the missile to move towards the target.
  */
 
 package game.model.entity.projectile;
@@ -10,7 +13,6 @@ import game.model.shape2d.ITriangle;
 import game.model.shape2d.Triangle;
 import javafx.geometry.Point2D;
 
-// Missiles are a homing projectile which steers towards its target.
 public class Missile extends Projectile<ITriangle> {
     // The target of the missile
     private IEntity<?> target;

@@ -1,5 +1,10 @@
 /*
  * Authors: Anton Hildingsson, Mattias Oom, Simon Genne, Erik Magnusson, Joachim Pedersen
+ *
+ * A movable entity is any entity with a velocity and acceleration, that is, any entity affected 
+ * by game physics. Movable entities are updated each time the update method is called. Between
+ * two update calls, the fields of the movable entity are typically not changed. However, certain
+ * abiliy actions affect these values directly. 
  */
 
 package game.model.entity.movable;
@@ -9,7 +14,6 @@ import game.model.shape2d.IShape2D;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 
-// A movable entity is any entity with a velocity and acceleration, that is, any entity affected by game physics
 public abstract class MovableEntity<T extends IShape2D> extends Entity<T> implements IMovable<T> {
     // Max force is the maximum acceleration which can be applied to the movable entity (using the addForce method)
     private final double maxForce;

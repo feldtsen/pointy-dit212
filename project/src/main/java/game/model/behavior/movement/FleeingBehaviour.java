@@ -1,5 +1,11 @@
 /*
  * Authors: Simon Genne, Anton Hildingsson
+ *
+ * A behavior for defining entities which moves away from its target if the target comes too close.
+ * The entity will move towards the target if the target is too far way, and move sideways if
+ * the target is between the closest and furthest distance. 
+ *
+ * I.e, entities using this behavior will try to keep a certain distance to the target entity.
  */
 
 package game.model.behavior.movement;
@@ -10,7 +16,6 @@ import javafx.geometry.Point2D;
 
 import java.util.Random;
 
-// A behavior for defining entities which moves away from its target if the target comes too close
 public class FleeingBehaviour implements IMovementBehaviour {
     // The closest distance that the subject wants to be from the object.
     private final double closestDistance;

@@ -1,5 +1,12 @@
 /*
  * Authors: Mattias Oom, Anton Hildingsson, Erik Magnusson, Simon Genne, Joachim Pedersen
+ *
+ * An enemy is a hostile entity which typically targets the player. Enemies move automatically 
+ * using a movement behavior and uses different abilities defined by an ability behavior. 
+ *
+ * During normal use, the strength of an enemy will exceed that of a player, which means
+ * the enemy can kill the player on touch, while the player needs to interact with the level
+ * (for example by reflecting a projectile) to kill the enemy. 
  */
 
 package game.model.entity.enemy;

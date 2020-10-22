@@ -1,5 +1,7 @@
 /*
  * Authors: Joachim Pedersen, Mattias Oom, Anton Hildingsson
+ *
+ * Root application class. Used by javaFX to start the application.
  */
 
 package game;
@@ -34,7 +36,6 @@ public class App extends Application {
         primaryStage.setX(screenWidth / 2 - ViewResourceLoader.INITIAL_WIDTH / 2);
         primaryStage.setY(screenHeight / 2 - ViewResourceLoader.INITIAL_HEIGHT / 2);
 
-        //TODO: is there a better way?
         GameWindowController gameWindowController = new GameWindowController();
 
         // Load game window

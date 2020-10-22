@@ -35,5 +35,8 @@ Slack (internal communication):
 * https://join.slack.com/t/pointy-dit212/shared_invite/zt-h621a081-F2Fco67GP6jt~zsK6zGgew
 
 Design model (live document, continuously updated):
-https://app.lucidchart.com/lucidchart/4a9f77ed-1032-4afe-aa50-b162c2b9fbcb/edit?page=sKHtDXfCDpsw#?folder_id=home&browser=icon
+* https://app.lucidchart.com/lucidchart/4a9f77ed-1032-4afe-aa50-b162c2b9fbcb/edit?page=sKHtDXfCDpsw#?folder_id=home&browser=icon
+
+Package Diagram (live document, continuously updated):
+* https://app.lucidchart.com/lucidchart/68fc70ff-cf8c-4eb6-91fe-10918630ace5/edit?page=0_0#?folder_id=home&browser=icon
 

@@ -1,5 +1,10 @@
 /*
  * Authors: Joachim Pedersen
+ *
+ * Menu with a start, level, score and exit button.
+ * A UI element which is displayed for the user when the application is started.
+ * This element interacts with the game window controller, which in turns controls
+ * model actions.
  */
 
 package game.view.pages.menu;
@@ -15,6 +20,7 @@ public class StartMenu extends HBox {
     private final static String MENU_BUTTON_CLASS = "menuButton";
 
     public StartMenu(GameWindowController gameWindowController) {
+        // Create buttons
         StartButton startButton = new StartButton("START");
         LevelButton levelButton = new LevelButton("LEVEL");
         ScoreButton scoreButton = new ScoreButton("SCORE");

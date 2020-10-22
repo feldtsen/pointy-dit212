@@ -1,5 +1,7 @@
 /*
  * Authors: Erik Magnusson, Anton Hildingsson, Mattias Oom, Joachim Pedersen
+ *
+ * Loads levels according to information stored in JSON-files. Acts as an iterator of levels for Game.
  */
 
 package game.services;
@@ -73,7 +75,7 @@ public class LevelLoader implements ILevelLoader {
     }
 
     @Override
-    public ILevel getSelectedLevel(int levelNr) {
+    public ILevel getLevel(int levelNr) {
         this.levelNr = levelNr;
         return getLevel();
     }

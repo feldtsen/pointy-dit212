@@ -1,5 +1,7 @@
 /*
  * Authors: Simon Genne, Anton Hildingsson, Erik Magnusson, Mattias Oom
+ *
+ * Basic obstacle which entities can collide with and use for cover.
  */
 
 package game.model.entity.obstacle;
@@ -8,7 +10,6 @@ import game.model.entity.movable.IMovable;
 import game.model.shape2d.Rectangle;
 import javafx.geometry.Point2D;
 
-//Basic obstacle which entities can collide with and use for cover.
 public class Wall extends Entity<Rectangle> implements IObstacle{
 
     // A wall is always a rectangle

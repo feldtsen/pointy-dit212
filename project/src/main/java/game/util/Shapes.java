@@ -1,5 +1,8 @@
 /*
  * Authors: Simon Genne, Anton Hildingsson
+ *
+ * Has methods for working with shapes. Implements the collision checking algorithm used by the rest of the game for
+ * detecting and handling collisions between entities.
  */
 
 package game.util;

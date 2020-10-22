@@ -1,5 +1,7 @@
 /*
  * Authors: Anton Hildingsson, Simon Genne, Joachim Pedersen
+ *
+ * Provides methods for manipulating vectors.
  */
 
 package game.util;

@@ -1,5 +1,10 @@
 /*
  * Authors: Erik Magnusson, Simon Genne, Mattias Oom, Anton Hildingsson
+ *
+ * IMovable is an interface for physics operations, to be applied on the 
+ * object which implements the interface. IMovables have an acceleration,
+ * velocity and position, as well as max (and sometimes min) values for 
+ * these properties.
  */
 
 package game.model.entity.movable;
@@ -9,7 +14,6 @@ import game.model.entity.IEntity;
 import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;
 
-// IMovable is an interface for physics operations, to be applied on the object which implements the interface.
 public interface IMovable<T extends IShape2D> extends IUpdatable, IEntity<T> {
     // Offsets the object by set amount.
     void move(Point2D offset);

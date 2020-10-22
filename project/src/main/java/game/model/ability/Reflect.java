@@ -1,5 +1,10 @@
 /*
  * Authors: Anton Hildingsson, Mattias Oom
+ * 
+ * Ability for reflecting projectiles. This ability is
+ * typically used by the player. When a projectile is reflected
+ * its strenght will increase. This is often used to make sure
+ * reflected projectiles can hurt enemies.
  */
 
 package game.model.ability;
@@ -12,7 +17,6 @@ import game.model.level.ILevel;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 
-// Ability for reflecting projectiles
 public class Reflect extends Ability {
     // Max/min angle of affected projectiles, relative to user
     private final double angle;

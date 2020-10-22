@@ -1,11 +1,12 @@
 /*
  * Authors: Anton Hildingsson, Mattias Oom, Joachim Pedersen
+ *
+ * A simple game loop abstraction. The loop will call update
+ * after it has been started, and if it is not paused.
  */
 
 package game.controller.gameLoop;
 
-// A simple game loop implementation. The loop will call update
-// after it has been started, and if it is not paused.
 public interface IGameLoop {
     // True if the game loop is currently running
     boolean isRunning();

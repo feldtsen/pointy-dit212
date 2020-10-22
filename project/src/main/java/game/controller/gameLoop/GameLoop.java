@@ -1,5 +1,12 @@
 /*
  * Authors: Anton Hildingsson, Mattias Oom, Joachim Pedersen
+ *
+ * A game loop implementation. The loop will strive towards achieving the desiredFPS,
+ * however the actual FPS might be lower if the desired fps is set to be too high.
+ * After the loop is started, the update method will be called each loop iteration.
+ *
+ * This code is abstracted away to ensure the model code does not have to implement it. 
+ * Model code could extend this class or (even better) let a controller handle the game loop.
  */
 
 package game.controller.gameLoop;
@@ -9,9 +16,6 @@ import javafx.animation.AnimationTimer;
 
 import java.util.concurrent.TimeUnit;
 
-// A game loop implementation. This code is abstracted away
-// to ensure the model code does not have to implement it. Model code could extend this class,
-// or (even better) let a controller handle the game loop.
 public abstract class GameLoop implements IGameLoop {
     // A second in nanoseconds. This value is used for various calculations, for example when
     // converting between seconds and nanoseconds.

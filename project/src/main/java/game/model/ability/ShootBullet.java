@@ -1,5 +1,8 @@
 /*
  * Authors: Simon Genne, Anton Hildingsson, Mattias Oom
+ *
+ * Ability for shooting bullets. This ability is typically used
+ * by enemies with the player as the target. 
  */
 
 package game.model.ability;
@@ -11,7 +14,6 @@ import game.util.Utils;
 import javafx.geometry.Point2D;
 
 
-// Ability for shooting bullets
 public class ShootBullet extends Shoot {
     // The radius of the bullet
     private final double bulletRadius;

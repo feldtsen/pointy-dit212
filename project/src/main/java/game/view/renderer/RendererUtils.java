@@ -1,5 +1,8 @@
 /*
  * Authors: Joachim Pedersen, Mattias Oom, Anton Hildingsson
+ *
+ * Utils class for drawing to the screen. Used to add a layer of abstraction
+ * between the view and javFX.
  */
 package game.view.renderer;
 
@@ -13,6 +16,7 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.shape.ArcType;
 
 public class RendererUtils {
+    // Helper class for defining an object with coordinates and dimensions
     private static class Quartet {
         public double x;
         public double y;
@@ -115,6 +119,7 @@ public class RendererUtils {
 
     private static final double[] xs = new double[3];
     private static final double[] ys = new double[3];
+
     public static void drawTriangle(GraphicsContext graphicsContext, Color color, ITriangle shape, Point2D position) {
         Quartet scaled = scaleDrawData(graphicsContext, position.getX(), position.getY(), shape.getWidth(), shape.getHeight());
 

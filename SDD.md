@@ -112,7 +112,7 @@ Top scores for each level are saved in a text file which is handled by class `Hi
 
 The application is tested using unit tests with the framework JUnit. These tests can be found under project/src/main/test. 
 
-The project is also integrated with Travis (https://travis-ci.org/), to automatically run all tests when doing pull requests to ensure nothing merged to master causes tests to fail. 
+Continuous Integration is done using Travis to automatically run tests when doing pull requests to ensure nothing merged to master causes tests to fail. 
 
 Link to Travis for our project: https://travis-ci.com/github/feldtsen/pointy-dit212
 
@@ -120,5 +120,6 @@ The game has also been thoroughly game tested by playing the different levels an
 
 ## 6. References
 - JavaFX - https://openjfx.io/
-- JUnit - https://junit.org/
-- Maven - https://maven.apache.org/
+- JUnit  - https://junit.org/
+- Maven  - https://maven.apache.org/
+- Travis - https://travis-ci.com

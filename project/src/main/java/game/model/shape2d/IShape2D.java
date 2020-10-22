@@ -1,5 +1,10 @@
 /*
  * Authors: Simon Genne, Mattias Oom, Joachim Pederson, Anton Hildingsson
+ *
+ * Interface for defining simple shapes. Each shape has an getAxes method
+ * which is used for checking collision. The same can be said for the projection and
+ * getPoints methods. Many methods are required for trating any shape the same
+ * way in the model code.
  */
 
 package game.model.shape2d;
@@ -8,7 +13,6 @@ import game.view.IVisitableShape;
 import javafx.geometry.Point2D;
 import java.util.List;
 
-// Interface for defining simple shapes
 public interface IShape2D extends IVisitableShape {
 
     /* Returns a list of normalized vectors (axes) to be used when checking for collisions.

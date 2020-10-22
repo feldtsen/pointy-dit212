@@ -1,5 +1,9 @@
 /*
  * Authors: Joachim Pedersen, Simon Genne, Erik Magnusson
+ *
+ * The main window of the game. Sets up a window, a canvas, and
+ * various UI elements.
+ *
  */
 
 package game.view.pages;
@@ -22,15 +26,27 @@ public class MainWindow extends StackPane {
     private static final String MAIN_WINDOW_CSS = "mainWindow";
     private static final String GAME_TITLE = "J E R K  E V E R T";
 
-    GameCanvas gameCanvas;
-    StartMenu startMenu;
-    ScorePanel scorePanel;
-    AbilityBar abilityBar;
-    Label gameTitle;
-    GameStatePanel gameStatePanel;
+    // The canvas which is used to draw shapes and effects to the screen
+    private final GameCanvas gameCanvas;
 
-    HighscorePanel highscorePanel;
-    LevelPanel levelPanel;
+    // The UI start menu which the user interacts with
+    private final StartMenu startMenu;
+
+    // A panel displaying the current store
+    private final ScorePanel scorePanel;
+
+    // The ability cooldown indicators
+    private final AbilityBar abilityBar;
+
+    // The title of the game
+    private final Label gameTitle;
+
+    // A panel for displaying the current state of the game
+    private GameStatePanel gameStatePanel;
+
+    private final HighscorePanel highscorePanel;
+
+    private final LevelPanel levelPanel;
 
     public MainWindow(GameWindowController gameWindowController) {
         gameCanvas = new GameCanvas();
@@ -128,11 +144,14 @@ public class MainWindow extends StackPane {
     public void addLevelButton(Button load) {
         levelPanel.createEntry(load);
     }
+
+    // Sets menus to visible
     public void showMenu() {
         startMenu.setVisible(true);
         gameTitle.setVisible(true);
     }
 
+    // Hides menus
     public void hideMenu() {
         highscorePanel.setVisible(false);
         levelPanel.setVisible(false);
@@ -144,6 +163,7 @@ public class MainWindow extends StackPane {
         if (!highscorePanel.isVisible() && !levelPanel.isVisible()) gameTitle.setVisible(true);
     }
 
+    // Changes the game state
     public void setGameState(String gameStateMessage, String gameStateInstructions) {
         this.gameStatePanel = new GameStatePanel(gameStateMessage, gameStateInstructions);
         windowSetup();
@@ -166,6 +186,7 @@ public class MainWindow extends StackPane {
         scorePanel.setVisible(true);
     }
 
+    // Hides UI elements
     public void hideUI() {
         abilityBar.setVisible(false);
         scorePanel.setVisible(false);

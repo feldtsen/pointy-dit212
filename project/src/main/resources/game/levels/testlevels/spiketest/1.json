@@ -1,28 +1,45 @@
 {
   "Player": {
-    "x": "50",
-    "y": "300"
+    "x": "250",
+    "y": "100"
   },
   "Enemies": [
     {
-      "type": "basic",
-      "x": "1000",
-      "y": "300",
+      "type": "bullet",
+      "x": "250",
+      "y": "500",
       "target": "player",
-      "difficulty" : "1",
-      "spikeimmune": "false"
+      "difficulty" : "3",
+      "spikeimmune": "true"
     }
   ],
   "Obstacles": [
     {
       "type": "spikes",
       "x1": "600",
-      "y1": "100",
+      "y1": "337",
       "x2": "0",
       "y2": "0",
       "width": "100",
-      "height": "100"
+      "height": "700"
+    },
+    {
+      "type": "moving",
+      "x1": "25",
+      "y1": "337",
+      "x2": "525",
+      "y2": "337",
+      "width": "50",
+      "height": "700"
+    },
+    {
+      "type": "moving",
+      "x1": "675",
+      "y1": "337",
+      "x2": "1175",
+      "y2": "337",
+      "width": "50",
+      "height": "700"
     }
-
   ]
 }

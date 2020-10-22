@@ -1,5 +1,9 @@
 /*
  * Authors: Joachim Pedersen, Mattias Oom, Anton Hildingsson, Erik Magnusson, Simon Genne
+ *
+ * The renderer handles drawing to a GraphicsContext which is supplied by the GameCanvas.
+ * This is the core view class which does all view-related interaction with javaFX through
+ * a RenderUtils class. This is done to facilitate the changing of graphics library, if necessary.
  */
 
 package game.view.renderer;
@@ -38,9 +42,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Renderer implements IRenderer, IShapeVisitor, IAbilityActionEventListener {
+    // Class for defining a effect which is displayed when certain ability actions are activated
     public abstract static class Effect {
+        // The duration of the effect
         private final double effectDuration;
 
+        // Render method, called as long as the effect is active
         abstract void render(IAbilityAction action, double time);
 
         public Effect(double effectDuration) {
@@ -83,31 +90,41 @@ public class Renderer implements IRenderer, IShapeVisitor, IAbilityActionEventLi
         colors.put(Spikes.class,          Color.rgb(135, 72, 70));
         colors.put(GraphicsContext.class, Color.rgb(52, 61, 70));
 
+        // Initialize different ability actions with effects
         abilityEffects.put(Dash.DashAction.class,           createDashEffect());
         abilityEffects.put(Shockwave.ShockwaveAction.class, createShockwaveEffect());
         abilityEffects.put(Reflect.ReflectAction.class,     createReflectEffect());
     }
 
+    // No effect for dash
     private Effect createDashEffect() {
         return new Effect(0) {
             @Override
             void render(IAbilityAction action, double time) {
-
             }
         };
-
-        //TODO
     }
 
+    // effect for reflect
     private Effect createReflectEffect(){
      return new Effect(0.2) {
+         // The radius of the effect
          final double radius = 1000;
          @Override
          void render(IAbilityAction action, double time) {
+             // The position of the user
              Point2D position = action.getUser().getPosition();
+
+             // The shape used to draw the effect
              ICircle circle = new Circle(radius * time);
+
+             // Rotation of circle
              circle.setRotation(action.getUser().getShape().getRotation() + (3 * Math.PI)/4);
+
+             // Stops is used to define a gradient effect
              Stop[] stops = new Stop[]{new Stop(0, Color.TRANSPARENT), new Stop(1, colors.get(action.getUser().getClass()))};
+
+             // Gradient effect used to draw effect
              LinearGradient linearGradient = new LinearGradient(
                      0,
                      .1,
@@ -117,20 +134,24 @@ public class Renderer implements IRenderer, IShapeVisitor, IAbilityActionEventLi
                      CycleMethod.NO_CYCLE,
                      stops
              );
+             // Draw arc using gradient
              RendererUtils.drawArc(graphicsContext, linearGradient, circle, position, Math.PI/2);
          }
      };
     }
 
 
+    // Chockwave effect
     private Effect createShockwaveEffect() {
-        double radius = 1000; //TODO how to get radius?
-
         return new Effect(0.2) {
+            final double radius = 1000;
             @Override
             void render(IAbilityAction action, double time) {
+                // Position of user
                 Point2D position = action.getUser().getPosition();
+                // Circle shape used to  draw effect
                 ICircle circle = new Circle(radius * time);
+                // Draws a ring
                 RendererUtils.drawRing(graphicsContext, colors.get(action.getUser().getClass()), circle, position);
             }
         };
@@ -197,41 +218,54 @@ public class Renderer implements IRenderer, IShapeVisitor, IAbilityActionEventLi
         graphicsContext.restore();
     }
 
+    // Renders abilities to the screen
     public void drawAbilities() {
+        // loop backwards to enable deleting ability effects while iterating
         for(int i = abilityActions.size() - 1; i >= 0; i--) {
             IAbilityAction action = abilityActions.get(i);
+
+            // Calculate the time passed
             double time = (double)(System.nanoTime() - activationTimes.get(i)) / GameLoop.SECOND;
             Effect effect = abilityEffects.get(action.getClass());
             if(effect == null) continue;
 
+            // Remove effect if duration has passed
             if(time > effect.getEffectDuration()){
                 abilityActions.remove(i);
                 activationTimes.remove(i);
                 continue;
             }
+
+            // Render
             effect.render(action, time);
         }
     }
 
+    // Method called when the model creates an AbilityActionEvent.
     @Override
     public void onAction(IAbilityActionEvent event) {
+        // If the ability action is activated and if the there is an effect defined for the action, continue
         if (event.getType() == IAbilityActionEvent.Type.ACTIVATED && abilityEffects.containsKey(event.getAction().getClass())){
+            // Add to actions list and set activation time
             abilityActions.add(event.getAction());
             activationTimes.add(System.nanoTime());
         }
     }
 
+    // Clear all ability effects
     @Override
     public void clearAbilities() {
         abilityActions.clear();
         activationTimes.clear();
     }
 
+    // Clear entire canvas
     @Override
     public void clearCanvas() {
         RendererUtils.clear(graphicsContext);
     }
 
+    // Visitor pattern implementations below, used to draw different shapes to the screen
     @Override
     public void visit(ICircle circle) {
         RendererUtils.drawCircle(graphicsContext,
@@ -251,6 +285,7 @@ public class Renderer implements IRenderer, IShapeVisitor, IAbilityActionEventLi
         RendererUtils.drawTriangle(graphicsContext, colors.get(entity.getClass()), triangle, entity.getPosition());
     }
 
+    // Sets rotation of an entity
     private void setRotation(Point2D velocity) {
        entity.getShape().setRotation(Utils.heading(velocity));
     }

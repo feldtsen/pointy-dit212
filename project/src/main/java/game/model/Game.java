@@ -1,5 +1,12 @@
 /*
  * Authors: Anton Hildingsson, Erik Magnusson, Simon Genne, Mattias Oom, Joachim Pedersen
+ *
+ * Implementation of game interface. This is the core of the model, binding all the model 
+ * parts together. 
+ *
+ * The update method in game updates all entities, checks and handles collision, removes
+ * dead entities, and so on. The game class requires the update method to be called each
+ * frame. 
  */
 
 package game.model;
@@ -26,8 +33,6 @@ import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-// Implementation of game interface.
-// This is the core of the model, binding all the model parts together.
 public class Game implements IGame {
     // True if the player has lost the game.
     private boolean gameOver;
@@ -91,7 +96,7 @@ public class Game implements IGame {
 
     @Override
     public void changeLevel(int level) {
-        setLevel(levelLoader.getSelectedLevel(level));
+        setLevel(levelLoader.getLevel(level));
     }
 
     @Override

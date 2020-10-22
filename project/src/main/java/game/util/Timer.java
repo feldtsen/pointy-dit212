@@ -1,5 +1,7 @@
 /*
-Author: Mattias Oom, Joachim Ørfeldt Pedersen
+ * Author: Mattias Oom, Joachim Ørfeldt Pedersen
+ *
+ * Used for keeping track of how much time has been spent in a level.
  */
 package game.util;
 
