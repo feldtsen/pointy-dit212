@@ -1,5 +1,8 @@
 /*
  * Authors: Simon Genne, Joachim Pedersen, Erik Magnusson
+ *
+ * Displays the current score (time) of the player. This value
+ * is updated continuously during gameplay.
  */
 
 package game.view.pages.score;

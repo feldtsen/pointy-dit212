@@ -1,5 +1,8 @@
 /*
  * Authors: Joachim Pedersen
+ *
+ * Holder of a single ability cooldown indicator. UI element used by the player
+ * to determine if they can use an ability or not.
  */
 
 package game.view.pages.abilityBar;
@@ -10,11 +13,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class AbilityHolder extends VBox {
+    // Cooldown timer (label for viewing the number of seconds left until cooldown is over)
     private final Label cooldownTimer = new Label();
-    private final javafx.scene.shape.Rectangle progress = new javafx.scene.shape.Rectangle(0, 10, Color.WHITE);
-    Label abilityLabel = new Label();
 
-    String abilityName;
+    // Rectangle shape for cooldown indicator
+    private final javafx.scene.shape.Rectangle progress = new javafx.scene.shape.Rectangle(0, 10, Color.WHITE);
+    private final Label abilityLabel = new Label();
+
+    // name of ability
+    private final String abilityName;
 
     public AbilityHolder (String abilityName) {
         this.abilityName = abilityName;

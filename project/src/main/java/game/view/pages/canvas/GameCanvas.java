@@ -1,5 +1,9 @@
 /*
  * Authors: Joachim Pedersen
+ *
+ * Canvas class used to draw entities and effects to the screen.
+ * Overrides certain canvas methods to achieve the required behavior, specifically
+ * to force the correct ratio of the window.
  */
 
 package game.view.pages.canvas;

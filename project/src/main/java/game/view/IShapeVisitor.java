@@ -1,5 +1,9 @@
 /*
  * Authors: Joachim Pedersen
+ *
+ * Interface for implementing visitor pattern for shapes.
+ * This is used to avoid casting and the use of "instanceof" when
+ * rendering shapes.
  */
 
 package game.view;
