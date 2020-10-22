@@ -2,23 +2,23 @@ package game.view.pages.level;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class LevelPanel extends VBox {
+public class LevelPanel extends FlowPane {
 
     public LevelPanel() {
         this.getStyleClass().add("levelPanel");
 
-        this.mouseTransparentProperty().setValue(true);
         this.setVisible(false);
+
+        this.setMaxHeight(500);
+
     }
 
-    public void createEntry (String level) {
-        Button load = new Button("Load level " + level);
-
+    public void createEntry (Button load) {
         this.getChildren().add(load);
-
     }
 
 }

@@ -13,10 +13,12 @@ import game.view.ViewResourceLoader;
 import game.view.pages.abilityBar.AbilityBar;
 import game.view.pages.canvas.GameCanvas;
 import game.view.pages.gameState.GameStatePanel;
+import game.view.pages.level.LevelPanel;
 import game.view.pages.menu.StartMenu;
 import game.view.pages.score.HighscorePanel;
 import game.view.pages.score.ScorePanel;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
@@ -44,6 +46,8 @@ public class MainWindow extends StackPane {
 
     private final HighscorePanel highscorePanel;
 
+    private final LevelPanel levelPanel;
+
     public MainWindow(GameWindowController gameWindowController) {
         gameCanvas = new GameCanvas();
         startMenu  = new StartMenu(gameWindowController);
@@ -52,6 +56,7 @@ public class MainWindow extends StackPane {
         abilityBar = new AbilityBar();
         gameTitle = new Label(GAME_TITLE);
         gameStatePanel = new GameStatePanel();
+        levelPanel = new LevelPanel();
 
         // Add a stylesheet
         this.getStylesheets().add(ViewResourceLoader.stylesheet);
@@ -61,7 +66,6 @@ public class MainWindow extends StackPane {
         gameTitle.getStyleClass().add("gameTitle");
 
         windowSetup();
-
     }
 
     private void windowSetup() {
@@ -73,6 +77,7 @@ public class MainWindow extends StackPane {
                 scorePanel,
                 startMenu,
                 highscorePanel,
+                levelPanel,
                 gameTitle,
                 gameStatePanel
         );
@@ -82,7 +87,7 @@ public class MainWindow extends StackPane {
         setAlignment(abilityBar, Pos.BOTTOM_CENTER);
         setAlignment(gameTitle, Pos.TOP_CENTER);
         setAlignment(gameStatePanel, Pos.CENTER);
-
+        setAlignment(levelPanel, Pos.TOP_CENTER);
 
         // Align inside their respective container
         startMenu.setAlignment(Pos.BOTTOM_CENTER);
@@ -109,22 +114,35 @@ public class MainWindow extends StackPane {
         return abilityBar;
     }
 
-    // Displays highscores
-    public void showHighscores () {
-        gameTitle.setVisible(!gameTitle.isVisible());
-        highscorePanel.setVisible(!highscorePanel.isVisible());
-    }
 
     public void addHighscore (String level, double time) {
         highscorePanel.createScoreEntry(level, time);
+    }
+
+    public void showHighscores () {
+        gameTitle.setVisible(false);
+        levelPanel.setVisible(false);
+        highscorePanel.setVisible(!highscorePanel.isVisible());
+        showGameTitle();
     }
 
     public void clearHighscorePanel () {
         highscorePanel.getChildren().clear();
     }
 
-    public void hideHighscore () {
+    public void showLevelPanel () {
+        gameTitle.setVisible(false);
         highscorePanel.setVisible(false);
+        levelPanel.setVisible(!levelPanel.isVisible());
+        showGameTitle();
+    }
+
+    public void clearLevelPanel () {
+        levelPanel.getChildren().clear();
+    }
+
+    public void addLevelButton(Button load) {
+        levelPanel.createEntry(load);
     }
 
     // Sets menus to visible
@@ -135,9 +153,14 @@ public class MainWindow extends StackPane {
 
     // Hides menus
     public void hideMenu() {
-        hideHighscore();
+        highscorePanel.setVisible(false);
+        levelPanel.setVisible(false);
         startMenu.setVisible(false);
         gameTitle.setVisible(false);
+    }
+
+    private void showGameTitle() {
+        if (!highscorePanel.isVisible() && !levelPanel.isVisible()) gameTitle.setVisible(true);
     }
 
     // Changes the game state
