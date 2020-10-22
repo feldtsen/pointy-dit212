@@ -184,7 +184,7 @@ public class Game implements IGame {
 
             // Remove projectile from list if destroyed or out of bounds
             if (projectile.isDestroyed() || isOutOfBounds(projectile)) {
-                currentLevel.getProjectiles().remove(i);
+                currentLevel.removeProjectile(projectile);
             }
         }
     }
