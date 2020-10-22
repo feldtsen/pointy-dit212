@@ -351,13 +351,13 @@ The goal of the player is to defeat all enemies. The game contains multiple leve
 
 - **Functional:**
     
-    - Can I get points by performing certain actions throughout the game?
+    ~~- Can I get points by performing certain actions throughout the game?~~
     - Can I see my score while playing?
     - Can I keep track of how many points I've had in previous playthroughs?
 
 - **Non-functional:**
     
-    - Does the difficulty of an action affect how many points that action is worth?
+    ~~- Does the difficulty of an action affect how many points that action is worth?~~
 
 ---
 **Story Identifier:** STK015 (FINISHED)
