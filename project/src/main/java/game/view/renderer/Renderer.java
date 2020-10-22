@@ -122,12 +122,9 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
     private Effect createShockwaveEffect() {
         double radius = 1000; //TODO how to get radius?
 
-
         return new Effect(0.2) {
             @Override
             void render(IAbilityAction action, double time) {
-
-
                 Point2D position = action.getUser().getPosition();
                 ICircle circle = new Circle(radius * time);
                 RendererUtils.drawRing(graphicsContext, colors.get(action.getUser().getClass()), circle, position);
@@ -171,16 +168,6 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         // Render all enemies
         for (IEnemy enemy : level.getEnemies()) {
             entity = enemy;
-  /*
-        // TODO: temporary testing code, to show facing direction of player
-        Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), 50);
-        RendererUtils.drawLine(graphicsContext,
-                colors.get(level.getPlayer().getClass()),
-                level.getPlayer().getPosition(),
-                level.getPlayer().getPosition().add(direction),
-                7);
-
-         */
 
             setRotation(enemy.getVelocity());
             enemy.getShape().acceptShapeVisitor(this);
