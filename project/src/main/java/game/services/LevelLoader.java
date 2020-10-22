@@ -73,8 +73,9 @@ public class LevelLoader implements ILevelLoader {
     }
 
     @Override
-    public void setLevel(int levelNr) {
+    public ILevel getSelectedLevel(int levelNr) {
         this.levelNr = levelNr;
+        return getLevel();
     }
 
     // Loads the player according to the parameters in level file.
