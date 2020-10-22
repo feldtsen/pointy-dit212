@@ -100,6 +100,11 @@ public class Game implements IGame {
     }
 
     @Override
+    public boolean levelExist(int level) {
+        return levelLoader.getLevel(level) != null;
+    }
+
+    @Override
     // Restarts the current level.
     public void restartLevel() {
         currentLevel = levelLoader.getLevel();

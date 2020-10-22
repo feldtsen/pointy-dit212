@@ -198,19 +198,21 @@ public class GameWindowController {
             window.addLevelButton(load);
         });
 
+
         int nextLevelNr = highscoreHandler.getStoredHighscores().size() + 1;
-        Button nextLevel = new Button("Load level " + nextLevelNr);
-        nextLevel.setOnMouseClicked(e ->  retrieveLevel(nextLevelNr));
-        window.addLevelButton(nextLevel);
+        if (game.levelExist(nextLevelNr)) {
+            Button nextLevel = new Button("Load level " + nextLevelNr);
+            nextLevel.setOnMouseClicked(e -> retrieveLevel(nextLevelNr));
+            window.addLevelButton(nextLevel);
+        }
 
         window.showLevelPanel();
 
     }
 
     private void retrieveLevel(int level) {
-        System.out.println("Changed");
         window.hideMenu();
-        changeLevel(level);
+        game.changeLevel(level);
         restart();
     }
 
@@ -218,10 +220,6 @@ public class GameWindowController {
         window.clearHighscorePanel();
         highscoreHandler.getStoredHighscores().forEach(window::addHighscore);
         window.showHighscores();
-    }
-
-    public void changeLevel(int level) {
-        game.changeLevel(level);
     }
 
     // Button action for starting the game
