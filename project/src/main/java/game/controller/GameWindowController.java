@@ -81,7 +81,7 @@ public class GameWindowController {
                 keyboardInputController.applyHeldRegisteredActions();
 
                 // Play sfx
-                //audioHandler.playSoundEffects();
+                audioHandler.playSoundEffects();
 
                 // Update the game model with a global time step of 1 (normal speed)
                 game.update(delta, 1);
@@ -178,6 +178,8 @@ public class GameWindowController {
         System.out.println("Level button clicked");
     }
     public void handleMenuScoreButton() {
+        window.clearHighscorePanel();
+        highscoreHandler.getStoredHighscores().forEach(window::addHighscore);
         window.showHighscores();
     }
 

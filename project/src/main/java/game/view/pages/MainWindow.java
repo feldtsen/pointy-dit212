@@ -100,6 +100,14 @@ public class MainWindow extends StackPane {
         highscorePanel.setVisible(!highscorePanel.isVisible());
     }
 
+    public void addHighscore (String level, double time) {
+        highscorePanel.createScoreEntry(level, time);
+    }
+
+    public void clearHighscorePanel () {
+        highscorePanel.getChildren().clear();
+    }
+
     public void hideHighscore () {
         highscorePanel.setVisible(false);
     }

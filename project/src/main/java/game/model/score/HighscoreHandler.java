@@ -27,8 +27,11 @@ public class HighscoreHandler implements IHighscoreHandler {
         if (!storedHighscores.containsKey(level)) {
             setHighscore(level, Double.MAX_VALUE);
         }
+
         return storedHighscores.get(level);
     }
+
+
 
     @Override
     public void setHighscore(String level, double score) {
@@ -98,5 +101,10 @@ public class HighscoreHandler implements IHighscoreHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public HashMap<String, Double> getStoredHighscores() {
+        return storedHighscores;
     }
 }

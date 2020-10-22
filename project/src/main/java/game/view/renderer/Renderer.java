@@ -4,7 +4,7 @@
 
 package game.view.renderer;
 
-import game.controller.event.AbilityActionEventListener;
+import game.controller.event.IAbilityActionEventListener;
 import game.controller.event.IAbilityActionEvent;
 import game.controller.gameLoop.GameLoop;
 import game.model.ability.Dash;
@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventListener {
+public class Renderer implements IRenderer, IShapeVisitor, IAbilityActionEventListener {
     public abstract static class Effect {
         private final double effectDuration;
 
@@ -78,9 +78,9 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         colors.put(Enemy.class,           Color.rgb(167, 173, 186, .96));
         colors.put(Bullet.class,          Color.rgb(96, 106, 116));
         colors.put(Missile.class,         Color.rgb(153, 163, 156));
-        colors.put(Spikes.class,          Color.rgb(140, 0, 0));
         colors.put(Wall.class,            Color.rgb(96, 106, 116));
         colors.put(MovingWall.class,      Color.rgb(96, 106, 116));
+        colors.put(Spikes.class,          Color.rgb(135, 72, 70));
         colors.put(GraphicsContext.class, Color.rgb(52, 61, 70));
 
         abilityEffects.put(Dash.DashAction.class,           createDashEffect());
@@ -151,11 +151,32 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         // Render player
         entity = level.getPlayer();
         setRotation(level.getPlayer().getFacingDirection());
-        RendererUtils.drawRectangle(graphicsContext, Color.DARKSLATEBLUE, new Rectangle(entity.getShape().getWidth(), entity.getShape().getHeight(), entity.getShape().getRotation()), level.getPlayer().getPosition());
         entity.getShape().acceptShapeVisitor(this);
-        RendererUtils.drawTriangle(graphicsContext, Color.PINK, new Triangle(entity.getShape().getWidth(), entity.getShape().getHeight(), entity.getShape().getRotation()), level.getPlayer().getPosition());
 
-        /*
+
+        // Draws a triangle on top of the player to be able to see the direction the player is facing
+        RendererUtils.drawTriangle(
+                graphicsContext,
+                colors.get(level.getPlayer().getClass()).darker(),
+                new Triangle(
+                        entity.getShape().getWidth() * .4,
+                        entity.getShape().getHeight() * .8,
+                        entity.getShape().getRotation()
+                ),
+                level.getPlayer().getPosition()
+        );
+
+        // Render all projectiles
+        for(IProjectile<?> projectile : level.getProjectiles()) {
+            entity = projectile;
+            setRotation(projectile.getVelocity());
+            projectile.getShape().acceptShapeVisitor(this);
+        }
+
+        // Render all enemies
+        for (IEnemy enemy : level.getEnemies()) {
+            entity = enemy;
+         /*
         // TODO: temporary testing code, to show facing direction of player
         Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), 50);
         RendererUtils.drawLine(graphicsContext,
@@ -166,11 +187,8 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
 
          */
 
-        // Render all projectiles
-        for(IProjectile<?> projectile : level.getProjectiles()) {
-            entity = projectile;
-            setRotation(projectile.getVelocity());
-            projectile.getShape().acceptShapeVisitor(this);
+            setRotation(enemy.getVelocity());
+            enemy.getShape().acceptShapeVisitor(this);
         }
 
         // Render all obstacles
