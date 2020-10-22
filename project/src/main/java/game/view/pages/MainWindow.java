@@ -22,7 +22,6 @@ public class MainWindow extends StackPane {
     private static final String MAIN_WINDOW_CSS = "mainWindow";
     private static final String GAME_TITLE = "J E R K  E V E R T";
 
-
     GameCanvas gameCanvas;
     StartMenu startMenu;
     ScorePanel scorePanel;
@@ -51,7 +50,6 @@ public class MainWindow extends StackPane {
         gameTitle.getStyleClass().add("gameTitle");
 
         windowSetup();
-
     }
 
     private void windowSetup() {
@@ -73,7 +71,7 @@ public class MainWindow extends StackPane {
         setAlignment(abilityBar, Pos.BOTTOM_CENTER);
         setAlignment(gameTitle, Pos.TOP_CENTER);
         setAlignment(gameStatePanel, Pos.CENTER);
-
+        setAlignment(levelPanel, Pos.TOP_CENTER);
 
         // Align inside their respective container
         startMenu.setAlignment(Pos.BOTTOM_CENTER);
