@@ -90,7 +90,8 @@ public class LevelLoader implements ILevelLoader {
             double x = enemyArr.get(i).getAsJsonObject().get("x").getAsDouble();
             double y = enemyArr.get(i).getAsJsonObject().get("y").getAsDouble();
             int difficulty = enemyArr.get(i).getAsJsonObject().get("difficulty").getAsInt();
-            enemies.add(selectEnemy(x, y, player, difficulty, type));
+            String spikeImmunity = enemyArr.get(i).getAsJsonObject().get("spikeimmune").getAsString();
+            enemies.add(selectEnemy(x, y, player, difficulty, type, spikeImmunity));
         }
         return enemies;
     }
@@ -121,7 +122,7 @@ public class LevelLoader implements ILevelLoader {
 
     // Returns the type of enemy according to "type" specified in level file.
     // Uses EntityFactory
-    private IEnemy selectEnemy(double x, double y, IEntity target, int difficulty, String type) {
+    private IEnemy selectEnemy(double x, double y, IEntity target, int difficulty, String type, String spikeImmunity) {
         IEnemy enemy = null;
         // Returns basic enemy without abilities
         if (type.equals("basic")) {
@@ -135,6 +136,7 @@ public class LevelLoader implements ILevelLoader {
         else if (type.equals("missile")) {
             enemy = EntityFactory.missileEnemy(x, y, target, difficulty);
         }
+        if (spikeImmunity.equals("true")) enemy.setStrength(101);
         return enemy;
     }
 

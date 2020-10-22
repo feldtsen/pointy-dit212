@@ -9,7 +9,8 @@
       "x": "",
       "y": "",
       "target": "",
-      "difficulty" : ""
+      "difficulty" : "",
+      "spikeimmune": "false"
     }
   ],
   "Obstacles": [

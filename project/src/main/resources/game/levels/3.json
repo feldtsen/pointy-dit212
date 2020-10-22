@@ -9,14 +9,16 @@
       "x": "1000",
       "y": "100",
       "target": " player",
-    "difficulty" : "2"
+      "difficulty" : "2",
+      "spikeimmune": "false"
     },
     {
       "type": "basic",
       "x": "1000",
       "y": "300",
       "target": " player",
-      "difficulty" : "5"
+      "difficulty" : "5",
+      "spikeimmune": "false"
     }
   ],
   "Obstacles": []
