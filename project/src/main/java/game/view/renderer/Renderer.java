@@ -147,21 +147,19 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         // Render player
         entity = level.getPlayer();
         setRotation(level.getPlayer().getFacingDirection());
-        RendererUtils.drawRectangle(graphicsContext, Color.DARKSLATEBLUE, new Rectangle(entity.getShape().getWidth(), entity.getShape().getHeight(), entity.getShape().getRotation()), level.getPlayer().getPosition());
         entity.getShape().acceptShapeVisitor(this);
-        RendererUtils.drawTriangle(graphicsContext, Color.PINK, new Triangle(entity.getShape().getWidth(), entity.getShape().getHeight(), entity.getShape().getRotation()), level.getPlayer().getPosition());
 
-        /*
-        // TODO: temporary testing code, to show facing direction of player
-        Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), 50);
-        RendererUtils.drawLine(graphicsContext,
-                colors.get(level.getPlayer().getClass()),
-                level.getPlayer().getPosition(),
-                level.getPlayer().getPosition().add(direction),
-                7);
-
-         */
-
+        // Draws a triangle on top of the player to be able to see the direction the player is facing
+        RendererUtils.drawTriangle(
+                graphicsContext,
+                colors.get(level.getPlayer().getClass()).darker(),
+                new Triangle(
+                        entity.getShape().getWidth() * .4,
+                        entity.getShape().getHeight() * .8,
+                        entity.getShape().getRotation()
+                ),
+                level.getPlayer().getPosition()
+        );
 
         // Render all projectiles
         for(IProjectile<?> projectile : level.getProjectiles()) {
@@ -173,6 +171,16 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         // Render all enemies
         for (IEnemy enemy : level.getEnemies()) {
             entity = enemy;
+  /*
+        // TODO: temporary testing code, to show facing direction of player
+        Point2D direction = Utils.vectorFromHeading(level.getPlayer().getShape().getRotation(), 50);
+        RendererUtils.drawLine(graphicsContext,
+                colors.get(level.getPlayer().getClass()),
+                level.getPlayer().getPosition(),
+                level.getPlayer().getPosition().add(direction),
+                7);
+
+         */
 
             setRotation(enemy.getVelocity());
             enemy.getShape().acceptShapeVisitor(this);
