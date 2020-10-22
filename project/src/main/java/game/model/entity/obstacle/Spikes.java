@@ -42,7 +42,7 @@ public class Spikes extends Entity<Rectangle> implements IObstacle, IStrength {
     @Override
     public void handleCollision(Point2D minimumTranslationVector, IMovable entity) {
         ILiving livingEntity = (ILiving) entity;
-        if (getStrength() > livingEntity.getStrength()) {
+        if (getStrength() > livingEntity.getStrength() && !livingEntity.isInvulnerable()) {
             livingEntity.setHitPoints(0);
         }
     }
