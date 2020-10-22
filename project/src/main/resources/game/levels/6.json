@@ -9,8 +9,8 @@
       "x": "250",
       "y": "500",
       "target": "player",
-      "difficulty" : "5",
-      "spikeimmune": "false"
+      "difficulty" : "3",
+      "spikeimmune": "true"
     }
   ],
   "Obstacles": [
@@ -27,14 +27,14 @@
       "type": "moving",
       "x1": "25",
       "y1": "337",
-      "x2": "425",
+      "x2": "525",
       "y2": "337",
       "width": "50",
       "height": "700"
     },
     {
       "type": "moving",
-      "x1": "775",
+      "x1": "675",
       "y1": "337",
       "x2": "1175",
       "y2": "337",
