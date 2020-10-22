@@ -23,8 +23,9 @@ public class HighscoreHandler implements IHighscoreHandler {
 
     @Override
     public double getHighscore(String level) {
+        // If this is the first time we check for a new highscore, compare it to the mac DOUBLE value
         if (!storedHighscores.containsKey(level)) {
-            setHighscore(level, 0);
+            setHighscore(level, Double.MAX_VALUE);
         }
         return storedHighscores.get(level);
     }
@@ -52,7 +53,6 @@ public class HighscoreHandler implements IHighscoreHandler {
             for (Map.Entry<String, Double> entry : storedHighscores.entrySet()) {
                 String name = entry.getKey();
                 Double score = entry.getValue();
-                System.out.println(name);
                 bufferedWriter.write(name + " " + score);
                 bufferedWriter.newLine();
             }
