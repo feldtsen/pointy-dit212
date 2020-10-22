@@ -96,9 +96,9 @@ public class GameWindowController {
                     // TODO: set timer score to score table if it's a new high score
                     checkHighscore(game.getTime());
                     game.nextLevel();
-                    if (!game.isGameWin()) {
-                        handleGameState("LEVEL COMPLETE", "\nScore: " + game.getTime() + "\n\nPress R to continue.");
-                    }
+
+                    handleGameState("LEVEL COMPLETE", "\nScore: " + game.getTime() + "\n\nPress R to continue.");
+
                 }
 
                 // Set facing direction of player
