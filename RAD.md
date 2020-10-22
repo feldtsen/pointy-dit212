@@ -500,6 +500,7 @@ Displayed when the game is launched.
 ## 3.1.1 Class responsibilities
 
 (Explanation of responsibilities of classes in diagram)
+Stepping into a package adds an indentation.
 > # controller (package)
 >> ## event (package)
 >>> #### AbilityActionEvent
