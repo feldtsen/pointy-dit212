@@ -103,18 +103,18 @@ The `Ability` in the domain model creates 0..* projectiles. In the design model,
 
 ## 4. Persistent data management
 
-The application currently makes use of JSON to handle level data. The level files contain JSON objects pertaining to the information of the level and its entities, i.e. their type (player, enemy, obstacle), variants (e.g. type of enemy) as well as instance variables not handled by the factory. Levels are loaded through the static class `LevelLoader` which parses the JSON file corresponding to a certain level ID, creates an object of type `Level`, and returns this object to be used by the `Game` class. Each level is contained within a separate file and is only loaded when needed to save memory resources. The parsing is done using the GSON library. 
+The application makes use of JSON to handle level data. The level files contain JSON objects pertaining to the information of the level and its entities, i.e. their type (player, enemy, obstacle), variants (e.g. type of enemy) as well as instance variables not handled by the factory. Levels are loaded through the class `LevelLoader` which parses the JSON file corresponding to a certain level ID, creates an object of type `Level`, and returns this object to be used by the `Game` class. Each level is contained within a separate file and is only loaded when needed to save memory resources. The parsing is done using the GSON library. 
 
-Future possible functionality includes storing and parsing level data as ASCII to enable easier level development, saving player progress made up to that point, as well as keeping top scores.  
+Top scores for each level are saved in a text file which is handled by class `HighscoreHandler`. 
 
 
 ## 5. Quality
 
 The application is tested using unit tests with the framework JUnit. These tests can be found under project/src/main/test. 
 
-The project is also integrated with Travis (https://travis-ci.org/), to automatically run all tests when pushing or doing pull requests. This ensures no commits merged to master causes tests to fail. 
+The project is also integrated with Travis (https://travis-ci.org/), to automatically run all tests when doing pull requests to ensure nothing merged to master causes tests to fail. 
 
-Link to our travis for our project: https://travis-ci.com/github/feldtsen/pointy-dit212
+Link to Travis for our project: https://travis-ci.com/github/feldtsen/pointy-dit212
 
 The game has also been thoroughly game tested by playing the different levels and manually testing the functionality described by the different user stories.
 

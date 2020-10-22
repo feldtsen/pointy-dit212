@@ -5,7 +5,7 @@
 package game.model;
 
 import game.controller.event.AbilityActionEvent;
-import game.controller.event.AbilityActionEventListener;
+import game.controller.event.IAbilityActionEventListener;
 import game.controller.event.IAbilityActionEvent;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
@@ -59,7 +59,7 @@ public class Game implements IGame {
     private final List<Long> activationTimes;
 
     // Ability action event listeners
-    private final List<AbilityActionEventListener> listeners;
+    private final List<IAbilityActionEventListener> listeners;
 
     public Game() {
 
@@ -110,7 +110,7 @@ public class Game implements IGame {
 
         // Notify listeners for ability action events
         AbilityActionEvent event = new AbilityActionEvent(IAbilityActionEvent.Type.ACTIVATED, action);
-        for (AbilityActionEventListener listener : listeners) {
+        for (IAbilityActionEventListener listener : listeners) {
             listener.onAction(event);
         }
 
@@ -128,7 +128,7 @@ public class Game implements IGame {
     private void deactivateAbility(int index) {
         // Notify listeners for ability action events
         AbilityActionEvent event = new AbilityActionEvent(IAbilityActionEvent.Type.FINISHED, activeAbilityActions.get(index));
-        for (AbilityActionEventListener listener : listeners) {
+        for (IAbilityActionEventListener listener : listeners) {
             listener.onAction(event);
         }
 
@@ -189,7 +189,7 @@ public class Game implements IGame {
 
             // Remove projectile from list if destroyed or out of bounds
             if (projectile.isDestroyed() || isOutOfBounds(projectile)) {
-                currentLevel.getProjectiles().remove(i);
+                currentLevel.removeProjectile(projectile);
             }
         }
     }
@@ -442,7 +442,7 @@ public class Game implements IGame {
 
     // Registers listeners for ability action events
     @Override
-    public void registerListener(AbilityActionEventListener listener) {
+    public void registerListener(IAbilityActionEventListener listener) {
         listeners.add(listener);
     }
 }

@@ -4,7 +4,7 @@
 
 package game.view.renderer;
 
-import game.controller.event.AbilityActionEventListener;
+import game.controller.event.IAbilityActionEventListener;
 import game.controller.event.IAbilityActionEvent;
 import game.controller.gameLoop.GameLoop;
 import game.model.ability.Dash;
@@ -15,7 +15,9 @@ import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.obstacle.IObstacle;
+import game.model.entity.obstacle.MovingWall;
 import game.model.entity.obstacle.Spikes;
+import game.model.entity.obstacle.Wall;
 import game.model.entity.player.Player;
 import game.model.entity.projectile.Bullet;
 import game.model.entity.projectile.IProjectile;
@@ -35,7 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventListener {
+public class Renderer implements IRenderer, IShapeVisitor, IAbilityActionEventListener {
     public abstract static class Effect {
         private final double effectDuration;
 
@@ -76,6 +78,8 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         colors.put(Enemy.class,           Color.rgb(167, 173, 186, .96));
         colors.put(Bullet.class,          Color.rgb(96, 106, 116));
         colors.put(Missile.class,         Color.rgb(153, 163, 156));
+        colors.put(Wall.class,            Color.rgb(96, 106, 116));
+        colors.put(MovingWall.class,      Color.rgb(96, 106, 116));
         colors.put(Spikes.class,          Color.rgb(135, 72, 70));
         colors.put(GraphicsContext.class, Color.rgb(52, 61, 70));
 
@@ -146,6 +150,7 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         setRotation(level.getPlayer().getFacingDirection());
         entity.getShape().acceptShapeVisitor(this);
 
+
         // Draws a triangle on top of the player to be able to see the direction the player is facing
         RendererUtils.drawTriangle(
                 graphicsContext,
@@ -168,11 +173,11 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         // Render all enemies
         for (IEnemy enemy : level.getEnemies()) {
             entity = enemy;
-
             setRotation(enemy.getVelocity());
             enemy.getShape().acceptShapeVisitor(this);
         }
 
+        // Render all obstacles
         for (IObstacle obstacle : level.getObstacles()) {
             graphicsContext.save();
             entity = obstacle;
@@ -181,6 +186,13 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
             // TODO: add rotation
             entity.getShape().acceptShapeVisitor(this);
             graphicsContext.restore();
+        }
+        // Render all enemies
+        for (IEnemy enemy : level.getEnemies()) {
+            entity = enemy;
+
+            setRotation(enemy.getVelocity());
+            enemy.getShape().acceptShapeVisitor(this);
         }
         graphicsContext.restore();
     }

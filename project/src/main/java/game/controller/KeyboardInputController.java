@@ -17,8 +17,8 @@ public  class KeyboardInputController {
     private final Set<KeyCode> pressedKeys;
     // Map of actions associated with each pressed key. If a key is pressed, its corresponding actions
     // will be applied on every call to "applyRegisteredActions".
-    private final Map<KeyCode, List<Action>> heldActions;
-    private final Map<KeyCode, List<Action>> pressedActions;
+    private final Map<KeyCode, List<IAction>> heldActions;
+    private final Map<KeyCode, List<IAction>> pressedActions;
 
     // Feeds the input handler a stack pane which is required for setting up key pressed and key released callbacks.
     public KeyboardInputController(Node node) {
@@ -40,19 +40,19 @@ public  class KeyboardInputController {
 
 
     // Register events that should get applied if a key is held down
-    public void registerHeldAction(KeyCode code, Action action) {
+    public void registerHeldAction(KeyCode code, IAction action) {
         registerAction(code, action, heldActions);
 
     }
 
     // Register events that should get applies if the key is pressed
-    public void registerPressedAction(KeyCode code, Action action) {
+    public void registerPressedAction(KeyCode code, IAction action) {
         registerAction(code, action, pressedActions);
     }
 
     // Registers an action to be performed on a key events.
-    public void registerAction(KeyCode code, Action action, Map<KeyCode, List<Action>> actions) {
-        List<Action> list;
+    public void registerAction(KeyCode code, IAction action, Map<KeyCode, List<IAction>> actions) {
+        List<IAction> list;
 
         // Check if there is no list of actions added for the current keycode.
         if(!heldActions.containsKey(code)) {
@@ -79,11 +79,11 @@ public  class KeyboardInputController {
     public void applyHeldRegisteredActions() {
         // Loop over all currently pressed keys.
         for(KeyCode c : pressedKeys) {
-            List<Action> l = heldActions.get(c);
+            List<IAction> l = heldActions.get(c);
             // If the currently pressed key has no actions associated with it, continue.
             if(l == null) continue;
             // Iterate over all actions, and apply.
-            for(Action a : l) {
+            for(IAction a : l) {
                 a.apply();
             }
         }
