@@ -500,6 +500,310 @@ Displayed when the game is launched.
 ## 3.1.1 Class responsibilities
 
 (Explanation of responsibilities of classes in diagram)
+# controller (package)
+## event (package)
+### AbilityActionEvent
+Event which is sent when an ability action is activated or finished.
+
+### AbilityAcitonHandler
+The event handler for ability action events.
+
+### AbilityActionEventListener
+Event listener for ability action events.
+
+### IAbilityActionEvent
+Simple abstraction for ability action events.
+
+## gameLoop (package)
+### gameLoop
+Calls an update method each loop iteration at a desired fps.
+
+### IGameLoop
+Simple abstraction for game loops.
+
+## Action
+Simple interface for defining lambda expression with no arguments and no arguments.
+
+## GameWindowController
+This class handles the model and view components of the game, starts the game loop, and ties all components together. Without the game window controller, there would be no game.
+
+## KeyboardInputController
+Handles keyboard input from the user and ties different keyboard presses to a specific method call.
+
+## MouseInputController
+Handles mouse input from the user and ties different mouse actions to specific method calls.
+
+# model (package)
+## ability (package)
+### action (package)
+#### AbilityAction
+Abstract implementation of ability action interface.
+
+#### IAbilityAction
+An abstraction for defining which actions should be performed on a level when an ability is applied.
+
+
+### Ability
+Abstract implementation of the ability interface. This simplifies creating new abilities by implementing the cooldown functionality used by all abilities.
+
+### IAbility
+An ability is something that influences the game environment (level) in some way.
+
+### Dash
+The ability for "dashing" forwards with a high speed in the direction in which the user is moving.
+
+### Reflect
+The ability used to reflect projectiles. Reflected projectiles can kill enemies.
+
+### Shockwave
+The ability used to push all nearby entities (excluding projectiles and obstacles) away.
+
+### Shock
+Abstract helper ability for shooting different kinds of projectiles.
+
+### ShootBullet
+The ability for shooting bullets.
+
+### ShootMissile
+The ability used to shoot missiles.
+
+## Audio (package)
+### AudioHandler
+Class for handling music and sound effects.
+
+### IAudioHandler
+An abstraction of an audio handler.
+
+## behavior (package)
+### ability (package)
+#### AbilityBehavior
+Abstract implementation of an IAbilityBehavior. Simplifies the creation of new ability behaviors.
+
+#### IAbilityBehavior
+Ability behaviors define how an entity will use its abilities. 
+
+#### SingleAbilityBehavior
+Simple ability behavior implementation. Only one ability is used.
+
+### movement (package)
+#### FleeingBehavior
+Movement behavior for entities that try to keep a certain distance to the target entity.
+
+#### IMovementBehavior
+An abstraction for defining how a movable entity moves.
+
+#### SeekingBehavior
+Movement behavior for entities that move straight towards the target entity.
+
+### IBehavior
+Conceptual marker interface. Marks anything considered to be an ability.
+
+## entity (package)
+### Enemy
+A hostile entity that typically targets the player.
+
+### IEnemy
+An abstraction of a hostile entity on the map.
+
+## movable (package)
+### ILiving
+Abstraction for an entity that is "alive" and hence can be killed.
+
+### IMovable
+Abstraction for an object which can move using physics-based on acceleration, velocity, and position.
+
+### LivingEntity
+Abstract class for living entities that might be (temporarily or permanently) invulnerable. 
+
+### MovableEntity
+Abstract implementation of an IMovable entity. Lots of game physics is implemented here.
+
+### obstacle (package)
+#### IObstacle
+Interface for non-hostile, blocking entities that can be used for cover.
+
+#### MovingWall
+A wall that moves back and forwards between a start and end position.
+
+#### Spikes
+Obstacles that are non-hostile but can do collision damage.
+
+#### Wall
+A basic obstacle that blocks entity movements.
+
+### player (package)
+#### IPlayer
+Abstraction for defining a user-controlled player entity.
+
+#### Player
+Implementation of IPlayer. This is the class that the player controls when playing the game.
+
+### projectile (package)
+#### Bullet
+A projectile that moves in a single direction.
+
+#### IProjectile
+Abstraction for projectiles which can hurt the player and be reflected using.
+
+#### Missile
+A projectile that steers towards its target, typically the player.
+
+#### Projectile
+Abstract projectile implementation.
+
+### Entity
+Abstract entity implementation that simplifies the creation of new entities.
+
+### IEntity
+Abstraction for all entities in the game. An entity might be the player, an enemy, a projectile, or an obstacle.
+
+### IStrength
+Any object with a strength (damage/hit points). 
+
+## level (package)
+### ILevel
+Abstraction for a class representing a single level/stage of the game.
+
+### Level
+Level implementation, used by the game.
+
+## score (package)
+### HighscoreHandler
+Implementation of an IHighscoreHandler. Implements functionality for writing and reading scores to/from a file.
+
+### IHighscoreHandler
+Writes and reads high scores to/from a file.
+
+## shape2d (package)
+### Circle
+Simple circle shape.
+
+### ICircle
+Circle abstraction.
+
+### IRectangle
+Rectangle abstraction.
+
+### IShape2D
+Interface for simple shapes. 
+
+### ITriangle
+Triangle abstraction.
+
+### Rectangle
+Rectangle shape.
+
+### Triangle
+Triangle shape.
+
+## Game
+Root model class. Implementation of IGame. Used to run the actual gameplay.
+
+## IGame
+Interface the root model class. Defines functions that influence the gameplay, typically used by controllers.
+
+## IPositionable
+Interface for any object with a position.
+
+## IUpdatable
+Interface for any object which should be updated each frame. 
+
+# Services
+## EntityFactory
+Responsible for creating Entities of different sorts using methods
+with only a few inputs.
+
+## LevelLoader
+Loads levels according to the information stored in JSON-files.
+Acts as an iterator of levels for the Game.
+
+## ILevelLoader
+An interface used by LevelLoader. Implements Iterator to allow for
+iteration over ILevel objects when changing levels.
+
+# Utils
+## Shapes
+Has methods for working with shapes. Implements the collision
+checking algorithm used by the rest of the game for detecting
+and handling collisions between entities.
+
+## Timer
+Used for keeping track of how much time has been spent on a level.
+
+## Utils
+Methods for manipulating vectors, and some additional helper methods.
+
+# view (package)
+## IShapeVisitor
+Interface for implementing visitor patterns for shapes.
+
+## IVisitableShape
+Interface for implementing visitor patterns for shapes.
+
+## ViewResourceLoader
+Loads view resources and define view-specific values.
+
+## pages (package)
+### abilityBar (package)
+#### AbilityBar
+Holds player ability cooldown indicators.
+
+#### AbilityHolder
+Holds a single ability cooldown indicator.
+
+### canvas (package)
+#### GameCanvas
+Canvas class is used to draw entities and effects on the screen.
+
+### gameState (package)
+#### GameStatePanel 
+Panel for displaying information about a particular game state.
+
+### menu (package)
+#### buttons (package)
+##### ExitButton
+Button for exiting the game.
+
+##### LevelButton
+Button for changing level.
+
+##### ResponsiveButton
+A button that changes size depending on screen size.
+
+##### ScoreButton
+Button for viewing score.
+
+##### StartButton
+Button for starting the game.
+
+#### StartMenu
+The menu that is displayed at the start of the game, which provides the user with a set of options, for example, starts the game, selecting a level, etc...
+
+### score (package)
+#### HighscorePanel
+Displays player score for each level.
+
+#### IScorePanel
+Interface for panels displaying the current player score.
+
+#### ScorePanel
+A panel that displays the current player score.
+
+### MainWindow
+The main window of the game. Sets up a window and various UI elements.
+
+## renderer (package)
+### IRenderer
+Abstraction for drawing entities to a canvas.
+
+### Renderer
+View used for rendering gameplay to a GameCanvas.
+
+### RenderUtils
+A layer of abstraction between view and JavaFX. Used to facilitate drawing to the screen.
+
+# App
+Root class that launches the application. 
 
 ## 3.2 Design Model
 **UML of design model**
