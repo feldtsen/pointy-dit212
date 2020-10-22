@@ -37,5 +37,5 @@ public interface IPlayer extends ILiving, IMovable<ICircle> {
     Point2D getFacingDirection();
 
     // sets the position which the player is facing. This is usually defined using the mouse position
-    void setFacingTowards(Point2D position);
+    void setFacingTowards(Point2D position, double windowWidth, double windowHeight);
 }

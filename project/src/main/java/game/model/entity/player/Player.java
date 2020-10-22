@@ -15,6 +15,7 @@ import game.model.entity.movable.LivingEntity;
 import game.model.shape2d.Circle;
 import game.model.shape2d.ICircle;
 import game.util.Utils;
+import game.view.ViewResourceLoader;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
@@ -95,11 +96,19 @@ public class Player extends LivingEntity<ICircle> implements IPlayer {
 
     // Sets the position which the player is facing towards
     @Override
-    public void setFacingTowards(Point2D position) {
+    public void setFacingTowards(Point2D mousePosition, double windowWidth, double windowHeight) {
         // If null, do nothing
-        if (position == null) return;
+        if (mousePosition == null) return;
+
+        // Scale the mouse position to respect the scaling of the window
+        Point2D newMousePosition = new Point2D(
+                Utils.map(mousePosition.getX(), 0, windowWidth, 0, ViewResourceLoader.INITIAL_WIDTH),
+                Utils.map(mousePosition.getY(), 0, windowHeight, 0, ViewResourceLoader.INITIAL_HEIGHT)
+        );
+
+
         // Calculate the new facing direction.
-        this.facingDirection = position.subtract(getPosition());
+        this.facingDirection = newMousePosition.subtract(getPosition());
 
         // Calculate angle which represents the facing direction in radians
         double angle = Utils.heading(facingDirection);

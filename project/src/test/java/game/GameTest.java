@@ -21,6 +21,7 @@ import game.model.shape2d.Circle;
 import game.model.shape2d.ICircle;
 import game.services.EntityFactory;
 import game.util.Utils;
+import game.view.ViewResourceLoader;
 import javafx.geometry.Point2D;
 import org.junit.Before;
 import org.junit.Test;
@@ -203,7 +204,7 @@ public class GameTest {
     public void testPlayerFacingMouse() {
 
         Point2D mousePosition = new Point2D(310, 515);
-        game.getCurrentLevel().getPlayer().setFacingTowards(mousePosition);
+        game.getCurrentLevel().getPlayer().setFacingTowards(mousePosition, ViewResourceLoader.INITIAL_WIDTH, ViewResourceLoader.INITIAL_HEIGHT);
 
         game.update(1.0, 1.0);
         IPlayer player = game.getCurrentLevel().getPlayer();
@@ -221,7 +222,7 @@ public class GameTest {
 
         IPlayer player = game.getCurrentLevel().getPlayer();
         double previousFacingDirection = player.getShape().getRotation();
-        game.getCurrentLevel().getPlayer().setFacingTowards(mousePosition);
+        game.getCurrentLevel().getPlayer().setFacingTowards(mousePosition, ViewResourceLoader.INITIAL_WIDTH, ViewResourceLoader.INITIAL_HEIGHT);
 
         game.update(1.0, 1.0);
 

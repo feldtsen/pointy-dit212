@@ -14,12 +14,17 @@ import game.controller.gameLoop.IGameLoop;
 import game.model.IGame;
 import game.model.audio.AudioHandler;
 import game.model.audio.IAudioHandler;
+import game.model.entity.player.IPlayer;
+import game.model.entity.projectile.IProjectile;
 import game.model.score.IHighscoreHandler;
 import game.model.score.HighscoreHandler;
+import game.util.Utils;
+import game.view.ViewResourceLoader;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
 import javafx.application.Platform;
+import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 
@@ -106,12 +111,20 @@ public class GameWindowController {
                 }
 
                 // Set facing direction of player
-                game.getCurrentLevel().getPlayer().setFacingTowards(mouseInputController.getMousePosition());
+                updatePlayerFacingDirection();
+                
             }
         };
 
         // Start the game loop. At this point, the game is running.
         gameLoop.start();
+    }
+
+    private void updatePlayerFacingDirection() {
+        IPlayer player = game.getCurrentLevel().getPlayer();
+        Point2D mousePosition = mouseInputController.getMousePosition();
+
+        player.setFacingTowards(mousePosition, window.getWidth(), window.getHeight());
     }
 
     // Updates the UI elements visible during gameplay
@@ -292,7 +305,5 @@ public class GameWindowController {
             if (game.activatePlayerAbility(2)) audioHandler.registerSoundEffect("reflect");
         });
 
-        // Bind mouse movement to updating the player facing position
-        mouseInputController.registerActionOnMove(() -> game.getCurrentLevel().getPlayer().setFacingTowards(mouseInputController.getMousePosition()));
     }
 }
