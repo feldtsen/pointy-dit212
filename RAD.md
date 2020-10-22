@@ -143,7 +143,7 @@ The goal of the player is to defeat all enemies. The game contains multiple leve
     
     - Is there an increasing difficulty level as the game progresses?
 ---
-**Story Identifier:** STK006 (IN PROGRESS)
+**Story Identifier:** STK006 (FINISHED)
 
 **Story Name:** Level transition
 
@@ -160,11 +160,7 @@ The goal of the player is to defeat all enemies. The game contains multiple leve
 - **Non-functional:**
 
     Interactivity:
-    - Is the transition interactive, for example, can I move to another part of the map to enter the next game section?
-    
-    Visibility:
-    - Is the transition interactive, for example, can I move to another part of the map to enter the next game section?
-
+    ~~- Is the transition interactive, for example, can I move to another part of the map to enter the next game section?~~
 ---
 **Story Identifier:** STK007 (FINISHED)
 
@@ -320,7 +316,7 @@ The goal of the player is to defeat all enemies. The game contains multiple leve
     - Can I see and navigate around the obstacles?
 
 ---    
-**Story Identifier:** STK013
+**Story Identifier:** STK013 (FINISHED)
 
 **Story Name:** Spikes
 
@@ -379,7 +375,7 @@ The goal of the player is to defeat all enemies. The game contains multiple leve
     - Can I hear music as I am playing the game?
 
 ---
-**Story Identifier:** STK016 (IN PROGRESS)
+**Story Identifier:** STK016 (PARTLY FINISHED)
 
 **Story Name:** Sound effects
 
