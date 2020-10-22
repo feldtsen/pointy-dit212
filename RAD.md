@@ -502,7 +502,7 @@ Displayed when the game is launched.
 (Explanation of responsibilities of classes in diagram)
 # controller (package)
 ## event (package)
-### AbilityActionEvent
+#### AbilityActionEvent
 Event which is sent when an ability action is activated or finished.
 
 ### AbilityAcitonHandler
