@@ -16,6 +16,7 @@ import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
 import javafx.application.Platform;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 
 // Top level controller which initializes the model and the view and starts the game.
@@ -93,8 +94,8 @@ public class GameWindowController {
 
                 // Checks if all enemies have been defeated
                 if (game.getCurrentLevel().getEnemies().isEmpty())  {
-                    // TODO: set timer score to score table if it's a new high score
                     checkHighscore(game.getTime());
+
                     game.nextLevel();
                     if (!game.isGameWin()) {
                         handleGameState("LEVEL COMPLETE", "\nScore: " + game.getTime() + "\n\nPress R to continue.");
@@ -173,12 +174,28 @@ public class GameWindowController {
     }
 
     public void handleMenuLevelButton() {
+        window.clearLevelPanel();
 
-        /*
+        highscoreHandler.getStoredHighscores().forEach((level, time) ->  {
+            Button load = new Button("Load level " + level);
+            load.setOnMouseClicked(e -> retrieveLevel(Integer.parseInt(level)));
+            window.addLevelButton(load);
+        });
+
+        int nextLevelNr = highscoreHandler.getStoredHighscores().size() + 1;
+        Button nextLevel = new Button("Load level " + nextLevelNr);
+        nextLevel.setOnMouseClicked(e ->  retrieveLevel(nextLevelNr));
+        window.addLevelButton(nextLevel);
+
+        window.showLevelPanel();
+
+    }
+
+    private void retrieveLevel(int level) {
+        System.out.println("Changed");
+        window.hideMenu();
         changeLevel(level);
         restart();
-        pause();
-        */
     }
 
     public void handleMenuScoreButton() {

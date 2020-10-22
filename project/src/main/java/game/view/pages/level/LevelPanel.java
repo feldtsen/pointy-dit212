@@ -10,15 +10,11 @@ public class LevelPanel extends VBox {
     public LevelPanel() {
         this.getStyleClass().add("levelPanel");
 
-        this.mouseTransparentProperty().setValue(true);
         this.setVisible(false);
     }
 
-    public void createEntry (String level) {
-        Button load = new Button("Load level " + level);
-
+    public void createEntry (Button load) {
         this.getChildren().add(load);
-
     }
 
 }
