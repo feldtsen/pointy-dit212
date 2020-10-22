@@ -9,7 +9,8 @@
       "x": "1000",
       "y": "300",
       "target": "player",
-      "difficulty" : "3"
+      "difficulty" : "3",
+      "spikeimmune": "false"
     }
   ],
   "Obstacles": [
