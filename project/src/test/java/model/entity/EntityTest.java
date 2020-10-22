@@ -13,12 +13,20 @@ public class EntityTest {
     // Helper method required for initializing an anonymous instance of the abstract class with a circle shape.
     public Entity<ICircle> createEntityCircle(Point2D position, double radius) {
         return new Entity<>(position, new Circle(radius)) {
+            @Override
+            public void update(double delta, double timeStep) {
+
+            }
         };
     }
 
     // Helper method for initializing an anonymous instance of the abstract class with a rectangle shape.
     public Entity<IRectangle> createEntityRectangle(Point2D position, double width, double height, double rotation) {
         return new Entity<>(position, new Rectangle(width, height, rotation)) {
+            @Override
+            public void update(double delta, double timeStep) {
+
+            }
         };
     }
 
