@@ -160,7 +160,7 @@ The goal of the player is to defeat all enemies. The game contains multiple leve
 - **Non-functional:**
 
     Interactivity:
-    ~~- Is the transition interactive, for example, can I move to another part of the map to enter the next game section?~~
+    - ~~Is the transition interactive, for example, can I move to another part of the map to enter the next game section?~~
 ---
 **Story Identifier:** STK007 (FINISHED)
 
@@ -351,13 +351,13 @@ The goal of the player is to defeat all enemies. The game contains multiple leve
 
 - **Functional:**
     
-    ~~- Can I get points by performing certain actions throughout the game?~~
+    - ~~Can I get points by performing certain actions throughout the game?~~
     - Can I see my score while playing?
     - Can I keep track of how many points I've had in previous playthroughs?
 
 - **Non-functional:**
     
-    ~~- Does the difficulty of an action affect how many points that action is worth?~~
+    - ~~Does the difficulty of an action affect how many points that action is worth?~~
 
 ---
 **Story Identifier:** STK015 (FINISHED)
@@ -375,7 +375,7 @@ The goal of the player is to defeat all enemies. The game contains multiple leve
     - Can I hear music as I am playing the game?
 
 ---
-**Story Identifier:** STK016 (PARTLY FINISHED)
+**Story Identifier:** STK016 (FINISHED)
 
 **Story Name:** Sound effects
 
@@ -388,7 +388,7 @@ The goal of the player is to defeat all enemies. The game contains multiple leve
 - **Functional:**
     
     - Are there sound effects that reflect the players actions?
-    - Are there sound effects that reflect the actions of the enemies?
+    - ~~Are there sound effects that reflect the actions of the enemies?~~
 
 - **Non-functional:**
     
