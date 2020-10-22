@@ -9,21 +9,24 @@
       "x": "1000",
       "y": "100",
       "target": "player",
-      "difficulty" : "3"
+      "difficulty" : "3",
+      "spikeimmune": "false"
     },
     {
       "type": "basic",
       "x": "700",
       "y": "100",
       "target": "player",
-      "difficulty" : "5"
+      "difficulty" : "5",
+      "spikeimmune": "false"
     },
     {
       "type": "missile",
       "x": "1000",
       "y": "500",
       "target": "player",
-      "difficulty" : "3"
+      "difficulty" : "3",
+      "spikeimmune": "false"
     }
   ],
   "Obstacles": [
