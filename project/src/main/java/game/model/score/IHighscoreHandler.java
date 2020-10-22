@@ -4,6 +4,10 @@
 
 package game.model.score;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public interface IHighscoreHandler {
     // Given a level, returns the highscore for that level
     double getHighscore(String level);
@@ -19,4 +23,7 @@ public interface IHighscoreHandler {
 
     // Creates a highscore.txt file if the file does not exist
     void createFile();
+
+    // Gets all the current stored highscores
+    HashMap<String, Double> getStoredHighscores();
 }
