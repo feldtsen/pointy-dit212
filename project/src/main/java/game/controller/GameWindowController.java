@@ -200,6 +200,8 @@ public class GameWindowController {
 
 
         int nextLevelNr = highscoreHandler.getStoredHighscores().size() + 1;
+
+        // Check if level exist before adding it to the level panel
         if (game.levelExist(nextLevelNr)) {
             Button nextLevel = new Button("Load level " + nextLevelNr);
             nextLevel.setOnMouseClicked(e -> retrieveLevel(nextLevelNr));
