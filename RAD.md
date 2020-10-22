@@ -500,8 +500,8 @@ Displayed when the game is launched.
 ## 3.1.1 Class responsibilities
 
 (Explanation of responsibilities of classes in diagram)
-# controller (package)
-## event (package)
+> # controller (package)
+>> ## event (package)
 #### AbilityActionEvent
 Event which is sent when an ability action is activated or finished.
 
