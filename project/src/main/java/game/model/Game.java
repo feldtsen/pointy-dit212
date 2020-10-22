@@ -68,7 +68,7 @@ public class Game implements IGame {
 
     public Game() {
 
-        this.levelLoader  = new LevelLoader("src/main/resources/game/levels/testlevels/spiketest/");
+        this.levelLoader  = new LevelLoader("src/main/resources/game/levels/");
         this.currentLevel = levelLoader.getLevel();
 
         this.timer = new Timer();
