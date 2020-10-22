@@ -4,7 +4,7 @@
 
 package game.view.renderer;
 
-import game.controller.event.AbilityActionEventListener;
+import game.controller.event.IAbilityActionEventListener;
 import game.controller.event.IAbilityActionEvent;
 import game.controller.gameLoop.GameLoop;
 import game.model.ability.Dash;
@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventListener {
+public class Renderer implements IRenderer, IShapeVisitor, IAbilityActionEventListener {
     public abstract static class Effect {
         private final double effectDuration;
 

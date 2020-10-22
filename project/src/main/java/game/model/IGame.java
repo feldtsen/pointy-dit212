@@ -4,16 +4,15 @@
 
 package game.model;
 
-import game.controller.event.AbilityActionEventHandler;
+import game.controller.event.IAbilityActionEventHandler;
 import game.model.ability.action.IAbilityAction;
 import game.model.level.ILevel;
-import javafx.geometry.Point2D;
 
 import java.util.List;
 
 // Interface for class running the game itself.
 // Does not include the gameLoop, which should be handled by a controller.
-public interface IGame extends AbilityActionEventHandler, IUpdatable {
+public interface IGame extends IAbilityActionEventHandler, IUpdatable {
     // Activate player ability
     boolean activatePlayerAbility(int index);
 
