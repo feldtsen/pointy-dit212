@@ -76,7 +76,7 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
         colors.put(Enemy.class,           Color.rgb(167, 173, 186, .96));
         colors.put(Bullet.class,          Color.rgb(96, 106, 116));
         colors.put(Missile.class,         Color.rgb(153, 163, 156));
-        colors.put(Spikes.class,         Color.rgb(140, 0, 0));
+        colors.put(Spikes.class,          Color.rgb(135, 72, 70));
         colors.put(GraphicsContext.class, Color.rgb(52, 61, 70));
 
         abilityEffects.put(Dash.DashAction.class,           createDashEffect());
