@@ -69,6 +69,7 @@ public class GameWindowController {
             @Override
             public void update(double delta) {
                 // Render the current level
+
                 renderer.drawEntities(game.getCurrentLevel());
                 // Render ability effects
                 renderer.drawAbilities();
@@ -85,22 +86,20 @@ public class GameWindowController {
                 // Update the game model with a global time step of 1 (normal speed)
                 game.update(delta, 1);
 
-                // Display the menu if the player wins the game
-                if(game.isGameWin()) pauseAndReload();
+                // Shows winning message
+                if(game.isGameWin()) handleGameState("YOU WIN", "You da man (or woman). Press ESC to return to menu.");
 
-                // Displays game over message
-                if(game.isGameOver()) handleGameOver();
+                // Shows game over message
+                if(game.isGameOver()) handleGameState("GAME OVER", "Press R to play again or ESC to return to menu.");
 
                 // Checks if all enemies have been defeated
                 if (game.getCurrentLevel().getEnemies().isEmpty())  {
-
                     // TODO: set timer score to score table if it's a new high score
                     checkHighscore(game.getTime());
                     game.nextLevel();
-                    game.resetTimer();
-                    // if (game.updateHighScore(Level l, Long time);
-                    // Register movement keys to new player object
-                    registerPlayerControls();
+                    if (!game.isGameWin()) {
+                        handleGameState("LEVEL COMPLETE", "\nScore: " + game.getTime() + "\n\nPress R to continue.");
+                    }
                 }
 
                 // Set facing direction of player
@@ -121,7 +120,8 @@ public class GameWindowController {
         window.getAbilityBar().updateAbilities(game.getCurrentLevel().getPlayer().getAbilities());
     }
 
-    private void handleGameOver() {
+
+    private void handleGameState(String gameStateMessage, String gameStateInstructions) {
         // Reset the timer
         game.resetTimer();
 
@@ -130,9 +130,10 @@ public class GameWindowController {
 
         // Clear all entities from screen.
         renderer.clearCanvas();
-
+        // Set message
+        window.setGameState( gameStateMessage, gameStateInstructions);
         // Show game over message.
-        window.showGameOver();
+        window.showGameState();
 
         window.hideUI();
     }
@@ -141,7 +142,7 @@ public class GameWindowController {
     private void restart() {
         gameLoop.setPaused(false);
 
-        window.hideGameOver();
+        window.hideGameState();
 
         // Makes ability bar and score panel visible.
         window.showUI();
@@ -157,7 +158,7 @@ public class GameWindowController {
     private void pauseAndReload() {
         pause();
         // Removes game over message.
-        window.hideGameOver();
+        window.hideGameState();
         // Setup new game.
         gameSetup();
     }
@@ -228,10 +229,10 @@ public class GameWindowController {
 
         // Registers methods to new keys. Pressing P starts a new game, pressing ESC displays starting menu.
         keyboardInputController.registerPressedAction(KeyCode.R,      ()->{
-            if(game.isGameOver()) restart();
+            if(gameLoop.isPaused()) restart();
         });
         keyboardInputController.registerPressedAction(KeyCode.ESCAPE, () -> {
-            if (game.isGameOver()) pauseAndReload();
+            if (game.isGameOver() || game.isGameWin()) pauseAndReload();
             else if (gameLoop.isPaused()) unpause();
             else if (!gameLoop.isPaused()) pause();
         });
