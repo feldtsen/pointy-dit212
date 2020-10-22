@@ -1,5 +1,10 @@
 /*
  * Authors: Anton Hildingsson, Mattias Oom, Joachim Pedersen, Erik Magnusson, Simon Genne
+ *
+ * Basic player implementation. The player entity extends from a living entity to inherit
+ * strength functionality. This is also required by the dash ability, which is typically 
+ * used by the player. The dash sets the user entity invulnerable state to true during
+ * the duration of the action. 
  */
 
 package game.model.entity.player;
@@ -15,7 +20,6 @@ import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-// Basic player implementation
 public class Player extends LivingEntity<ICircle> implements IPlayer {
     // Unit vectors in all four directions. These are used as helper vectors
     // for defining different movement actions.

@@ -1,5 +1,8 @@
 /*
  * Authors: Mattias Oom, Anton Hildingsson, Simon Genne
+ *
+ * Enemies represent hostile elements in the game. They have a target
+ * which they typically move towards and aim at when using their abilities.
  */
 
 package game.model.entity.enemy;
@@ -13,7 +16,6 @@ import game.model.entity.IEntity;
 import game.model.shape2d.ICircle;
 
 
-// Enemies represent hostile elements in the game
 public interface IEnemy extends ILiving, IMovable<ICircle> {
     // The movement behavior of an enemy defines how it moves across the map
     void setMovementBehaviour(IMovementBehaviour movementBehaviour);

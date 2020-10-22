@@ -1,5 +1,10 @@
 /*
  * Authors: Anton Hildingsson, Mattias Oom, Simon Genne
+ *
+ * An ability behavior defines how an entity will use it's abilities.
+ * Using this interface, more complex and intelligent usage of abilities can be defined.
+ * For example, an entity might only use its abiltiy when a certain condition is fulfilled. 
+ * Logic like this should be implemented in the apply method.
  */
 
 package game.model.behavior.ability;

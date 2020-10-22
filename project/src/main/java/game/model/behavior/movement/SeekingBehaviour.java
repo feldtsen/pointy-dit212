@@ -1,5 +1,8 @@
 /*
  * Authors: Anton Hildingsson, Mattias Oom
+ *
+ * This movement behavior will have the user of the behavior seek (move towards) the target entity.
+ * The user of this ability will always move towards the tartget, no matter what.
  */
 
 package game.model.behavior.movement;
@@ -10,7 +13,6 @@ import game.model.entity.movable.MovableEntity;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 
-// This movement behavior will have the user of the behavior seek (move towards) the target entity.
 public class SeekingBehaviour implements IMovementBehaviour {
     @Override
     public boolean apply(IMovable<?> subject, IEntity<?> object) {
