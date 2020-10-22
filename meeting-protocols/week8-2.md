@@ -1,8 +1,11 @@
 # Meeting Agenda
 
 Group: Pointy
+
 Date: 22/10/2020
-Chair: Simon	
+
+Chair: Simon
+	
 Participants: Everyone
 
 ## Reports (15 min) from previous meeting
@@ -18,37 +21,34 @@ Participants: Everyone
 
 ## Objectives (5 min) 
 
-- Resolve any issues preventing the team to continue.
-- Short clear descriptions.
-	Make demo version.
-	Finish UML-diagram.
-	Clean-up and finish unimplemented.
-	double check that every class has authors and responsibilities.
-	Prepare for presentation.
+- Make demo version for presentation.
+- Finish updating UML-diagrams.
+- Go over SDD and RAD and see that everything is correct.
+- Double check that all classes have authors.
+- prepare for presentation. 
 
 
 ## Discussion items (35 min)
 
-- Discuss the identified issues, and possibly new or more general issues (very
-  short notes and/or keywords).
-		
+
+- We should prepare the project for the submission at the end of the week. Go over everything and see that everything that should be implemented is done.
+
+- Preparing for the submission will take priority. Once were done with this we will prepare for the presentation. 
+
+- We need to implement a demo version of the game where we don't need to wory about dying while explaining game functionality.
 
 
 ## Outcomes and assignments (5 min)
 
-- Outcomes from discussion items. Write down what's decided and why it was 
-  decided. Sync with other documentation (add terms to wordbook).
-- (re)Assign to each group member which issues to solve.
-	mattias: UML-cleanup
-	Joachim: Levelselect, mouseinpout scaling bug. 
-	Erik: Make spikes work, clean-up and double check RAD & SDD.
-	Anton: Start working on presentation.
-	Simon: Work on demo-version.
+
+- Mattias will keep working on the UML-diagrams and make sure that they are correct and up to date.
+- Joachim will work on selecting levels and fix current mouse input bug. 
+- Erik will keep working on spikes, UML, and go over the RAD and SDD.
+- Anton will start working on the presentation.
+- Simon will create a demo-version for the presentation.
 	
 
 ## Wrap up
 
-- Write down any unresolved issues for next meeting. 
-- Decide a time and location for next meeting.
 This is the last meeting.
 
