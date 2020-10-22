@@ -1,5 +1,10 @@
 /*
  * Authors: Mattias Oom, Erik Magnusson, Anton Hildingsson, Simon Genne, Joachim Pedersen
+ *
+ * Class from which all living entities inherits. Has hit points which upon 
+ * reaching zero will cause the death of the entity. Living entities can
+ * be invulernable, which means they cannot loose hit points.
+ *
  */
 
 package game.model.entity.movable;
@@ -7,8 +12,6 @@ package game.model.entity.movable;
 import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;
 
-//Class from which all living entities inherits.
-//Has hit points which upon reaching zero will cause the death of the entity.
 public abstract class LivingEntity<T extends IShape2D> extends MovableEntity<T> implements ILiving {
     // The number of hit points for this living entity
     private int hitPoints;

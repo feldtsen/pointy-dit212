@@ -1,5 +1,10 @@
 /*
  * Authors: Mattias Oom, Anton Hildingsson, Joachim Pedersen
+ *
+ * Interface defining the actions and abilities of the player.
+ * The activation of the move methods and activateAbility method is
+ * typically controlled by an input controller of some sort. The facing
+ * direction of the player determines how many abilities will be used.
  */
 
 package game.model.entity.player;
@@ -13,7 +18,6 @@ import javafx.geometry.Point2D;
 
 import java.util.List;
 
-// Interface defining the actions and abilities of the player.
 public interface IPlayer extends ILiving, IMovable<ICircle> {
     // Activates an ability at a particular index. A player might have multiple abilities.
     IAbilityAction activateAbility(int index);

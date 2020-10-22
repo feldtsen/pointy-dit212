@@ -1,5 +1,7 @@
 /*
- * Joachim Pedersen
+ * Authors: Joachim Pedersen
+ *
+ * Button for viewing score.
  */
 
 package game.view.pages.menu.buttons;

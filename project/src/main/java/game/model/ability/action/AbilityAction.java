@@ -1,5 +1,9 @@
 /*
  * Authors: Anton Hildingsson, Mattias Oom
+ *
+ * Abstract helper implementation of ability actions.
+ * When creating an ability action, this class is typically extended, 
+ * to simplify implementation.
  */
 
 package game.model.ability.action;
@@ -7,10 +11,10 @@ package game.model.ability.action;
 import game.model.entity.IEntity;
 import game.model.level.ILevel;
 
-// Abstract helper implementation of ability actions.
 public abstract class AbilityAction implements IAbilityAction {
     // The user of the ability action
     protected final IEntity<?> user;
+
     // The duration (in seconds) when the ability is active
     private final double duration;
 

@@ -1,5 +1,7 @@
 /*
  * Authors: Joachim Pedersen
+ *
+ * Button for changing level.
  */
 
 package game.view.pages.menu.buttons;

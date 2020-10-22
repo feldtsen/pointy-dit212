@@ -1,5 +1,9 @@
 /*
  * Authors: Anton Hildingsson, Mattias Oom, Simon Genne
+ *
+ * Abstract entity implementation. This method simplifies creating new entity
+ * implementations by implementing the position and shape properties. It
+ * also checks for collision by delegating this to the Shapes utils library.
  */
 
 package game.model.entity;
@@ -8,7 +12,6 @@ import game.model.shape2d.IShape2D;
 import game.util.Shapes;
 import javafx.geometry.Point2D;
 
-// Abstract entity implementation.
 public abstract class Entity<T extends IShape2D> implements IEntity<T> {
     // The position of the entity
     protected Point2D position;

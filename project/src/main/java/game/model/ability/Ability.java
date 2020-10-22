@@ -1,5 +1,8 @@
 /*
  * Authors: Anton Hildingsson, Joachim Pedersen, Mattias Oom, Simon Genne
+ *
+ * Abstract helper implementation of IAbility, which simplifies creating new abilities.
+ * This is possible since all abilities will share the same cool down functionality.
  */
 
 package game.model.ability;
@@ -8,8 +11,6 @@ import game.controller.gameLoop.GameLoop;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
 
-// Abstract helper implementation of IAbility, which simplifies creating new abilities.
-// This is possible since all abilities will share the same cool down functionality.
 public abstract class Ability implements IAbility{
     // The time it takes (in nanoseconds) before the ability can be activated again
     private final long cooldown;

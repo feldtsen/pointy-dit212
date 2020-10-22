@@ -1,5 +1,9 @@
 /*
  * Authors: Anton Hildingsson, Mattias Oom, Simon Genne
+ *
+ * Ability for shooting projectiles. This class is abstract 
+ * since it does not define which projectile to shoot. This will 
+ * be done by implementing classes.
  */
 
 package game.model.ability;
@@ -12,9 +16,6 @@ import game.model.level.ILevel;
 
 import java.util.List;
 
-// Ability for shooting projectiles.
-// This class is abstract since it does not define which projectile to shoot. This will be done by
-// implementing classes.
 public abstract class Shoot extends Ability {
 
     public Shoot(long cooldown) {

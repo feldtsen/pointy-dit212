@@ -1,5 +1,9 @@
 /*
  * Authors: Joachim Pedersen
+ *
+ * Abstraction for a simple audio handler. Music is toggled using
+ * the toggleMusic method and sound effects are registered using the
+ * registerSoundEffect method.
  */
 
 package game.model.audio;

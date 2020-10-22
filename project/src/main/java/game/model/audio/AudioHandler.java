@@ -1,5 +1,10 @@
 /*
  * Authors: Joachim Pedersen
+ *
+ * The audio handler handles music and sound effects for the game. 
+ * Sound effects are registered using the registerSoundEffect method. 
+ * A registered sound effect will be played once when the playSoundEffect
+ * method is called. 
  */
 
 package game.model.audio;
