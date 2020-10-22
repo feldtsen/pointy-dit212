@@ -61,7 +61,6 @@ public class GameWindowController {
         // Initialize the game and map all the keys to their corresponding actions.
         gameSetup();
 
-
         // Create a game loop. The update method will be called every frame.
         // Game loop is initialized with a improbably high desired fps value, to ensure the
         // game is run at max fps possible.
@@ -169,18 +168,27 @@ public class GameWindowController {
 
         // If the time for completing the current level is lesser than the stored time, overwrite it
         if (time < highscoreHandler.getHighscore(currentLevel)) {
-         highscoreHandler.setHighscore(currentLevel, time);
+             highscoreHandler.setHighscore(currentLevel, time);
         }
     }
 
-    //TODO: implement
     public void handleMenuLevelButton() {
-        System.out.println("Level button clicked");
+
+        /*
+        changeLevel(level);
+        restart();
+        pause();
+        */
     }
+
     public void handleMenuScoreButton() {
         window.clearHighscorePanel();
         highscoreHandler.getStoredHighscores().forEach(window::addHighscore);
         window.showHighscores();
+    }
+
+    public void changeLevel(int level) {
+        game.changeLevel(level);
     }
 
     // Button action for starting the game

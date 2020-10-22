@@ -24,6 +24,9 @@ public interface IGame extends IAbilityActionEventHandler, IUpdatable {
 
     boolean setLevel(ILevel level);
 
+    // Given a level, load that level
+    void changeLevel(int levelNr);
+
     // Retrieves the game time in String format (time used on the current level)
     double getTime();
 

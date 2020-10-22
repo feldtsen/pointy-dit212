@@ -63,17 +63,17 @@ public class Game implements IGame {
 
     public Game() {
 
-        this.levelLoader = new LevelLoader("src/main/resources/game/levels/");
+        this.levelLoader  = new LevelLoader("src/main/resources/game/levels/");
         this.currentLevel = levelLoader.getLevel();
 
         this.timer = new Timer();
 
         this.gameOver = false;
-        this.gameWin = false;
+        this.gameWin  = false;
 
         this.activeAbilityActions = new ArrayList<>();
-        this.currentAbilityTimes = new ArrayList<>();
-        this.activationTimes = new ArrayList<>();
+        this.currentAbilityTimes  = new ArrayList<>();
+        this.activationTimes      = new ArrayList<>();
 
         listeners = new ArrayList<>();
 
@@ -87,6 +87,11 @@ public class Game implements IGame {
         else {
             gameWin = true;
         }
+    }
+
+    @Override
+    public void changeLevel(int level) {
+        setLevel(levelLoader.getSelectedLevel(level));
     }
 
     @Override
