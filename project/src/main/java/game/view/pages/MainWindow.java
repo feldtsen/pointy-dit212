@@ -10,6 +10,7 @@ import game.view.pages.abilityBar.AbilityBar;
 import game.view.pages.canvas.GameCanvas;
 import game.view.pages.gameOver.GameOverPanel;
 import game.view.pages.menu.StartMenu;
+import game.view.pages.score.HighscorePanel;
 import game.view.pages.score.ScorePanel;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -26,10 +27,12 @@ public class MainWindow extends StackPane {
     AbilityBar abilityBar;
     Label gameTitle;
     GameOverPanel gameOverPanel;
+    HighscorePanel highscorePanel;
 
     public MainWindow(GameWindowController gameWindowController) {
         gameCanvas = new GameCanvas();
         startMenu  = new StartMenu(gameWindowController);
+        highscorePanel = new HighscorePanel();
         scorePanel = new ScorePanel();
         abilityBar = new AbilityBar();
         gameOverPanel = new GameOverPanel();
@@ -43,13 +46,13 @@ public class MainWindow extends StackPane {
         this.getStyleClass().add(MAIN_WINDOW_CSS);
         gameTitle.getStyleClass().add("gameTitle");
 
-
         // Add what you want to display
         this.getChildren().setAll(
                 gameCanvas,
                 abilityBar,
                 scorePanel,
                 startMenu,
+                highscorePanel,
                 gameTitle,
                 gameOverPanel
 
@@ -87,12 +90,22 @@ public class MainWindow extends StackPane {
         return abilityBar;
     }
 
+    public void showHighscores () {
+        gameTitle.setVisible(!gameTitle.isVisible());
+        highscorePanel.setVisible(!highscorePanel.isVisible());
+    }
+
+    public void hideHighscore () {
+        highscorePanel.setVisible(false);
+    }
+
     public void showMenu() {
         startMenu.setVisible(true);
         gameTitle.setVisible(true);
     }
 
     public void hideMenu() {
+        hideHighscore();
         startMenu.setVisible(false);
         gameTitle.setVisible(false);
     }

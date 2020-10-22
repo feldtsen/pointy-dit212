@@ -177,7 +177,7 @@ public class GameWindowController {
         System.out.println("Level button clicked");
     }
     public void handleMenuScoreButton() {
-        System.out.println("Score button clicked ");
+        window.showHighscores();
     }
 
     // Button action for starting the game
