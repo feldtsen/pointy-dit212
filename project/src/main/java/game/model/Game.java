@@ -214,6 +214,8 @@ public class Game implements IGame {
             if (minimumTranslationVector != null) {
                 obstacle.handleCollision(minimumTranslationVector, player);
             }
+
+
         }
     }
 

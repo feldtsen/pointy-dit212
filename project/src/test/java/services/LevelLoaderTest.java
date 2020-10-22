@@ -21,7 +21,7 @@ public class LevelLoaderTest {
     
     @Before
     public void init() {
-        levelLoader = new LevelLoader("src/main/resources/game/testlevels/LevelLoaderTest/");
+        levelLoader = new LevelLoader("src/main/resources/game/levels/testlevels/LevelLoaderTest/");
         level = levelLoader.getLevel();
     }
 

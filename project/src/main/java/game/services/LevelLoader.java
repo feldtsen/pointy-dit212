@@ -152,7 +152,7 @@ public class LevelLoader implements ILevelLoader {
         }
         // Spike obstacle which can kill other entities
         else if (type.equals("spikes")) {
-            obstacle = EntityFactory.spikes(x1, x2);
+            obstacle = EntityFactory.spikes(x1, y1, width, height);
         }
         return obstacle;
     }
