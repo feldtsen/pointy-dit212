@@ -35,7 +35,7 @@ public class LevelLoader implements ILevelLoader {
         this.levelNr = 1;
     }
 
-    // Get the level coresponding to levelNr.
+    // Get the level corresponding to levelNr.
     @Override
     public ILevel getLevel()  {
         String filePath = path + Integer.toString(levelNr) + ".json";
@@ -70,6 +70,11 @@ public class LevelLoader implements ILevelLoader {
     public ILevel next() {
         levelNr += 1;
         return getLevel();
+    }
+
+    @Override
+    public void setLevel(int levelNr) {
+        this.levelNr = levelNr;
     }
 
     // Loads the player according to the parameters in level file.

@@ -89,6 +89,10 @@ public class Game implements IGame {
         }
     }
 
+    public void loadSelectedLevel() {
+
+    }
+
     @Override
     // Restarts the current level.
     public void restartLevel() {

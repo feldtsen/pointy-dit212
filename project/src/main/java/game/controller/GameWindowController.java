@@ -183,6 +183,10 @@ public class GameWindowController {
         window.showHighscores();
     }
 
+    public void setSelectedLevel(int level) {
+
+    }
+
     // Button action for starting the game
     public void unpause() {
         gameLoop.setPaused(false);

@@ -97,7 +97,7 @@ public class Renderer implements IRenderer, IShapeVisitor, AbilityActionEventLis
 
     private Effect createReflectEffect(){
      return new Effect(0.2) {
-         double radius = 1000;
+         final double radius = 1000;
          @Override
          void render(IAbilityAction action, double time) {
              Point2D position = action.getUser().getPosition();
