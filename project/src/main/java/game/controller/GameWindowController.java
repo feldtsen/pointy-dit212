@@ -15,11 +15,8 @@ import game.model.IGame;
 import game.model.audio.AudioHandler;
 import game.model.audio.IAudioHandler;
 import game.model.entity.player.IPlayer;
-import game.model.entity.projectile.IProjectile;
 import game.model.score.IHighscoreHandler;
 import game.model.score.HighscoreHandler;
-import game.util.Utils;
-import game.view.ViewResourceLoader;
 import game.view.pages.MainWindow;
 import game.view.pages.canvas.GameCanvas;
 import game.view.renderer.Renderer;
@@ -197,7 +194,7 @@ public class GameWindowController {
 
     // Checks if new highscore
     private void checkHighscore (double time) {
-        String currentLevel = String.format("%d", game.getCurrentLevel().getLevelNr());
+        String currentLevel = String.format("%d", game.getCurrentLevel().getLevelNumber());
 
         // If the time for completing the current level is lesser than the stored time, overwrite it
         if (time < highscoreHandler.getHighscore(currentLevel)) {

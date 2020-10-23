@@ -78,7 +78,7 @@ public class Level implements ILevel {
     }
 
     @Override
-    public int getLevelNr() {
+    public int getLevelNumber() {
         return this.levelNr;
     }
 
