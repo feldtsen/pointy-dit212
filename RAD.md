@@ -463,7 +463,7 @@ For a user story to be considered to be done, the following criteria have to be 
 
 **GUI sketch**
 
-<img src=https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/gui-sketch.jpg height=600>
+<img src=models-and-sketches/gui-sketch.jpg height=600>
 
 ### Image 1
 A player (circle) with a small ring around. The ring indicates the state of one of the player's abilities.
@@ -481,7 +481,7 @@ The spikes represent a dangerous element which can hurt both players and enemies
 This image represent when the player moves from one level to the next. When the player has completed their objective, a gate is opened at the center of the map. This gate can be used to enter the next level.
 
 ### Start screen
-<img src=https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/gamemenu.jpg height=600>
+<img src=models-and-sketches/gamemenu.jpg height=600>
 
 Displayed when the game is launched. 
 
@@ -493,7 +493,7 @@ Displayed when the game is launched.
 ## 3.1 Domain Model
 **UML of domain model**
 
-<img src=https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/domain-model.png width=100%>
+<img src=models-and-sketches/domain-model.png width=100%>
 
 
 
@@ -812,7 +812,7 @@ Stepping into a package adds an indentation.
 ## 3.2 Design Model
 **UML of design model**
 
-<img src=https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/design-model.png width=100%>
+<img src=models-and-sketches/design-model.png width=100%>
 
 
 
