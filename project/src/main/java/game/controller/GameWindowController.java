@@ -194,7 +194,7 @@ public class GameWindowController {
 
     // Checks if new highscore
     private void checkHighscore (double time) {
-        String currentLevel = String.format("%d", game.getCurrentLevel().getLevelNr());
+        String currentLevel = String.format("%d", game.getCurrentLevel().getLevelNumber());
 
         // If the time for completing the current level is lesser than the stored time, overwrite it
         if (time < highscoreHandler.getHighscore(currentLevel)) {
