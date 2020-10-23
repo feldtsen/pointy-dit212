@@ -52,6 +52,9 @@ public interface IGame extends IAbilityActionEventHandler, IUpdatable {
     // Returns true when game is completed.
     boolean isGameWin();
 
+    // Return true if you have killed all the enemies
+    boolean isNextLevel();
+
     // Loads the next level
     void nextLevel();
 

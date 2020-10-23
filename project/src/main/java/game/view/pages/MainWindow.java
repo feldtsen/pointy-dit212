@@ -20,7 +20,9 @@ import game.view.pages.score.ScorePanel;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class MainWindow extends StackPane {
     private static final String MAIN_WINDOW_CSS = "mainWindow";
@@ -48,6 +50,8 @@ public class MainWindow extends StackPane {
 
     private final LevelPanel levelPanel;
 
+    private final ScrollPane scrollPane;
+
     public MainWindow(GameWindowController gameWindowController) {
         gameCanvas = new GameCanvas();
         startMenu  = new StartMenu(gameWindowController);
@@ -57,6 +61,7 @@ public class MainWindow extends StackPane {
         gameTitle = new Label(GAME_TITLE);
         gameStatePanel = new GameStatePanel();
         levelPanel = new LevelPanel();
+        scrollPane = new ScrollPane();
 
         // Add a stylesheet
         this.getStylesheets().add(ViewResourceLoader.stylesheet);
@@ -64,6 +69,8 @@ public class MainWindow extends StackPane {
         // Add class for styling
         this.getStyleClass().add(MAIN_WINDOW_CSS);
         gameTitle.getStyleClass().add("gameTitle");
+        scrollPane.getStyleClass().add("menuContent");
+        scrollPane.setFitToWidth(true);
 
         windowSetup();
     }
@@ -76,11 +83,12 @@ public class MainWindow extends StackPane {
                 abilityBar,
                 scorePanel,
                 startMenu,
-                highscorePanel,
-                levelPanel,
                 gameTitle,
-                gameStatePanel
+                gameStatePanel,
+                scrollPane
         );
+
+        scrollPane.setVisible(false);
 
         // Align based on window container
         setAlignment(scorePanel, Pos.TOP_RIGHT);
@@ -88,16 +96,30 @@ public class MainWindow extends StackPane {
         setAlignment(gameTitle, Pos.TOP_CENTER);
         setAlignment(gameStatePanel, Pos.CENTER);
         setAlignment(levelPanel, Pos.TOP_CENTER);
+        setAlignment(scrollPane, Pos.TOP_CENTER);
+        setAlignment(startMenu, Pos.BOTTOM_CENTER);
 
         // Align inside their respective container
         startMenu.setAlignment(Pos.BOTTOM_CENTER);
         abilityBar.setAlignment(Pos.CENTER);
         gameStatePanel.setAlignment(Pos.CENTER);
 
+
         // Bind the size of different components to the window size, making the components responsive
         // (relative to its parent)
         gameCanvas.widthProperty().bind(this.widthProperty());
         gameCanvas.heightProperty().bind(this.heightProperty());
+
+        scrollPane.prefWidthProperty().bind(this.widthProperty());
+
+        levelPanel.prefWidthProperty().bind(this.widthProperty());
+        levelPanel.setAlignment(Pos.CENTER);
+
+        highscorePanel.prefWidthProperty().bind(this.widthProperty());
+        highscorePanel.setAlignment(Pos.CENTER);
+
+        scrollPane.maxHeightProperty().bind(this.heightProperty().multiply(.8));
+        startMenu.maxHeightProperty().bind(this.heightProperty().multiply(.2));
 
         // Enables key presses to get captured at every graphical layer
         gameCanvas.setFocusTraversable(true);
@@ -121,25 +143,23 @@ public class MainWindow extends StackPane {
 
     public void showHighscores () {
         gameTitle.setVisible(false);
-        levelPanel.setVisible(false);
-        highscorePanel.setVisible(!highscorePanel.isVisible());
+
+        scrollPane.setContent(highscorePanel);
+        scrollPane.setVisible(true);
+
         showGameTitle();
     }
 
-    public void clearHighscorePanel () {
-        highscorePanel.getChildren().clear();
-    }
 
     public void showLevelPanel () {
         gameTitle.setVisible(false);
-        highscorePanel.setVisible(false);
-        levelPanel.setVisible(!levelPanel.isVisible());
+
+        scrollPane.setContent(levelPanel);
+        scrollPane.setVisible(true);
+
         showGameTitle();
     }
 
-    public void clearLevelPanel () {
-        levelPanel.getChildren().clear();
-    }
 
     public void addLevelButton(Button load) {
         levelPanel.createEntry(load);
@@ -153,14 +173,20 @@ public class MainWindow extends StackPane {
 
     // Hides menus
     public void hideMenu() {
-        highscorePanel.setVisible(false);
-        levelPanel.setVisible(false);
+        scrollPane.setVisible(false);
         startMenu.setVisible(false);
         gameTitle.setVisible(false);
     }
 
+    public void clearHighscorePanel() {
+       highscorePanel.getChildren().clear();
+    }
+    public void clearLevelPanel() {
+        levelPanel.getChildren().clear();
+    }
+
     private void showGameTitle() {
-        if (!highscorePanel.isVisible() && !levelPanel.isVisible()) gameTitle.setVisible(true);
+        if (!scrollPane.isVisible()) gameTitle.setVisible(true);
     }
 
     // Changes the game state

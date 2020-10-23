@@ -450,6 +450,12 @@ public class Game implements IGame {
         return gameWin;
     }
 
+    @Override
+    public boolean isNextLevel() {
+        if (getCurrentLevel().getEnemies() == null) return false;
+        return  getCurrentLevel().getEnemies().isEmpty();
+    }
+
     // Registers listeners for ability action events
     @Override
     public void registerListener(IAbilityActionEventListener listener) {

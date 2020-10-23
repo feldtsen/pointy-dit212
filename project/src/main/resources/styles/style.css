@@ -16,9 +16,17 @@
 
 
 .highscorePanel {
-    -fx-font-size: 1.2em;
-    -fx-padding: 1em;
-    -fx-spacing: .3em;
+    -fx-padding: 2em;
+    -fx-spacing: 2em;
+}
+
+.highscorePanel > .label{
+    -fx-font-size: 2em;
+}
+
+.levelPanel {
+    -fx-spacing: 2em;
+    -fx-padding: 2em;
 }
 
 .highscorePanel > *  {
@@ -35,7 +43,7 @@
     -fx-border-style:      none;
     -fx-background-color:  rgba(0, 0, 0, 0);
     -fx-text-fill:         BBBBBB;
-    -fx-font-size:         2.4em;
+    -fx-font-size:         2em;
 }
 .button:hover {
     -fx-text-fill: rgb(255, 255, 255);
@@ -51,7 +59,13 @@
 .menuButton {
     -fx-background-color: rgb(255, 255, 255);
     -fx-text-fill: rgb(52, 61, 70);
-    -fx-pref-height: 7em;
+    -fx-max-height: 1000000;
+}
+
+.menuContent {
+    -fx-background: transparent;
+    -fx-background-color: rgba(32, 41, 50, .9);
+
 }
 
 .scorePanel {
@@ -87,9 +101,16 @@
 }
 
 .gameTitle {
-    -fx-padding: 10em 0 0 0;
+    -fx-padding: 2em;
     -fx-text-fill: white!important;
     -fx-font-size: 4em;
+    -fx-background-color: rgba(52, 61, 70, .9);
+    -fx-translate-y: 2em;
+}
+
+.gameStatePanel {
+    -fx-background-color: rgba(52, 61, 70, .9);
+
 }
 
 .gameStateLabel {

@@ -23,6 +23,7 @@ public class GameStatePanel extends VBox {
         // set styles
         gameStateLabel.getStyleClass().add(GAME_STATE_LABEL_CSS);
         gameStateInstructions.getStyleClass().add(GAME_STATE_INSTRUCTIONS_CSS);
+        this.getStyleClass().add("gameStatePanel");
 
         this.getChildren().setAll(
                 gameStateLabel,
