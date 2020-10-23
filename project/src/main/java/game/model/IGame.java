@@ -37,6 +37,9 @@ public interface IGame extends IAbilityActionEventHandler, IUpdatable {
     // Given a level, load that level
     void changeLevel(int levelNr);
 
+    // Checks if the given level exist
+    boolean levelExist(int level);
+
     // Retrieves the game time in String format (time used on the current level)
     double getTime();
 
@@ -48,6 +51,9 @@ public interface IGame extends IAbilityActionEventHandler, IUpdatable {
 
     // Returns true when game is completed.
     boolean isGameWin();
+
+    // Return true if you have killed all the enemies
+    boolean isNextLevel();
 
     // Loads the next level
     void nextLevel();

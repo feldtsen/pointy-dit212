@@ -8,7 +8,6 @@
 package game.view.pages.score;
 
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class HighscorePanel extends VBox {
@@ -21,25 +20,16 @@ public class HighscorePanel extends VBox {
         // with nodes below.
         this.mouseTransparentProperty().setValue(true);
 
-        // Start of as invisible
-        this.setVisible(false);
     }
 
     // Set score view
     public void createScoreEntry (String level, double time) {
-        HBox entryContainer = new HBox();
+        // Highscore entry
+        Label entry = new Label("Level " + level + " - " + String.format("%.1fs", time));
 
-        // Level ID
-        Label lvl = new Label(level + ": ");
-
-        // Score value
-        Label score = new Label(String.format("%.1f", time));
-
-        entryContainer.getChildren().addAll(
-                lvl,
-                score
+        this.getChildren().add(
+                entry
         );
 
-        this.getChildren().add(entryContainer);
     }
 }

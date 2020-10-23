@@ -76,9 +76,32 @@ public class GameWindowController {
         gameLoop = new GameLoop(1000) {
             @Override
             public void update(double delta) {
-                // Render the current level
+                // Shows winning message
+                if(game.isGameWin()) {
+                    handleGameState("YOU WIN", "\nPress ESC to return to the menu.");
+                }
 
+                // Shows game over message
+                if(game.isGameOver()) {
+                    handleGameState("GAME OVER", "\nPress R to play again or ESC to return to the menu.");
+                }
+
+                // Checks if all enemies have been defeated
+                if (game.isNextLevel())  {
+                    // Check if the newly acquired time is better than previously stored
+                    checkHighscore(game.getTime());
+
+
+                    handleGameState("LEVEL COMPLETE", "\nTime " + String.format("%.1f", game.getTime()) + "s. Press R to continue or ESC to return to the menu.");
+
+                }
+
+                // Set facing direction of player
+                updatePlayerFacingDirection();
+
+                // Render the current level
                 renderer.drawEntities(game.getCurrentLevel());
+
                 // Render ability effects
                 renderer.drawAbilities();
 
@@ -94,30 +117,21 @@ public class GameWindowController {
                 // Update the game model with a global time step of 1 (normal speed)
                 game.update(delta, 1);
 
-                // Shows winning message
-                if(game.isGameWin()) handleGameState("YOU WIN", "You da man (or woman). Press ESC to return to menu.");
-
-                // Shows game over message
-                if(game.isGameOver()) handleGameState("GAME OVER", "Press R to play again or ESC to return to menu.");
-
-                // Checks if all enemies have been defeated
-                if (game.getCurrentLevel().getEnemies().isEmpty())  {
-                    checkHighscore(game.getTime());
-
-                    game.nextLevel();
-
-                    handleGameState("LEVEL COMPLETE", "\nScore: " + game.getTime() + "\n\nPress R to continue.");
-
-                }
-
-                // Set facing direction of player
-                updatePlayerFacingDirection();
-                
             }
         };
 
         // Start the game loop. At this point, the game is running.
         gameLoop.start();
+    }
+
+    private void continueGame()  {
+        // Loads the next level
+        game.nextLevel();
+
+        gameLoop.setPaused(false);
+        window.hideUI();
+
+        restart();
     }
 
     private void updatePlayerFacingDirection() {
@@ -146,8 +160,10 @@ public class GameWindowController {
 
         // Clear all entities from screen.
         renderer.clearCanvas();
+
         // Set message
-        window.setGameState( gameStateMessage, gameStateInstructions);
+        window.setGameState(gameStateMessage, gameStateInstructions);
+
         // Show game over message.
         window.showGameState();
 
@@ -192,25 +208,29 @@ public class GameWindowController {
     public void handleMenuLevelButton() {
         window.clearLevelPanel();
 
+        // If we have obtained a highscore for the level, make it possible to load that level from the level pane
         highscoreHandler.getStoredHighscores().forEach((level, time) ->  {
             Button load = new Button("Load level " + level);
             load.setOnMouseClicked(e -> retrieveLevel(Integer.parseInt(level)));
             window.addLevelButton(load);
         });
 
+
         int nextLevelNr = highscoreHandler.getStoredHighscores().size() + 1;
-        Button nextLevel = new Button("Load level " + nextLevelNr);
-        nextLevel.setOnMouseClicked(e ->  retrieveLevel(nextLevelNr));
-        window.addLevelButton(nextLevel);
+        // Check if level exist before adding it to the level panel
+        if (game.levelExist(nextLevelNr)) {
+            Button nextLevel = new Button("Load level " + nextLevelNr);
+            nextLevel.setOnMouseClicked(e -> retrieveLevel(nextLevelNr));
+            window.addLevelButton(nextLevel);
+        }
 
+        // Display the panel where you can select the level
         window.showLevelPanel();
-
     }
 
     private void retrieveLevel(int level) {
-        System.out.println("Changed");
         window.hideMenu();
-        changeLevel(level);
+        game.changeLevel(level);
         restart();
     }
 
@@ -218,10 +238,6 @@ public class GameWindowController {
         window.clearHighscorePanel();
         highscoreHandler.getStoredHighscores().forEach(window::addHighscore);
         window.showHighscores();
-    }
-
-    public void changeLevel(int level) {
-        game.changeLevel(level);
     }
 
     // Button action for starting the game
@@ -272,10 +288,16 @@ public class GameWindowController {
 
         // Registers methods to new keys. Pressing P starts a new game, pressing ESC displays starting menu.
         keyboardInputController.registerPressedAction(KeyCode.R,      ()->{
-            if(gameLoop.isPaused()) restart();
+            if (game.isNextLevel()) continueGame();
+            else if(game.isGameOver()) restart();
         });
+
         keyboardInputController.registerPressedAction(KeyCode.ESCAPE, () -> {
-            if (game.isGameOver() || game.isGameWin()) pauseAndReload();
+            if (game.isNextLevel()) {
+                continueGame();
+                pause();
+            }
+            else if (game.isGameOver() || game.isGameWin()) pauseAndReload();
             else if (gameLoop.isPaused()) unpause();
             else if (!gameLoop.isPaused()) pause();
         });
