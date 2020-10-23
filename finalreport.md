@@ -112,6 +112,8 @@ Top scores for each level are saved in a text file which is handled by class `Hi
 
 The application is tested using unit tests with the framework JUnit. These tests can be found under project/src/main/test. 
 
+The overall code coverage of the application is 45%. The coverage of the model, however, is higher at 82%.  
+
 Continuous Integration is done using Travis to automatically run tests when doing pull requests to ensure nothing merged to master causes tests to fail. 
 
 Link to Travis for our project: https://travis-ci.com/github/feldtsen/pointy-dit212
