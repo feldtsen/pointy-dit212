@@ -1,28 +1,19 @@
 package model.ability;
 
-import game.model.ability.Ability;
 import game.model.ability.IAbility;
 import game.model.ability.ShootBullet;
 import game.model.ability.action.IAbilityAction;
 import game.model.behavior.ability.AbilityBehaviour;
 import game.model.behavior.ability.IAbilityBehaviour;
-import game.model.entity.Entity;
 import game.model.entity.IEntity;
 import game.model.entity.enemy.Enemy;
 import game.model.entity.enemy.IEnemy;
-import game.model.entity.movable.LivingEntity;
-import game.model.entity.movable.MovableEntity;
-import game.model.entity.obstacle.IObstacle;
 import game.model.entity.player.Player;
 import game.model.entity.projectile.IProjectile;
-import game.model.entity.projectile.Projectile;
 import game.model.level.ILevel;
 import game.model.level.Level;
-import game.model.shape2d.Circle;
 import javafx.geometry.Point2D;
-import org.junit.Before;
 import org.junit.Test;
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +62,7 @@ public class ShootBulletTest {
         init();
         shoot();
 
-        assertTrue(level.getProjectiles().size() == 1);
+        assertEquals(1, level.getProjectiles().size());
     }
 
     @Test
@@ -79,7 +70,7 @@ public class ShootBulletTest {
         init();
         shoot();
         IProjectile<?> bullet = level.getProjectiles().get(0);
-        assertTrue(bullet.getVelocity().magnitude() == 5);
+        assertEquals(5, bullet.getVelocity().magnitude(), 0.0);
     }
 
     private void shoot() {

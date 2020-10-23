@@ -8,7 +8,6 @@ import game.model.ability.action.IAbilityAction;
 import game.model.behavior.ability.AbilityBehaviour;
 import game.model.behavior.ability.SingleAbilityBehavior;
 import game.model.entity.IEntity;
-import game.model.entity.enemy.Enemy;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.movable.MovableEntity;
 import game.model.entity.obstacle.IObstacle;
@@ -26,7 +25,6 @@ import javafx.geometry.Point2D;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 

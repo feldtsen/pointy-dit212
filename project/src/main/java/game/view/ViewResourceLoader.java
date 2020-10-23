@@ -8,8 +8,6 @@
 package game.view;
 
 import game.App;
-import javafx.animation.FadeTransition;
-import javafx.util.Duration;
 
 public class ViewResourceLoader {
     // The stylesheet defines styles for buttons and other UI elements

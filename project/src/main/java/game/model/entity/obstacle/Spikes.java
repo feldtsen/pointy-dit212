@@ -12,7 +12,6 @@ import game.model.entity.Entity;
 import game.model.entity.IStrength;
 import game.model.entity.movable.ILiving;
 import game.model.entity.movable.IMovable;
-import game.model.entity.movable.LivingEntity;
 import game.model.shape2d.Rectangle;
 import javafx.geometry.Point2D;
 

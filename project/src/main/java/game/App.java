@@ -7,9 +7,7 @@
 package game;
 
 import game.controller.GameWindowController;
-import game.model.audio.AudioHandler;
 import game.view.ViewResourceLoader;
-import game.view.pages.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Screen;

@@ -2,11 +2,9 @@ package model.ability;
 
 import game.model.ability.Ability;
 import game.model.ability.IAbility;
-import game.model.ability.ShootBullet;
 import game.model.ability.action.AbilityAction;
 import game.model.ability.action.IAbilityAction;
 import game.model.entity.IEntity;
-import game.model.entity.enemy.IEnemy;
 import game.model.entity.player.Player;
 import game.model.level.ILevel;
 import javafx.geometry.Point2D;
@@ -15,8 +13,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AbilityTest {
-    private IEntity<?> dummy1 = new Player(new Point2D(0, 0), 1, 1, 1,0);
-    private IEntity<?> dummy2 = new Player(new Point2D(0, 0), 1, 1, 1,0);
+    private final IEntity<?> dummy1 = new Player(new Point2D(0, 0), 1, 1, 1,0);
+    private final IEntity<?> dummy2 = new Player(new Point2D(0, 0), 1, 1, 1,0);
 
     private IAbilityAction getAction() {
         return new IAbilityAction() {

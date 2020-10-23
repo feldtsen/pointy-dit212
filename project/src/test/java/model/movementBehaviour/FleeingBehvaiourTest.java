@@ -68,7 +68,7 @@ public class FleeingBehvaiourTest {
             enemy.update(0.1, 1);
 
             // The enemy is strafing if its velocity vector is orthogonal to the original vector from the enemy to the player.
-            assertTrue(difVector.dotProduct(enemy.getVelocity()) == 0);
+            assertEquals(0, difVector.dotProduct(enemy.getVelocity()), 0.0);
         }
     }
 }

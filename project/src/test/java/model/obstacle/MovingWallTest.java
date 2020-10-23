@@ -24,14 +24,14 @@ public class MovingWallTest {
     @Test
     public void testMovementX() {
 
-        boolean b = false;
+        boolean b;
 
         double xStart = wallX.getPosition().getX();
         double yStart = wallX.getPosition().getY();
 
         wallX.update(1,1);
         assertNotEquals(xStart, wallX.getPosition().getX(), 0.0);
-        assertTrue(yStart == wallX.getPosition().getY());
+        assertEquals(yStart, wallX.getPosition().getY(), 0.0);
 
         while(true) {
             wallX.update(1,1);
@@ -41,9 +41,8 @@ public class MovingWallTest {
             }
         }
         assertTrue(b);
-        assertTrue(yStart == wallX.getPosition().getY());
+        assertEquals(yStart, wallX.getPosition().getY(), 0.0);
 
-        b = false;
         while(true) {
             wallX.update(1,1);
             if (wallX.getPosition().getX() == xStart) {
@@ -52,7 +51,7 @@ public class MovingWallTest {
             }
         }
         assertTrue(b);
-        assertTrue(yStart == wallX.getPosition().getY());
+        assertEquals(yStart, wallX.getPosition().getY(), 0.0);
 
 
 
@@ -60,17 +59,16 @@ public class MovingWallTest {
     @Test
     public void testMovementY() {
 
-        boolean b = false;
+        boolean b;
 
         double xStart = wallY.getPosition().getX();
         double yStart = wallY.getPosition().getY();
 
         wallY.update(1,1);
         assertNotEquals(yStart, wallY.getPosition().getY(), 0.0);
-        assertTrue(xStart == wallY.getPosition().getX());
+        assertEquals(xStart, wallY.getPosition().getX(), 0.0);
 
 
-        b = false;
         while(true) {
             wallY.update(1,1);
             if (wallY.getPosition().getY() == yStart) {
@@ -79,9 +77,8 @@ public class MovingWallTest {
             }
         }
         assertTrue(b);
-        assertTrue(xStart == wallY.getPosition().getX());
+        assertEquals(xStart, wallY.getPosition().getX(), 0.0);
 
-        b = false;
         while(true) {
             wallY.update(1,1);
             if (wallY.getPosition().getX() == yStart) {
@@ -90,6 +87,6 @@ public class MovingWallTest {
             }
         }
         assertTrue(b);
-        assertTrue(xStart == wallY.getPosition().getX());
+        assertEquals(xStart, wallY.getPosition().getX(), 0.0);
     }
 }

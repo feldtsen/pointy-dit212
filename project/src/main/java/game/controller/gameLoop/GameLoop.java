@@ -11,10 +11,7 @@
 
 package game.controller.gameLoop;
 
-import game.util.Timer;
 import javafx.animation.AnimationTimer;
-
-import java.util.concurrent.TimeUnit;
 
 public abstract class GameLoop implements IGameLoop {
     // A second in nanoseconds. This value is used for various calculations, for example when

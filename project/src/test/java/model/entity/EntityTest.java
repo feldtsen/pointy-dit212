@@ -7,8 +7,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class EntityTest {
-    Entity<IRectangle> testRectangle = createEntityRectangle(new Point2D(0, 0), 1, 1, 0);
-    Entity<ICircle> testCircle = createEntityCircle(new Point2D(0, 0), 1);
+    final Entity<IRectangle> testRectangle = createEntityRectangle(new Point2D(0, 0), 1, 1, 0);
+    final Entity<ICircle> testCircle = createEntityCircle(new Point2D(0, 0), 1);
 
     // Helper method required for initializing an anonymous instance of the abstract class with a circle shape.
     public Entity<ICircle> createEntityCircle(Point2D position, double radius) {
@@ -42,13 +42,13 @@ public class EntityTest {
         Entity<IRectangle> rectangle3 = createEntityRectangle(new Point2D(0, -1.0001), 1, 1, 0);
 
 
-        assertFalse(testCircle.checkCollision(circle0) != null);
-        assertFalse(testRectangle.checkCollision(circle1) != null);
-        assertFalse(testRectangle.checkCollision(circle2) != null);
-        assertFalse(testRectangle.checkCollision(rectangle0) != null);
-        assertFalse(testRectangle.checkCollision(rectangle1) != null);
-        assertFalse(testRectangle.checkCollision(rectangle2) != null);
-        assertFalse(testRectangle.checkCollision(rectangle3) != null);
+        assertNull(testCircle.checkCollision(circle0));
+        assertNull(testRectangle.checkCollision(circle1));
+        assertNull(testRectangle.checkCollision(circle2));
+        assertNull(testRectangle.checkCollision(rectangle0));
+        assertNull(testRectangle.checkCollision(rectangle1));
+        assertNull(testRectangle.checkCollision(rectangle2));
+        assertNull(testRectangle.checkCollision(rectangle3));
     }
 
     @Test
@@ -56,10 +56,10 @@ public class EntityTest {
         Entity<ICircle> circle0 = createEntityCircle(new Point2D(1.4, 0), 1);
         Entity<IRectangle> rectangle0 = createEntityRectangle(new Point2D(0.75, 0), 1, 1, 0);
 
-        assertTrue(testCircle.checkCollision(circle0) != null);
-        assertTrue(testCircle.checkCollision(rectangle0) != null);
-        assertTrue(testRectangle.checkCollision(circle0) != null);
-        assertTrue(testRectangle.checkCollision(rectangle0) != null);
+        assertNotNull(testCircle.checkCollision(circle0));
+        assertNotNull(testCircle.checkCollision(rectangle0));
+        assertNotNull(testRectangle.checkCollision(circle0));
+        assertNotNull(testRectangle.checkCollision(rectangle0));
     }
 
     @Test
@@ -70,9 +70,9 @@ public class EntityTest {
         Entity<IRectangle> rectangle0 = createEntityRectangle(new Point2D(1, 1), 1, 1, 0);
         Entity<IRectangle> rectangle1 = createEntityRectangle(new Point2D(-1, 0), 1, 1, 0);
 
-        assertTrue(testCircle.checkCollision(circle0) != null);
-        assertTrue(testRectangle.checkCollision(circle1) != null);
-        assertTrue(testRectangle.checkCollision(rectangle0) != null);
-        assertTrue(testRectangle.checkCollision(rectangle1) != null);
+        assertNotNull(testCircle.checkCollision(circle0));
+        assertNotNull(testRectangle.checkCollision(circle1));
+        assertNotNull(testRectangle.checkCollision(rectangle0));
+        assertNotNull(testRectangle.checkCollision(rectangle1));
     }
 }

@@ -1,10 +1,8 @@
 package model.shape;
 
-import game.model.entity.Entity;
 import game.model.entity.obstacle.Wall;
 import game.model.entity.player.Player;
 import game.model.shape2d.Circle;
-import game.model.shape2d.IShape2D;
 import game.model.shape2d.Rectangle;
 import game.model.shape2d.Triangle;
 import game.services.EntityFactory;
@@ -12,7 +10,6 @@ import game.util.Shapes;
 import javafx.geometry.Point2D;
 import org.junit.Test;
 
-import java.awt.*;
 import java.util.Random;
 
 import static org.junit.Assert.*;
@@ -39,7 +36,7 @@ public class ShapesTest {
             }
 
             // After applying the mtv, the collision should no longer occur.
-            assertTrue(player.checkCollision(wall) == null);
+            assertNull(player.checkCollision(wall));
         }
     }
 
@@ -60,10 +57,10 @@ public class ShapesTest {
         Triangle t4 = new Triangle(2, 2, 0);
         Point2D p4 = new Point2D(0, 2);
 
-        assertTrue(Shapes.testCollision(c, pc, t1, p1) != null);
-        assertTrue(Shapes.testCollision(c, pc, t2, p2) != null);
-        assertTrue(Shapes.testCollision(c, pc, t3, p3) != null);
-        assertTrue(Shapes.testCollision(c, pc, t4, p4) != null);
+        assertNotNull(Shapes.testCollision(c, pc, t1, p1));
+        assertNotNull(Shapes.testCollision(c, pc, t2, p2));
+        assertNotNull(Shapes.testCollision(c, pc, t3, p3));
+        assertNotNull(Shapes.testCollision(c, pc, t4, p4));
     }
 
     @Test
@@ -77,8 +74,8 @@ public class ShapesTest {
         Triangle t2 = new Triangle(3, 1.5, 0);
         Point2D p2 = new Point2D(-1.5, -0.75);
 
-        assertFalse(Shapes.testCollision(r, pr, t1, p1) != null);
-        assertFalse(Shapes.testCollision(r, pr, t2, p2) != null);
+        assertNull(Shapes.testCollision(r, pr, t1, p1));
+        assertNull(Shapes.testCollision(r, pr, t2, p2));
     }
 
     @Test
@@ -88,7 +85,7 @@ public class ShapesTest {
         Point2D p1 = new Point2D(0,0);
         Point2D p2 = new Point2D(9,0);
 
-        assertTrue(Shapes.testCollision(c1,p1,c2,p2) != null);
+        assertNotNull(Shapes.testCollision(c1, p1, c2, p2));
 
     }
 
@@ -99,7 +96,7 @@ public class ShapesTest {
         Point2D p1 = new Point2D(0,0);
         Point2D p2 = new Point2D(7,0);
 
-        assertTrue(Shapes.testCollision(c1,p1,c2,p2) != null);
+        assertNotNull(Shapes.testCollision(c1, p1, c2, p2));
 
     }
 
@@ -110,7 +107,7 @@ public class ShapesTest {
         Point2D p1 = new Point2D(120,0);
         Point2D p2 = new Point2D(9,0);
 
-        assertFalse(Shapes.testCollision(c1,p1,c2,p2) != null);
+        assertNull(Shapes.testCollision(c1, p1, c2, p2));
     }
 
     @Test
@@ -144,11 +141,11 @@ public class ShapesTest {
         Rectangle r5 = new Rectangle(1, 1, 0);
         Point2D p5 = new Point2D(0, -1);
 
-        assertTrue(Shapes.testCollision(r1, p1, r2, p2) != null);
-        assertTrue(Shapes.testCollision(r1, p1, r2, p2) != null);
-        assertTrue(Shapes.testCollision(r1, p1, r3, p3) != null);
-        assertTrue(Shapes.testCollision(r1, p1, r4, p4) != null);
-        assertTrue(Shapes.testCollision(r1, p1, r5, p5) != null);
+        assertNotNull(Shapes.testCollision(r1, p1, r2, p2));
+        assertNotNull(Shapes.testCollision(r1, p1, r2, p2));
+        assertNotNull(Shapes.testCollision(r1, p1, r3, p3));
+        assertNotNull(Shapes.testCollision(r1, p1, r4, p4));
+        assertNotNull(Shapes.testCollision(r1, p1, r5, p5));
     }
 
     @Test
@@ -168,10 +165,10 @@ public class ShapesTest {
         Rectangle r5 = new Rectangle(1, 1, 0);
         Point2D p5 = new Point2D(0, -1.01);
 
-        assertFalse(Shapes.testCollision(r1, p1, r2, p2) != null);
-        assertFalse(Shapes.testCollision(r1, p1, r3, p3) != null);
-        assertFalse(Shapes.testCollision(r1, p1, r4, p4) != null);
-        assertFalse(Shapes.testCollision(r1, p1, r5, p5) != null);
+        assertNull(Shapes.testCollision(r1, p1, r2, p2));
+        assertNull(Shapes.testCollision(r1, p1, r3, p3));
+        assertNull(Shapes.testCollision(r1, p1, r4, p4));
+        assertNull(Shapes.testCollision(r1, p1, r5, p5));
     }
 
     @Test
@@ -186,9 +183,9 @@ public class ShapesTest {
 
         Point2D pr3 = new Point2D(-1.5, 0);
 
-        assertTrue(Shapes.testCollision(rect1, pr1, circle, pc) != null);
-        assertTrue(Shapes.testCollision(rect1, pr2, circle, pc) != null);
-        assertTrue(Shapes.testCollision(rect1, pr3, circle, pc) != null);
+        assertNotNull(Shapes.testCollision(rect1, pr1, circle, pc));
+        assertNotNull(Shapes.testCollision(rect1, pr2, circle, pc));
+        assertNotNull(Shapes.testCollision(rect1, pr3, circle, pc));
     }
 
     @Test
@@ -206,10 +203,10 @@ public class ShapesTest {
 
         Point2D pr4 = new Point2D(0, -1.51);
 
-        assertFalse(Shapes.testCollision(rect1, pr1, circle, pc) != null);
-        assertFalse(Shapes.testCollision(rect2, pr2, circle, pc) != null);
-        assertFalse(Shapes.testCollision(rect1, pr3, circle, pc) != null);
-        assertFalse(Shapes.testCollision(rect2, pr4, circle, pc) != null);
+        assertNull(Shapes.testCollision(rect1, pr1, circle, pc));
+        assertNull(Shapes.testCollision(rect2, pr2, circle, pc));
+        assertNull(Shapes.testCollision(rect1, pr3, circle, pc));
+        assertNull(Shapes.testCollision(rect2, pr4, circle, pc));
     }
 
     @Test
@@ -224,10 +221,10 @@ public class ShapesTest {
         Point2D pr3 = new Point2D(-1.5, 0);
         Point2D pr4 = new Point2D(0, -1.5);
 
-        assertTrue(Shapes.testCollision(rectangle, pr1, circle, pc) != null);
-        assertTrue(Shapes.testCollision(rectangle, pr2, circle, pc) != null);
-        assertTrue(Shapes. testCollision(rectangle, pr3, circle, pc) != null);
-        assertTrue(Shapes.testCollision(rectangle, pr4, circle, pc) != null);
+        assertNotNull(Shapes.testCollision(rectangle, pr1, circle, pc));
+        assertNotNull(Shapes.testCollision(rectangle, pr2, circle, pc));
+        assertNotNull(Shapes.testCollision(rectangle, pr3, circle, pc));
+        assertNotNull(Shapes.testCollision(rectangle, pr4, circle, pc));
 
     }
 
