@@ -7,9 +7,7 @@
 
 package game.model.score;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public interface IHighscoreHandler {
     // Given a level, returns the highscore for that level

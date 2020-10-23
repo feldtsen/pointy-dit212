@@ -499,7 +499,7 @@ Displayed when the game is launched.
 
 ## 3.1.1 Class responsibilities
 
-(Explanation of responsibilities of classes in diagram)
+Explanation of responsibilities of classes in diagram. (More details in the actual class) 
 Stepping into a package adds an indentation.
 > # controller (package)
 >> ## event (package)
@@ -758,6 +758,10 @@ Stepping into a package adds an indentation.
 >>> ### gameState (package)
 >>>> #### GameStatePanel 
 >>>> Panel for displaying information about a particular game state.
+
+>>> ### level (package)
+>>>> #### LevelPanel 
+>>>> Panel for displaying acquired levels
 
 >>> ### menu (package)
 >>>> #### buttons (package)
