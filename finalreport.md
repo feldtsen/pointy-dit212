@@ -816,7 +816,6 @@ Stepping into a package adds an indentation.
 
 <img src=models-and-sketches/design-model.png width=100%>
 
-# SDD
 # System Design Document for Pointy
 
 **Authors:** Anton Hildingsson, Erik Magnusson, Joachim Ørfeldt Pedersen, Mattias Oom, Simon Genne
