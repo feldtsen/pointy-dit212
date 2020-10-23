@@ -53,34 +53,34 @@ Here follows a set of diagrams over all our packages. We have decided to leave t
 
 |                                                                                                                                                                                                  |                                                                                                                     |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- | 
-| <img src="models-and-sketches/package-diagrams/controller.png">                                                                            | <img src="models-and-sketches/package-diagrams/gameloop.png"> |
+| <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/controller.png">                                                                            | <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/gameloop.png"> |
 | GameWindowController creates a game loop, during which, it will use the Keyboard- and MouseInputHandler to gather input from the user and apply these to the model.                              | GameLoop implements the template of the game loop that will be used by GameWindowController.                        |
-| <img src="models-and-sketches/package-diagrams/model.png">                                                                                 | <img src="models-and-sketches/package-diagrams/ability.png">  |
+| <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/model.png">                                                                                 | <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/ability.png">  |
 |Game is what connects the different parts of the model. It will update the state of all the entities during the gameplay, according to interactions between them and inputs from the outside.     | Abilities can be used by the player and enemies during gameplay to impact other entities.|
-|<img src="models-and-sketches/package-diagrams/action.png">                                                                                 | <img src="models-and-sketches/package-diagrams/behavior.png" >|
+|<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/action.png">                                                                                 | <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/behavior.png" >|
 |AbilityActions are created by Abilites to apply their desired affects onto the game.                                                                                                              | Behaviours control the actions of enemies.                                                                                                                                                         |
-|<img src="models-and-sketches/package-diagrams/behavior-ability.png">                                                                       | <img src="models-and-sketches/package-diagrams/movement.png" >|
+|<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/behavior-ability.png">                                                                       | <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/movement.png" >|
 |AbilityBehaviours control how an enemy uses its abilities.                                                                                                                                        | MovementBehaviours control the movement of an enemy.                                                                                                                                                                        |
-|<img src="models-and-sketches/package-diagrams/entitiy.png">                                                                                | <img src="models-and-sketches/package-diagrams/enemy.png">|
+|<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/entitiy.png">                                                                                | <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/enemy.png">|
 |Entities represent all active objects in the game, such as players, enemies, obstacles, projectiles, and so on.                                                                                   | Enemies are the opponents of the player. Acts according to its behaviours. Different enemy types are achieved through different combinations of behaviours.                                                                                                                            |
-|<img src="models-and-sketches/package-diagrams/movable.png">                                                                                | <img src="models-and-sketches/package-diagrams/obstacle.png">|
+|<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/movable.png">                                                                                | <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/obstacle.png">|
 |MovableEntity represents something that can move. Implements the movement functionality for all movable entities in the game.                                                                     | Neutral elements that can hinder the movement of other entities and/or cause damage to them. |
-|<img src="models-and-sketches/package-diagrams/player.png">                                                                                 | <img src="models-and-sketches/package-diagrams/projectile.png">|
+|<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/player.png">                                                                                 | <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/projectile.png">|
 |Player represents the entity controlled by the player of the game.                                                                                                                                | Projectiles can be fired by some enemies and cause damage to certain entities. Bullets will get a velocity when created, which will remain until they are destroyed. Missiles will change their velocities according to the movement of their targets. |
-|<img src="models-and-sketches/package-diagrams/level.png">                                                                                  | <img src="models-and-sketches/package-diagrams/shape2d.png">|
+|<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/level.png">                                                                                  | <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/shape2d.png">|
 |A Level stores the contents of a playable level, together with information about width and height of the map.                                                                                     | Shape2D represents the shape of an entity. It stores methods relevant for rendering and collision checking.     |
-|<img src="models-and-sketches/package-diagrams/services.png">                                                                               | <img src="models-and-sketches/package-diagrams/util.png">|
+|<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/services.png">                                                                               | <img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/util.png">|
 |LevelLoader creates levels from JSON-files that specify the contents of the level. EntityFactory creates entities of different sorts.                                                             | Utils contains helper methods for handling vectors. Shapes contains methods for manipulating shapes. |
-|<img src="models-and-sketches/package-diagrams/view.png">                                                                                   ||
+|<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/package-diagrams/view.png">                                                                                   ||
 |Renderer uses RenderUtils to draw entities to the screen.                                                                                                                                         ||
 
 **Design model:**
 
-<img src=models-and-sketches/design-model.png width=100%>
+<img src=https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/design-model.png width=100%>
 
 **Domain model:**
 
-<img src="models-and-sketches/domain-model.png" width=100%>
+<img src="https://github.com/feldtsen/pointy-dit212/blob/master/models-and-sketches/domain-model.png" width=100%>
 
 ### 3.1 Relation between domain model and design model
 
@@ -100,7 +100,6 @@ The `Ability` in the domain model creates 0..* projectiles. In the design model,
 * Template method pattern, letting Ability implement a method that is dependent on an abstract method implemented by subclasses.
 * Visitor pattern, shapes accept a visitor to do specific action for different shapes
 * Observer pattern, the view listens for ability action events sent by the game. This is used to indicate when to draw certain effects to the screen.
-* [NOTE] Singleton pattern is an option for KeyboardInputHandler (previously were) and MouseInputHandler, but this results in harder to test code and less readable code in general since we could reference the instance from anywhere in the codebase. Hence we no longer use the singleton pattern. 
 
 ## 4. Persistent data management
 
@@ -112,6 +111,8 @@ Top scores for each level are saved in a text file which is handled by class `Hi
 ## 5. Quality
 
 The application is tested using unit tests with the framework JUnit. These tests can be found under project/src/main/test. 
+
+The overall code coverage of the application is 45%. The coverage of the model, however, is higher at 82%.  
 
 Continuous Integration is done using Travis to automatically run tests when doing pull requests to ensure nothing merged to master causes tests to fail. 
 

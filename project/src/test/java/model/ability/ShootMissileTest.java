@@ -16,11 +16,10 @@ import static org.junit.Assert.*;
 
 public class ShootMissileTest {
     private IEnemy user;
-    private IPlayer target;
     private ILevel level;
 
     private void init() {
-        target = EntityFactory.basicPlayer(100, 100);
+        IPlayer target = EntityFactory.basicPlayer(100, 100);
         user = EntityFactory.missileEnemy(0, 0, target, 1);
 
         List<IEnemy> enemies = new ArrayList<>();
@@ -34,7 +33,7 @@ public class ShootMissileTest {
         init();
 
         // Initially the number of projectiles should be 0.
-        assertTrue(level.getProjectiles().size() == 0);
+        assertEquals(0, level.getProjectiles().size());
 
         // Apply ability (create missile).
         IAbilityAction abilityAction = user.applyAbility();

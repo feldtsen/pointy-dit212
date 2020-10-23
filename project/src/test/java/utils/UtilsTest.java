@@ -4,8 +4,6 @@ import game.util.Utils;
 import javafx.geometry.Point2D;
 import org.junit.Test;
 
-import java.nio.channels.Pipe;
-
 import static org.junit.Assert.assertEquals;
 
 public class UtilsTest {

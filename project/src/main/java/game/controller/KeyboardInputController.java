@@ -36,9 +36,7 @@ public  class KeyboardInputController {
 
         // The register and unregister methods will be called on key press and key release, respectively.
         // Simply adds a keycode to the set of currently pressed keys.
-        node.setOnKeyPressed(e ->   {
-            pressedKeys.add(e.getCode());
-        });
+        node.setOnKeyPressed(e -> pressedKeys.add(e.getCode()));
         // Removes a keycode from the set of currently pressed keys.
         node.setOnKeyReleased(e -> {
             pressedKeys.remove(e.getCode());

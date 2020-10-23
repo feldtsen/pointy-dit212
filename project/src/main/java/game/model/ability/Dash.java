@@ -78,7 +78,7 @@ public class Dash extends Ability {
             user.setMaxSpeed(user.getMaxSpeed() / maxSpeedMultiplier);
             user.setIsInvulnerable(false);
         }
-    };
+    }
 
     public Dash(long cooldown, double length, double speedMultiplier) {
         super(cooldown);

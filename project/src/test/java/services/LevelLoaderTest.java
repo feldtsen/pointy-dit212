@@ -9,8 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import java.io.FileNotFoundException;
-
 
 // Test class for level loader.
 // Level data is found in src/main/resources/levels/test.json - make sure data corresponds to test values.
@@ -28,8 +26,8 @@ public class LevelLoaderTest {
     @Test
     // Test to see if the lists of entities correspond to the number in the level file
     public void entityListProperties() {
-        assertTrue(level.getObstacles().size() == 2);
-        assertTrue(level.getEnemies().size() == 3);
+        assertEquals(2, level.getObstacles().size());
+        assertEquals(3, level.getEnemies().size());
         assertTrue(level.getProjectiles().isEmpty());
     }
 
@@ -38,8 +36,8 @@ public class LevelLoaderTest {
     public void playerPositionTest() {
         double x = 500;
         double y = 500;
-        assertTrue(level.getPlayer().getPosition().getX() == x);
-        assertTrue(level.getPlayer().getPosition().getX() == y);
+        assertEquals(level.getPlayer().getPosition().getX(), x, 0.0);
+        assertEquals(level.getPlayer().getPosition().getX(), y, 0.0);
     }
 
     @Test
@@ -47,8 +45,8 @@ public class LevelLoaderTest {
         double x = 100;
         double y = 100;
         for (IEnemy e : level.getEnemies()) {
-            assertTrue(e.getPosition().getX() == x);
-            assertTrue(e.getPosition().getY() == y);
+            assertEquals(e.getPosition().getX(), x, 0.0);
+            assertEquals(e.getPosition().getY(), y, 0.0);
             x += 100;
             y += 100;
         }
@@ -59,8 +57,8 @@ public class LevelLoaderTest {
         double x = 300;
         double y = 300;
         for (IObstacle o : level.getObstacles()) {
-            assertTrue(o.getPosition().getX() == x);
-            assertTrue(o.getPosition().getY() == y);
+            assertEquals(o.getPosition().getX(), x, 0.0);
+            assertEquals(o.getPosition().getY(), y, 0.0);
             x += 300;
             y += 300;
         }

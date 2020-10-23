@@ -1,24 +1,17 @@
 package model.ability;
 
-import game.model.Game;
 import game.model.ability.Dash;
 import game.model.ability.IAbility;
-import game.model.ability.Shockwave;
 import game.model.ability.action.IAbilityAction;
-import game.model.entity.Entity;
 import game.model.entity.enemy.IEnemy;
 import game.model.entity.player.IPlayer;
 import game.model.entity.player.Player;
 import game.model.level.ILevel;
-import game.model.level.Level;
 import game.services.EntityFactory;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 public class DashTest {
@@ -27,7 +20,7 @@ public class DashTest {
     IPlayer player;
     IEnemy enemy;
 
-    double length = 3000;
+    final double length = 3000;
 
 
     // TODO: Maybe change implementation of dash before creating more tests

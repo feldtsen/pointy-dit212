@@ -14,7 +14,7 @@ import game.model.entity.IEntity;
 import game.model.shape2d.IShape2D;
 import javafx.geometry.Point2D;
 
-public interface IMovable<T extends IShape2D> extends IUpdatable, IEntity<T> {
+public interface IMovable<T extends IShape2D> extends IEntity<T> {
     // Offsets the object by set amount.
     void move(Point2D offset);
 

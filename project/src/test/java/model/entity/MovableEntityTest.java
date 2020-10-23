@@ -1,6 +1,5 @@
 package model.entity;
 
-import game.model.entity.IEntity;
 import game.model.entity.movable.MovableEntity;
 import game.util.Utils;
 import javafx.geometry.Point2D;

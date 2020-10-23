@@ -41,13 +41,13 @@ public class Game implements IGame {
     private boolean gameWin;
 
     // An iterator over the existing levels
-    private ILevelLoader levelLoader;
+    private final ILevelLoader levelLoader;
 
     // The current, active level
     private ILevel currentLevel;
 
     // Timer used for the score system
-    Timer timer;
+    final Timer timer;
 
     // This value represents the position the player is "looking towards".
     //private Point2D playerFacingPosition;

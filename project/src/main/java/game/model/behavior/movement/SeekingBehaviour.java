@@ -9,7 +9,6 @@ package game.model.behavior.movement;
 
 import game.model.entity.IEntity;
 import game.model.entity.movable.IMovable;
-import game.model.entity.movable.MovableEntity;
 import game.util.Utils;
 import javafx.geometry.Point2D;
 

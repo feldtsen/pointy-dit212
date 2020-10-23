@@ -18,10 +18,10 @@ import javafx.scene.shape.ArcType;
 public class RendererUtils {
     // Helper class for defining an object with coordinates and dimensions
     private static class Quartet {
-        public double x;
-        public double y;
-        public double w;
-        public double h;
+        public final double x;
+        public final double y;
+        public final double w;
+        public final double h;
         public Quartet(double x, double y, double w, double h) {
             this.x = x;
             this.y = y;

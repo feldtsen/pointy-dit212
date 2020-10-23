@@ -24,7 +24,7 @@ public class ShockwaveTest {
     ILevel level;
     IPlayer player;
     IEnemy enemy;
-    double radius = 100;
+    final double radius = 100;
     double force;
 
     @Before

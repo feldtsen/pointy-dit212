@@ -13,8 +13,7 @@ import javafx.scene.layout.VBox;
 
 // Used for displaying the players current score.
 public class ScorePanel extends VBox implements IScorePanel {
-    private Label scoreLabel = new Label(" T I M E ");
-    private Label score = new Label();
+    private final Label score = new Label();
 
     public ScorePanel() {
         // Set id for css.
@@ -22,6 +21,7 @@ public class ScorePanel extends VBox implements IScorePanel {
 
         // Set css classes
         this.getStyleClass().add("scorePanel");
+        Label scoreLabel = new Label(" T I M E ");
         scoreLabel.getStyleClass().add("scoreLabel");
         score.getStyleClass().add("score");
 

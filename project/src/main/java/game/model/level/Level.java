@@ -64,8 +64,8 @@ public class Level implements ILevel {
     @Override
     public IPlayer getPlayer() {
         return this.player;
-    };
-    
+    }
+
 
     @Override
     public double getWidth(){
@@ -78,7 +78,7 @@ public class Level implements ILevel {
     }
 
     @Override
-    public int getLevelNr() {
+    public int getLevelNumber() {
         return this.levelNr;
     }
 

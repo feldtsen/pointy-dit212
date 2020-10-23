@@ -4,7 +4,6 @@ package model.projectile;
 import game.model.behavior.movement.SeekingBehaviour;
 import game.model.entity.movable.MovableEntity;
 import game.model.entity.projectile.Missile;
-import game.model.entity.projectile.Projectile;
 import game.model.shape2d.Circle;
 import game.services.EntityFactory;
 import javafx.geometry.Point2D;
@@ -16,8 +15,9 @@ public class MissileTest {
     private Missile missile;
 
     private void init() {
-        target = new MovableEntity<Circle>(new Point2D(10, 0), 3, 3,
-                new Circle(1)) {};
+        target = new MovableEntity<>(new Point2D(10, 0), 3, 3,
+                new Circle(1)) {
+        };
 
         Point2D velocity = target.getPosition();
 
@@ -34,7 +34,7 @@ public class MissileTest {
     missile.update(1, 1);
 
     // The y-component of the missiles velocity should initially be 0.
-    assertTrue(missile.getVelocity().getY() == 0);
+        assertEquals(0, missile.getVelocity().getY(), 0.0);
 
     target.setVelocity(new Point2D(0, 3));
     target.update(1, 1);
@@ -51,6 +51,6 @@ public class MissileTest {
 
         missile.setTarget(newTarget);
 
-        assertTrue(missile.getTarget() == newTarget);
+        assertSame(missile.getTarget(), newTarget);
     }
 }

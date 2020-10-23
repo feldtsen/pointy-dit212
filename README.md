@@ -10,7 +10,7 @@ The goal of the player is to defeat all enemies. The game contains multiple leve
 * java-11 (java-11-openjdk) 
 * javafx-15 (automatically imported by maven)
 * junit-4.11 (automatically imported by maven)
-* gson-2.8.5 
+* gson-2.8.5 (automatically imported by maven)
 
 # Project setup
 ## Intellij 

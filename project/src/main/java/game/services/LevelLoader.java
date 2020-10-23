@@ -16,6 +16,8 @@ import game.model.entity.player.IPlayer;
 import game.model.entity.projectile.IProjectile;
 import game.model.level.ILevel;
 import game.model.level.Level;
+import game.view.ViewResourceLoader;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -24,12 +26,9 @@ import java.util.List;
 // Class for loading levels using GSON JSON parser.
 public class LevelLoader implements ILevelLoader {
 
-    private String path;
+    private final String path;
     private JsonObject levelJSON;
     private int levelNr;
-
-    private final double LEVEL_WIDTH = 1200;
-    private final double LEVEL_HEIGHT = 675;
 
     // Constructor takes the level ID in form of a string and parses the level data into a JSON object.
     public LevelLoader(String path)  {
@@ -40,7 +39,7 @@ public class LevelLoader implements ILevelLoader {
     // Get the level corresponding to levelNr.
     @Override
     public ILevel getLevel()  {
-        String filePath = path + Integer.toString(levelNr) + ".json";
+        String filePath = path + levelNr + ".json";
         try {
             levelJSON = new JsonParser().parse(new FileReader(filePath)).getAsJsonObject();
 
@@ -50,6 +49,8 @@ public class LevelLoader implements ILevelLoader {
             List<IEnemy> enemies = loadEnemies(player);
             List<IProjectile<?>> projectiles = loadProjectiles();
 
+            double LEVEL_WIDTH = ViewResourceLoader.INITIAL_WIDTH;
+            double LEVEL_HEIGHT = ViewResourceLoader.INITIAL_HEIGHT;
             return new Level(levelNr, enemies, projectiles, obstacles, player, LEVEL_WIDTH, LEVEL_HEIGHT);
         } catch (FileNotFoundException e) {
             return null;
@@ -133,18 +134,23 @@ public class LevelLoader implements ILevelLoader {
     private IEnemy selectEnemy(double x, double y, IEntity target, int difficulty, String type, String spikeImmunity) {
         IEnemy enemy = null;
         // Returns basic enemy without abilities
-        if (type.equals("basic")) {
-            enemy = EntityFactory.basicEnemy(x, y,target, difficulty);
+        switch (type) {
+            case "basic":
+                enemy = EntityFactory.basicEnemy(x, y, target, difficulty);
+                break;
+            // Returns enemy which fires bullets
+            case "bullet":
+                enemy = EntityFactory.bulletEnemy(x, y, target, difficulty);
+                break;
+            // Returns enemy which fires homing missiles
+            case "missile":
+                enemy = EntityFactory.missileEnemy(x, y, target, difficulty);
+                break;
         }
-        // Returns enemy which fires bullets
-        else if (type.equals("bullet")) {
-            enemy = EntityFactory.bulletEnemy(x, y, target, difficulty);
+        if (spikeImmunity.equals("true")) {
+            assert enemy != null;
+            enemy.setStrength(101);
         }
-        // Returns enemy which fires homing missiles
-        else if (type.equals("missile")) {
-            enemy = EntityFactory.missileEnemy(x, y, target, difficulty);
-        }
-        if (spikeImmunity.equals("true")) enemy.setStrength(101);
         return enemy;
     }
 
@@ -153,16 +159,18 @@ public class LevelLoader implements ILevelLoader {
     private IObstacle selectObstacle(double x1, double y1, double x2, double y2, double width, double height, String type) {
         IObstacle obstacle = null;
         // Stationary obstacle
-        if (type.equals("wall")) {
-            obstacle = EntityFactory.wall(x1, y1, width, height);
-        }
-        // Obstacle that moves across the level. Moves between points (x1,y1) and (x2,y2)
-        else if (type.equals("moving")) {
-            obstacle = EntityFactory.movingWall(x1, y1, x2, y2, width, height);
-        }
-        // Spike obstacle which can kill other entities
-        else if (type.equals("spikes")) {
-            obstacle = EntityFactory.spikes(x1, y1, width, height);
+        switch (type) {
+            case "wall":
+                obstacle = EntityFactory.wall(x1, y1, width, height);
+                break;
+            // Obstacle that moves across the level. Moves between points (x1,y1) and (x2,y2)
+            case "moving":
+                obstacle = EntityFactory.movingWall(x1, y1, x2, y2, width, height);
+                break;
+            // Spike obstacle which can kill other entities
+            case "spikes":
+                obstacle = EntityFactory.spikes(x1, y1, width, height);
+                break;
         }
         return obstacle;
     }
