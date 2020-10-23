@@ -16,12 +16,16 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class HighscoreHandler implements IHighscoreHandler {
+    // Path to highscore storing file
     private final static String PATH_TO_HIGHSCORE = App.class.getResource("").getPath() + "highscore.txt";
+    // Data set that stores highscores for each level
     private final HashMap<String, Double> storedHighscores;
 
     public HighscoreHandler() {
         storedHighscores = new HashMap<>();
+        // Creates a new highscore text file if one does not exist
         createFile();
+        // Loads storedHighscores with saved highscores from highscore text file
         readFromFile();
     }
 
@@ -48,6 +52,7 @@ public class HighscoreHandler implements IHighscoreHandler {
     @Override
     public void writeToFile() {
         try {
+            // Clear the content of highscore.txt to make in ready to be populated with new data
             PrintWriter printWriter = new PrintWriter(PATH_TO_HIGHSCORE);
             printWriter.print("");
         } catch (FileNotFoundException e) {
@@ -57,6 +62,7 @@ public class HighscoreHandler implements IHighscoreHandler {
         try {
             FileOutputStream fileOut = new FileOutputStream(PATH_TO_HIGHSCORE);
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOut));
+            // For every entry in storedHighscore, we create a new string separated with an new line in highscore.txt
             for (Map.Entry<String, Double> entry : storedHighscores.entrySet()) {
                 String name = entry.getKey();
                 Double score = entry.getValue();
@@ -78,7 +84,7 @@ public class HighscoreHandler implements IHighscoreHandler {
         try {
             highscoreScanner = new Scanner(highscoreFile);
             highscoreScanner.useDelimiter(System.lineSeparator());
-
+            // For every line we retrieve, we split it, and then add respective part to storedHighscores
             while (highscoreScanner.hasNext()) {
                 String currentLine = highscoreScanner.next();
                 String[] words = currentLine.split(" ");
