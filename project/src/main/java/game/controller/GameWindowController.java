@@ -93,6 +93,7 @@ public class GameWindowController {
 
                 }
 
+                if (game.getCurrentLevel() == null || game.getCurrentLevel().getPlayer() == null) return;
                 // Set facing direction of player
                 updatePlayerFacingDirection();
 
@@ -180,6 +181,7 @@ public class GameWindowController {
         game.restartLevel();
 
         // Register player controls to new player object.
+        if (game.getCurrentLevel() == null || game.getCurrentLevel().getPlayer() == null) return;
         registerPlayerControls();
     }
 

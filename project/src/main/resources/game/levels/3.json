@@ -11,15 +11,35 @@
       "target": " player",
       "difficulty" : "2",
       "spikeimmune": "false"
-    },
-    {
-      "type": "basic",
-      "x": "1000",
-      "y": "300",
-      "target": " player",
-      "difficulty" : "5",
-      "spikeimmune": "false"
     }
   ],
-  "Obstacles": []
+  "Obstacles": [
+  {
+    "type": "moving",
+    "x1": "400",
+    "y1": "200",
+    "x2": "1000",
+    "y2": "500",
+    "width": "100",
+    "height": "100"
+  },
+  {
+    "type": "moving",
+    "x1": "100",
+    "y1": "200",
+    "x2": "100",
+    "y2": "400",
+    "width": "25",
+    "height": "300"
+  },
+  {
+    "type": "moving",
+    "x1": "400",
+    "y1": "600",
+    "x2": "1000",
+    "y2": "600",
+    "width": "300",
+    "height": "25"
+  }
+]
 }

@@ -452,6 +452,7 @@ public class Game implements IGame {
 
     @Override
     public boolean isNextLevel() {
+        if (getCurrentLevel() == null ) return false;
         if (getCurrentLevel().getEnemies() == null) return false;
         return  getCurrentLevel().getEnemies().isEmpty();
     }
