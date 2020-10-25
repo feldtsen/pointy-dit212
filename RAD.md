@@ -339,7 +339,7 @@ The goal of the player is to defeat all enemies. The game contains multiple leve
     Visibility:
     - Can I see the spikes, to know how to navigate around them?
 ---
-**Story Identifier:** STK014 (IN PROGRESS)
+**Story Identifier:** STK014 (FINISHED)
 
 **Story Name:** Scoring system
 
