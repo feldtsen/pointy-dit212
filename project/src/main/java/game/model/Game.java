@@ -87,6 +87,7 @@ public class Game implements IGame {
     // Loads the next level
     public void nextLevel() {
         if (levelLoader.hasNext()) {
+            gameWin = false;
             setLevel(levelLoader.next());
         }
         else {
