@@ -96,6 +96,7 @@ public class Game implements IGame {
 
     @Override
     public void changeLevel(int level) {
+        gameWin = false;
         setLevel(levelLoader.getLevel(level));
     }
 

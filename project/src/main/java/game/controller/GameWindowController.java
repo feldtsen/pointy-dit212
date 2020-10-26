@@ -73,25 +73,27 @@ public class GameWindowController {
         gameLoop = new GameLoop(1000) {
             @Override
             public void update(double delta) {
-                // Shows winning message
-                if(game.isGameWin()) {
-                    handleGameState("YOU WIN", "\nPress ESC to return to the menu.");
-                }
 
                 // Shows game over message
-                if(game.isGameOver()) {
+                if (game.isGameOver()) {
                     handleGameState("GAME OVER", "\nPress R to play again or ESC to return to the menu.");
+                    return;
+                }  // Shows winning message
+                else if (game.isGameWin()) {
+                    handleGameState("YOU WIN", "\nPress ESC to return to the menu.");
+                    return;
                 }
-
                 // Checks if all enemies have been defeated
-                if (game.isNextLevel())  {
+                else if (game.isNextLevel())  {
                     // Check if the newly acquired time is better than previously stored
                     checkHighscore(game.getTime());
 
 
                     handleGameState("LEVEL COMPLETE", "\nTime " + String.format("%.1f", game.getTime()) + "s. Press R to continue or ESC to return to the menu.");
+                    return;
 
                 }
+
 
                 if (game.getCurrentLevel() == null || game.getCurrentLevel().getPlayer() == null) return;
                 // Set facing direction of player
